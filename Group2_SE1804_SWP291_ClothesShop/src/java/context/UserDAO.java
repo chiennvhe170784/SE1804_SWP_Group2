@@ -11,6 +11,8 @@ import jakarta.mail.Session;
 import jakarta.mail.Transport;
 import jakarta.mail.internet.InternetAddress;
 import jakarta.mail.internet.MimeMessage;
+import java.security.MessageDigest;
+import java.util.Base64;
 import java.util.Date;
 import java.util.Properties;
 import java.util.Random;
@@ -71,11 +73,29 @@ public class UserDAO extends DBContext {
         int number = rd.nextInt(1000000);
         return String.format("%06d", number);
     }
+     
+     //Mã hóa mật khẩu 
+     public static String toSHA1(String str){
+         String tim_ho ="kaisd#$%^&*(sg~~sda";
+         String result =null;
+         
+         str = str + tim_ho;
+         try {
+             byte[] dataByte = str.getBytes("UTF-8");
+             MessageDigest md = MessageDigest.getInstance("SHA-1");
+             byte[] hashBytes = md.digest(dataByte);
+             result = Base64.getEncoder().encodeToString(hashBytes);
+         } catch (Exception e) {
+         }
+         return result;
+         
+     }
 
     public static void main(String[] args) {
+                    UserDAO ud = new UserDAO();
 //        UserDAO.verifyCode("chien19042003@gmail.com", 12341);
-//            UserDAO ud = new UserDAO();
-//          System.out.println(ud.getCode());
 
+//          System.out.println(ud.getCode());
+System.out.println(ud.toSHA1("12345"));
     }
 }
