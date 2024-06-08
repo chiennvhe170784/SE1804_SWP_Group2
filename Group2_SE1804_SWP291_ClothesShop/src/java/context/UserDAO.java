@@ -4,107 +4,78 @@
  */
 package context;
 
-import model.User;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
+import jakarta.mail.Authenticator;
+import jakarta.mail.Message;
+import jakarta.mail.PasswordAuthentication;
+import jakarta.mail.Session;
+import jakarta.mail.Transport;
+import jakarta.mail.internet.InternetAddress;
+import jakarta.mail.internet.MimeMessage;
 import java.util.Date;
-import java.util.List;
+import java.util.Properties;
+import java.util.Random;
 
 /**
  *
- * @author Putaa
+ * @author chien
  */
 public class UserDAO extends DBContext {
-    
-    public User findByUsername(String username) throws SQLException {
-        String query = "SELECT User.id AS id, fullName, phone, address, email, username, password, dob, gender, Role.name AS role "
-                + "FROM User "
-                + "JOIN Role ON Users.role = Roles.id "
-                + "WHERE username = ?";
 
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-        Connection conn = null;
+    public static void verifyCode(String mailTo, int code) {
+        final String from = "champion19042003@gmail.com";
+        final String password = "uqqy hrpu monf efam";
 
-        try {
-            ps = connection.prepareStatement(query);
-            ps.setString(1, username);
+        Properties props = new Properties();
+        props.setProperty("mail.smtp.host", "smtp.gmail.com"); // Use the correct SMTP server
+        props.setProperty("mail.smtp.port", "587");
+        props.setProperty("mail.smtp.auth", "true");
+        props.setProperty("mail.smtp.starttls.enable", "true");
 
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                return new User(rs.getInt("id"),
-                        rs.getString("fullName"),
-                        rs.getString("phone"),
-                        rs.getString("address"),
-                        rs.getString("email"),
-                        rs.getString("username"),
-                        rs.getString("password"),
-                        rs.getDate("dob"),
-                        rs.getBoolean("gender"),
-                        rs.getInt("rid")
-                );
+        //create Authenticator
+        Authenticator auth = new Authenticator() {
+            @Override
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(from, password);
             }
+        };
+        Session session = Session.getInstance(props, auth);
+
+        //using mail api, content send to mail.
+        MimeMessage msg = new MimeMessage(session);
+        try {
+            msg.addHeader("Content-type", "text/HTML; charset=UTF-8");
+            msg.setFrom(new InternetAddress(from));
+            msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(mailTo, false));
+            msg.setSubject("verifile code");
+            msg.setSentDate(new Date());
+            String emailContent = "<html>"
+                    + "<head>"
+                    + "<style>"
+                    + "p { font-size: 16px; }"
+                    + "</style>"
+                    + "</head>"
+                    + "<body>"
+                    + "<h1>This is your code: <h1 style=\"color: #33ff33\">" + code + "</h1></h1>"
+                    + "<p>Thank you for using our service.</p>"
+                    + "</body>"
+                    + "</html>";
+            msg.setContent(emailContent, "text/html; charset=UTF-8");
+            Transport.send(msg);
+
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            if (rs != null) {
-                rs.close();
-            }
-            if (ps != null) {
-                ps.close();
-            }
-            if (conn != null) {
-                conn.close();
-            }
         }
-
-        return null;
     }
-    
-     public User add(String fullName, String phone, String address, String email, String username, String password, Date dob, boolean gender, int rid) throws SQLException {
-        PreparedStatement ps = null;
-        Connection conn = null;
-        try {
-
-            String query = "INSERT INTO Users fullName, phone, address, email, username, password, dob, gender, rid) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
-            ps = connection.prepareStatement(query);
-            ps.setString(1, fullName);
-            ps.setString(2, phone);
-            ps.setString(3, address);
-            ps.setString(4, email);
-            ps.setString(5, username);
-            ps.setString(6, password);
-            ps.setDate(7, (java.sql.Date) dob);
-            ps.setBoolean(8, gender);
-            ps.setInt(9, rid);
-            ps.executeUpdate();
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (ps != null) {
-                ps.close();
-            }
-            if (conn != null) {
-                conn.close();
-            }
-        }
-
-        return null;
+     public static String getCode() {
+        Random rd = new Random();
+        int number = rd.nextInt(1000000);
+        return String.format("%06d", number);
     }
-     
-     public static User login(String username, String password) throws SQLException {
-        UserDAO users = new UserDAO();
-        User user = users.findByUsername(username);
-        if (user == null) {
-            return null;
-        }
 
-        else {
-            return user;
-        }
+    public static void main(String[] args) {
+//        UserDAO.verifyCode("chien19042003@gmail.com", 12341);
+//            UserDAO ud = new UserDAO();
+//          System.out.println(ud.getCode());
+
     }
 }
