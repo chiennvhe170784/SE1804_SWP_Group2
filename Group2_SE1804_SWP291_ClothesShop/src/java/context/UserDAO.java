@@ -12,10 +12,14 @@ import jakarta.mail.Transport;
 import jakarta.mail.internet.InternetAddress;
 import jakarta.mail.internet.MimeMessage;
 import java.security.MessageDigest;
+import java.sql.PreparedStatement;
 import java.util.Base64;
 import java.util.Date;
 import java.util.Properties;
 import java.util.Random;
+import model.User;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  *
@@ -23,17 +27,116 @@ import java.util.Random;
  */
 public class UserDAO extends DBContext {
 
-    public static void verifyCode(String mailTo, int code) {
+    // set active of account
+    public void changeActive(int uid, int active) {
+        String sql = "UPDATE [dbo].[User]\n"
+                + "   SET [active] = ?\n"
+                + " WHERE [uid] =?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, uid);
+            ps.setInt(2, active);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+        }
+    }
+    
+    //set role of account
+    public void changeRole(int uid, int role) {
+        String sql = "UPDATE [dbo].[User]\n"
+                + "   SET [role] = ?\n"
+                + " WHERE [uid] =?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, uid);
+            ps.setInt(2, role);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+        }
+    }
+
+    //resgister with customer
+    public void registerAcc(User u) {
+        String sql = "INSERT INTO [dbo].[User]\n"
+                + "           ([uid]\n"
+                + "           ,[fullName]\n"
+                + "           ,[phone]\n"
+                + "           ,[address]\n"
+                + "           ,[email]\n"
+                + "           ,[username]\n"
+                + "           ,[password]\n"
+                + "           ,[dob]\n"
+                + "           ,[gender]\n"
+                + "           ,[rid]\n"
+                + "           ,[active])\n"
+                + "     VALUES (?,?,?,?,?,?,?,?)";
+        try {
+
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, u.getFullName());
+            ps.setString(2, u.getPhone());
+            ps.setString(3, u.getAddress());
+            ps.setString(4, u.getEmail());
+            ps.setString(5, u.getUsername());
+            ps.setString(6, u.getPassword());
+            ps.setString(7, u.getDob());
+            ps.setInt(8, u.getGender());
+            ps.executeUpdate();
+
+        } catch (SQLException e) {
+        }
+    }
+
+    public User checkUser(String user, String pass) {
+        String sql = "SELECT [uid]\n"
+                + "      ,[fullName]\n"
+                + "      ,[phone]\n"
+                + "      ,[address]\n"
+                + "      ,[email]\n"
+                + "      ,[username]\n"
+                + "      ,[password]\n"
+                + "      ,[dob]\n"
+                + "      ,[gender]\n"
+                + "      ,[rid]\n"
+                + "      ,[active]\n"
+                + "  FROM [dbo].[User]\n"
+                + "  where username =? and password = ? ";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, user);
+            ps.setString(2, pass);
+            ResultSet rs = ps.executeQuery();
+            ps.executeQuery();
+            while (rs.next()) {
+                return new User(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getString(7),
+                        rs.getString(8),
+                        rs.getInt(9),
+                        rs.getInt(10),
+                        rs.getInt(11));
+            }
+        } catch (SQLException e) {
+        }
+        return null;
+    }
+
+    //sent code to email
+    public static boolean verifyCode(String mailTo, int code) {
         final String from = "champion19042003@gmail.com";
         final String password = "uqqy hrpu monf efam";
 
         Properties props = new Properties();
         props.setProperty("mail.smtp.host", "smtp.gmail.com"); // Use the correct SMTP server
-        props.setProperty("mail.smtp.port", "587");
-        props.setProperty("mail.smtp.auth", "true");
-        props.setProperty("mail.smtp.starttls.enable", "true");
+        props.setProperty("mail.smtp.port", "587");//Cổng smtp tls-587
+        props.setProperty("mail.smtp.auth", "true");//xác định cần xác thực mail
+        props.setProperty("mail.smtp.starttls.enable", "true");// Kích hoạt STARTTLS để bảo mật kết nối.
 
-        //create Authenticator
+        //Authenticator: cugn cấp thông tin xác thực khi cần
         Authenticator auth = new Authenticator() {
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {
@@ -63,39 +166,43 @@ public class UserDAO extends DBContext {
                     + "</html>";
             msg.setContent(emailContent, "text/html; charset=UTF-8");
             Transport.send(msg);
+            return true;
 
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return false;
     }
-     public static String getCode() {
+
+    //cretate random code send to email
+    public static String getCode() {
         Random rd = new Random();
         int number = rd.nextInt(1000000);
         return String.format("%06d", number);
     }
-     
-     //Mã hóa mật khẩu 
-     public static String toSHA1(String str){
-         String tim_ho ="kaisd#$%^&*(sg~~sda";
-         String result =null;
-         
-         str = str + tim_ho;
-         try {
-             byte[] dataByte = str.getBytes("UTF-8");
-             MessageDigest md = MessageDigest.getInstance("SHA-1");
-             byte[] hashBytes = md.digest(dataByte);
-             result = Base64.getEncoder().encodeToString(hashBytes);
-         } catch (Exception e) {
-         }
-         return result;
-         
-     }
+
+    //encode string  
+    public static String toSHA1(String str) {
+        String tim_ho = "kaisd#$%^&*(sg~~sda";
+        String result = null;
+
+        str = str + tim_ho;
+        try {
+            byte[] dataByte = str.getBytes("UTF-8");
+            MessageDigest md = MessageDigest.getInstance("SHA-1");
+            byte[] hashBytes = md.digest(dataByte);
+            result = Base64.getEncoder().encodeToString(hashBytes);
+        } catch (Exception e) {
+        }
+        return result;
+
+    }
 
     public static void main(String[] args) {
-                    UserDAO ud = new UserDAO();
+        UserDAO ud = new UserDAO();
 //        UserDAO.verifyCode("chien19042003@gmail.com", 12341);
 
 //          System.out.println(ud.getCode());
-System.out.println(ud.toSHA1("12345"));
+//        System.out.println(ud.toSHA1("12345"));
     }
 }

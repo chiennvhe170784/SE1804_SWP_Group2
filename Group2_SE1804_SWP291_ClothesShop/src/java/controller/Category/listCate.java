@@ -62,7 +62,7 @@ public class listCate extends HttpServlet {
 
         String indexPage = request.getParameter("index");
         String searchCate = request.getParameter("searchCate");
-
+       searchCate = searchCate.trim();
         if (indexPage == null) {
             indexPage = "1";
         }
