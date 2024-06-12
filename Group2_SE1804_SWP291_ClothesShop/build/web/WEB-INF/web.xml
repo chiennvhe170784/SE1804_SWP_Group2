@@ -64,6 +64,14 @@
         <servlet-name>deleteBrand</servlet-name>
         <servlet-class>controller.Brand.deleteBrand</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>loginController</servlet-name>
+        <servlet-class>controller.Login.loginController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>resetPass</servlet-name>
+        <servlet-class>controller.Login.getCode</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>newsList</servlet-name>
         <url-pattern>/newsList</url-pattern>
@@ -127,6 +135,14 @@
     <servlet-mapping>
         <servlet-name>listproduct</servlet-name>
         <url-pattern>/listproduct</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>loginController</servlet-name>
+        <url-pattern>/login</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>getCode</servlet-name>
+        <url-pattern>/getCode</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
