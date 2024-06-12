@@ -3,7 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-package controller.Login;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -14,9 +13,9 @@ import jakarta.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author chien
+ * @author ADMIN
  */
-public class loginController extends HttpServlet {
+public class NewServlet extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -33,10 +32,10 @@ public class loginController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet loginController</title>");  
+            out.println("<title>Servlet NewServlet</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet loginController at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet NewServlet at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -53,7 +52,7 @@ public class loginController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-            request.getRequestDispatcher("login/login.jsp").forward(request, response);
+        processRequest(request, response);
     } 
 
     /** 
@@ -66,7 +65,7 @@ public class loginController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-               response.sendRedirect("login");
+        processRequest(request, response);
     }
 
     /** 
