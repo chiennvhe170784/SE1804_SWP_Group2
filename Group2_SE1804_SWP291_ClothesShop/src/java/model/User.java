@@ -6,11 +6,8 @@ package model;
 
 import java.util.Date;
 
-/**
- *
- * @author Putaa
- */
 public class User {
+
     private int uid;
     private String fullName;
     private String phone;
@@ -18,14 +15,15 @@ public class User {
     private String email;
     private String username;
     private String password;
-    private Date dob;
-    private boolean gender;
+    private String dob;
+    private int gender;
     private int rid;
+    private int active;
 
     public User() {
     }
 
-    public User(int uid, String fullName, String phone, String address, String email, String username, String password, Date dob, boolean gender, int rid) {
+    public User(int uid, String fullName, String phone, String address, String email, String username, String password, String dob, int gender, int rid, int active) {
         this.uid = uid;
         this.fullName = fullName;
         this.phone = phone;
@@ -36,6 +34,7 @@ public class User {
         this.dob = dob;
         this.gender = gender;
         this.rid = rid;
+        this.active = active;
     }
 
     public int getUid() {
@@ -94,19 +93,19 @@ public class User {
         this.password = password;
     }
 
-    public Date getDob() {
+    public String getDob() {
         return dob;
     }
 
-    public void setDob(Date dob) {
+    public void setDob(String dob) {
         this.dob = dob;
     }
 
-    public boolean isGender() {
+    public int getGender() {
         return gender;
     }
 
-    public void setGender(boolean gender) {
+    public void setGender(int gender) {
         this.gender = gender;
     }
 
@@ -117,5 +116,14 @@ public class User {
     public void setRid(int rid) {
         this.rid = rid;
     }
+
+    public int getActive() {
+        return active;
+    }
+
+    public void setActive(int active) {
+        this.active = active;
+    }
+
     
 }
