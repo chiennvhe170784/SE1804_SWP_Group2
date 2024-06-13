@@ -5,10 +5,11 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
     <head>
-               <meta charset="utf-8">
+        <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="description" content="">
@@ -26,7 +27,7 @@
         <!-- Custom styles for this page -->
         <link href="adminassets/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     </head>
-     <body id="page-top">
+    <body id="page-top">
 
         <!-- Page Wrapper -->
         <div id="wrapper">
@@ -59,10 +60,15 @@
                 <div class="sidebar-heading">Interface</div>
 
                 <!-- Nav Item - Tables -->
-                <li class="nav-item active">
+                <li class="nav-item disabled">
                     <a class="nav-link" href="listproduct">
                         <i class="fas fa-fw fa-table"></i>
                         <span>Product Table</span></a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="newsListStaff">
+                        <i class="fas fa-fw fa-table"></i>
+                        <span>News</span></a>
                 </li>
 
                 <!-- Divider -->
@@ -114,51 +120,59 @@
 
                     <!-- Begin Page Content -->
                     <div class="container-fluid">
-                   <div class="container" style="background-color:whitesmoke;height:auto;overflow: auto;">
+                        <div class="container" style="background-color:whitesmoke;height:auto;overflow: auto;">
 
-    <div class="row">
-        <div class="col-3">
-                <h3 style="padding-left:40px; margin-top:20px;white-space: nowrap">Bài Đăng</h3>
-        </div>
-        <div class="col-9">
-            <input id="createBlogbtn" type="button" class="btn btn-info" style="float:right;margin-top:20px" value="Tạo Bài Đăng" />
+                            <div class="row">
+                                <div class="col-3">
+                                    <h3 style="padding-left:40px; margin-top:20px;white-space: nowrap">News</h3>
+                                </div>
+                                <div class="col-9">
+                                    <input id="createBlogbtn" type="button" class="btn btn-info" style="float:right;margin-top:20px" value="Create News" />
 
 
-        </div>
-    </div>
-        
-    <div class="row" style="margin-top:50px;margin-left:50px;margin-bottom:20px">
-       
-            <div class="col-3">            
-                <button id="blogList" type="button" class="btn btn-link" style="height:20px;color:royalblue;width:160px;font-size:18px">News</button>
+                                </div>
+                            </div>
 
-            </div>
-            <div class="col-3">
-                <button id="waitingList" type="button" class="btn btn-link" style="height:20px;color:royalblue;width:160px;font-size:18px">Waiting News</button>
-            </div>
-    </div>
-    <div id="box" class="row" style="   min-width: 500px;max-width: 1060px;position: relative;margin-left:40px;border:solid;height:auto;background-color:white;min-height: 350px;border-radius: 7px;overflow: auto;">
-    </div>
-</div>
+                            <div class="row" style="margin-top:50px;margin-left:50px;margin-bottom:20px">
 
-                        <!-- Pagination -->
-                        <nav aria-label="Page navigation example" class="mt-4">
-                            <ul class="pagination justify-content-center">
-                           
-                                <c:forEach begin="1" end = "${pages}" var = "i">
-                                    <li> 
-                                    <c:if test="${not empty param.search}">
-                                        <a href="newsList?index=${i}&search=${param.search}">${i}</a>
-                                    </c:if>
-                                    <c:if test="${empty param.search}">
-                                        <a href="newsList?index=${i}">${i}</a>
-                                    </c:if>
-                                    </li>
-                                </c:forEach>
-								
-							
-                            </ul>
-                        </nav>
+                                <div class="col-3">            
+                                    <button id="blogList" type="button" class="btn btn-link" style="height:20px;color:royalblue;width:160px;font-size:18px">News</button>
+
+                                </div>
+                                <div class="col-3">
+                                    <button id="waitingList" type="button" class="btn btn-link" style="height:20px;color:royalblue;width:160px;font-size:18px">Waiting News</button>
+                                </div>
+                            </div>
+                            <div id="box" class="row" style="   min-width: 500px;max-width: 1060px;position: relative;margin-left:40px;border:solid;height:auto;background-color:white;min-height: 350px;border-radius: 7px;overflow: auto;">
+                                 <c:forEach var="news" items="${n}">
+                                                                                <table style="max-height:124px; min-height:119.4px;width:1049.7px; "><tr onmouseover="this.style.backgroundColor ='#B0E0E6'" onmouseout="this.style.backgroundColor='transparent'">
+                                 <th style="width: 85%;"><div  style="min-width: 500px;max-width: 916px;height:109.4px;padding-left:20px;padding-top:13px; white-space: nowrap;" ><h3 style="font-size: 20px;display: inline-block; vertical-align: top;margin-top: 17px;text-overflow: ellipsis; overflow: hidden; white-space: nowrap;" ><a href="newsDetail?id=${news.nId}">${news.title} </a></h3>           
+                                <button id="deletebtn" onclick="deleteBlog(${news.nId})" style="float:right; border:none; width:103px; height:70px; appearance: none; background-color: inherit; display: flex; justify-content: center; align-items: center;">
+                                <img src="https://drive.google.com/thumbnail?id=1jMT2nYYaUtyf7OQbRk3t_6u8U5bnL8r2" style="width:103px; height:70px; display:inline-block;" class="img-rounded" alt="Load img fail"></button>     
+                                <input data-id="${news.nId}" type = "button" class="btn btn-info editBlogbtn" style = "float:right ;display:inline-block;vertical-align:top; margin-top:15px;" value = "Edit" />
+                                <p style="margin-top: -2px;">
+                                    Posted: ${news.updateDate}
+                                     </p></th></div></tr></table>
+                                                </c:forEach>
+                                
+   
+                                     </div>
+                            <!-- Pagination -->
+                            <div aria-label="Page navigation example" class="mt-4">
+                                <ul class="pagination justify-content-center">
+
+                                    <c:forEach begin="1" end = "${pages}" var = "i">
+                                        <li class="page-item"> 
+                                            <a class="page-link" href="newsListStaff?index=${i}">${i}</a>
+                                        </li>
+                                    </c:forEach>
+
+
+                                </ul>
+                            </div>                
+                        </div>
+
+
                     </div>
                     <!-- /.container-fluid -->
                 </div>
@@ -169,7 +183,7 @@
         <!-- End of Page Wrapper -->
 
         <!-- Bootstrap core JavaScript-->
-         <script src="vendor/jquery/jquery.min.js"></script>
+        <script src="vendor/jquery/jquery.min.js"></script>
         <script src="../assets/js/jquery-3.5.1.min.js" type="text/javascript"></script>
         <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
         <!-- Core plugin JavaScript-->

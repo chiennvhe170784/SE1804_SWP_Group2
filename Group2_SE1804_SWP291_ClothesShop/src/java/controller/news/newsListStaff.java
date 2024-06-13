@@ -57,35 +57,26 @@ public class newsListStaff extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
           String indexPage = request.getParameter("index");
-        String searchQuery = request.getParameter("search");
+     
            NewsDAO dao = new NewsDAO();
            ArrayList<News> n = new ArrayList<News>();
            if(indexPage != null){
-             int index = Integer.parseInt(indexPage);
-             if(searchQuery != null && searchQuery != ""){
-              n = dao.getNewByTitle(searchQuery, index);
-             }
-             else{
-             n = dao.pagging(index);
-             }
-           }
-           else{
-               if(searchQuery != null && searchQuery != ""){
-              n = dao.getNewByTitle(searchQuery, 1);
-             }
-             else{
-             n = dao.pagging(1);
-             }
-             
-           }
-            
-        int count = dao.count(searchQuery);
-        int pages = 0;
-         if(count % 4 != 0){
-            pages = (count/4) +1 ;
+            int index = Integer.parseInt(indexPage);
+
+            n = dao.pagging(index);
+
+        } else {
+
+            n = dao.pagging(1);
+
         }
-         else
-              pages = count/4;
+
+        int count = dao.count("");
+        int pages = 0;
+        if (count % 4 != 0) {
+            pages = (count / 4) + 1;
+        } else
+            pages = count / 4;
         request.setAttribute("n", n);
         request.setAttribute("pages", pages);
         

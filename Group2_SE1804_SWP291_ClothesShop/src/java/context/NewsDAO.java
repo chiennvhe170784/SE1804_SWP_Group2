@@ -114,12 +114,12 @@ public class NewsDAO extends DBContext{
         return b;
     }
     
-   /*  public static void main(String[] args) {
+   public static void main(String[] args) {
         NewsDAO dao = new NewsDAO();
         
-        System.out.println(dao.count("Test"));
+        System.out.println(dao.count(""));
         }
-    */
+  
     
     
    
