@@ -72,6 +72,14 @@
         <servlet-name>getCode</servlet-name>
         <servlet-class>controller.Login.getCode</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>resetPass</servlet-name>
+        <servlet-class>controller.Login.resetPass</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>sendCode</servlet-name>
+        <servlet-class>controller.Login.sendCode</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>newsList</servlet-name>
         <url-pattern>/newsList</url-pattern>
@@ -143,6 +151,14 @@
     <servlet-mapping>
         <servlet-name>getCode</servlet-name>
         <url-pattern>/getCode</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>resetPass</servlet-name>
+        <url-pattern>/resetPass</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>sendCode</servlet-name>
+        <url-pattern>/sendCode</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

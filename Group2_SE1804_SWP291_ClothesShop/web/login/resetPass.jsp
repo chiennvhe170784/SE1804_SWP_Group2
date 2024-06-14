@@ -1,13 +1,6 @@
-<%-- 
-    Document   : resetPass
-    Created on : Jun 12, 2024, 7:13:26 PM
-    Author     : chien
---%>
-
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html  class="no-js" lang="en">
+<html class="no-js" lang="en">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -29,9 +22,6 @@
 
     </head>
     <body>
-
-
-
 
         <!--offcanvas menu area end-->
         <!-- End Mobile Menu Area -->
@@ -59,52 +49,70 @@
                 <div class="row">
                     <div class="col-lg-6 offset-lg-3">
                         <div class="login-register-form-full">
-                            <h3>Reset Password</h3>
-                            <form action="resetPass">
-                                <div class="form-control-range"><input type="email" class="form-control" name="email" placeholder="Your Email"></div>
-                                <p style="color: #0061f2; display: none;" id ="pls">Please check your email and enter the code!</p>
+                            <form id="resetForm" action="resetPass" method="POST">
+                                <div class="form-control-range" style="display: flex; align-items: center;">
+                                    <input type="email" class="form-control" id="inputEmail" pattern="[a-zA-Z0-9._%+-]+@gmail\.com" required
+                                           oninput="checkEmailValidity()" name="email" placeholder="Enter your email" style="flex: 8; height: 40px;">
+                                    <button type="button"  id="getCodeBtn" onclick="sendEmail()" style="border-radius: 10px ;background-color: #ff9933 ;flex: 2;height: 40px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">Get Code</button>
+                                </div>
+                                <p style="color: #0061f2; display: none;" id="pleaseCheckEmail">Please check your email and enter the code!</p>
+                                <!--<p style="color: red; display: none;" id="invalidEmail">Invalid email address. Please use a @gmail.com address.</p>-->
 
 
-                                <a href="deleteCate?cid=${c.cid}" onclick="return checkdelete()"> <button class="button-1" id="getCodeBtn" type="submit">Get Code</button></a>
+
                                 <input type="text" class="form-control" name="code" id="code" placeholder="Enter Code">
-                                <input type="text" class="form-control" name="pass" id="code" placeholder="Enter new password">
-                                <input type="text" class="form-control" name="repass" id="code" placeholder="Confirm password">
-                                <button class="button-1" id="resetBtn" type="submit" >Reset Now</button>
+                                <input type="password" class="form-control" name="pass" id="pass" placeholder="Enter new password">
+                                <input type="password" class="form-control" name="repass" id="repass" placeholder="Confirm password">
+                                <button class="button-1" id="resetBtn" type="submit">Reset Now</button>
                             </form>
-
                         </div>
-                    </div> 
+                    </div>
                 </div>
             </div>
         </div>
         <!-- End Login Register Form -->
 
-
-
-
-
         <div class="scroll-area">
             <i class="fa fa-angle-up"></i>
         </div>
 
-
         <!-- Js File -->
         <script src="assets/js/jquery-3.5.1.min.js"></script>
-
+        <script src="assets/js/bootstrap.min.js"></script>
         <script src="assets/js/script.js"></script>
         <script>
+                                        function checkEmailValidity() {
+                                            var emailInput = document.getElementById('inputEmail');
+                                            var invalidEmailMessage = document.getElementById('invalidEmail');
+                                            var emailPattern = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
 
-            function checkEmailValidity() {
-                const input = document.getElementById("email");
-                const email = input.value.trim();
-                if (email === "") {
-                    input.setCustomValidity("Please input your email!");
-                } else if (!email.endsWith("@gmail.com")) {
-                    input.setCustomValidity("Please enter an email ending with @gmail.com");
-                } else {
-                    input.setCustomValidity("");
-                }
-            }
+                                            if (emailPattern.test(emailInput.value)) {
+                                                invalidEmailMessage.style.display = 'none';
+                                            } else {
+                                                invalidEmailMessage.style.display = 'block';
+                                            }
+                                        }
+
+                                        function sendEmail() {
+                                            var emailInput = document.getElementById('inputEmail');
+                                            var email = emailInput.value;
+                                            var emailPattern = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
+
+                                            if (email && emailPattern.test(email)) {
+                                                var confirmed = confirm('Are you sure you want to send the code to the email: ' + email + '?');
+                                                if (confirmed) {
+                                                    var resetPassLink = 'resetPass?email=' + encodeURIComponent(email);
+                                                    document.getElementById('pleaseCheckEmail').style.display = 'block';
+
+//                                                    // Redirect to the reset password link
+//                                                    window.location.href = resetPassLink;
+                                                }
+                                            } else {
+                                                document.getElementById('invalidEmail').style.display = 'block';
+                                                alert('Please enter a valid email address.');
+                                            }
+                                        }
+
         </script>
     </body>
 </html>

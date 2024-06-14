@@ -27,6 +27,15 @@ import java.sql.SQLException;
  */
 public class UserDAO extends DBContext {
 
+    //_____________________________Reset Password_____________________________
+    public User changePassByEmail(String email){
+        return null;
+    }
+    
+    
+    
+    
+    //___________________________Active User_________________________
     // set active of account
     public void changeActive(int uid, int active) {
         String sql = "UPDATE [dbo].[User]\n"
@@ -55,6 +64,7 @@ public class UserDAO extends DBContext {
         }
     }
 
+    //_____________________________________Register Account______________________________
     //resgister with customer
     public void registerAcc(User u) {
         String sql = "INSERT INTO [dbo].[User]\n"
