@@ -28,13 +28,20 @@ import java.sql.SQLException;
 public class UserDAO extends DBContext {
 
     //_____________________________Reset Password_____________________________
-    public User changePassByEmail(String email){
-        return null;
+    public void changePassByEmail(String email, String pass) {
+        String sql = "UPDATE [dbo].[User]\n"
+                + "   SET \n"
+                + "[password] = ?\n"
+                + " WHERE [email] = ?";
+        try {
+            PreparedStatement pst = connection.prepareStatement(sql);
+            pst.setString(1, pass);
+            pst.setString(2, email);
+            pst.executeUpdate();
+        } catch (SQLException e) {
+        }
     }
-    
-    
-    
-    
+
     //___________________________Active User_________________________
     // set active of account
     public void changeActive(int uid, int active) {
@@ -210,8 +217,9 @@ public class UserDAO extends DBContext {
 
     public static void main(String[] args) {
         UserDAO ud = new UserDAO();
-        ud.verifyCode("chien19042003@gmail.com", ud.getCode());
+//        ud.verifyCode("chien19042003@gmail.com", ud.getCode());
 //         System.out.println(ud.getCode());
 //      System.out.println(ud.toSHA1("12345"));
+//ud.changePassByEmail("chien19042003@gmail.com", "12345");
     }
 }

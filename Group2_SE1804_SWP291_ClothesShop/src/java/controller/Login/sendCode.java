@@ -4,12 +4,14 @@
  */
 package controller.Login;
 
+import context.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 /**
  *
@@ -55,7 +57,28 @@ public class sendCode extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("login/getCode.jsp").forward(request, response);
+        String email = request.getParameter("emailChange");
+        UserDAO ud = new UserDAO();
+        String code = ud.getCode();
+        boolean test = ud.verifyCode(email, code);
+
+        if (test) {
+            HttpSession session = request.getSession();
+            String currentEmail = (String) session.getAttribute("mailTo");
+
+            // Check if the email is the same and invalidate the session if true
+            if (email.equals(currentEmail)) {
+                session.invalidate();
+                session = request.getSession(true); // create a new session
+            }
+
+            session.setAttribute("codeSend", code);
+            session.setAttribute("mailTo", email);
+            response.sendRedirect("resetPass");
+        } else {
+            response.sendRedirect("404.html");
+        }
+
     }
 
     /**
