@@ -1,10 +1,8 @@
 <%-- 
-    Document   : resetPass
-    Created on : Jun 12, 2024, 7:13:26 PM
+    Document   : getCode
+    Created on : Jun 13, 2024, 2:52:33 PM
     Author     : chien
 --%>
-
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html  class="no-js" lang="en">
@@ -60,16 +58,15 @@
                     <div class="col-lg-6 offset-lg-3">
                         <div class="login-register-form-full">
                             <h3>Reset Password</h3>
-                            <form action="resetPass">
+                            <form action="getCode">
                                 <div class="form-control-range"><input type="email" class="form-control" name="email" placeholder="Your Email"></div>
+
+
                                 <p style="color: #0061f2; display: none;" id ="pls">Please check your email and enter the code!</p>
+                                <input type="password" class="form-control" name="pass" id="code" placeholder="Enter Code" style="display: none">
 
-
-                                <a href="deleteCate?cid=${c.cid}" onclick="return checkdelete()"> <button class="button-1" id="getCodeBtn" type="submit">Get Code</button></a>
-                                <input type="text" class="form-control" name="code" id="code" placeholder="Enter Code">
-                                <input type="text" class="form-control" name="pass" id="code" placeholder="Enter new password">
-                                <input type="text" class="form-control" name="repass" id="code" placeholder="Confirm password">
-                                <button class="button-1" id="resetBtn" type="submit" >Reset Now</button>
+                                <button class="button-1" id="getCodeBtn" type="submit">Get Code</button>
+                                <button class="button-1" id="resetBtn" type="submit" style="display: none">Reset Now</button>
                             </form>
 
                         </div>
@@ -92,11 +89,20 @@
         <script src="assets/js/jquery-3.5.1.min.js"></script>
 
         <script src="assets/js/script.js"></script>
+        <!--        <script>
+                    document.getElementById('getCodeBtn').addEventListener('click', function () {
+                        document.getElementById('code').style.display = 'block';
+                        document.getElementById('getCodeBtn').style.display = 'none';
+                        document.getElementById('resetBtn').style.display = 'block';
+                        document.getElementById('pls').style.display = 'block';
+        
+                    });
+                </script>-->
         <script>
-
             function checkEmailValidity() {
                 const input = document.getElementById("email");
                 const email = input.value.trim();
+
                 if (email === "") {
                     input.setCustomValidity("Please input your email!");
                 } else if (!email.endsWith("@gmail.com")) {
