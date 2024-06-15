@@ -95,9 +95,6 @@ public class resetPass extends HttpServlet {
             } else {
                 output += "Code failed, please input again!";
             }
-       
-
-// Đặt attribute "output" và chuyển hướng request tới trang resetPass.jsp
         request.setAttribute("output", output);
         request.getRequestDispatcher("login/resetPass.jsp").forward(request, response);
 
