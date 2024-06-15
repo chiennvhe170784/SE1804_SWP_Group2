@@ -83,7 +83,6 @@ public class resetPass extends HttpServlet {
         String output = "";
 
 // Kiểm tra các giá trị null
-
             if (codeRe.equals(codeSend)) {
                 if (pass.equals(repass)) {
                     String pass1 = ud.toSHA1(pass);
