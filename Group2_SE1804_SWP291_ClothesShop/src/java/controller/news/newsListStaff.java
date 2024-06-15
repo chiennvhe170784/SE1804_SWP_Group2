@@ -57,10 +57,11 @@ public class newsListStaff extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
           String indexPage = request.getParameter("index");
-     
+          String type = request.getParameter("type");
            NewsDAO dao = new NewsDAO();
            ArrayList<News> n = new ArrayList<News>();
-           if(indexPage != null){
+           if(type=="" || type == null || type.equals("News")){
+               if(indexPage != null){
             int index = Integer.parseInt(indexPage);
 
             n = dao.pagging(index);
@@ -81,6 +82,32 @@ public class newsListStaff extends HttpServlet {
         request.setAttribute("pages", pages);
         
         request.getRequestDispatcher("news/newsListStaff.jsp").forward(request, response);
+           }
+           else
+               {
+                    if(indexPage != null){
+            int index = Integer.parseInt(indexPage);
+
+            n = dao.paggingWaitingList(index);
+
+        } else {
+
+            n = dao.paggingWaitingList(1);
+
+        }
+
+        int count = dao.countWaiting();
+        int pages = 0;
+        if (count % 4 != 0) {
+            pages = (count / 4) + 1;
+        } else
+            pages = count / 4;
+        request.setAttribute("n", n);
+        request.setAttribute("pages", pages);
+        
+        request.getRequestDispatcher("news/newsListStaff.jsp").forward(request, response);
+               }
+           
     } 
 
     /** 

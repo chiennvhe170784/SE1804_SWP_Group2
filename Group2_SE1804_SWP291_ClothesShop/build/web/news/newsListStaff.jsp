@@ -26,6 +26,7 @@
 
         <!-- Custom styles for this page -->
         <link href="adminassets/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+        <script src="../assets/js/jquery-3.5.1.min.js" type="text/javascript"></script>
     </head>
     <body id="page-top">
 
@@ -136,11 +137,11 @@
                             <div class="row" style="margin-top:50px;margin-left:50px;margin-bottom:20px">
 
                                 <div class="col-3">            
-                                    <button id="blogList" type="button" class="btn btn-link" style="height:20px;color:royalblue;width:160px;font-size:18px">News</button>
+                                    <a  class="btn btn-link" style="height:20px;color:royalblue;width:160px;font-size:18px;height: 36px" href="newsListStaff?type=News">News</a>
 
                                 </div>
                                 <div class="col-3">
-                                    <button id="waitingList" type="button" class="btn btn-link" style="height:20px;color:royalblue;width:160px;font-size:18px">Waiting News</button>
+                                    <a  class="btn btn-link" style="height:20px;color:royalblue;width:160px;font-size:18px;height: 36px" href="newsListStaff?type=WaitingNews">Waiting News</a>
                                 </div>
                             </div>
                             <div id="box" class="row" style="   min-width: 500px;max-width: 1060px;position: relative;margin-left:40px;border:solid;height:auto;background-color:white;min-height: 350px;border-radius: 7px;overflow: auto;">
@@ -163,7 +164,7 @@
 
                                     <c:forEach begin="1" end = "${pages}" var = "i">
                                         <li class="page-item"> 
-                                            <a class="page-link" href="newsListStaff?index=${i}">${i}</a>
+                                            <a class="page-link" href="newsListStaff?index=${i}&type=${param.type}">${i}</a>
                                         </li>
                                     </c:forEach>
 
@@ -184,7 +185,6 @@
 
         <!-- Bootstrap core JavaScript-->
         <script src="vendor/jquery/jquery.min.js"></script>
-        <script src="../assets/js/jquery-3.5.1.min.js" type="text/javascript"></script>
         <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
         <!-- Core plugin JavaScript-->
         <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
