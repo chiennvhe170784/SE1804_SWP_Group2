@@ -49,12 +49,14 @@
                 <div class="row">
                     <div class="col-lg-6 offset-lg-3">
                         <div class="login-register-form-full">
-                            <form id="resetForm" action="resetPass" method="post">
+                            <form  action="sendCode" method="get">
                                 <div class="form-control-range" style="display: flex; align-items: center;">
                                     <input type="email" class="form-control" id="inputEmail" pattern="[a-zA-Z0-9._%+-]+@gmail\.com" required
-                                           oninput="checkEmailValidity()" name="emailChange" placeholder="Enter your email" style="flex: 8; height: 40px;">
-                                    <button type="button"  id="getCodeBtn" onclick="sendEmail()" style="border-radius: 10px ;background-color: #ff9933 ;flex: 2;height: 40px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">Get Code</button>
+                                           oninput="checkEmailValidity()" name="emailChange" placeholder="${sessionScope.mailTo != null ? sessionScope.mailTo : 'Enter your email'}" style="flex: 8; height: 40px;">
+                                    <button type="submit"  id="getCodeBtn" onclick="sendEmail()" style="border-radius: 10px ;background-color: #ff9933 ;flex: 2;height: 40px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">Get Code</button>
                                 </div>
+                            </form>
+                            <form action="resetPass" method="post">
                                 <p style="color: #0061f2; display: none;" id="pleaseCheckEmail">Please check your email and enter the code!</p>
                                 <!--<p style="color: red; display: none;" id="invalidEmail">Invalid email address. Please use a @gmail.com address.</p>-->
                               
@@ -93,9 +95,7 @@
                                             if (email && emailPattern.test(email)) {
                                                 var confirmed = confirm('Are you sure you want to send the code to the email: ' + email + '?');
                                                 if (confirmed) {
-                                                    var resetPassLink = 'sendCode?emailChange=' + encodeURIComponent(email);
                                                     document.getElementById('pleaseCheckEmail').style.display = 'block';
-
 //                                                    // Redirect to the reset password link
 //                                                    window.location.href = resetPassLink;
                                                 }
