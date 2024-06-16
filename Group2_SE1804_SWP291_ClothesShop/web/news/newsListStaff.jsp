@@ -26,10 +26,56 @@
 
         <!-- Custom styles for this page -->
         <link href="adminassets/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-        <script src="../assets/js/jquery-3.5.1.min.js" type="text/javascript"></script>
+
+        <script src="${pageContext.request.contextPath}/assets/js/jquery-3.5.1.min.js" type="text/javascript"></script>
+
+        <script type="text/javascript">
+    function deleteNews(newsId){
+                    var result =  confirm("Confirm delete?");
+                    var nId = newsId; 
+        if (result) {
+         console.log("News Id: "+ nId);
+                    $.ajax({
+    type: 'POST',
+    data: {nId:nId},
+    url: 'newsListStaff',
+    success: (result) => {
+        
+         showAlert('Delete successfully', 3000);
+     
+    setTimeout(() => {
+        window.location.reload(); 
+    }, 2000);
+    },
+    error: function () {
+     showAlert('Delete fail something went wrong', 3000);
+    }
+});
+                }               
+    }   
+      function showAlert(message, duration) {
+            // Tạo phần tử alert mới
+            let alertDiv = document.createElement('div');
+            alertDiv.className = 'alert alert-success';
+            alertDiv.role = 'alert';
+            alertDiv.innerHTML = message;
+            let wrapper = document.getElementById('notifications');
+            // Thêm phần tử alert vào body hoặc một container cụ thể
+            wrapper.appendChild(alertDiv);
+
+            // Tự động ẩn phần tử alert sau thời gian đã định
+            setTimeout(() => {
+                alertDiv.remove();
+            }, duration);
+        }
+    $(document).ready(function(){
+   
+            });
+        </script>
     </head>
     <body id="page-top">
-
+<div style="margin-top: 50px;z-index: 9999; position: fixed; top: 0; right: 0;width: 300px;height:200px " id="notifications">
+</div>
         <!-- Page Wrapper -->
         <div id="wrapper">
 
@@ -128,7 +174,7 @@
                                     <h3 style="padding-left:40px; margin-top:20px;white-space: nowrap">News</h3>
                                 </div>
                                 <div class="col-9">
-                                    <input id="createBlogbtn" type="button" class="btn btn-info" style="float:right;margin-top:20px" value="Create News" />
+                                    <input id="createNewsbtn" type="button" class="btn btn-info" style="float:right;margin-top:20px" value="Create News" />
 
 
                                 </div>
@@ -148,9 +194,9 @@
                                  <c:forEach var="news" items="${n}">
                                                                                 <table style="max-height:124px; min-height:119.4px;width:1049.7px; "><tr onmouseover="this.style.backgroundColor ='#B0E0E6'" onmouseout="this.style.backgroundColor='transparent'">
                                  <th style="width: 85%;"><div  style="min-width: 500px;max-width: 916px;height:109.4px;padding-left:20px;padding-top:13px; white-space: nowrap;" ><h3 style="font-size: 20px;display: inline-block; vertical-align: top;margin-top: 17px;text-overflow: ellipsis; overflow: hidden; white-space: nowrap;" ><a href="newsDetail?id=${news.nId}">${news.title} </a></h3>           
-                                <button id="deletebtn" onclick="deleteBlog(${news.nId})" style="float:right; border:none; width:103px; height:70px; appearance: none; background-color: inherit; display: flex; justify-content: center; align-items: center;">
+                                <button id="deletebtn" onclick="deleteNews(${news.nId})" style="float:right; border:none; width:103px; height:70px; appearance: none; background-color: inherit; display: flex; justify-content: center; align-items: center;">
                                 <img src="https://drive.google.com/thumbnail?id=1jMT2nYYaUtyf7OQbRk3t_6u8U5bnL8r2" style="width:103px; height:70px; display:inline-block;" class="img-rounded" alt="Load img fail"></button>     
-                                <input data-id="${news.nId}" type = "button" class="btn btn-info editBlogbtn" style = "float:right ;display:inline-block;vertical-align:top; margin-top:15px;" value = "Edit" />
+                                <input data-id="${news.nId}" type = "button" class="btn btn-info editNewsbtn" style = "float:right ;display:inline-block;vertical-align:top; margin-top:15px;" value = "Edit" />
                                 <p style="margin-top: -2px;">
                                     Posted: ${news.updateDate}
                                      </p></th></div></tr></table>

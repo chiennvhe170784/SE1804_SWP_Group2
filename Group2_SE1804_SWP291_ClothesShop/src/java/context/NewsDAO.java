@@ -145,10 +145,21 @@ public class NewsDAO extends DBContext{
         }
         return b;
     }
+    public void deleteNews(int newsId){
+         try {
+            String sql = "delete from News where nid = ? ";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, newsId);
+            stm.executeUpdate();
+            
+        } catch (Exception e) {
+        }
+    }
+    
     
    public static void main(String[] args) {
         NewsDAO dao = new NewsDAO();
-        
+
         System.out.println(dao.count(""));
         }
   
