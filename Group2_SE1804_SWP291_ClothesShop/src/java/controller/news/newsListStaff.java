@@ -69,7 +69,6 @@ public class newsListStaff extends HttpServlet {
         } else {
 
             n = dao.pagging(1);
-
         }
 
         int count = dao.count("");
@@ -120,7 +119,9 @@ public class newsListStaff extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        NewsDAO dao = new NewsDAO();
+        int nId = Integer.parseInt(request.getParameter("nId"));
+        dao.deleteNews(nId);
     }
 
     /** 
