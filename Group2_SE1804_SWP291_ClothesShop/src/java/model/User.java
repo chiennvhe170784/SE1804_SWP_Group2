@@ -125,5 +125,11 @@ public class User {
         this.active = active;
     }
 
+    @Override
+    public String toString() {
+        return this.username+", "+this.password;
+    }
+    
+
     
 }

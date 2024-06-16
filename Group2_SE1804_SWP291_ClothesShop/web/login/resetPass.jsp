@@ -33,7 +33,7 @@
                         <div class="breadcrumb-content">
                             <h2>Reset Password</h2>
                             <ul>
-                                <li><a href="index.html">Home</a></li>
+                                <li><a href="login">Login</a></li>
                                 <li class="active">Reset Password</li>
                             </ul>
                         </div>
