@@ -123,8 +123,8 @@ public class UserDAO extends DBContext {
             ps.setString(1, user);
             ps.setString(2, pass);
             ResultSet rs = ps.executeQuery();
-            ps.executeQuery();
-            while (rs.next()) {
+      
+            if (rs.next()) {
                 return new User(rs.getInt(1),
                         rs.getString(2),
                         rs.getString(3),
@@ -221,5 +221,7 @@ public class UserDAO extends DBContext {
 //         System.out.println(ud.getCode());
 //      System.out.println(ud.toSHA1("12345"));
 //ud.changePassByEmail("chien19042003@gmail.com", "12345");
+        System.out.println(ud.checkUser("admin", ud.toSHA1("123")));
+
     }
 }
