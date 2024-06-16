@@ -45,10 +45,10 @@
      
     setTimeout(() => {
         window.location.reload(); 
-    }, 2000);
+    }, 1000);
     },
     error: function () {
-     showAlert('Delete fail something went wrong', 3000);
+     showError('Delete fail something went wrong', 3000);
     }
 });
                 }               
@@ -59,6 +59,23 @@
             alertDiv.className = 'alert alert-success';
             alertDiv.role = 'alert';
             alertDiv.innerHTML = message;
+            alertDiv.style = 'margin-top: 50px;z-index: 9999; position: fixed; top: 0; right: 0;width: 300px;height:50px'
+            let wrapper = document.getElementById('notifications');
+            // Thêm phần tử alert vào body hoặc một container cụ thể
+            wrapper.appendChild(alertDiv);
+
+            // Tự động ẩn phần tử alert sau thời gian đã định
+            setTimeout(() => {
+                alertDiv.remove();
+            }, duration);
+        }
+        function showError(message, duration) {
+            // Tạo phần tử alert mới
+            let alertDiv = document.createElement('div');
+            alertDiv.className = 'alert alert-danger';
+            alertDiv.role = 'alert';
+            alertDiv.innerHTML = message;
+             alertDiv.style = 'margin-top: 50px;z-index: 9999; position: fixed; top: 0; right: 0;width: 300px;height:50px'
             let wrapper = document.getElementById('notifications');
             // Thêm phần tử alert vào body hoặc một container cụ thể
             wrapper.appendChild(alertDiv);
@@ -74,7 +91,7 @@
         </script>
     </head>
     <body id="page-top">
-<div style="margin-top: 50px;z-index: 9999; position: fixed; top: 0; right: 0;width: 300px;height:200px " id="notifications">
+        <div  id="notifications">
 </div>
         <!-- Page Wrapper -->
         <div id="wrapper">
@@ -174,8 +191,8 @@
                                     <h3 style="padding-left:40px; margin-top:20px;white-space: nowrap">News</h3>
                                 </div>
                                 <div class="col-9">
-                                    <input id="createNewsbtn" type="button" class="btn btn-info" style="float:right;margin-top:20px" value="Create News" />
-
+                                    
+                                    <a href="addNews" class="btn btn-info" style="float:right;margin-top:20px" >Create News</a>
 
                                 </div>
                             </div>
