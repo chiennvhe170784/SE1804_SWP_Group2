@@ -56,32 +56,31 @@
                         <div class="login-register-form-full">
 
                     <form id="registerForm" action="register" method="post">
-    <p style="color: #0061f2; display: none;" id="pleaseCheckEmail">Please check your email and enter the code!</p>
-
-    <input type="text" class="form-control" name="nameU" id="name" placeholder="Enter name">
-    <input type="text" class="form-control" name="phone" id="phone" placeholder="Enter your phone">
-    <input type="email" class="form-control" name="email" id="email" placeholder="Enter your email">
-    <input type="password" class="form-control" name="address" id="address" placeholder="Enter address">
-    <div><label>Date of birth &nbsp;</label> <input type="date" class="form-control" name="date" id="date"></div>
+    <input type="text" class="form-control" name="nameU" id="name" placeholder="Enter name" value="${param.nameU != null ? param.nameU : ''}">
+    <input type="text" class="form-control" name="phoneU" id="phone" placeholder="Enter phone number" value="${param.phoneU != null ? param.phoneU : ''}" >
+    <input type="email" class="form-control" name="emailU" id="email" placeholder="Enter your email" value="${param.emailU != null ? param.emailU : ''}">
+    <input type="text" class="form-control" name="addressU" id="address" placeholder="Enter address" value="${param.addressU != null ? param.addressU : ''}">
+    <div><label>Date of birth &nbsp;</label> <input type="date" class="form-control" name="dateU" id="date" ></div>
     <div style="margin-bottom: 20px; display: flex ">
         <div style="margin-right: 50px">Choose gender:</div>
         <div style="display: inline-block; margin-right: 10px">
-            <input type="radio" name="gender" id="male" value="male" checked="">
+            <input type="radio" name="genderU" id="male" value="1" checked="">
             <label for="male">Male</label>
         </div>
         <div style="display: inline-block; margin-left: 10px; margin-right: 10px">
-            <input type="radio" name="gender" id="female" value="female">
+            <input type="radio" name="genderU" id="female" value="0">
             <label for="female">Female</label>
         </div>
         <div style="display: inline-block; margin-left: 10px;">
-            <input type="radio" name="gender" id="other" value="other">
+            <input type="radio" name="genderU" id="other" value="2">
             <label for="other">Other</label>
         </div>
     </div>
-    <input type="text" class="form-control" name="username" id="username" placeholder="Enter username">
-    <input type="password" class="form-control" name="pass" id="pass" placeholder="Enter password">
-    <input type="password" class="form-control" name="repass" id="repass" placeholder="Confirm password">
-    <p style="color: #0061f2;">${requestScope.output}</p>
+    <input type="text" class="form-control" name="usernameU" id="username" placeholder="Enter username" value="${param.usernameU != null ? param.usernameU : ''}">
+    <input type="password" class="form-control" name="passU" id="pass" placeholder="Enter password" value="${param.passU != null ? param.passU : ''}">
+    <input type="password" class="form-control" name="repassU" id="repass" placeholder="Confirm password" value="${param.repassU != null ? param.repassU : ''}">
+
+    <p style="color: #0061f2;">${requestScope.suc}</p>
     <button class="button-1" id="resetBtn" type="button">Create Account</button>
 </form>
 
@@ -115,11 +114,11 @@
         var repass = document.getElementById('repass').value.trim();
         
 //        var nameRegex = /^[A-Za-z\s]+$/;
-        var phoneRegex = /^[0-9]{10,11}$/;
+        var phoneRegex = /^0[0-9]{9,10}$/;
         var emailRegex =  /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
         var addressRegex = /^[A-Za-z0-9\s,.'-]{3,}$/;
         var usernameRegex = /^[A-Za-z0-9_\.]+$/;
-        var passRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$/;
+        var passRegex =/^(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
 
         var isValid = true;
 
@@ -135,7 +134,7 @@
             alert('Phone cannot be empty');
             isValid = false;
         } else if (!phoneRegex.test(phone)) {
-            alert('Phone must be 10-11 digits');
+            alert('Phone must be 10-11 digits and start with 0');
             isValid = false;
         } else if (!email) {
             alert('Email cannot be empty');
@@ -162,7 +161,7 @@
             alert('Password cannot be empty');
             isValid = false;
         } else if (!passRegex.test(pass)) {
-            alert('Invalid password');
+            alert('Password must be at least 8 characters, uppercase and lowercase');
             isValid = false;
         } else if (!repass) {
             alert('Re-enter password cannot be empty');
