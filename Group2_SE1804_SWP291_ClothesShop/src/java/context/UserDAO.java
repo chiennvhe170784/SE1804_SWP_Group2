@@ -73,31 +73,29 @@ public class UserDAO extends DBContext {
 
     //_____________________________________Register Account______________________________
     //resgister with customer
-    public void registerAcc(User u) {
+    public void registerAcc(String name, String phone, String address, String email, String username, String password, String dbo, int gender) {
         String sql = "INSERT INTO [dbo].[User]\n"
-                + "           ([uid]\n"
-                + "           ,[fullName]\n"
+                + "           ([fullName]\n"
                 + "           ,[phone]\n"
                 + "           ,[address]\n"
                 + "           ,[email]\n"
                 + "           ,[username]\n"
                 + "           ,[password]\n"
                 + "           ,[dob]\n"
-                + "           ,[gender]\n"
-                + "           ,[rid]\n"
-                + "           ,[active])\n"
-                + "     VALUES (?,?,?,?,?,?,?,?)";
+                + "           ,[gender])\n"
+                + "     VALUES\n"
+                + "    (?, ?, ?, ?, ?, ?, ?, ?);";
         try {
 
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setString(1, u.getFullName());
-            ps.setString(2, u.getPhone());
-            ps.setString(3, u.getAddress());
-            ps.setString(4, u.getEmail());
-            ps.setString(5, u.getUsername());
-            ps.setString(6, u.getPassword());
-            ps.setString(7, u.getDob());
-            ps.setInt(8, u.getGender());
+            ps.setString(1, name);
+            ps.setString(2, phone);
+            ps.setString(3, address);
+            ps.setString(4, email);
+            ps.setString(5, username);
+            ps.setString(6, password);
+            ps.setString(7, dbo);
+            ps.setInt(8, gender);
             ps.executeUpdate();
 
         } catch (SQLException e) {
@@ -105,8 +103,7 @@ public class UserDAO extends DBContext {
     }
 
     public User checkUser(String user, String pass) {
-        String sql = "SELECT [uid]\n"
-                + "      ,[fullName]\n"
+        String sql = "    [fullName]\n"
                 + "      ,[phone]\n"
                 + "      ,[address]\n"
                 + "      ,[email]\n"
@@ -114,8 +111,6 @@ public class UserDAO extends DBContext {
                 + "      ,[password]\n"
                 + "      ,[dob]\n"
                 + "      ,[gender]\n"
-                + "      ,[rid]\n"
-                + "      ,[active]\n"
                 + "  FROM [dbo].[User]\n"
                 + "  where username =? and password = ? ";
         try {
@@ -123,7 +118,7 @@ public class UserDAO extends DBContext {
             ps.setString(1, user);
             ps.setString(2, pass);
             ResultSet rs = ps.executeQuery();
-      
+
             if (rs.next()) {
                 return new User(rs.getInt(1),
                         rs.getString(2),
@@ -141,6 +136,23 @@ public class UserDAO extends DBContext {
         }
         return null;
     }
+    public boolean checkUsername(String username) {
+    String sql = "SELECT [username] FROM [dbo].[User] WHERE [username] = ?";
+    try {
+        PreparedStatement ps = connection.prepareStatement(sql);
+        ps.setString(1, username);
+        ResultSet rs = ps.executeQuery();
+
+        if (rs.next()) {
+            // Username already exists in the database
+            return false;
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();  // Print the stack trace for debugging
+    }
+    return true;
+}
+
 
     //sent code to email
     public static boolean verifyCode(String mailTo, String code) {
@@ -221,7 +233,9 @@ public class UserDAO extends DBContext {
 //         System.out.println(ud.getCode());
 //      System.out.println(ud.toSHA1("12345"));
 //ud.changePassByEmail("chien19042003@gmail.com", "12345");
-        System.out.println(ud.checkUser("admin", ud.toSHA1("123")));
-
+//        System.out.println(ud.checkUser("admin", ud.toSHA1("123")));
+       
+//        ud.registerAcc("123", "00000000", "123", "123", "123", "123", "1985-05-15", 1);
+System.out.println(ud.checkUsername("admin"));
     }
 }
