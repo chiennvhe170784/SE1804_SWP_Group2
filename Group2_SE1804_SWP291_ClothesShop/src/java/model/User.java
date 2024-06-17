@@ -4,8 +4,6 @@
  */
 package model;
 
-import java.util.Date;
-
 public class User {
 
     private int uid;

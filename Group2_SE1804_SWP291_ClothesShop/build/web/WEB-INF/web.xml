@@ -87,10 +87,14 @@
     <servlet>
         <servlet-name>addNews</servlet-name>
         <servlet-class>controller.news.addNews</servlet-class>
-    </servlet>    
+    </servlet>
     <servlet>
         <servlet-name>register</servlet-name>
         <servlet-class>controller.Login.register</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>managerUser</servlet-name>
+        <servlet-class>controller.User.managerUser</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>newsList</servlet-name>
@@ -179,11 +183,14 @@
     <servlet-mapping>
         <servlet-name>addNews</servlet-name>
         <url-pattern>/addNews</url-pattern>
-         
-    </servlet-mapping>        
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>register</servlet-name>
         <url-pattern>/register</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>managerUser</servlet-name>
+        <url-pattern>/managerUser</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

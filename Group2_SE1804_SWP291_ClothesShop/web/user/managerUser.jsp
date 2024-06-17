@@ -25,29 +25,10 @@
 
         <!-- Custom styles for this template -->
         <link href="adminassets/css/sb-admin-2.min.css" rel="stylesheet">
-
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
         <!-- Custom styles for this page -->
         <link href="adminassets/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
-        <script>
-            function validateForm() {
-                const priceFrom = document.forms["filterForm"]["priceFrom"].value;
-                const priceTo = document.forms["filterForm"]["priceTo"].value;
-                const maxPrice = ${maxPrice};
-
-                if (priceFrom && priceFrom <= 0) {
-                    alert("Min Price must be greater than 0");
-                    return false;
-                }
-
-                if (priceTo && priceTo >= maxPrice) {
-                    alert("Max Price must be less than " + maxPrice);
-                    return false;
-                }
-
-                return true;
-            }
-        </script>
     </head>
 
     <body id="page-top">
@@ -56,47 +37,7 @@
         <div id="wrapper">
 
             <!-- Sidebar -->
-            <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-                <!-- Sidebar - Brand -->
-                <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-                    <div class="sidebar-brand-icon rotate-n-15">
-                        <i class="fas fa-laugh-wink"></i>
-                    </div>
-                    <div class="sidebar-brand-text mx-3">Clothes Shop Manager
-                    </div>
-                </a>
-
-                <!-- Divider -->
-                <hr class="sidebar-divider my-0">
-
-                <!-- Nav Item - Dashboard -->
-                <li class="nav-item">
-                    <a class="nav-link" href="index.html">
-                        <i class="fas fa-fw fa-tachometer-alt"></i>
-                        <span>Dashboard</span></a>
-                </li>
-
-                <!-- Divider -->
-                <hr class="sidebar-divider">
-
-                <!-- Heading -->
-                <div class="sidebar-heading">Interface</div>
-
-                <!-- Nav Item - Tables -->
-                <li class="nav-item active">
-                    <a class="nav-link" href="listproduct">
-                        <i class="fas fa-fw fa-table"></i>
-                        <span>Product Table</span></a>
-                </li>
-
-                <!-- Divider -->
-                <hr class="sidebar-divider d-none d-md-block">
-
-                <!-- Sidebar Toggler (Sidebar) -->
-                <div class="text-center d-none d-md-inline">
-                    <button class="rounded-circle border-0" id="sidebarToggle"></button>
-                </div>
-            </ul>
+            <%@include file="../sidebar_admin.jsp" %>
             <!-- End of Sidebar -->
 
             <!-- Content Wrapper -->
@@ -140,7 +81,7 @@
                     <div class="container-fluid">
                         <!-- Page Heading -->
                         <h1 class="h3 mb-2 text-gray-800">Product List</h1>
-                        <a href="addproduct" class="btn btn-success mb-3">Add New Product</a>
+                        <a href="addproduct" class="btn btn-success mb-3">New User</a>
 
                         <!-- Search and Filter Form -->
                         <form name="filterForm" action="listproduct" method="get" onsubmit="return validateForm()">
@@ -202,33 +143,45 @@
                                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                         <thead>
                                             <tr>
+                                                
                                                 <th>ID</th>
                                                 <th>Name</th>
-                                                <th>Quantity</th>
-                                                <th>Price</th>
-                                                <th>Category</th>
-                                                <th>Brand</th>
-                                                <th>Gender</th>
-                                                <th>Size</th>
-                                                <th>Release Date</th>
+                                                <th>Phone</th>
+                                                <th>Email</th>
+                                                <th>Username</th>
+                                                <th>Role</th>
+                                                <th>Active</th>
+                                                <th>Ban</th>
+                                                <th>UnBan</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <c:forEach var="product" items="${products}">
+                                            <c:forEach items="${requestScope.listU}" var="u">
                                                 <tr>
-                                                    <td>${product.pid}</td>
-                                                    <td><a href="productdetail?pid=${product.pid}">${product.name}</a></td>
-                                                    <td>${product.quantity}</td>
-                                                    <td>$${product.price}</td>
-                                                    <td>${product.category.name}</td>
-                                                    <td>${product.brand.name}</td>
-                                                    <td>${product.gender.description}</td>
+
+
+                                                    <td>${u.uid}</td>
+                                                    <td>${u.fullName}</td>
+                                                    <td>${u.phone}</td>
+                                                    <td>${u.email}</td>
+                                                    <td>${u.username}</td>
                                                     <td>
-                                                        <c:forEach var="size" items="${product.sizes}" varStatus="status">
-                                                            ${size.name}<c:if test="${!status.last}">,</c:if>
-                                                        </c:forEach>
+                                                        <c:choose>
+                                                            <c:when test="${u.rid == 1}">
+                                                                admin
+                                                            </c:when>
+                                                            <c:when test="${u.rid == 2}">
+                                                                staff
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                user
+                                                            </c:otherwise>
+                                                        </c:choose>
                                                     </td>
-                                                    <td>${product.releaseDate}</td>
+                                                    <td>${u.active}</td>
+                                                    <td><a href="#"><i class="bi bi-ban"></i></a></td>
+                                                    <td><a href="#"><i class="bi bi-unlock"></i></a></td>
+
                                                 </tr>
                                             </c:forEach>
                                         </tbody>
