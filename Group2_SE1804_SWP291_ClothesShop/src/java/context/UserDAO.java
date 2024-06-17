@@ -20,6 +20,8 @@ import java.util.Random;
 import model.User;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -69,6 +71,43 @@ public class UserDAO extends DBContext {
             ps.executeUpdate();
         } catch (SQLException e) {
         }
+    }
+
+    //get all user
+    public List<User> getListU() {
+        List<User> listU = new ArrayList<>();
+        String sql = "select [uid]\n"
+                + "      ,[fullName]\n"
+                + "      ,[phone]\n"
+                + "      ,[address]\n"
+                + "      ,[email]\n"
+                + "      ,[username]\n"
+                + "      ,[password]\n"
+                + "      ,[dob]\n"
+                + "      ,g.[gid]\n"
+                + "      ,[rid]\n"
+                + "      ,[active]\n"
+                + "	  from [User] u \n"
+                + "inner join gender g on g.gid = u.gender";
+        try {
+            PreparedStatement stm = connection.prepareStatement(sql);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                listU.add(new User(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getString(7),
+                        rs.getString(8),
+                        rs.getInt(9),
+                        rs.getInt(10),
+                        rs.getInt(11)));
+            }
+        } catch (SQLException e) {
+        }
+        return listU;
     }
 
     //_____________________________________Register Account______________________________
@@ -136,23 +175,23 @@ public class UserDAO extends DBContext {
         }
         return null;
     }
+
     public boolean checkUsername(String username) {
-    String sql = "SELECT [username] FROM [dbo].[User] WHERE [username] = ?";
-    try {
-        PreparedStatement ps = connection.prepareStatement(sql);
-        ps.setString(1, username);
-        ResultSet rs = ps.executeQuery();
+        String sql = "SELECT [username] FROM [dbo].[User] WHERE [username] = ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, username);
+            ResultSet rs = ps.executeQuery();
 
-        if (rs.next()) {
-            // Username already exists in the database
-            return false;
+            if (rs.next()) {
+                // Username already exists in the database
+                return false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();  // Print the stack trace for debugging
         }
-    } catch (SQLException e) {
-        e.printStackTrace();  // Print the stack trace for debugging
+        return true;
     }
-    return true;
-}
-
 
     //sent code to email
     public static boolean verifyCode(String mailTo, String code) {
@@ -234,8 +273,10 @@ public class UserDAO extends DBContext {
 //      System.out.println(ud.toSHA1("12345"));
 //ud.changePassByEmail("chien19042003@gmail.com", "12345");
 //        System.out.println(ud.checkUser("admin", ud.toSHA1("123")));
-       
+
 //        ud.registerAcc("123", "00000000", "123", "123", "123", "123", "1985-05-15", 1);
-System.out.println(ud.checkUsername("admin"));
+//        System.out.println(ud.checkUsername("admin"));
+        List<User> l = ud.getListU();
+        System.out.println(l.size());
     }
 }

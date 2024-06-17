@@ -96,6 +96,10 @@
         <servlet-name>imageUploader</servlet-name>
         <servlet-class>controller.news.imageUploader</servlet-class>
     </servlet>
+          <servlet>
+        <servlet-name>managerUser</servlet-name>
+        <servlet-class>controller.User.managerUser</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>newsList</servlet-name>
         <url-pattern>/newsList</url-pattern>
@@ -191,6 +195,9 @@
     <servlet-mapping>
         <servlet-name>imageUploader</servlet-name>
         <url-pattern>/imageUploader</url-pattern>
+    </servlet-mapping><servlet-mapping>
+        <servlet-name>managerUser</servlet-name>
+        <url-pattern>/managerUser</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
