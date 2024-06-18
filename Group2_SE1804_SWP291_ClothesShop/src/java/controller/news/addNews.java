@@ -5,12 +5,15 @@
 
 package controller.news;
 
+import context.NewsDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.Date;
+import model.News;
 
 /**
  *
@@ -54,7 +57,14 @@ public class addNews extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        News news = new News();
+        news.setAuthor(Integer.parseInt(request.getParameter("authorId")));
+        news.setBody(request.getParameter("body"));
+        news.setTitle((request.getParameter("title")));
+        news.setStatus(false);
+        news.setUpdateDate(new Date());
+        NewsDAO dao = new NewsDAO();
+        dao.addNews(news);
     }
 
     /** 
