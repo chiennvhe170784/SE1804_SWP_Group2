@@ -28,6 +28,11 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
         <!-- Custom styles for this page -->
         <link href="adminassets/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+
+
+
+
 
     </head>
 
@@ -83,55 +88,29 @@
                         <h1 class="h3 mb-2 text-gray-800">Product List</h1>
                         <a href="addproduct" class="btn btn-success mb-3">New User</a>
 
+
                         <!-- Search and Filter Form -->
-                        <form name="filterForm" action="listproduct" method="get" onsubmit="return validateForm()">
+                        <form name="filterForm" action="managerUser" method="get" onsubmit="return validateForm()">
                             <div class="form-row">
                                 <!-- Search by name -->
                                 <div class="col-md-2 mb-3">
-                                    <input type="text" name="search" placeholder="Search by name" value="${search}" class="form-control">
+                                    <input type="text" name="searchU" placeholder="Search property" class="form-control">
                                 </div>
-
-                                <!-- Categories Dropdown -->
-                                <div class="col-md-2 mb-3">
-                                    <select name="category" class="form-control">
-                                        <option value="">All Categories</option>
-                                        <c:forEach var="category" items="${categories}">
-                                            <option value="${category.cid}" <c:if test="${category.cid == param.category}">selected</c:if>>${category.name}</option>
-                                        </c:forEach>
-                                    </select>
-                                </div>
-
                                 <!-- Brands Dropdown -->
                                 <div class="col-md-2 mb-3">
-                                    <select name="brand" class="form-control">
-                                        <option value="">All Brands</option>
-                                        <c:forEach var="brand" items="${brands}">
-                                            <option value="${brand.bid}" <c:if test="${brand.bid == param.brand}">selected</c:if>>${brand.name}</option>
-                                        </c:forEach>
+                                    <select name="role" class="form-control">
+                                        <option value="">All Role</option>
                                     </select>
                                 </div>
-
                                 <!-- Genders Dropdown -->
                                 <div class="col-md-2 mb-3">
-                                    <select name="gender" class="form-control">
-                                        <option value="">All Genders</option>
-                                        <c:forEach var="gender" items="${genders}">
-                                            <option value="${gender.gid}" <c:if test="${gender.gid == param.gender}">selected</c:if>>${gender.description}</option>
-                                        </c:forEach>
+                                    <select name="active" class="form-control">
+                                        <option value="">All Active</option>
                                     </select>
                                 </div>
-
-                                <!-- Price Range -->
-                                <div class="col-md-1 mb-3">
-                                    <input type="number" name="priceFrom" placeholder="Min Price" value="${priceFrom}" class="form-control">
-                                </div>
-                                <div class="col-md-1 mb-3">
-                                    <input type="number" name="priceTo" placeholder="Max Price" value="${priceTo}" class="form-control">
-                                </div>
-
                                 <!-- Submit Button -->
                                 <div class="col-md-2 mb-3">
-                                    <button type="submit" class="btn btn-primary btn-block">Filter</button>
+                                    <button type="submit" class="btn btn-primary btn-block">Search</button>
                                 </div>
                             </div>
                         </form>
@@ -143,7 +122,7 @@
                                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                         <thead>
                                             <tr>
-                                                
+
                                                 <th>ID</th>
                                                 <th>Name</th>
                                                 <th>Phone</th>
@@ -192,25 +171,58 @@
                         </div>
 
                         <!-- Pagination -->
-                        <nav aria-label="Page navigation example" class="mt-4">
-                            <ul class="pagination justify-content-center">
-                                <c:if test="${pageIndex > 1}">
-                                    <li class="page-item">
-                                        <a class="page-link" href="listproduct?page=${pageIndex - 1}&search=${param.search}&category=${param.category}&brand=${param.brand}&gender=${param.gender}&priceFrom=${param.priceFrom}&priceTo=${param.priceTo}">Previous</a>
+                        <!--                        <nav aria-label="Page navigation example" class="mt-4">
+                                                    <ul class="pagination justify-content-center">
+                                                        
+                        <c:set var="currentIndex" value="${param.index != null ? param.index : 1}" />
+                        <c:forEach begin="1" end="${requestScope.endPage}" var="i">
+                            <li>
+
+                                <a class="${i == currentIndex ? 'active' : ''}" href="managerUser?indexU=${i}&searchU=${param.searchU}">${i}</a>
+
+
+                            </li>
+                        </c:forEach>
+
+                    </ul>
+                </nav>-->
+                        <nav aria-label="Page navigation example" class="mt-4" style="margin-top: 1.5rem;">
+                            <ul class="pagination justify-content-center" style="list-style: none; padding: 0; display: flex;">
+                                <c:set var="currentIndex" value="${param.indexU != null ? param.indexU : 1}" />
+
+                                <!-- Previous button -->
+                                <c:if test="${currentIndex > 1}">
+                                    <li style="margin: 0 5px;">
+                                        <a href="managerUser?indexU=${currentIndex - 1}&searchU=${param.searchU}"
+                                           style="text-decoration: none; padding: 8px 16px; border: 1px solid #ddd; border-radius: 4px;">
+                                            Previous
+                                        </a>
                                     </li>
                                 </c:if>
-                                <c:forEach var="i" begin="1" end="${totalPages}">
-                                    <li class="page-item <c:if test='${i == pageIndex}'>active</c:if>'">
-                                        <a class="page-link" href="listproduct?page=${i}&search=${param.search}&category=${param.category}&brand=${param.brand}&gender=${param.gender}&priceFrom=${param.priceFrom}&priceTo=${param.priceTo}">${i}</a>
+
+                                <!-- Page links -->
+                                <c:forEach begin="${currentIndex > 2 ? currentIndex - 1 : 1}" end="${(currentIndex < endPage - 1) ? currentIndex + 1 : endPage}" var="i">
+                                    <li style="margin: 0 5px;">
+                                        <a class="${i == currentIndex ? 'active' : ''}" href="managerUser?indexU=${i}&searchU=${param.searchU}"
+                                           style="text-decoration: none; padding: 8px 16px; border: 1px solid #ddd; border-radius: 4px; color: ${i == currentIndex ? '#fff' : '#007bff'}; background-color: ${i == currentIndex ? '#007bff' : '#fff'};">
+                                            ${i}
+                                        </a>
                                     </li>
                                 </c:forEach>
-                                <c:if test="${pageIndex < totalPages}">
-                                    <li class="page-item">
-                                        <a class="page-link" href="listproduct?page=${pageIndex + 1}&search=${param.search}&category=${param.category}&brand=${param.brand}&gender=${param.gender}&priceFrom=${param.priceFrom}&priceTo=${param.priceTo}">Next</a>
+
+                                <!-- Next button -->
+                                <c:if test="${currentIndex < endPage}">
+                                    <li style="margin: 0 5px;">
+                                        <a href="managerUser?indexU=${currentIndex + 1}&searchU=${param.searchU}"
+                                           style="text-decoration: none; padding: 8px 16px; border: 1px solid #ddd; border-radius: 4px;">
+                                            Next
+                                        </a>
                                     </li>
                                 </c:if>
                             </ul>
                         </nav>
+
+
                     </div>
                     <!-- /.container-fluid -->
                 </div>
@@ -232,6 +244,7 @@
         <script src="adminassets/vendor/datatables/dataTables.bootstrap4.min.js"></script>
         <!-- Page level custom scripts -->
         <script src="adminassets/js/demo/datatables-demo.js"></script>
+
     </body>
 
 </html>

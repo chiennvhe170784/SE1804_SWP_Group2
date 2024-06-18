@@ -83,18 +83,19 @@ public class resetPass extends HttpServlet {
         String output = "";
 
 // Kiểm tra các giá trị null
-            if (codeRe.equals(codeSend)) {
-                if (pass.equals(repass)) {
-                    String pass1 = ud.toSHA1(pass);
-                    ud.changePassByEmail(emailTo, pass1);
-                    output += "Change password successfully!";
-                } else {
-                    output += "Password and password confirm not same!";
-                }
+        if (codeRe.equals(codeSend)) {
+            if (pass.equals(repass)) {
+                String pass1 = ud.toSHA1(pass);
+                ud.changePassByEmail(emailTo, pass1);
+                output += "Change password successfully!";
             } else {
-                output += "Code failed, please input again!";
+                output += "Password and password confirm not same!";
             }
+        } else {
+            output += "Code failed, please input again!";
+        }
         request.setAttribute("output", output);
+
         request.getRequestDispatcher("login/resetPass.jsp").forward(request, response);
 
     }

@@ -74,7 +74,7 @@ public class UserDAO extends DBContext {
     }
 
     //get all user
-    public List<User> getListU() {
+    public List<User> getListU(int index, int quantity) {
         List<User> listU = new ArrayList<>();
         String sql = "select [uid]\n"
                 + "      ,[fullName]\n"
@@ -84,13 +84,17 @@ public class UserDAO extends DBContext {
                 + "      ,[username]\n"
                 + "      ,[password]\n"
                 + "      ,[dob]\n"
-                + "      ,g.[gid]\n"
+                + "      ,[gender]\n"
                 + "      ,[rid]\n"
                 + "      ,[active]\n"
-                + "	  from [User] u \n"
-                + "inner join gender g on g.gid = u.gender";
+                + "     from [User] u \n"
+                + "order by uid\n "
+                + "OFFSET ? ROWS\n"
+                + "FETCH NEXT ? ROWS ONLY;";
         try {
             PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, (index - 1) * 5);
+            stm.setInt(2, quantity);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 listU.add(new User(rs.getInt(1),
@@ -108,6 +112,19 @@ public class UserDAO extends DBContext {
         } catch (SQLException e) {
         }
         return listU;
+    }
+
+    public int count() {
+        String sql = "select count(*) from [user]";
+        try {
+            PreparedStatement stm = connection.prepareCall(sql);
+            ResultSet rs = stm.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException e) {
+        }
+        return 0;
     }
 
     //_____________________________________Register Account______________________________
@@ -142,7 +159,8 @@ public class UserDAO extends DBContext {
     }
 
     public User checkUser(String user, String pass) {
-        String sql = "    [fullName]\n"
+        String sql = "SELECT  [uid]\n"
+                + "      ,[fullName]\n"
                 + "      ,[phone]\n"
                 + "      ,[address]\n"
                 + "      ,[email]\n"
@@ -150,8 +168,10 @@ public class UserDAO extends DBContext {
                 + "      ,[password]\n"
                 + "      ,[dob]\n"
                 + "      ,[gender]\n"
-                + "  FROM [dbo].[User]\n"
-                + "  where username =? and password = ? ";
+                + "      ,[rid]\n"
+                + "      ,[active]\n"
+                + "  FROM [ClothesShop].[dbo].[User]\n"
+                + "  where username =? and password=? ";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1, user);
@@ -176,8 +196,8 @@ public class UserDAO extends DBContext {
         return null;
     }
 
-    public boolean checkUsername(String username) {
-        String sql = "SELECT [username] FROM [dbo].[User] WHERE [username] = ?";
+    public boolean checkUsername(String username, String email) {
+        String sql = "SELECT [username] FROM [dbo].[User] WHERE [username] = ? or [email] = ?";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1, username);
@@ -272,11 +292,13 @@ public class UserDAO extends DBContext {
 //         System.out.println(ud.getCode());
 //      System.out.println(ud.toSHA1("12345"));
 //ud.changePassByEmail("chien19042003@gmail.com", "12345");
+//        System.out.println(ud.toSHA1("123"));
 //        System.out.println(ud.checkUser("admin", ud.toSHA1("123")));
 
 //        ud.registerAcc("123", "00000000", "123", "123", "123", "123", "1985-05-15", 1);
 //        System.out.println(ud.checkUsername("admin"));
-        List<User> l = ud.getListU();
+        List<User> l = ud.getListU(2,3);
         System.out.println(l.size());
+//        System.out.println(ud.count());
     }
 }
