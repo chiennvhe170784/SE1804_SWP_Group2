@@ -74,7 +74,8 @@ public class sendCode extends HttpServlet {
 
             session.setAttribute("codeSend", code);
             session.setAttribute("mailTo", email);
-            response.sendRedirect("resetPass");
+            request.setAttribute("eee", "Please check your email and enter the code!");
+            request.getRequestDispatcher("resetPass").forward(request, response);
         } else {
             response.sendRedirect("404.html");
         }

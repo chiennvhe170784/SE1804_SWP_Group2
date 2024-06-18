@@ -61,8 +61,25 @@ public class managerUser extends HttpServlet {
             throws ServletException, IOException {
 
         UserDAO ud = new UserDAO();
-        List<User> listU = null;
-        listU = ud.getListU();
+        String indexPage = request.getParameter("indexU");
+        String searchU = request.getParameter("searchU");
+        if (indexPage == null) {
+            indexPage = "1";
+        }
+
+        int index1 = Integer.parseInt(indexPage);
+        int count = ud.count();
+        int endPage = count / 5;
+        if (count % 5 != 0) {
+            endPage++;
+        }
+        List<User> listU = ud.getListU(index1, 5);
+        request.setAttribute("endPage", endPage);
+   
+
+//        List<User> listU = null;
+//        listU = ud.getListU(2,5);
+
         request.setAttribute("listU", listU);
         request.getRequestDispatcher("user/managerUser.jsp").forward(request, response);
     }

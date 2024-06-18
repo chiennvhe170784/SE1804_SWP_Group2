@@ -62,7 +62,7 @@
                                             <p>${requestScope.err}</p>
                                 <button class="button-1" type="submit">Log In</button>
                             </form>
-                            <p>Don't Have an Account? Please <a href="register.html">Sign up now</a></p>
+                            <p>Don't Have an Account? Please <a href="register">Sign up now</a></p>
                         </div>
                     </div>
                 </div>

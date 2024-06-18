@@ -81,13 +81,13 @@ public class register extends HttpServlet {
         String username = request.getParameter("usernameU");
         String password = request.getParameter("passU");
         UserDAO ud = new UserDAO();
-        if (ud.checkUsername(username)) {
+        if (ud.checkUsername(username, email)) {
             password = ud.toSHA1(password);
             ud.registerAcc(name, phone, address, email, username, password, dbo, Integer.parseInt(gender));
             request.setAttribute("suc", "Create account successfully! ");
             request.getRequestDispatcher("login/register.jsp").forward(request, response);
         } else {
-            request.setAttribute("suc", "username already exist!");
+            request.setAttribute("suc", "username or email already exist!");
             request.getRequestDispatcher("login/register.jsp").forward(request, response);
         }
 

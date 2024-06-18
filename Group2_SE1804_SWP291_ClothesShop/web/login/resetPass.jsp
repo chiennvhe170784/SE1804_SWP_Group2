@@ -57,7 +57,7 @@
                                 </div>
                             </form>
                             <form action="resetPass" method="post">
-                                <p style="color: #0061f2; display: none;" id="pleaseCheckEmail">Please check your email and enter the code!</p>
+                                <p style="color: #0061f2;" >${requestScope.eee}</p>
                                 <!--<p style="color: red; display: none;" id="invalidEmail">Invalid email address. Please use a @gmail.com address.</p>-->
                               
 
@@ -94,13 +94,7 @@
 
                                             if (email && emailPattern.test(email)) {
                                                 var confirmed = confirm('Are you sure you want to send the code to the email: ' + email + '?');
-                                                if (confirmed) {
-                                                    document.getElementById('pleaseCheckEmail').style.display = 'block';
-//                                                    // Redirect to the reset password link
-//                                                    window.location.href = resetPassLink;
-                                                }
                                             } else {
-                                          
                                                 alert('Please enter a valid email address.');
                                             }
                                         }
