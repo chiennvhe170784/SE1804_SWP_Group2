@@ -101,17 +101,17 @@ public class imageUploader extends HttpServlet {
     response.setContentType("application/json");
     response.getWriter().write("{\"url\": \"" + fileUrl + "\"}");
     }
- // Phương thức để lấy tên file từ Part
-    private String extractFileName(Part part) {
-        String contentDisp = part.getHeader("content-disposition");
-        String[] items = contentDisp.split(";");
-        for (String item : items) {
-            if (item.trim().startsWith("filename")) {
-                return item.substring(item.indexOf("=") + 2, item.length() - 1);
-            }
-        }
-        return "";
-        }
+// // Phương thức để lấy tên file từ Part
+//    private String extractFileName(Part part) {
+//        String contentDisp = part.getHeader("content-disposition");
+//        String[] items = contentDisp.split(";");
+//        for (String item : items) {
+//            if (item.trim().startsWith("filename")) {
+//                return item.substring(item.indexOf("=") + 2, item.length() - 1);
+//            }
+//        }
+//        return "";
+//        }
     /** 
      * Returns a short description of the servlet.
      * @return a String containing servlet description

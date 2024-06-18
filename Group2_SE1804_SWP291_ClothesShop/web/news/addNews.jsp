@@ -88,6 +88,7 @@
                     alertDiv.remove();
                 }, duration);
             }
+            
             $(document).ready(function () {
 
 
@@ -212,7 +213,44 @@
                         .catch(err => {
                             console.error(err.stack);
                         });
+                        
+                        
+     $('#savebtn').click(() => {
+     if ($('#title').val() === "" || window.editor.getData() === "") {
+         showError('All field must be filled', 3000);
+     }
+     else {
+         if ($('#title').val().length > 60) {
+             showError('Title can not be more than 60 characters', 3000);
+         } else {
+             var title = $('#title').val(),
+                 body = window.editor.getData(),
+                 AuthorId = 1;
+             var inputString = body;
 
+             
+             $.ajax({
+                  type: 'POST',
+                 url: 'addNews',
+                 data: {
+                     "title": title,
+                     "body": body,
+                     "authorId": AuthorId
+                 },
+                 success: function (data) {
+                     showAlert("Create News successfully",3000);
+                      setTimeout(() => {
+                              window.location.href = 'newsListStaff'; // Thay 'newsList' bằng URL đúng của servlet
+                            }, 1000);
+                 },
+                 error: function (xhr, status, error) {
+                     showError("Create fail, something went wrong",3000);
+
+                 }
+             });
+         }
+     }
+ });
             });
         </script>
     </head>
