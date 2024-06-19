@@ -53,8 +53,8 @@ public class UserDAO extends DBContext {
                 + " WHERE [uid] =?";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setInt(1, uid);
-            ps.setInt(2, active);
+            ps.setInt(1, active);
+            ps.setInt(2, uid);
             ps.executeUpdate();
         } catch (SQLException e) {
         }

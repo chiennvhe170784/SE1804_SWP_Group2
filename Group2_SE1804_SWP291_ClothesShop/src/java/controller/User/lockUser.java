@@ -11,15 +11,12 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.List;
-import model.Role;
-import model.User;
 
 /**
  *
  * @author chien
  */
-public class managerUser extends HttpServlet {
+public class lockUser extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,10 +35,10 @@ public class managerUser extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet managerUser</title>");
+            out.println("<title>Servlet lockUser</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet managerUser at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet lockUser at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -59,50 +56,18 @@ public class managerUser extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String type = request.getParameter("type");
+        String uid = request.getParameter("uid");
+        UserDAO ud = new UserDAO();
 
-     UserDAO ud = new UserDAO();
-String indexPage = request.getParameter("indexU");
-String searchU = request.getParameter("searchU");
-String role = request.getParameter("role");
-String active = request.getParameter("active");
-
-if (indexPage == null) {
-    indexPage = "1";
-}
-
-if ((searchU == null || searchU.trim().isEmpty()) && (role == null && active == null)) {
-
-    int index1 = Integer.parseInt(indexPage);
-    int count = ud.getListU(1, 99999).size();
-    int endPage = count / 5;
-    if (count % 5 != 0) {
-        endPage++;
-    }
-    List<Role> listR = ud.listRole();
-    List<User> listU = ud.getListU(index1, 5);
-    request.setAttribute("endPage", endPage);
-    request.setAttribute("listU", listU);
-    request.setAttribute("listR", listR);
-    request.getRequestDispatcher("user/managerUser.jsp").forward(request, response);
-} else {
-    int index1 = Integer.parseInt(indexPage);
-    int roleId = (role != null && !role.isEmpty()) ? Integer.parseInt(role) : -1;
-    int activeId = (active != null && !active.isEmpty()) ? Integer.parseInt(active) : -1;
-    
-    int count = ud.searchU((searchU != null) ? searchU.trim() : "", roleId, activeId, 0, 999).size();
-    int endPage = count / 5;
-    if (count % 5 != 0) {
-        endPage++;
-    }
-    List<Role> listR = ud.listRole();
-    List<User> listU = ud.searchU((searchU != null) ? searchU.trim() : "", roleId, activeId, index1, 5);
-    request.setAttribute("endPage", endPage);
-    request.setAttribute("listU", listU);
-    request.setAttribute("listR", listR);
-    request.setAttribute("role", roleId);
-    request.setAttribute("active", activeId);
-    request.getRequestDispatcher("user/managerUser.jsp").forward(request, response);
-}
+        if (type.equals("lock")) {
+            ud.changeActive(Integer.parseInt(uid), 0);
+            response.sendRedirect("managerUser");
+        }
+        if (type.equals("unlock")) {
+            ud.changeActive(Integer.parseInt(uid), 1);
+            response.sendRedirect("managerUser");
+        }
 
     }
 

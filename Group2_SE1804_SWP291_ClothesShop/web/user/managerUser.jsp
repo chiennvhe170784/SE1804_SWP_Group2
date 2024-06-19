@@ -177,8 +177,8 @@
                                                                 open</c:when>
                                                         </c:choose>
                                                     </td>
-                                                    <td><a href="#"><i class="bi bi-ban"></i></a></td>
-                                                    <td><a href="#"><i class="bi bi-unlock"></i></a></td>
+                                                       <td><a href="#" onclick="return checkBan('${u.uid}')"><i class="bi bi-ban"></i></a></td>
+                                                <td><a href="#" onclick="return checkUnBan('${u.uid}')"><i class="bi bi-unlock"></i></a></td>
 
                                                 </tr>
                                             </c:forEach>
@@ -262,12 +262,22 @@
                     });
                 });
             });
-
-            function validateForm() {
-                // Thêm mã kiểm tra hợp lệ của form nếu cần
-                return true;
-            }
         </script>
+          <script>
+        function checkBan(uid) {
+            // Thêm mã kiểm tra hợp lệ của form nếu cần
+            if (confirm("Ban user with uid = " + uid + "?")) {
+                window.location = 'lockUser?type=lock&uid=' + uid;
+            }
+        }
+
+        function checkUnBan(uid) {
+            // Thêm mã kiểm tra hợp lệ của form nếu cần
+            if (confirm("Unban with user " + uid + "?")) {
+                window.location = 'lockUser?type=unlock&uid=' + uid;
+            }
+        }
+    </script>
         <!-- Bootstrap core JavaScript-->
         <script src="vendor/jquery/jquery.min.js"></script>
         <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
