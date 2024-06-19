@@ -106,7 +106,7 @@
                                     <select name="role" class="form-control">
                                         <option value="-1">All Role</option>
                                         <c:forEach var="r" items="${listR}">
-                                            <option value="${r.rid}" ${param.role == r.rid ? 'selected' : ''}>${r.role}</option>
+                                            <option value="${r.rid}" ${requestScope.role == r.rid ? 'selected' : ''}>${r.role}</option>
                                         </c:forEach>
                                     </select>
                                 </div>
@@ -114,9 +114,9 @@
                                 <!-- Genders Dropdown -->
                                 <div class="col-md-2 mb-3">
                                     <select name="active" class="form-control">
-                                        <option value="-1"  ${param.active == -1 ? 'selected' : ''}>All Active</option>
-                                        <option value="0" ${param.active == 0 ? 'selected' : ''}>Close</option>
-                                        <option value="1" ${param.active == 1 ? 'selected' : ''}>Open</option>
+                                        <option value="-1"  ${requestScope.active == -1 ? 'selected' : ''}>All Active</option>
+                                        <option value="0" ${requestScope.active == 0 ? 'selected' : ''}>Close</option>
+                                        <option value="1" ${requestScope.active == 1 ? 'selected' : ''}>Open</option>
                                     </select>
                                 </div>
                                 <!-- Submit Button (hidden) -->
