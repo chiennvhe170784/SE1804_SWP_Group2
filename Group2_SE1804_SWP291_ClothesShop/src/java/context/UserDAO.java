@@ -22,6 +22,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import model.Role;
 
 /**
  *
@@ -89,11 +90,10 @@ public class UserDAO extends DBContext {
                 + "      ,[active]\n"
                 + "     from [User] u \n"
                 + "order by uid\n "
-                + "OFFSET ? ROWS\n"
-                + "FETCH NEXT ? ROWS ONLY;";
+                + "OFFSET ? ROWS FETCH NEXT ? ROWS ONLY;";
         try {
             PreparedStatement stm = connection.prepareStatement(sql);
-            stm.setInt(1, (index - 1) * 5);
+            stm.setInt(1, (index - 1) * quantity);
             stm.setInt(2, quantity);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
@@ -114,18 +114,74 @@ public class UserDAO extends DBContext {
         return listU;
     }
 
-    public int count() {
-        String sql = "select count(*) from [user]";
+    //search user
+//Name Phone Email Username
+    public List<User> searchU(String key, int rid, int active, int index, int quantity) {
+        List<User> listU = new ArrayList<>();
+        String sql = "SELECT [uid], [fullName], [phone], [address], [email], [username], [password], [dob], [gender], [rid], [active] "
+                   + "FROM [dbo].[User] u "
+                   + "WHERE (u.fullName LIKE ? OR u.phone LIKE ? OR u.email LIKE ? OR u.username LIKE ?) ";
+        if (rid != -1) {
+            sql += "AND u.rid = ? ";
+        }
+        if (active != -1) {
+            sql += "AND u.active = ? ";
+        }
+        sql += "ORDER BY u.uid OFFSET ? ROWS FETCH NEXT ? ROWS ONLY;";
+        
         try {
-            PreparedStatement stm = connection.prepareCall(sql);
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, "%" + key + "%");
+            stm.setString(2, "%" + key + "%");
+            stm.setString(3, "%" + key + "%");
+            stm.setString(4, "%" + key + "%");
+            int paramIndex = 5;
+            if (rid != -1) {
+                stm.setInt(paramIndex++, rid);
+            }
+            if (active != -1) {
+                stm.setInt(paramIndex++, active);
+            }
+            int offset = Math.max(0, (index - 1) * quantity); // Ensure offset is non-negative
+            stm.setInt(paramIndex++, offset);
+            stm.setInt(paramIndex, quantity);
+            
             ResultSet rs = stm.executeQuery();
-            if (rs.next()) {
-                return rs.getInt(1);
+            while (rs.next()) {
+                listU.add(new User(rs.getInt("uid"),
+                                   rs.getString("fullName"),
+                                   rs.getString("phone"),
+                                   rs.getString("address"),
+                                   rs.getString("email"),
+                                   rs.getString("username"),
+                                   rs.getString("password"),
+                                   rs.getString("dob"),
+                                   rs.getInt("gender"),
+                                   rs.getInt("rid"),
+                                   rs.getInt("active")));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(); // Handle or log the exception properly
+        }
+        
+        return listU;
+    }
+    //get all role
+    public List<Role> listRole() {
+        List<Role> listR = new ArrayList<>();
+        String sql = "select * from [Role]";
+        try {
+            PreparedStatement stm = connection.prepareStatement(sql);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                listR.add(new Role(rs.getInt(1),
+                        rs.getString(2)));
             }
         } catch (SQLException e) {
         }
-        return 0;
+        return listR;
     }
+    
 
     //_____________________________________Register Account______________________________
     //resgister with customer
@@ -297,8 +353,14 @@ public class UserDAO extends DBContext {
 
 //        ud.registerAcc("123", "00000000", "123", "123", "123", "123", "1985-05-15", 1);
 //        System.out.println(ud.checkUsername("admin"));
-        List<User> l = ud.getListU(2,3);
-        System.out.println(l.size());
+//        List<User> l = ud.getListU(2, 3);
+//        System.out.println(l.size());
 //        System.out.println(ud.count());
+//        List<Role> r = ud.listRole();
+//        for (Role role : r) {
+//            System.out.println(role.getRid());
+//        }
+        List<User> lu = ud.searchU("", 1, 1, 0, 5);
+        System.out.println(lu.size());
     }
 }
