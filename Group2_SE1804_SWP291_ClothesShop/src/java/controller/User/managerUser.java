@@ -72,6 +72,7 @@ if (indexPage == null) {
 }
 
 if ((searchU == null || searchU.trim().isEmpty()) && (role == null && active == null)) {
+
     int index1 = Integer.parseInt(indexPage);
     int count = ud.getListU(1, 99999).size();
     int endPage = count / 5;
@@ -86,8 +87,8 @@ if ((searchU == null || searchU.trim().isEmpty()) && (role == null && active == 
     request.getRequestDispatcher("user/managerUser.jsp").forward(request, response);
 } else {
     int index1 = Integer.parseInt(indexPage);
-    int roleId = (role != null && !role.isEmpty()) ? Integer.parseInt(role) : 0;
-    int activeId = (active != null && !active.isEmpty()) ? Integer.parseInt(active) : 0;
+    int roleId = (role != null && !role.isEmpty()) ? Integer.parseInt(role) : -1;
+    int activeId = (active != null && !active.isEmpty()) ? Integer.parseInt(active) : -1;
     
     int count = ud.searchU((searchU != null) ? searchU.trim() : "", roleId, activeId, 0, 999).size();
     int endPage = count / 5;
@@ -99,6 +100,8 @@ if ((searchU == null || searchU.trim().isEmpty()) && (role == null && active == 
     request.setAttribute("endPage", endPage);
     request.setAttribute("listU", listU);
     request.setAttribute("listR", listR);
+    request.setAttribute("role", roleId);
+    request.setAttribute("active", activeId);
     request.getRequestDispatcher("user/managerUser.jsp").forward(request, response);
 }
 
