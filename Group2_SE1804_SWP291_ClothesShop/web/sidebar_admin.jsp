@@ -37,7 +37,7 @@
             <span>Product Table</span></a>
     </li>
     <li class="nav-item active">
-        <a class="nav-link" href="listproduct">
+        <a class="nav-link" href="managerUser">
             <i class="fas fa-fw fa-table"></i>
             <span>Manager User</span></a>
     </li>
