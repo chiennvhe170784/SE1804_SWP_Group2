@@ -80,6 +80,12 @@ public class updateNews extends HttpServlet {
         NewsDAO dao = new NewsDAO();
         dao.updateNews(news);
         }
+        else if(request.getParameter("functionName").equalsIgnoreCase("approveFunction")){
+        news.setStatus(true);
+        NewsDAO dao = new NewsDAO();
+        dao.updateNews(news);
+        }
+        
     }
 
     /** 

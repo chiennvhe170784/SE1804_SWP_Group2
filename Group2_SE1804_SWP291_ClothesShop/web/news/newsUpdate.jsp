@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -24,6 +25,7 @@
         <link href="adminassets/css/sb-admin-2.min.css" rel="stylesheet">
         <!-- Custom styles for this page -->
         <link href="adminassets/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+
         <style>
             .ck-editor__editable_inline {
                 min-height: 320px;
@@ -33,41 +35,63 @@
         <script src="${pageContext.request.contextPath}/assets/js/jquery-3.5.1.min.js" type="text/javascript"></script>
         <script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
         <script type="text/javascript">
-           function saveUpdate(functionName) {
-     if ( window.editor.getData() === "") {
-         showError('All field must be filled', 3000);
-     }
-    else {
-             var title = $('#title').val(),
-                 body = window.editor.getData(),
-                 AuthorId = 1;
-             var inputString = body;
+         
+            function approveNews(functionName) {
+                if (window.editor.getData() === "") {
+                    showError('All field must be filled', 3000);
+                } else {
+                    $.ajax({
+                        type: 'POST',
+                        url: 'updateNews',
+                        data: {
+                            "functionName": functionName
+                        },
+                        success: function (data) {
+                            showAlert("Approve News successfully", 3000);
+                             setTimeout(() => {
+                                window.location.href = 'newsListStaff'; // Thay 'newsList' bằng URL đúng của servlet
+                            }, 1000);
+                        },
+                        error: function (xhr, status, error) {
+                            showError("Approve fail, something went wrong", 3000);
+                            setTimeout(() => {
+                                window.location.href = 'newsListStaff'; // Thay 'newsList' bằng URL đúng của servlet
+                            }, 1000);
+                        }
+                    });
+                }
+            }
+            ;
+            function saveUpdate(functionName) {
+                if (window.editor.getData() === "") {
+                    showError('All field must be filled', 3000);
+                } else {
+                    var body = window.editor.getData();
 
-             
-             $.ajax({
-                  type: 'POST',
-                 url: 'updateNews',
-                 data: {
-                     "title": title,
-                     "body": body,
-                     "authorId": AuthorId,
-                     "functionName": functionName
-                 },
-                 success: function (data) {
-                     showAlert("Update News successfully",3000);
-                      setTimeout(() => {
-                              window.location.href = 'newsListStaff'; // Thay 'newsList' bằng URL đúng của servlet
+
+                    $.ajax({
+                        type: 'POST',
+                        url: 'updateNews',
+                        data: {
+                            "body": body,
+                            "functionName": functionName
+                        },
+                        success: function (data) {
+                            showAlert("Update News successfully", 3000);
+                            setTimeout(() => {
+                                window.location.href = 'newsListStaff'; // Thay 'newsList' bằng URL đúng của servlet
                             }, 1000);
-                 },
-                 error: function (xhr, status, error) {
-                     showError("Update fail, something went wrong",3000);
-                     setTimeout(() => {
-                              window.location.href = 'newsListStaff'; // Thay 'newsList' bằng URL đúng của servlet
+                        },
+                        error: function (xhr, status, error) {
+                            showError("Update fail, something went wrong", 3000);
+                            setTimeout(() => {
+                                window.location.href = 'newsListStaff'; // Thay 'newsList' bằng URL đúng của servlet
                             }, 1000);
-                 }
-             });
-     }
- };
+                        }
+                    });
+                }
+            }
+            ;
             function deleteNews(newsId) {
                 var result = confirm("Confirm delete?");
                 var nId = newsId;
@@ -81,8 +105,8 @@
 
                             showAlert('Delete successfully', 3000);
 
-                            setTimeout(() => {
-                                window.location.reload();
+                           setTimeout(() => {
+                                window.location.href = 'newsListStaff'; // Thay 'newsList' bằng URL đúng của servlet
                             }, 1000);
                         },
                         error: function () {
@@ -123,10 +147,10 @@
                     alertDiv.remove();
                 }, duration);
             }
-            
+
             $(document).ready(function () {
 
-                 
+
                 $("#box").css("min-height", "650px");
                 class MyUploadAdapter {
                     constructor(loader) {
@@ -238,9 +262,9 @@
                         .catch(err => {
                             console.error(err.stack);
                         });
-                        
-                          
-   
+
+
+
             });
         </script>
     </head>
@@ -373,8 +397,11 @@
                                     </div>
                                     <div>
                                         <button onclick="saveUpdate('updateFunction')" type="button" id="updatebtn" class="btn btn-primary" style="margin-bottom:20px; margin-top:10px">Update</button>
-                                        <button type="button" onclick="approveBlog('123')" id="approvebtn" class="btn btn-success" style="margin-left:10px; margin-bottom:20px; margin-top:10px">Approve</button>
-                                        <button onclick="deleteBlog('123')" type="button" id="denybtn" class="btn btn-danger" style="margin-left:10px; margin-bottom:20px; margin-top:10px">Delete</button>
+                                        <c:if test="${!news.status}">
+                                            <button type="button" onclick="approveNews('approveFunction')" id="approvebtn" class="btn btn-success" style="margin-left:10px; margin-bottom:20px; margin-top:10px">Approve</button>
+                                        </c:if>
+
+                                        <button onclick="deleteNews(${news.nId})" type="button" id="denybtn" class="btn btn-danger" style="margin-left:10px; margin-bottom:20px; margin-top:10px">Delete</button>
                                     </div>
                                 </div>
 

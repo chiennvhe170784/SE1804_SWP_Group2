@@ -95,17 +95,16 @@
     <servlet>
         <servlet-name>imageUploader</servlet-name>
         <servlet-class>controller.news.imageUploader</servlet-class>
-<<<<<<< HEAD
-             </servlet>
-              <servlet>
-=======
     </servlet>
     <servlet>
->>>>>>> 16a483d (Done Update News)
         <servlet-name>managerUser</servlet-name>
         <servlet-class>controller.User.managerUser</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>lockUser</servlet-name>
+        <servlet-class>controller.User.lockUser</servlet-class>
+        </servlet>
+ <servlet>
         <servlet-name>updateNews</servlet-name>
         <servlet-class>controller.news.updateNews</servlet-class>
     </servlet>
@@ -204,19 +203,19 @@
     <servlet-mapping>
         <servlet-name>imageUploader</servlet-name>
         <url-pattern>/imageUploader</url-pattern>
-<<<<<<< HEAD
-            </servlet-mapping>
-                <servlet-mapping>
-=======
     </servlet-mapping>
     <servlet-mapping>
->>>>>>> 16a483d (Done Update News)
         <servlet-name>managerUser</servlet-name>
         <url-pattern>/managerUser</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>lockUser</servlet-name>
+        <url-pattern>/lockUser</url-pattern>
+          </servlet-mapping>
+        <servlet-mapping>
         <servlet-name>updateNews</servlet-name>
         <url-pattern>/updateNews</url-pattern>
+
     </servlet-mapping>
     <session-config>
         <session-timeout>

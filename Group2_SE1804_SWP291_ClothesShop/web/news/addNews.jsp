@@ -199,7 +199,7 @@
      }
      else {
          if ($('#title').val().length > 60) {
-             showError('Title can not be more than 60 characters', 3000);
+             showError('Title can not be more than 60 char', 3000);
          } else {
              var title = $('#title').val(),
                  body = window.editor.getData(),

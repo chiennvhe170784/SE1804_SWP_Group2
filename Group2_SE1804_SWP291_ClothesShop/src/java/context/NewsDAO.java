@@ -158,7 +158,7 @@ public class NewsDAO extends DBContext{
     public void addNews(News news) {
         try {
             String sql = "INSERT INTO News (title, description, uid, status, updateDate) VALUES (?, ?, ?, ?, ?)";
-            PreparedStatement stm = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
+            PreparedStatement stm = connection.prepareStatement(sql);
             stm.setString(1, news.getTitle());
             stm.setString(2, news.getBody());
             stm.setInt(3, news.getAuthor());
@@ -180,7 +180,7 @@ public class NewsDAO extends DBContext{
 "      ,[status] = ?" +
 "      ,[updateDate] = ?" +
 " WHERE [nid] = ?";
-            PreparedStatement stm = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
+            PreparedStatement stm = connection.prepareStatement(sql);
             stm.setString(1, news.getTitle());
             stm.setString(2, news.getBody());
             stm.setInt(3, news.getAuthor());
