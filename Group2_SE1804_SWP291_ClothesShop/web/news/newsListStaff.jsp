@@ -213,7 +213,7 @@
                                  <th style="width: 85%;"><div  style="min-width: 500px;max-width: 916px;height:109.4px;padding-left:20px;padding-top:13px; white-space: nowrap;" ><h3 style="font-size: 20px;display: inline-block; vertical-align: top;margin-top: 17px;text-overflow: ellipsis; overflow: hidden; white-space: nowrap;" ><a href="newsDetail?id=${news.nId}">${news.title} </a></h3>           
                                 <button id="deletebtn" onclick="deleteNews(${news.nId})" style="float:right; border:none; width:103px; height:70px; appearance: none; background-color: inherit; display: flex; justify-content: center; align-items: center;">
                                 <img src="https://drive.google.com/thumbnail?id=1jMT2nYYaUtyf7OQbRk3t_6u8U5bnL8r2" style="width:103px; height:70px; display:inline-block;" class="img-rounded" alt="Load img fail"></button>     
-                                <input data-id="${news.nId}" type = "button" class="btn btn-info editNewsbtn" style = "float:right ;display:inline-block;vertical-align:top; margin-top:15px;" value = "Edit" />
+                                <a href="updateNews?nId=${news.nId}"  class="btn btn-info editNewsbtn" style="float:right; display:inline-block; vertical-align:top; margin-top:15px;">Edit</a>
                                 <p style="margin-top: -2px;">
                                     Posted: ${news.updateDate}
                                      </p></th></div></tr></table>

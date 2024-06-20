@@ -33,7 +33,64 @@
         <script src="${pageContext.request.contextPath}/assets/js/jquery-3.5.1.min.js" type="text/javascript"></script>
         <script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
         <script type="text/javascript">
-            
+           function saveUpdate(functionName) {
+     if ( window.editor.getData() === "") {
+         showError('All field must be filled', 3000);
+     }
+    else {
+             var title = $('#title').val(),
+                 body = window.editor.getData(),
+                 AuthorId = 1;
+             var inputString = body;
+
+             
+             $.ajax({
+                  type: 'POST',
+                 url: 'updateNews',
+                 data: {
+                     "title": title,
+                     "body": body,
+                     "authorId": AuthorId,
+                     "functionName": functionName
+                 },
+                 success: function (data) {
+                     showAlert("Update News successfully",3000);
+                      setTimeout(() => {
+                              window.location.href = 'newsListStaff'; // Thay 'newsList' bằng URL đúng của servlet
+                            }, 1000);
+                 },
+                 error: function (xhr, status, error) {
+                     showError("Update fail, something went wrong",3000);
+                     setTimeout(() => {
+                              window.location.href = 'newsListStaff'; // Thay 'newsList' bằng URL đúng của servlet
+                            }, 1000);
+                 }
+             });
+     }
+ };
+            function deleteNews(newsId) {
+                var result = confirm("Confirm delete?");
+                var nId = newsId;
+                if (result) {
+                    console.log("News Id: " + nId);
+                    $.ajax({
+                        type: 'POST',
+                        data: {nId: nId},
+                        url: 'newsListStaff',
+                        success: (result) => {
+
+                            showAlert('Delete successfully', 3000);
+
+                            setTimeout(() => {
+                                window.location.reload();
+                            }, 1000);
+                        },
+                        error: function () {
+                            showError('Delete fail something went wrong', 3000);
+                        }
+                    });
+                }
+            }
             function showAlert(message, duration) {
                 // Tạo phần tử alert mới
                 let alertDiv = document.createElement('div');
@@ -69,18 +126,8 @@
             
             $(document).ready(function () {
 
-
-                $("#box").html(' <div id="createBlog" class="col">' +
-                        '<div>' +
-                        '<label style="padding-top:12px">Title</label>' +
-                        '<input type="text" class="form-control" id="title" placeholder="Enter title" />' +
-                        '</div>' +
-                        '<div>' +
-                        '<label>Content</label>' +
-                        '<textarea id="body" placeholder="Enter content" style="min-height: 450px"></textarea>' +
-                        '</div>' +
-                        '<button type="button" id="savebtn" class="btn btn-primary" style="margin-bottom:20px;margin-top:10px">Post</button>' +
-                        '</div>');
+                 
+                $("#box").css("min-height", "650px");
                 class MyUploadAdapter {
                     constructor(loader) {
                         // The file loader instance to use during the upload. It sounds scary but do not
@@ -192,43 +239,8 @@
                             console.error(err.stack);
                         });
                         
-                        
-     $('#savebtn').click(() => {
-     if ($('#title').val() === "" || window.editor.getData() === "") {
-         showError('All field must be filled', 3000);
-     }
-     else {
-         if ($('#title').val().length > 60) {
-             showError('Title can not be more than 60 characters', 3000);
-         } else {
-             var title = $('#title').val(),
-                 body = window.editor.getData(),
-                 AuthorId = 1;
-             var inputString = body;
-
-             
-             $.ajax({
-                  type: 'POST',
-                 url: 'addNews',
-                 data: {
-                     "title": title,
-                     "body": body,
-                     "authorId": AuthorId
-                 },
-                 success: function (data) {
-                     showAlert("Create News successfully",3000);
-                      setTimeout(() => {
-                              window.location.href = 'newsListStaff'; // Thay 'newsList' bằng URL đúng của servlet
-                            }, 1000);
-                 },
-                 error: function (xhr, status, error) {
-                     showError("Create fail, something went wrong",3000);
-
-                 }
-             });
-         }
-     }
- });
+                          
+   
             });
         </script>
     </head>
@@ -350,7 +362,21 @@
                                 </div>
                             </div>
                             <div id="box" class="row" style="   min-width: 500px;max-width: 1060px;position: relative;margin-left:40px;border:solid;height:auto;background-color:white;min-height: 350px;border-radius: 7px;overflow: auto;">
-
+                                <div id="createBlog" class="col">
+                                    <div>
+                                        <label style="padding-top:12px">Title</label>
+                                        <input readonly type="text" class="form-control" id="title" value="${news.title}" />
+                                    </div>
+                                    <div>
+                                        <label>Content</label>
+                                        <textarea id="body" style="min-height: 450px">${news.body}</textarea>
+                                    </div>
+                                    <div>
+                                        <button onclick="saveUpdate('updateFunction')" type="button" id="updatebtn" class="btn btn-primary" style="margin-bottom:20px; margin-top:10px">Update</button>
+                                        <button type="button" onclick="approveBlog('123')" id="approvebtn" class="btn btn-success" style="margin-left:10px; margin-bottom:20px; margin-top:10px">Approve</button>
+                                        <button onclick="deleteBlog('123')" type="button" id="denybtn" class="btn btn-danger" style="margin-left:10px; margin-bottom:20px; margin-top:10px">Delete</button>
+                                    </div>
+                                </div>
 
 
                             </div>
