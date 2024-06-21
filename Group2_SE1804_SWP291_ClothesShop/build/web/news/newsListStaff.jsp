@@ -210,10 +210,10 @@
                             <div id="box" class="row" style="   min-width: 500px;max-width: 1060px;position: relative;margin-left:40px;border:solid;height:auto;background-color:white;min-height: 350px;border-radius: 7px;overflow: auto;">
                                  <c:forEach var="news" items="${n}">
                                                                                 <table style="max-height:124px; min-height:119.4px;width:1049.7px; "><tr onmouseover="this.style.backgroundColor ='#B0E0E6'" onmouseout="this.style.backgroundColor='transparent'">
-                                 <th style="width: 85%;"><div  style="min-width: 500px;max-width: 916px;height:109.4px;padding-left:20px;padding-top:13px; white-space: nowrap;" ><h3 style="font-size: 20px;display: inline-block; vertical-align: top;margin-top: 17px;text-overflow: ellipsis; overflow: hidden; white-space: nowrap;" ><a href="newsDetail?id=${news.nId}">${news.title} </a></h3>           
+                                 <th style="width: 85%;"><div  style="min-width: 500px;max-width: 916px;height:109.4px;padding-left:20px;padding-top:13px; white-space: nowrap;" ><h3 style="font-size: 20px;display: inline-block; vertical-align: top;margin-top: 17px;text-overflow: ellipsis; overflow: hidden; white-space: nowrap;" ><a href="">${news.title} </a></h3>           
                                 <button id="deletebtn" onclick="deleteNews(${news.nId})" style="float:right; border:none; width:103px; height:70px; appearance: none; background-color: inherit; display: flex; justify-content: center; align-items: center;">
                                 <img src="https://drive.google.com/thumbnail?id=1jMT2nYYaUtyf7OQbRk3t_6u8U5bnL8r2" style="width:103px; height:70px; display:inline-block;" class="img-rounded" alt="Load img fail"></button>     
-                                <input data-id="${news.nId}" type = "button" class="btn btn-info editNewsbtn" style = "float:right ;display:inline-block;vertical-align:top; margin-top:15px;" value = "Edit" />
+                                <a href="updateNews?nId=${news.nId}"  class="btn btn-info editNewsbtn" style="float:right; display:inline-block; vertical-align:top; margin-top:15px;">Edit</a>
                                 <p style="margin-top: -2px;">
                                     Posted: ${news.updateDate}
                                      </p></th></div></tr></table>

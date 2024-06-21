@@ -3,21 +3,24 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-package controller.Home;
+package controller.news;
 
+import context.NewsDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.Date;
+import model.News;
 
 /**
  *
- * @author chien
+ * @author ADMIN
  */
-public class guestHome extends HttpServlet {
-   
+public class updateNews extends HttpServlet {
+    private News news;
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
@@ -33,10 +36,10 @@ public class guestHome extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet guestHome</title>");  
+            out.println("<title>Servlet updateNews</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet guestHome at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet updateNews at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -53,7 +56,11 @@ public class guestHome extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        int newsId =Integer.parseInt(request.getParameter("nId")) ;
+        NewsDAO dao = new NewsDAO();
+        news = dao.detail(newsId);
+        request.setAttribute("news", news);
+        request.getRequestDispatcher("news/newsUpdate.jsp").forward(request, response);
     } 
 
     /** 
@@ -66,7 +73,19 @@ public class guestHome extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        if(request.getParameter("functionName").equalsIgnoreCase("updateFunction")){
+        news.setBody(request.getParameter("body"));
+        news.setStatus(false);
+        news.setUpdateDate(new Date());
+        NewsDAO dao = new NewsDAO();
+        dao.updateNews(news);
+        }
+        else if(request.getParameter("functionName").equalsIgnoreCase("approveFunction")){
+        news.setStatus(true);
+        NewsDAO dao = new NewsDAO();
+        dao.updateNews(news);
+        }
+        
     }
 
     /** 

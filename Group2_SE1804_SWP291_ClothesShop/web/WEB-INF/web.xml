@@ -33,6 +33,10 @@
         <servlet-class>controller.product.listproduct</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>Home</servlet-name>
+        <servlet-class>controller.home.Home</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>Login</servlet-name>
         <servlet-class>controller.User.Login</servlet-class>
     </servlet>
@@ -103,6 +107,10 @@
     <servlet>
         <servlet-name>lockUser</servlet-name>
         <servlet-class>controller.User.lockUser</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>updateNews</servlet-name>
+        <servlet-class>controller.news.updateNews</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>newsList</servlet-name>
@@ -207,6 +215,14 @@
     <servlet-mapping>
         <servlet-name>lockUser</servlet-name>
         <url-pattern>/lockUser</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>updateNews</servlet-name>
+        <url-pattern>/updateNews</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Home</servlet-name>
+        <url-pattern>/Home</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
