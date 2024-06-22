@@ -62,23 +62,30 @@ public class listCate extends HttpServlet {
 
         String indexPage = request.getParameter("index");
         String searchCate = request.getParameter("searchCate");
-
+        String name = request.getParameter("addCate_name");
         if (indexPage == null) {
             indexPage = "1";
         }
 
-        if (searchCate == null) {
+
+        if (searchCate == null || searchCate.trim() == "") {
             int index1 = Integer.parseInt(indexPage);
             int count = cd.count();
             int endPage = count / 5;
             if (count % 5 != 0) {
                 endPage++;
             }
+            if (name != null) {
+            cd.addCategory(name);
+            request.setAttribute("add_suc", "Add category sucessfully!");
+        }
             List<Category> listC = cd.pagging(index1);
             request.setAttribute("endPage", endPage);
             request.setAttribute("listC", listC);
             request.setAttribute("searchCate", searchCate);
-            request.getRequestDispatcher("category_brand/listCate.jsp").forward(request, response);
+            request.setAttribute("count", count);
+
+            request.getRequestDispatcher("category_brand/listCate2.jsp").forward(request, response);
 
         } else {
             int index1 = Integer.parseInt(indexPage);
@@ -87,11 +94,16 @@ public class listCate extends HttpServlet {
             if (count % 5 != 0) {
                 endPage++;
             }
+                    if (name != null) {
+            cd.addCategory(name);
+            request.setAttribute("add_suc", "Add category sucessfully!");
+        }
             List<Category> listC = cd.search(searchCate, index1);
             request.setAttribute("endPage", endPage);
             request.setAttribute("listC", listC);
             request.setAttribute("searchCate", searchCate);
-            request.getRequestDispatcher("category_brand/listCate.jsp").forward(request, response);
+            request.setAttribute("count", count);
+            request.getRequestDispatcher("category_brand/listCate2.jsp").forward(request, response);
         }
 
     }
@@ -107,23 +119,7 @@ public class listCate extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//        CategoryDAO cd = new CategoryDAO();
-//        String searchCate = request.getParameter("searchCate");
-//        String indexPage = request.getParameter("index");
-//        if (indexPage == null) {
-//            indexPage = "1";
-//        }
-//        int index1 = Integer.parseInt(indexPage);
-//        int count = cd.count();
-//        int endPage = count / 5;
-//        if (count % 5 != 0) {
-//            endPage++;
-//        }
-//        List<Category> listC = cd.search(searchCate, index1);
-//        request.setAttribute("endPage", endPage);
-//        request.setAttribute("listC", listC);
-//        request.getRequestDispatcher("category_brand/showCate.jsp").forward(request, response);
-        processRequest(request, response);
+
     }
 
     /**

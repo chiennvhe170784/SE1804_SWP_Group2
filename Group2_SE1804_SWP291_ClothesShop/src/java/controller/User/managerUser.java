@@ -73,7 +73,7 @@ if (indexPage == null) {
 if ((searchU == null || searchU.trim().isEmpty()) && (role == null && active == null)) {
 
     int index1 = Integer.parseInt(indexPage);
-    int count = ud.getListU(1, 99999).size();
+    int count = ud.getListU(1, 9999).size();
     int endPage = count / 5;
     if (count % 5 != 0) {
         endPage++;

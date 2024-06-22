@@ -56,7 +56,12 @@ public class addCate extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-     request.getRequestDispatcher("category_brand/addCate.jsp").forward(request, response);
+        String name = request.getParameter("addCate_name");
+        CategoryDAO cd = new CategoryDAO();
+        cd.addCategory(name);
+        request.setAttribute("add_suc", "Add category sucessfully!");
+        request.getRequestDispatcher("category_brand/listCate2.jsp").forward(request, response);
+     
     }
 
     /**
@@ -70,10 +75,7 @@ public class addCate extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-                String name = request.getParameter("addCate_name");
-        CategoryDAO cd = new CategoryDAO();
-        cd.addCategory(name);
-        request.getRequestDispatcher("listCate").forward(request, response);
+         
 
     }
 

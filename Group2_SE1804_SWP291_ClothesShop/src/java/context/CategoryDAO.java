@@ -38,7 +38,6 @@ public class CategoryDAO extends DBContext {
         return list;
     }
 
-
     public ArrayList<Category> pagging(int index) {
         ArrayList<Category> cate = new ArrayList<>();
         try {
@@ -57,7 +56,6 @@ public class CategoryDAO extends DBContext {
         return cate;
     }
 
-
     public int count() {
         try {
             String sql = "select count (*) from category";
@@ -70,7 +68,8 @@ public class CategoryDAO extends DBContext {
         }
         return 0;
     }
-        public int count2(String key) {
+
+    public int count2(String key) {
         try {
             String sql = "SELECT count(*) from category c where c.name like '%" + key + "%'";
             PreparedStatement stm = connection.prepareStatement(sql);
@@ -124,10 +123,7 @@ public class CategoryDAO extends DBContext {
     }
 
     public void deleteCate(int cid) {
-        String sql = "delete from product\n"
-                + "where cid=?\n"
-                + "\n"
-                + "delete from category\n"
+        String sql = "delete from category\n"
                 + "where cid=?";
         try {
             PreparedStatement stm = connection.prepareStatement(sql);
@@ -171,8 +167,8 @@ public class CategoryDAO extends DBContext {
     public static void main(String[] args) {
 
         CategoryDAO cd = new CategoryDAO();
-
-        ArrayList<Category> list = cd.search("",2);
+        cd.addCategory("123");
+        ArrayList<Category> list = cd.getAllCate();
 
         for (Category category : list) {
             System.out.println(category.getName() + ", " + category.getCid());
