@@ -44,6 +44,19 @@ public class UserDAO extends DBContext {
         } catch (SQLException e) {
         }
     }
+    public void changePass(String username, String pass) {
+        String sql = "UPDATE [dbo].[User]\n"
+                + "   SET \n"
+                + "[password] = ?\n"
+                + " WHERE [username] = ?";
+        try {
+            PreparedStatement pst = connection.prepareStatement(sql);
+            pst.setString(1, pass);
+            pst.setString(2, username);
+            pst.executeUpdate();
+        } catch (SQLException e) {
+        }
+    }
 
     //___________________________Active User_________________________
     // set active of account

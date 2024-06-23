@@ -3,6 +3,10 @@
     Created on : Jun 17, 2024, 4:31:07 PM
     Author     : chien
 --%>
+<head>
+    <link rel="stylesheet" href="assets/css/fontawesome.all.min.css">
+
+</head>
 
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
     <!-- Sidebar - Brand -->
@@ -41,6 +45,16 @@
             <i class="fas fa-fw fa-table"></i>
             <span>Manager User</span></a>
     </li>
+    <li class="nav-item active">
+        <a class="nav-link" href="listCate">
+            <i class="fas fa-fw fa-table"></i>
+            <span>Category Table</span></a>
+    </li>
+    <li class="nav-item active">
+        <a class="nav-link" href="listBrand">
+            <i class="fas fa-fw fa-table"></i>
+            <span>Brand Table</span></a>
+    </li>
 
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
@@ -50,3 +64,8 @@
         <button class="rounded-circle border-0" id="sidebarToggle"></button>
     </div>
 </ul>
+<script>
+    document.getElementById('sidebarToggle').addEventListener('click', function () {
+        document.getElementById('accordionSidebar').classList.toggle('toggled');
+    });
+</script>

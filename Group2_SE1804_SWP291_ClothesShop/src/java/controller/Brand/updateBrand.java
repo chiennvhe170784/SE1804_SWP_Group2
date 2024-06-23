@@ -2,21 +2,22 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controller.Category;
+package controller.Brand;
 
-import context.CategoryDAO;
+import context.BrandDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import model.Brand;
 
 /**
  *
  * @author chien
  */
-public class addCate extends HttpServlet {
+public class updateBrand extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -30,15 +31,15 @@ public class addCate extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
+        try ( PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet addCate</title>");
+            out.println("<title>Servlet updateBrand</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet addCate at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet updateBrand at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -56,7 +57,12 @@ public class addCate extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-     request.getRequestDispatcher("category_brand/addCate.jsp").forward(request, response);
+        int cid = Integer.parseInt(request.getParameter("cidUpdate"));
+        BrandDAO cd = new BrandDAO();
+        Brand c = cd.getCateById(cid);
+        request.setAttribute("brand", c);
+        request.getRequestDispatcher("category_brand/updateBrand.jsp").forward(request, response);
+
     }
 
     /**
@@ -70,11 +76,12 @@ public class addCate extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-                String name = request.getParameter("addCate_name");
-        CategoryDAO cd = new CategoryDAO();
-        cd.addCategory(name);
-        request.getRequestDispatcher("listCate").forward(request, response);
-
+        int cid = Integer.parseInt(request.getParameter("bid"));
+        String name = request.getParameter("brand_name");
+        BrandDAO cd = new BrandDAO();
+        cd.updateCate(cid, name);
+        request.setAttribute("update_suc", "Update brand successfully!");
+        response.sendRedirect("listBrand");
     }
 
     /**

@@ -1,5 +1,5 @@
 <%-- 
-    Document   : listBrand
+    Document   : listCate2
     Created on : Jun 22, 2024, 10:19:05 PM
     Author     : chien
 --%>
@@ -93,13 +93,13 @@
                     <!-- Begin Page Content -->
                     <div class="container-fluid">
                         <!-- Page Heading -->
-                        <h1 >Brand List</h1>
+                        <h1 >Category List</h1>
                         <div id="newCateForm" style="display: none;">
-                            <form action="listBrand" method="get" style="margin-bottom: 20px">
+                            <form action="listCate" method="get" style="margin-bottom: 20px">
 
                                 <fieldset class="form-group">
 
-                                    <input type="text" value="" class="form-control col-md-4" name="addBrand_name" placeholder="Enter Brand Name" id="name" required>
+                                    <input type="text" value="" class="form-control col-md-4" name="addCate_name" placeholder="Enter Category Name" id="name" required>
                                 </fieldset>
 
                                 <div class="text-left" style="margin-left: 12px">
@@ -110,43 +110,43 @@
                             </form>
                         </div>
 
-                        <button type="button" id="newCateButton" style="margin-bottom: 20px" class="btn btn-primary" onclick="showForm()">Add Brand</button>
+                        <button type="button" id="newCateButton" style="margin-bottom: 20px" class="btn btn-primary" onclick="showForm()">Add Category</button>
 
 
 
 
                         <!-- Search and Filter Form -->
-                        <form id="filterForm" name="filterForm" action="listBrand" method="get" onsubmit="return validateForm()">
+                        <form id="filterForm" name="filterForm" action="listCate" method="get" onsubmit="return validateForm()">
                             <div class="form-row">
                                 <!-- Search properties -->
                                 <%
-                               String searchBrand = request.getParameter("searchBrand");
+                               String searchCate = request.getParameter("searchCate");
                                 %>
 
                                 <div class="col-md-2 mb-3">
-                                    <input type="text" name="searchBrand" placeholder="Search Brand" value="<%= searchBrand != null ? searchBrand : "" %>" class="form-control">
+                                    <input type="text" name="searchCate" placeholder="Search Category" value="<%= searchCate != null ? searchCate : "" %>" class="form-control">
                                 </div>
 
 
                                 <!-- Genders Dropdown -->
                                 <div class="col-md-2 mb-3">
-                                    <select class="form-select" name="sortBrand" aria-label="Default select example">
+                                    <select class="form-select" name="sortCate" aria-label="Default select example">
 
-                                        <option value="1" ${requestScope.sortBrand == 1 ? 'selected' : ''}>Sort by Cid</option>
-                                        <option value="2"  ${requestScope.sortBrand == 2 ? 'selected' : ''}>Sort by Name</option>
+                                        <option value="1" ${requestScope.sortCate == 1 ? 'selected' : ''}>Sort by Cid</option>
+                                        <option value="2"  ${requestScope.sortCate == 2 ? 'selected' : ''}>Sort by Name</option>
 
                                     </select>
                                 </div>
                                 <div class="col-md-2 mb-3">
-                                    <select class="form-select" name="sortTypeB" aria-label="Default select example">
+                                    <select class="form-select" name="sortType" aria-label="Default select example">
 
-                                        <option value="1" ${requestScope.sortTypeB == 1 ? 'selected' : ''}>Increase</option>
-                                        <option value="2" ${requestScope.sortTypeB == 2 ? 'selected' : ''}>Decrease</option>
+                                        <option value="1" ${requestScope.sortType == 1 ? 'selected' : ''}>Increase</option>
+                                        <option value="2" ${requestScope.sortType == 2 ? 'selected' : ''}>Decrease</option>
                                     </select>
                                 </div>
 
                                 <div class="col-md-1 mb-1">
-                                    <input class="form-control" readonly="" value="Total: ${requestScope.countB}">
+                                    <input class="form-control" readonly="" value="Total: ${requestScope.count}">
                                 </div>
 
                                 <!-- Submit Button (hidden) -->
@@ -167,23 +167,23 @@
                                             <tr>
 
                                                 <th scope="col">ID</th>
-                                                <th scope="col">Brand Name</th>
+                                                <th scope="col">Category Name</th>
 
                                                 <th scope="col">Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <c:forEach items="${requestScope.listB}" var="c">
+                                            <c:forEach items="${requestScope.listC}" var="c">
                                                 <tr>
-                                                    <td>${c.bid}</td>
+                                                    <td>${c.cid}</td>
                                                     <td>${c.name}</td>
 
 
                                                     <td><li class="list-inline-item">
-                                                <a href="#" onclick="return checkDelete('${c.bid}')"><button class="btn btn-danger btn-sm rounded-0" type="button" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-trash"></i></button></a>
+                                                <a href="#" onclick="return checkDelete('${c.cid}')"><button class="btn btn-danger btn-sm rounded-0" type="button" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-trash"></i></button></a>
                                             </li>
                                             <li class="list-inline-item">
-                                                <a href="updateBrand?bidUpdate=${c.bid}"><button class="btn btn-success btn-sm rounded-0" type="button" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-edit"></i></button></a>
+                                                <a href="updateCate?cidUpdate=${c.cid}"><button class="btn btn-success btn-sm rounded-0" type="button" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-edit"></i></button></a>
                                             </li>
                                             </td>
                                             </tr>
@@ -205,7 +205,7 @@
                                 <!-- Previous button -->
                                 <c:if test="${currentIndex > 1}">
                                     <li style="margin: 0 5px;">
-                                        <a href="listBrand?index=${currentIndex - 1}&searchBrand=${param.searchBrand}&sortBrand=${param.sortBrand}&sortTypeB=${param.sortTypeB}"
+                                        <a href="listCate?index=${currentIndex - 1}&searchCate=${param.searchCate}&sortCate=${param.sortCate}&sortType=${param.sortType}"
                                            style="text-decoration: none; padding: 8px 16px; border: 1px solid #ddd; border-radius: 4px;">
                                             Previous
                                         </a>
@@ -215,7 +215,7 @@
                                 <!-- Page links -->
                                 <c:forEach begin="${currentIndex > 2 ? currentIndex - 1 : 1}" end="${(currentIndex < endPage - 1) ? currentIndex + 1 : endPage}" var="i">
                                     <li style="margin: 0 5px;">
-                                        <a class="${i == currentIndex ? 'active' : ''}" href="listBrand?index=${i}&searchBrand=${param.searchBrand}&sortBrand=${param.sortBrand}&sortTypeB=${param.sortTypeB}"
+                                        <a class="${i == currentIndex ? 'active' : ''}" href="listCate?index=${i}&searchCate=${param.searchCate}&sortCate=${param.sortCate}&sortType=${param.sortType}"
                                            style="text-decoration: none; padding: 8px 16px; border: 1px solid #ddd; border-radius: 4px; color: ${i == currentIndex ? '#fff' : '#007bff'}; background-color: ${i == currentIndex ? '#007bff' : '#fff'};">
                                             ${i}
                                         </a>
@@ -225,7 +225,7 @@
                                 <!-- Next button -->
                                 <c:if test="${currentIndex < endPage}">
                                     <li style="margin: 0 5px;">
-                                        <a href="listBrand?index=${currentIndex + 1}&searchBrand=${param.searchBrand}&sortBrand=${param.sortBrand}&sortTypeB=${param.sortTypeB}"
+                                        <a href="listCate?index=${currentIndex + 1}&searchCate=${param.searchCate}&sortCate=${param.sortCate}&sortType=${param.sortType}"
                                            style="text-decoration: none; padding: 8px 16px; border: 1px solid #ddd; border-radius: 4px;">
                                             Next
                                         </a>
@@ -298,8 +298,8 @@
         <script>
             function checkDelete(uid) {
                 // Thêm mã kiểm tra hợp lệ của form nếu cần
-                if (confirm("Delete brand with bid = " + uid + "?")) {
-                    window.location = 'deleteBrand?bid=' + uid;
+                if (confirm("Delete category with cid = " + uid + "?")) {
+                    window.location = 'deleteCate?cid=' + uid;
                 }
             }
         </script>

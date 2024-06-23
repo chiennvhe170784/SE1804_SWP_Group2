@@ -1,3 +1,9 @@
+<%-- 
+    Document   : changePass
+    Created on : Jun 21, 2024, 11:14:44 AM
+    Author     : chien
+--%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html class="no-js" lang="en">
@@ -25,10 +31,10 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="breadcrumb-content">
-                        <h2>Reset Password</h2>
+                        <h2>Change Password</h2>
                         <ul>
                             <li><a href="login">Login</a></li>
-                            <li class="active">Reset Password</li>
+                            <li class="active">Change Password</li>
                         </ul>
                     </div>
                 </div>
@@ -43,19 +49,13 @@
             <div class="row">
                 <div class="col-lg-6 offset-lg-3">
                     <div class="login-register-form-full">
-                        <form action="sendCode" method="get" onsubmit="return sendEmail()">
-                            <div class="form-control-range" style="display: flex; align-items: center;">
-                                <input type="email" class="form-control" id="inputEmail" pattern="[a-zA-Z0-9._%+-]+@gmail\.com" required
-                                       name="emailChange" placeholder="${sessionScope.mailTo != null ? sessionScope.mailTo : 'Enter your email'}" style="flex: 8; height: 40px;">
-                                <button type="submit" id="getCodeBtn" style="border-radius: 10px; background-color: #ff9933; flex: 2; height: 40px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">Get Code</button>
-                            </div>
-                        </form>
-                        <form action="resetPass" method="post" onsubmit="return validateResetForm()">
+                        <form action="changePass" method="post" onsubmit="return validateResetForm()">
                             <p style="color: #0061f2;">${requestScope.eee}</p>
-                            <input type="text" class="form-control" name="codeRe" id="code" placeholder="Enter Code">
-                            <input type="password" class="form-control" name="pass" id="pass" placeholder="Enter new password">
+                            <input type="text" class="form-control" name="username" id="username" value="${sessionScope.user.fullName}" readonly="">
+                            <input type="password" class="form-control" name="oldpass" id="oldpass" placeholder="Enter old password">
+                            <input type="password" class="form-control" name="pass" id="newpass" placeholder="Enter new password">
                             <input type="password" class="form-control" name="repass" id="repass" placeholder="Confirm password">
-                            <p style="color: #0061f2;">${requestScope.output}</p>
+                            <p style="color: #0061f2;">${requestScope.err}</p>
                             <button class="button-1" id="resetBtn" type="submit">Reset Now</button>
                         </form>
                     </div>
@@ -74,21 +74,8 @@
     <script src="assets/js/bootstrap.min.js"></script>
     <script src="assets/js/script.js"></script>
     <script>
-        function sendEmail() {
-            var emailInput = document.getElementById('inputEmail');
-            var email = emailInput.value;
-            var emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-
-            if (email && emailPattern.test(email)) {
-                return confirm('Are you sure you want to send the code to the email: ' + email + '?');
-            } else {
-                alert('Please enter a valid email address.');
-                return false;
-            }
-        }
-
         function validateResetForm() {
-            var pass = document.getElementById('pass').value.trim();
+            var pass = document.getElementById('newpass').value.trim();
             var repass = document.getElementById('repass').value.trim();
             var passRegex = /^(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
 

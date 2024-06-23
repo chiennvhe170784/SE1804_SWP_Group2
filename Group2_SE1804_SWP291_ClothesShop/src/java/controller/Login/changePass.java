@@ -2,22 +2,23 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controller.Category;
+package controller.Login;
 
-import context.CategoryDAO;
+import context.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import model.Category;
+import jakarta.servlet.http.HttpSession;
+import model.User;
 
 /**
  *
  * @author chien
  */
-public class deleteCate extends HttpServlet {
+public class changePass extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,10 +37,10 @@ public class deleteCate extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet deleteCate</title>");
+            out.println("<title>Servlet changePass</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet deleteCate at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet changePass at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -57,22 +58,8 @@ public class deleteCate extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
 
-            int cid = Integer.parseInt(request.getParameter("cid"));
-            CategoryDAO cd = new CategoryDAO();
-            boolean cate = cd.checkDelete(cid);
-            if (cate ==true) {
-                cd.deleteCate(cid);
-                request.setAttribute("out", "delete category with cid = " + cid + " success");
-                request.getRequestDispatcher("listCate").forward(request, response);
-            } else {
-                request.setAttribute("out", " Can't delete category with id = " + cid + " because product still exists!");
-                request.getRequestDispatcher("listCate").forward(request, response);
-            }
-
-        } catch (NumberFormatException e) {
-        }
+        request.getRequestDispatcher("login/changePass.jsp").forward(request, response);
     }
 
     /**
@@ -86,7 +73,26 @@ public class deleteCate extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String oldPass = request.getParameter("oldpass");
+        String newPass = request.getParameter("pass");
+        HttpSession session = request.getSession();
+        UserDAO ud = new UserDAO();
+        oldPass = ud.toSHA1(oldPass);
+        newPass = ud.toSHA1(newPass);
+        User user = (User) session.getAttribute("user");
+        String sname = user.getUsername();
+        String spass = user.getPassword();
+        if (!oldPass.equals(spass)) {
+            request.setAttribute("err", "oldPass: "+oldPass+"spass: "+spass);
+            request.getRequestDispatcher("login/changePass.jsp").forward(request, response);
+        } else {
+            ud.changePass(sname, newPass);
+            user.setPassword(newPass);
+            session.setAttribute("user", user);
+            request.setAttribute("err", "change password successfully!");
+            request.getRequestDispatcher("login/changePass.jsp").forward(request, response);
+
+        }
     }
 
     /**

@@ -93,23 +93,23 @@
                     <!-- Begin Page Content -->
                     <div class="container-fluid">
                         <!-- Page Heading -->
-                        <h1 >Update Category</h1>
+                        <h1 >Update Brand</h1>
 
                         <form action="updateCate" method="post">
                             <fieldset class="form-group">
                                 <div> <label>Category ID</label></div>  
-                                <input readonly="" name="cid" value="${cate.cid}"/>
+                                <input readonly="" name="bid" value="${brand.bid}"/>
                             </fieldset>
                             <fieldset class="form-group">
-                                <label>Category Name</label> 
-                                <input type="text" value="${cate.name}" class="form-control col-md-4"
-                                       name="category_name"  id="name" required >
+                                <label>Brand Name</label> 
+                                <input type="text" value="${brand.name}" class="form-control col-md-4"
+                                       name="brand_name"  id="name" required >
                             </fieldset>
 
                             <div class="text-left">
 
                                 <button type="submit"  onclick="myFunction()" style="margin-left: 12px" value="Update" onclick="myFunction()" class="btn btn-success">Save</button>
-                                <a href="listCate"> <button type="button" class="btn btn-secondary ml-2">Cancel</button></a>
+                                <a href="listBrand"> <button type="button" class="btn btn-secondary ml-2">Cancel</button></a>
                             </div>
 
                         </form>
@@ -147,7 +147,6 @@
                 } else {
                     inpObj.setCustomValidity(""); // Clear any previous validation message
                 }
-                F
 
             }
         </script>
