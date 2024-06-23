@@ -266,53 +266,25 @@
         </div>
         <!--offcanvas menu area end-->
         <!-- End Mobile Menu Area -->
-
-
-
         <!-- Start Hero Area -->
         <section class="hero-area">
             <div class="hero-area-full owl-carousel">
-                <!-- Single -->
-                <div class="hero-slider-single" style="background-image: url('assets/img/cw1_11zon.jpg');">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="hero-slider-single-content">
-                                    <h2>Leading Hand Tools <span>Manufacturer</span></h2>
-                                    <p>Ostromi Is A Specialist Of Hand Tools Which Are</p>
-                                    <a class="button-1" href="shop.html">Shop Now</a>
+                <c:forEach var="image" items="${randomImages}">
+                    <div class="hero-slider-single" style="background-image: url('${image}');">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="hero-slider-single-content">
+                                        <h2>Leading Fashion <span>Manufacturer</span></h2>
+                                        <p>Ostromi Is A Specialist In High-Quality Clothing And Accessories</p>
+
+                                        <a class="button-1" href="shop.html">Shop Now</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <!-- Single -->
-                <div class="hero-slider-single" style="background-image: url('assets/img/es1_11zon.jpg');">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="hero-slider-single-content">
-                                    <h2>Leading Hand Tools <span>Manufacturer</span></h2>
-                                    <p>Ostromi Is A Specialist Of Hand Tools Which Are</p>
-                                    <a class="button-1" href="shop.html">Shop Now</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="hero-slider-single" style="background-image: url('assets/img/mt1_11zon.jpg');">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="hero-slider-single-content">
-                                    <h2>Leading Hand Tools <span>Manufacturer</span></h2>
-                                    <p>Ostromi Is A Specialist Of Hand Tools Which Are</p>
-                                    <a class="button-1" href="shop.html">Shop Now</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                </c:forEach>
             </div>
         </section>
         <!-- End Hero Area -->
@@ -371,40 +343,24 @@
         </div>
         <!-- End Shipping Area -->
         <!-- Start banner Area -->
-        <div class="banner-area container">
+        <section class="banner-area container">
             <div class="row">
-                <!-- Single -->
-                <div class="col-lg-4 col-md-6 mb-30">
-                    <div class="banner-item">
-                        <a href="#">
-                            <img src="assets/img/pd1.jpg" alt="img">
-                        </a>
+                <c:forEach var="image" items="${bannerImages}">
+                    <div class="col-lg-3 col-md-6 mb-30">
+                        <div class="banner-item">
+                            <a href="#">
+                                <img src="${image}" alt="img">
+                            </a>
+                        </div>
                     </div>
-                </div>
-                <!-- Single -->
-                <div class="col-lg-4 col-md-6 mb-30">
-                    <div class="banner-item">
-                        <a href="#">
-                            <img src="assets/img/pd2.jpg" alt="img">
-                        </a>
-                    </div>
-                </div>
-                <!-- Single -->
-                <div class="col-lg-4 col-md-6 mb-30">
-                    <div class="banner-item">
-                        <a href="#">
-                            <img src="assets/img/pd3.jpg" alt="img">
-                        </a>
-                    </div>
-                </div>
+                </c:forEach>
             </div>
-        </div>
+        </section>
         <!-- End banner Area -->
         <!-- Start Product Style -->
         <section class="pb-50 pt-50">
             <div class="container">
                 <div class="row">
-
                     <div class="product-tab-style product-tab-style-1">
                         <div class="row">
                             <div class="col-lg-6">
@@ -416,7 +372,7 @@
                                         <span class="nav-link active" id="popular1-tab" data-bs-toggle="tab" data-bs-target="#popular1" role="tab" aria-controls="popular1" aria-selected="true">Popular</span>
                                     </li>
                                     <li class="nav-item" role="presentation">
-                                        <span class="nav-link" id="bastsaller1-tab" data-bs-toggle="tab" data-bs-target="#bastsaller1" role="tab" aria-controls="bastsaller1" aria-selected="false">Best Saller</span>
+                                        <span class="nav-link" id="bastsaller1-tab" data-bs-toggle="tab" data-bs-target="#bastsaller1" role="tab" aria-controls="bastsaller1" aria-selected="false">Best Seller</span>
                                     </li>
                                     <li class="nav-item" role="presentation">
                                         <span class="nav-link" id="featured1-tab" data-bs-toggle="tab" data-bs-target="#featured1" role="tab" aria-controls="featured1" aria-selected="false">Featured</span>
@@ -427,374 +383,39 @@
                         <div class="tab-content product-tab-full" id="myTabContent">
                             <div class="tab-pane product-tab-item fade show active" id="popular1" role="tabpanel" aria-labelledby="popular1-tab">
                                 <div class="product-tab-slider-full owl-carousel">
-
-                                    <!-- Single -->
-                                    <div class="product-single product-style-1">
-                                        <div class="sale-badge"><span>sale</span></div>
-                                        <div class="product-thumbnail">
-                                            <a href="product-details.html">
-                                                <img src="assets/img/product/4.jpg" alt="product">
-                                                <img src="assets/img/product/5.jpg" alt="product">
-                                            </a>
-                                        </div>
-                                        <div class="product-content">
-                                            <h4><a href="product-details.html">Funda Para Ebook</a></h4>
-                                            <div class="pricing">
-                                                <span>$200 <del>$210</del></span>
+                                    <!-- Iterating through products -->
+                                    <c:forEach var="product" items="${products}">
+                                        <div class="product-single product-style-1">
+                                            <div class="product-thumbnail" style="width: 100%; height: 400px; overflow: hidden;">
+                                                <a href="product-details.html">
+                                                    <img src="${product.img}" alt="${product.name}" style="width: 100%; height: 400px; object-fit: cover; display: block;">
+                                                    <img src="${product.img}" alt="${product.name}" style="width: 100%; height: 400px; object-fit: cover; display: block;">
+                                                </a>
                                             </div>
-                                            <div class="product-content-btn">
-                                                <ul>
-                                                    <li><a href="wishlist.html"><i class="far fa-heart"></i></a></li>
-                                                    <li><a class="active" href="cart.html">Add to Cart</a></li>
-                                                    <li><a href="#"><i class="far fa-eye"></i></a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- Single -->
-                                    <div class="product-single product-style-1">
-                                        <div class="product-thumbnail">
-                                            <a href="product-details.html">
-                                                <img src="assets/img/product/4.jpg" alt="product">
-                                                <img src="assets/img/product/5.jpg" alt="product">
-                                            </a>
-                                        </div>
-                                        <div class="product-content">
-                                            <h4><a href="product-details.html">Funda Para Ebook</a></h4>
-                                            <div class="pricing">
-                                                <span>$200 <del>$210</del></span>
-                                            </div>
-                                            <div class="product-content-btn">
-                                                <ul>
-                                                    <li><a href="wishlist.html"><i class="far fa-heart"></i></a></li>
-                                                    <li><a class="active" href="cart.html">Add to Cart</a></li>
-                                                    <li><a href="#"><i class="far fa-eye"></i></a></li>
-                                                </ul>
+                                            <div class="product-content">
+                                                <h4><a href="product-details.html">${product.name}</a></h4>
+                                                <div class="pricing">
+                                                    <span>$${product.price}</span>
+                                                </div>
+                                                <div class="product-content-btn">
+                                                    <ul>
+                                                        <li><a href="wishlist.html"><i class="far fa-heart"></i></a></li>
+                                                        <li><a class="active" href="cart.html">Add to Cart</a></li>
+                                                        <li><a href="#"><i class="far fa-eye"></i></a></li>
+                                                    </ul>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <!-- Single -->
-                                    <div class="product-single product-style-1">
-                                        <div class="product-thumbnail">
-                                            <a href="product-details.html">
-                                                <img src="assets/img/product/4.jpg" alt="product">
-                                                <img src="assets/img/product/5.jpg" alt="product">
-                                            </a>
-                                        </div>
-                                        <div class="product-content">
-                                            <h4><a href="product-details.html">Funda Para Ebook</a></h4>
-                                            <div class="pricing">
-                                                <span>$200 <del>$210</del></span>
-                                            </div>
-                                            <div class="product-content-btn">
-                                                <ul>
-                                                    <li><a href="wishlist.html"><i class="far fa-heart"></i></a></li>
-                                                    <li><a class="active" href="cart.html">Add to Cart</a></li>
-                                                    <li><a href="#"><i class="far fa-eye"></i></a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- Single -->
-                                    <div class="product-single product-style-1">
-                                        <div class="discount-badge"><span>50%</span></div>
-                                        <div class="product-thumbnail">
-                                            <a href="product-details.html">
-                                                <img src="assets/img/product/4.jpg" alt="product">
-                                                <img src="assets/img/product/5.jpg" alt="product">
-                                            </a>
-                                        </div>
-                                        <div class="product-content">
-                                            <h4><a href="product-details.html">Funda Para Ebook</a></h4>
-                                            <div class="pricing">
-                                                <span>$200 <del>$210</del></span>
-                                            </div>
-                                            <div class="product-content-btn">
-                                                <ul>
-                                                    <li><a href="wishlist.html"><i class="far fa-heart"></i></a></li>
-                                                    <li><a class="active" href="cart.html">Add to Cart</a></li>
-                                                    <li><a href="#"><i class="far fa-eye"></i></a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Single -->
-                                    <div class="product-single product-style-1">
-                                        <div class="discount-badge"><span>50%</span></div>
-                                        <div class="product-thumbnail">
-                                            <a href="product-details.html">
-                                                <img src="assets/img/product/4.jpg" alt="product">
-                                                <img src="assets/img/product/5.jpg" alt="product">
-                                            </a>
-                                        </div>
-                                        <div class="product-content">
-                                            <h4><a href="product-details.html">Funda Para Ebook</a></h4>
-                                            <div class="pricing">
-                                                <span>$200 <del>$210</del></span>
-                                            </div>
-                                            <div class="product-content-btn">
-                                                <ul>
-                                                    <li><a href="wishlist.html"><i class="far fa-heart"></i></a></li>
-                                                    <li><a class="active" href="cart.html">Add to Cart</a></li>
-                                                    <li><a href="#"><i class="far fa-eye"></i></a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-
-
+                                    </c:forEach>
                                 </div>
                             </div>
-                            <div class="tab-pane product-tab-item fade" id="bastsaller1" role="tabpanel" aria-labelledby="bastsaller1-tab">
-                                <div class="product-tab-slider-full owl-carousel">
-
-                                    <!-- Single -->
-                                    <div class="product-single product-style-1">
-                                        <div class="sale-badge"><span>sale</span></div>
-                                        <div class="product-thumbnail">
-                                            <a href="product-details.html">
-                                                <img src="assets/img/product/4.jpg" alt="product">
-                                                <img src="assets/img/product/5.jpg" alt="product">
-                                            </a>
-                                        </div>
-                                        <div class="product-content">
-                                            <h4><a href="product-details.html">Funda Para Ebook</a></h4>
-                                            <div class="pricing">
-                                                <span>$200 <del>$210</del></span>
-                                            </div>
-                                            <div class="product-content-btn">
-                                                <ul>
-                                                    <li><a href="wishlist.html"><i class="far fa-heart"></i></a></li>
-                                                    <li><a class="active" href="cart.html">Add to Cart</a></li>
-                                                    <li><a href="#"><i class="far fa-eye"></i></a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- Single -->
-                                    <div class="product-single product-style-1">
-                                        <div class="product-thumbnail">
-                                            <a href="product-details.html">
-                                                <img src="assets/img/product/4.jpg" alt="product">
-                                                <img src="assets/img/product/5.jpg" alt="product">
-                                            </a>
-                                        </div>
-                                        <div class="product-content">
-                                            <h4><a href="product-details.html">Funda Para Ebook</a></h4>
-                                            <div class="pricing">
-                                                <span>$200 <del>$210</del></span>
-                                            </div>
-                                            <div class="product-content-btn">
-                                                <ul>
-                                                    <li><a href="wishlist.html"><i class="far fa-heart"></i></a></li>
-                                                    <li><a class="active" href="cart.html">Add to Cart</a></li>
-                                                    <li><a href="#"><i class="far fa-eye"></i></a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- Single -->
-                                    <div class="product-single product-style-1">
-                                        <div class="product-thumbnail">
-                                            <a href="product-details.html">
-                                                <img src="assets/img/product/4.jpg" alt="product">
-                                                <img src="assets/img/product/5.jpg" alt="product">
-                                            </a>
-                                        </div>
-                                        <div class="product-content">
-                                            <h4><a href="product-details.html">Funda Para Ebook</a></h4>
-                                            <div class="pricing">
-                                                <span>$200 <del>$210</del></span>
-                                            </div>
-                                            <div class="product-content-btn">
-                                                <ul>
-                                                    <li><a href="wishlist.html"><i class="far fa-heart"></i></a></li>
-                                                    <li><a class="active" href="cart.html">Add to Cart</a></li>
-                                                    <li><a href="#"><i class="far fa-eye"></i></a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- Single -->
-                                    <div class="product-single product-style-1">
-                                        <div class="discount-badge"><span>50%</span></div>
-                                        <div class="product-thumbnail">
-                                            <a href="product-details.html">
-                                                <img src="assets/img/product/4.jpg" alt="product">
-                                                <img src="assets/img/product/5.jpg" alt="product">
-                                            </a>
-                                        </div>
-                                        <div class="product-content">
-                                            <h4><a href="product-details.html">Funda Para Ebook</a></h4>
-                                            <div class="pricing">
-                                                <span>$200 <del>$210</del></span>
-                                            </div>
-                                            <div class="product-content-btn">
-                                                <ul>
-                                                    <li><a href="wishlist.html"><i class="far fa-heart"></i></a></li>
-                                                    <li><a class="active" href="cart.html">Add to Cart</a></li>
-                                                    <li><a href="#"><i class="far fa-eye"></i></a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Single -->
-                                    <div class="product-single">
-                                        <div class="sale-badge"><span>sale</span></div>
-                                        <div class="product-thumbnail">
-                                            <a href="product-details.html"><img src="assets/img/product/2.jpg" alt="product"></a>
-                                            <div class="product-thumbnail-overly">
-                                                <ul>
-                                                    <li><a href="cart.html"><i class="fas fa-shopping-cart"></i></a></li>
-                                                    <li><a href="wishlist.html"><i class="far fa-heart"></i></a></li>
-                                                    <li><a href="#"><i class="far fa-eye"></i></a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="product-content">
-                                            <h4><a href="product-details.html">Funda Para Ebook 7" 128GB full HD</a></h4>
-                                            <div class="pricing">
-                                                <span>$200 <del>$210</del></span>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                            <div class="tab-pane product-tab-item fade" id="featured1" role="tabpanel" aria-labelledby="featured1-tab">
-                                <div class="product-tab-slider-full owl-carousel">
-
-                                    <!-- Single -->
-                                    <div class="product-single product-style-1">
-                                        <div class="sale-badge"><span>sale</span></div>
-                                        <div class="product-thumbnail">
-                                            <a href="product-details.html">
-                                                <img src="assets/img/product/4.jpg" alt="product">
-                                                <img src="assets/img/product/5.jpg" alt="product">
-                                            </a>
-                                        </div>
-                                        <div class="product-content">
-                                            <h4><a href="product-details.html">Funda Para Ebook</a></h4>
-                                            <div class="pricing">
-                                                <span>$200 <del>$210</del></span>
-                                            </div>
-                                            <div class="product-content-btn">
-                                                <ul>
-                                                    <li><a href="wishlist.html"><i class="far fa-heart"></i></a></li>
-                                                    <li><a class="active" href="cart.html">Add to Cart</a></li>
-                                                    <li><a href="#"><i class="far fa-eye"></i></a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- Single -->
-                                    <div class="product-single product-style-1">
-                                        <div class="product-thumbnail">
-                                            <a href="product-details.html">
-                                                <img src="assets/img/product/4.jpg" alt="product">
-                                                <img src="assets/img/product/5.jpg" alt="product">
-                                            </a>
-                                        </div>
-                                        <div class="product-content">
-                                            <h4><a href="product-details.html">Funda Para Ebook</a></h4>
-                                            <div class="pricing">
-                                                <span>$200 <del>$210</del></span>
-                                            </div>
-                                            <div class="product-content-btn">
-                                                <ul>
-                                                    <li><a href="wishlist.html"><i class="far fa-heart"></i></a></li>
-                                                    <li><a class="active" href="cart.html">Add to Cart</a></li>
-                                                    <li><a href="#"><i class="far fa-eye"></i></a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- Single -->
-                                    <div class="product-single product-style-1">
-                                        <div class="product-thumbnail">
-                                            <a href="product-details.html">
-                                                <img src="assets/img/product/4.jpg" alt="product">
-                                                <img src="assets/img/product/5.jpg" alt="product">
-                                            </a>
-                                        </div>
-                                        <div class="product-content">
-                                            <h4><a href="product-details.html">Funda Para Ebook</a></h4>
-                                            <div class="pricing">
-                                                <span>$200 <del>$210</del></span>
-                                            </div>
-                                            <div class="product-content-btn">
-                                                <ul>
-                                                    <li><a href="wishlist.html"><i class="far fa-heart"></i></a></li>
-                                                    <li><a class="active" href="cart.html">Add to Cart</a></li>
-                                                    <li><a href="#"><i class="far fa-eye"></i></a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- Single -->
-                                    <div class="product-single product-style-1">
-                                        <div class="discount-badge"><span>50%</span></div>
-                                        <div class="product-thumbnail">
-                                            <a href="product-details.html">
-                                                <img src="assets/img/product/4.jpg" alt="product">
-                                                <img src="assets/img/product/5.jpg" alt="product">
-                                            </a>
-                                        </div>
-                                        <div class="product-content">
-                                            <h4><a href="product-details.html">Funda Para Ebook</a></h4>
-                                            <div class="pricing">
-                                                <span>$200 <del>$210</del></span>
-                                            </div>
-                                            <div class="product-content-btn">
-                                                <ul>
-                                                    <li><a href="wishlist.html"><i class="far fa-heart"></i></a></li>
-                                                    <li><a class="active" href="cart.html">Add to Cart</a></li>
-                                                    <li><a href="#"><i class="far fa-eye"></i></a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Single -->
-                                    <div class="product-single">
-                                        <div class="sale-badge"><span>sale</span></div>
-                                        <div class="product-thumbnail">
-                                            <a href="product-details.html"><img src="assets/img/product/2.jpg" alt="product"></a>
-                                            <div class="product-thumbnail-overly">
-                                                <ul>
-                                                    <li><a href="cart.html"><i class="fas fa-shopping-cart"></i></a></li>
-                                                    <li><a href="wishlist.html"><i class="far fa-heart"></i></a></li>
-                                                    <li><a href="#"><i class="far fa-eye"></i></a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="product-content">
-                                            <h4><a href="product-details.html">Funda Para Ebook 7" 128GB full HD</a></h4>
-                                            <div class="pricing">
-                                                <span>$200 <del>$210</del></span>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
+                            <!-- Repeat for other tabs if necessary -->
                         </div>
 
                     </div>
-
                 </div>
             </div>
         </section>
-        <!-- End Product Style -->
-
-
-        <!-- Start Sales Banner Area -->
-
-        <!-- End Sales Banner Area -->
-
-        <!-- Start Our Latest Product -->
         <section class="latest-product pt-70 pb-70">
             <div class="container">
                 <!-- Section Title -->
@@ -809,488 +430,43 @@
                     <div class="col-12">
                         <div class="latest-product-full owl-carousel">
                             <!-- Single -->
-                            <div class="product-single">
-                                <div class="product-thumbnail">
-                                    <a href="product-details.html"><img src="assets/img/product/8.jpg" alt="product"></a>
-                                    <div class="product-thumbnail-overly">
-                                        <ul>
-                                            <li><a href="cart.html"><i class="fas fa-shopping-cart"></i></a></li>
-                                            <li><a href="wishlist.html"><i class="far fa-heart"></i></a></li>
-                                            <li><a href="#"><i class="far fa-eye"></i></a></li>
-                                        </ul>
+                            <c:forEach var="product2" items="${products2}">
+                                <div class="product-single">
+                                    <div class="product-thumbnail">
+                                        <a href="product-details.html?pid=${product2.pid}">
+                                            <img src="${product2.img}" alt="${product2.name}" style="width: 100%; height: auto; object-fit: cover; aspect-ratio: 1 / 1;">
+                                        </a>
+                                        <div class="product-thumbnail-overly">
+                                            <ul>
+                                                <li><a href="cart.html"><i class="fas fa-shopping-cart"></i></a></li>
+                                                <li><a href="wishlist.html"><i class="far fa-heart"></i></a></li>
+                                                <li><a href="#"><i class="far fa-eye"></i></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="product-content">
+                                        <h4><a href="product-details.html?pid=${product2.pid}">${product2.name}</a></h4>
+                                        <div class="pricing">
+                                            <span>$${product2.price} <del>$210</del></span>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="product-content">
-                                    <h4><a href="product-details.html">Funda Para Ebook 7" 128GB full HD</a></h4>
-                                    <div class="pricing">
-                                        <span>$200 <del>$210</del></span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="product-single">
-                                <div class="product-thumbnail">
-                                    <a href="product-details.html"><img src="assets/img/product/1.jpg" alt="product"></a>
-                                    <div class="product-thumbnail-overly">
-                                        <ul>
-                                            <li><a href="cart.html"><i class="fas fa-shopping-cart"></i></a></li>
-                                            <li><a href="wishlist.html"><i class="far fa-heart"></i></a></li>
-                                            <li><a href="#"><i class="far fa-eye"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="product-content">
-                                    <h4><a href="product-details.html">Funda Para Ebook 7" 128GB full HD</a></h4>
-                                    <div class="pricing">
-                                        <span>$200 <del>$210</del></span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="product-single">
-                                <div class="product-thumbnail">
-                                    <a href="product-details.html"><img src="assets/img/product/3.jpg" alt="product"></a>
-                                    <div class="product-thumbnail-overly">
-                                        <ul>
-                                            <li><a href="cart.html"><i class="fas fa-shopping-cart"></i></a></li>
-                                            <li><a href="wishlist.html"><i class="far fa-heart"></i></a></li>
-                                            <li><a href="#"><i class="far fa-eye"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="product-content">
-                                    <h4><a href="#">Funda Para Ebook 7" 128GB full HD</a></h4>
-                                    <div class="pricing">
-                                        <span>$200 <del>$210</del></span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="product-single">
-                                <div class="product-thumbnail">
-                                    <a href="product-details.html"><img src="assets/img/product/4.jpg" alt="product"></a>
-                                    <div class="product-thumbnail-overly">
-                                        <ul>
-                                            <li><a href="cart.html"><i class="fas fa-shopping-cart"></i></a></li>
-                                            <li><a href="wishlist.html"><i class="far fa-heart"></i></a></li>
-                                            <li><a href="#"><i class="far fa-eye"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="product-content">
-                                    <h4><a href="#">Funda Para Ebook 7" 128GB full HD</a></h4>
-                                    <div class="pricing">
-                                        <span>$200 <del>$210</del></span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="product-single">
-                                <div class="product-thumbnail">
-                                    <a href="product-details.html"><img src="assets/img/product/5.jpg" alt="product"></a>
-                                    <div class="product-thumbnail-overly">
-                                        <ul>
-                                            <li><a href="cart.html"><i class="fas fa-shopping-cart"></i></a></li>
-                                            <li><a href="wishlist.html"><i class="far fa-heart"></i></a></li>
-                                            <li><a href="#"><i class="far fa-eye"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="product-content">
-                                    <h4><a href="#">Funda Para Ebook 7" 128GB full HD</a></h4>
-                                    <div class="pricing">
-                                        <span>$200 <del>$210</del></span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="product-single">
-                                <div class="product-thumbnail">
-                                    <a href="product-details.html"><img src="assets/img/product/6.jpg" alt="product"></a>
-                                    <div class="product-thumbnail-overly">
-                                        <ul>
-                                            <li><a href="cart.html"><i class="fas fa-shopping-cart"></i></a></li>
-                                            <li><a href="wishlist.html"><i class="far fa-heart"></i></a></li>
-                                            <li><a href="#"><i class="far fa-eye"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="product-content">
-                                    <h4><a href="#">Funda Para Ebook 7" 128GB full HD</a></h4>
-                                    <div class="pricing">
-                                        <span>$200 <del>$210</del></span>
-                                    </div>
-                                </div>
-                            </div>
-
+                            </c:forEach>
                         </div>
                     </div>
                 </div>
+
             </div>
         </section>
+
+
         <!-- End Our Latest Product -->
 
         <!-- Start Deal Product -->
         <!-- Start Deal Product -->
 
         <!-- Start Product Widget List Area -->
-        <section class="pt-50 pb-60">
-            <div class="container">
-                <div class="row">
-                    <!-- Single -->
-                    <div class="col-lg-3 col-md-6">
-                        <h3 class="deal-title">Best Selling</h3>
-                        <div class="product-widgets-single">
-                            <!-- Single -->
-                            <div class="p-widgets-single mb-20">
-                                <div class="row">
-                                    <div class="col-5">
-                                        <div class="thumbnail">
-                                            <a href="product-details.html">
-                                                <img src="assets/img/product/4.jpg" alt="img">
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="col-7 align-self-center">
-                                        <div class="content">
-                                            <h4><a href="product-details.html">Funda Para Ebook</a></h4>
-                                            <div class="ratting">
-                                                <span><i class="fas fa-star"></i></span>
-                                                <span><i class="fas fa-star"></i></span>
-                                                <span><i class="fas fa-star"></i></span>
-                                                <span><i class="fas fa-star"></i></span>
-                                                <span><i class="fas fa-star"></i></span>
-                                            </div>
-                                            <div class="pricing">
-                                                <span>$200 <del>$210</del></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Single -->
-                            <div class="p-widgets-single mb-20">
-                                <div class="row">
-                                    <div class="col-5">
-                                        <div class="thumbnail">
-                                            <a href="product-details.html">
-                                                <img src="assets/img/product/5.jpg" alt="img">
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="col-7 align-self-center">
-                                        <div class="content">
-                                            <h4><a href="product-details.html">Funda Para Ebook</a></h4>
-                                            <div class="ratting">
-                                                <span><i class="fas fa-star"></i></span>
-                                                <span><i class="fas fa-star"></i></span>
-                                                <span><i class="fas fa-star"></i></span>
-                                                <span><i class="fas fa-star"></i></span>
-                                                <span><i class="fas fa-star"></i></span>
-                                            </div>
-                                            <div class="pricing">
-                                                <span>$200 <del>$210</del></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Single -->
-                            <div class="p-widgets-single mb-20">
-                                <div class="row">
-                                    <div class="col-5">
-                                        <div class="thumbnail">
-                                            <a href="product-details.html">
-                                                <img src="assets/img/product/4.jpg" alt="img">
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="col-7 align-self-center">
-                                        <div class="content">
-                                            <h4><a href="product-details.html">Funda Para Ebook</a></h4>
-                                            <div class="ratting">
-                                                <span><i class="fas fa-star"></i></span>
-                                                <span><i class="fas fa-star"></i></span>
-                                                <span><i class="fas fa-star"></i></span>
-                                                <span><i class="fas fa-star"></i></span>
-                                                <span><i class="fas fa-star"></i></span>
-                                            </div>
-                                            <div class="pricing">
-                                                <span>$200 <del>$210</del></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Single -->
-                            <div class="p-widgets-single mb-20">
-                                <div class="row">
-                                    <div class="col-5">
-                                        <div class="thumbnail">
-                                            <a href="product-details.html">
-                                                <img src="assets/img/product/5.jpg" alt="img">
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="col-7 align-self-center">
-                                        <div class="content">
-                                            <h4><a href="product-details.html">Funda Para Ebook</a></h4>
-                                            <div class="ratting">
-                                                <span><i class="fas fa-star"></i></span>
-                                                <span><i class="fas fa-star"></i></span>
-                                                <span><i class="fas fa-star"></i></span>
-                                                <span><i class="fas fa-star"></i></span>
-                                                <span><i class="fas fa-star"></i></span>
-                                            </div>
-                                            <div class="pricing">
-                                                <span>$200 <del>$210</del></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Single -->
-                    <div class="col-lg-3 col-md-6">
-                        <h3 class="deal-title">Sale Products</h3>
-                        <div class="product-widgets-single">
-                            <!-- Single -->
-                            <div class="p-widgets-single mb-20">
-                                <div class="row">
-                                    <div class="col-5">
-                                        <div class="thumbnail">
-                                            <a href="product-details.html">
-                                                <img src="assets/img/product/1.jpg" alt="img">
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="col-7 align-self-center">
-                                        <div class="content">
-                                            <h4><a href="product-details.html">Funda Para Ebook</a></h4>
-                                            <div class="ratting">
-                                                <span><i class="fas fa-star"></i></span>
-                                                <span><i class="fas fa-star"></i></span>
-                                                <span><i class="fas fa-star"></i></span>
-                                                <span><i class="fas fa-star"></i></span>
-                                                <span><i class="fas fa-star"></i></span>
-                                            </div>
-                                            <div class="pricing">
-                                                <span>$200 <del>$210</del></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Single -->
-                            <div class="p-widgets-single mb-20">
-                                <div class="row">
-                                    <div class="col-5">
-                                        <div class="thumbnail">
-                                            <a href="product-details.html">
-                                                <img src="assets/img/product/2.jpg" alt="img">
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="col-7 align-self-center">
-                                        <div class="content">
-                                            <h4><a href="product-details.html">Funda Para Ebook</a></h4>
-                                            <div class="ratting">
-                                                <span><i class="fas fa-star"></i></span>
-                                                <span><i class="fas fa-star"></i></span>
-                                                <span><i class="fas fa-star"></i></span>
-                                                <span><i class="fas fa-star"></i></span>
-                                                <span><i class="fas fa-star"></i></span>
-                                            </div>
-                                            <div class="pricing">
-                                                <span>$200 <del>$210</del></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Single -->
-                            <div class="p-widgets-single mb-20">
-                                <div class="row">
-                                    <div class="col-5">
-                                        <div class="thumbnail">
-                                            <a href="product-details.html">
-                                                <img src="assets/img/product/3.jpg" alt="img">
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="col-7 align-self-center">
-                                        <div class="content">
-                                            <h4><a href="product-details.html">Funda Para Ebook</a></h4>
-                                            <div class="ratting">
-                                                <span><i class="fas fa-star"></i></span>
-                                                <span><i class="fas fa-star"></i></span>
-                                                <span><i class="fas fa-star"></i></span>
-                                                <span><i class="fas fa-star"></i></span>
-                                                <span><i class="fas fa-star"></i></span>
-                                            </div>
-                                            <div class="pricing">
-                                                <span>$200 <del>$210</del></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Single -->
-                            <div class="p-widgets-single mb-20">
-                                <div class="row">
-                                    <div class="col-5">
-                                        <div class="thumbnail">
-                                            <a href="product-details.html">
-                                                <img src="assets/img/product/4.jpg" alt="img">
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="col-7 align-self-center">
-                                        <div class="content">
-                                            <h4><a href="product-details.html">Funda Para Ebook</a></h4>
-                                            <div class="ratting">
-                                                <span><i class="fas fa-star"></i></span>
-                                                <span><i class="fas fa-star"></i></span>
-                                                <span><i class="fas fa-star"></i></span>
-                                                <span><i class="fas fa-star"></i></span>
-                                                <span><i class="fas fa-star"></i></span>
-                                            </div>
-                                            <div class="pricing">
-                                                <span>$200 <del>$210</del></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Single -->
-                    <div class="col-lg-3 col-md-6">
-                        <h3 class="deal-title">Latest Products</h3>
-                        <div class="product-widgets-single">
-                            <!-- Single -->
-                            <div class="p-widgets-single mb-20">
-                                <div class="row">
-                                    <div class="col-5">
-                                        <div class="thumbnail">
-                                            <a href="product-details.html">
-                                                <img src="assets/img/product/3.jpg" alt="img">
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="col-7 align-self-center">
-                                        <div class="content">
-                                            <h4><a href="product-details.html">Funda Para Ebook</a></h4>
-                                            <div class="ratting">
-                                                <span><i class="fas fa-star"></i></span>
-                                                <span><i class="fas fa-star"></i></span>
-                                                <span><i class="fas fa-star"></i></span>
-                                                <span><i class="fas fa-star"></i></span>
-                                                <span><i class="fas fa-star"></i></span>
-                                            </div>
-                                            <div class="pricing">
-                                                <span>$200 <del>$210</del></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Single -->
-                            <div class="p-widgets-single mb-20">
-                                <div class="row">
-                                    <div class="col-5">
-                                        <div class="thumbnail">
-                                            <a href="product-details.html">
-                                                <img src="assets/img/product/2.jpg" alt="img">
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="col-7 align-self-center">
-                                        <div class="content">
-                                            <h4><a href="product-details.html">Funda Para Ebook</a></h4>
-                                            <div class="ratting">
-                                                <span><i class="fas fa-star"></i></span>
-                                                <span><i class="fas fa-star"></i></span>
-                                                <span><i class="fas fa-star"></i></span>
-                                                <span><i class="fas fa-star"></i></span>
-                                                <span><i class="fas fa-star"></i></span>
-                                            </div>
-                                            <div class="pricing">
-                                                <span>$200 <del>$210</del></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Single -->
-                            <div class="p-widgets-single mb-20">
-                                <div class="row">
-                                    <div class="col-5">
-                                        <div class="thumbnail">
-                                            <a href="product-details.html">
-                                                <img src="assets/img/product/1.jpg" alt="img">
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="col-7 align-self-center">
-                                        <div class="content">
-                                            <h4><a href="product-details.html">Funda Para Ebook</a></h4>
-                                            <div class="ratting">
-                                                <span><i class="fas fa-star"></i></span>
-                                                <span><i class="fas fa-star"></i></span>
-                                                <span><i class="fas fa-star"></i></span>
-                                                <span><i class="fas fa-star"></i></span>
-                                                <span><i class="fas fa-star"></i></span>
-                                            </div>
-                                            <div class="pricing">
-                                                <span>$200 <del>$210</del></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Single -->
-                            <div class="p-widgets-single mb-20">
-                                <div class="row">
-                                    <div class="col-5">
-                                        <div class="thumbnail">
-                                            <a href="product-details.html">
-                                                <img src="assets/img/product/6.jpg" alt="img">
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="col-7 align-self-center">
-                                        <div class="content">
-                                            <h4><a href="product-details.html">Funda Para Ebook</a></h4>
-                                            <div class="ratting">
-                                                <span><i class="fas fa-star"></i></span>
-                                                <span><i class="fas fa-star"></i></span>
-                                                <span><i class="fas fa-star"></i></span>
-                                                <span><i class="fas fa-star"></i></span>
-                                                <span><i class="fas fa-star"></i></span>
-                                            </div>
-                                            <div class="pricing">
-                                                <span>$200 <del>$210</del></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Single -->
-                    <div class="col-lg-3 col-md-6">
-                        <h3 class="deal-title">Weekly Discount</h3>
-                        <div class="weekly-discount-full">
-                            <!-- single -->
-                            <div class="weekly-discount-single mb-30">
-                                <a href="#"><img src="assets/img/diccount1.jpg" alt="img"></a>
-                            </div>
-                            <!-- single -->
-                            <div class="weekly-discount-single">
-                                <a href="#"><img src="assets/img/diccount2.jpg" alt="img"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+
         <!-- End Product Widget List Area -->
 
         <!-- Start Latest Blog -->
@@ -1300,65 +476,33 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="section-headding-1 mb-50">
-                            <h2><span>Latest News</span></h2>
+                            <h2><span>Latest Blogs</span></h2>
                         </div>
                     </div>
                 </div>
                 <div class="row">
-                    <!-- Single -->
-                    <div class="col-lg-4 col-md-6 mb-30">
-                        <div class="blog-item">
-                            <div class="thumnail">
-                                <a href="single.html"><img src="assets/img/blog/1.jpg" alt="blog"></a>
-                            </div>
-                            <div class="content">
-                                <ul class="auth">
-                                    <li><a href="#">by Admin</a></li>
-                                    <li><a href="#">02 Comments</a></li>
-                                    <li><a href="#">Fashion</a></li>
-                                </ul>
-                                <h2><a href="single.html">Slow cooker apple cinnamon oatmeal pot </a></h2>
-                                <p> Lorem ipsum dolor sit amet, consectetuipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqut enim ad minim veniamquis </p>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Single -->
-                    <div class="col-lg-4 col-md-6 mb-30">
-                        <div class="blog-item">
-                            <div class="thumnail">
-                                <a href="single.html"><img src="assets/img/blog/5.jpg" alt="blog"></a>
-                            </div>
-                            <div class="content">
-                                <ul class="auth">
-                                    <li><a href="#">by Admin</a></li>
-                                    <li><a href="#">02 Comments</a></li>
-                                    <li><a href="#">Fashion</a></li>
-                                </ul>
-                                <h2><a href="single.html">Slow cooker apple cinnamon oatmeal pot </a></h2>
-                                <p> Lorem ipsum dolor sit amet, consectetuipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqut enim ad minim veniamquis </p>
+                    <c:forEach var="news" items="${latestNews}">
+                        <div class="col-lg-4 col-md-6 mb-30">
+                            <div class="blog-item">
+                                <div class="thumnail">
+                                    <a href="single.html"><img src="assets/img/blog/${news.nId}.jpg" alt="blog"></a>
+                                </div>
+                                <div class="content">
+                                    <ul class="auth">
+                                        <li><a href="#">by ${news.authorName}</a></li>
+                                        <li><a href="#">${news.updateDate}</a></li>
+                                        <li><a href="#">${news.categoryName}</a></li>
+                                    </ul>
+                                    <h2><a href="single.html">${news.title}</a></h2>
+                                    <p>${news.body.substring(0, 100)}...</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <!-- Single -->
-                    <div class="col-lg-4 col-md-6 mb-30">
-                        <div class="blog-item">
-                            <div class="thumnail">
-                                <a href="single.html"><img src="assets/img/blog/3.jpg" alt="blog"></a>
-                            </div>
-                            <div class="content">
-                                <ul class="auth">
-                                    <li><a href="#">by Admin</a></li>
-                                    <li><a href="#">02 Comments</a></li>
-                                    <li><a href="#">Fashion</a></li>
-                                </ul>
-                                <h2><a href="single.html">Slow cooker apple cinnamon oatmeal pot </a></h2>
-                                <p> Lorem ipsum dolor sit amet, consectetuipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqut enim ad minim veniamquis </p>
-                            </div>
-                        </div>
-                    </div>
+                    </c:forEach>
                 </div>
             </div>
         </section>
+
         <!-- End Latest Blog -->
 
         <!-- Start Instagram Feed -->
@@ -1370,46 +514,46 @@
             <div class="footer-top pt-50">
                 <div class="container">
                     <div class="row">
-                        <!-- SIngle -->
+                        <!-- Single -->
                         <div class="col-lg-3 col-md-6 mb-30">
                             <div class="footer-widgets-single">
-                                <h2><img src="assets/img/white-logo.png"></h2>
-                                <p> Lorem ipsum dolor sit amet, consectetuipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqut enim ad minim veniamquis </p>
+                                <h2><img src="assets/img/logo3.jpg" alt="Shop Logo"></h2>
+                                <p>Discover the latest trends in fashion and get inspired by our new styles. Shop our current collections now at the Online Store.</p>
                             </div>
                         </div>
-                        <!-- SIngle -->
+                        <!-- Single -->
                         <div class="col-lg-3 col-md-6 mb-30">
                             <div class="footer-widgets-single">
-                                <h3>My account</h3>
+                                <h3>My Account</h3>
                                 <ul>
                                     <li><a href="#">Sign In</a></li>
                                     <li><a href="#">View Cart</a></li>
                                     <li><a href="#">My Wishlist</a></li>
-                                    <li><a href="#">Terms & Conditions</a></li>
-                                    <li><a href="#">Contact us</a></li>
+                                    <li><a href="#">Order History</a></li>
                                     <li><a href="#">Track My Order</a></li>
+                                    <li><a href="#">Help</a></li>
                                 </ul>
                             </div>
                         </div>
-                        <!-- SIngle -->
+                        <!-- Single -->
                         <div class="col-lg-3 col-md-6 mb-30">
                             <div class="footer-widgets-single">
-                                <h3>Categories</h3>
+                                <h3>Shop</h3>
                                 <ul>
-                                    <li><a href="#">Home Audio & Theater</a></li>
-                                    <li><a href="#">TV & Video</a></li>
-                                    <li><a href="#">Camera, Photo & Video</a></li>
-                                    <li><a href="#">Cell Phones & Accessories</a></li>
-                                    <li><a href="#">Headphones</a></li>
-                                    <li><a href="#">Video Games</a></li>
+                                    <li><a href="#">New Arrivals</a></li>
+                                    <li><a href="#">Women</a></li>
+                                    <li><a href="#">Men</a></li>
+                                    <li><a href="#">Kids</a></li>
+                                    <li><a href="#">Sale</a></li>
+                                    <li><a href="#">Accessories</a></li>
                                 </ul>
                             </div>
                         </div>
-                        <!-- SIngle -->
+                        <!-- Single -->
                         <div class="col-lg-3 col-md-6 mb-30">
                             <div class="footer-widgets-single">
                                 <h3>Newsletter</h3>
-                                <p> Get notified of new products, limited releases, and more. </p>
+                                <p>Subscribe to our newsletter to get the latest updates on new arrivals and exclusive offers.</p>
                                 <form action="#">
                                     <input type="email" name="email" placeholder="Your Email">
                                     <button type="submit" class="button-1">Subscribe</button>
@@ -1425,22 +569,23 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="copyright-text">
-                                <p> &copy; Copyright 2021 <a href="https://codepopular.com" target="_blank">CodePopular</a> All Rights Reserved. </p>
+                                <p>&copy; Copyright 2024 <a href="https://yourshop.com" target="_blank">YourShop</a> All Rights Reserved.</p>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <ul class="footer_payment">
-                                <li><a href="#"><img src="assets/img/visa.png" alt="visa"></a></li>
-                                <li><a href="#"><img src="assets/img/discover.png" alt="discover"></a></li>
-                                <li><a href="#"><img src="assets/img/master_card.png" alt="master_card"></a></li>
-                                <li><a href="#"><img src="assets/img/paypal.png" alt="paypal"></a></li>
-                                <li><a href="#"><img src="assets/img/amarican_express.png" alt="amarican_express"></a></li>
+                                <li><a href="#"><img src="assets/img/visa.png" alt="Visa"></a></li>
+                                <li><a href="#"><img src="assets/img/discover.png" alt="Discover"></a></li>
+                                <li><a href="#"><img src="assets/img/master_card.png" alt="MasterCard"></a></li>
+                                <li><a href="#"><img src="assets/img/paypal.png" alt="PayPal"></a></li>
+                                <li><a href="#"><img src="assets/img/american_express.png" alt="American Express"></a></li>
                             </ul>
                         </div>
                     </div>
                 </div>
             </div>
         </footer>
+
         <!-- End Footer Area -->
 
 
