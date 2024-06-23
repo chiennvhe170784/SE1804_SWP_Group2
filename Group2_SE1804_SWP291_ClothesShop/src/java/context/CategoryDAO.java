@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.Product;
 
 /**
  *
@@ -18,15 +19,53 @@ import java.util.logging.Logger;
  */
 public class CategoryDAO extends DBContext {
 
-    public ArrayList<Category> search(String key, int index) {
+    public ArrayList<Category> search(String key, int index, String sort, String type) {
         ArrayList<Category> list = new ArrayList<>();
-        String sql = "SELECT * from category c where c.name like '%" + key + "%'"
-                + "ORDER BY cid\n"
-                + "OFFSET ? ROWS\n"
+
+        // Validate the sort column name to prevent SQL injection
+        String sortColumn;
+        switch (sort) {
+            case "1":
+                switch (type) {
+                    case "1":
+                        sortColumn = "cid asc";
+                        break;
+                    case "2":
+                        sortColumn = "cid desc";
+                        break;
+                    default:
+                        sortColumn = "cid asc";
+                        break;
+                }
+                break;
+            case "2":
+                switch (type) {
+                    case "1":
+                        sortColumn = "name asc";
+                        break;
+                    case "2":
+                        sortColumn = "name desc";
+                        break;
+                    default:
+                        sortColumn = "name asc";
+                        break;
+                }
+                break;
+            default:
+                sortColumn = "cid asc";
+                break;
+        }
+
+        String sql = "SELECT * FROM category c WHERE c.name LIKE ? or c.cid LIKE ? "
+                + "ORDER BY " + sortColumn + " "
+                + "OFFSET ? ROWS "
                 + "FETCH NEXT 5 ROWS ONLY;";
         try {
             PreparedStatement stm = connection.prepareStatement(sql);
-            stm.setInt(1, (index - 1) * 5);
+            stm.setString(1, "%" + key + "%");
+            stm.setString(2, "%" + key + "%");
+            stm.setInt(3, (index - 1) * 5);
+       
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 list.add(new Category(rs.getInt(1), rs.getString(2)));
@@ -38,20 +77,56 @@ public class CategoryDAO extends DBContext {
         return list;
     }
 
-    public ArrayList<Category> pagging(int index) {
+    public ArrayList<Category> pagging(int index, String sort, String type) {
         ArrayList<Category> cate = new ArrayList<>();
         try {
+            // Validate the sort column name and order to prevent SQL injection
+            String sortColumn;
+            switch (sort) {
+                case "1":
+                    switch (type) {
+                        case "1":
+                            sortColumn = "cid asc";
+                            break;
+                        case "2":
+                            sortColumn = "cid desc";
+                            break;
+                        default:
+                            sortColumn = "cid asc";
+                            break;
+                    }
+                    break;
+                case "2":
+                    switch (type) {
+                        case "1":
+                            sortColumn = "name asc";
+                            break;
+                        case "2":
+                            sortColumn = "name desc";
+                            break;
+                        default:
+                            sortColumn = "name asc";
+                            break;
+                    }
+                    break;
+                default:
+                    sortColumn = "cid asc";
+                    break;
+            }
+
             String sql = "SELECT * FROM category\n"
-                    + "ORDER BY cid\n"
+                    + "ORDER BY " + sortColumn + " \n"
                     + "OFFSET ? ROWS\n"
                     + "FETCH NEXT 5 ROWS ONLY;";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setInt(1, (index - 1) * 5);
+         
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 cate.add(new Category(rs.getInt(1), rs.getString(2)));
             }
         } catch (SQLException e) {
+            e.printStackTrace();  // Log the exception
         }
         return cate;
     }
@@ -96,6 +171,21 @@ public class CategoryDAO extends DBContext {
         }
         return listCate;
     }
+    public Category getCateById(int cid) {
+
+        String sql = "select * from category where cid = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, cid);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                return (new Category(rs.getInt("cid"), rs.getString("name")));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
     public ArrayList<Category> sortCateByName() {
         ArrayList<Category> listCate = new ArrayList<>();
@@ -129,7 +219,6 @@ public class CategoryDAO extends DBContext {
             PreparedStatement stm = connection.prepareStatement(sql);
 
             stm.setInt(1, cid);
-            stm.setInt(2, cid);
             stm.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -148,31 +237,29 @@ public class CategoryDAO extends DBContext {
         }
     }
 
-    public Category getCateById(int cid) {
-        String sql = "select * from category where cid=?";
+    public boolean checkDelete(int cid) {
+        String sql = "select * from product where cid=?";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setInt(1, cid);
 
             ResultSet rs = st.executeQuery();
             if (rs.next()) {
-                return new Category(cid, rs.getString("name"));
+                return false;
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null;
+        return true;
     }
 
     public static void main(String[] args) {
 
         CategoryDAO cd = new CategoryDAO();
         cd.addCategory("123");
-        ArrayList<Category> list = cd.getAllCate();
 
-        for (Category category : list) {
-            System.out.println(category.getName() + ", " + category.getCid());
-        }
 
+  
+        cd.deleteCate(45);
     }
 }

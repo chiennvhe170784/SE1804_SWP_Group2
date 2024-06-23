@@ -54,14 +54,21 @@ public class deleteBrand extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-                try {
-            
-      
-        int bid = Integer.parseInt(request.getParameter("bid"));
+     try {
+
+            int cid = Integer.parseInt(request.getParameter("bid"));
             BrandDAO cd = new BrandDAO();
-            cd.deleteBrand(bid);
-            response.sendRedirect("listBrand");
-          } catch (NumberFormatException e) {
+            boolean cate = cd.checkDelete(cid);
+            if (cate ==true) {
+                cd.deleteCate(cid);
+                request.setAttribute("out", "delete category with bid = " + cid + " success");
+                request.getRequestDispatcher("listBrand").forward(request, response);
+            } else {
+                request.setAttribute("out", " Can't delete brand with id = " + cid + " because product still exists!");
+                request.getRequestDispatcher("listBrand").forward(request, response);
+            }
+
+        } catch (NumberFormatException e) {
         }
     } 
 

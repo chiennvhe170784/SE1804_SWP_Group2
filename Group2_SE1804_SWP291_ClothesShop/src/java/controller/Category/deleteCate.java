@@ -61,10 +61,10 @@ public class deleteCate extends HttpServlet {
 
             int cid = Integer.parseInt(request.getParameter("cid"));
             CategoryDAO cd = new CategoryDAO();
-            Category cate = cd.getCateById(cid);
-            if (cate == null) {
+            boolean cate = cd.checkDelete(cid);
+            if (cate ==true) {
                 cd.deleteCate(cid);
-                request.setAttribute("out", "delete " + cid + " success");
+                request.setAttribute("out", "delete category with cid = " + cid + " success");
                 request.getRequestDispatcher("listCate").forward(request, response);
             } else {
                 request.setAttribute("out", " Can't delete category with id = " + cid + " because product still exists!");

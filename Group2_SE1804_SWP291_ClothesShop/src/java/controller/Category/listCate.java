@@ -63,10 +63,17 @@ public class listCate extends HttpServlet {
         String indexPage = request.getParameter("index");
         String searchCate = request.getParameter("searchCate");
         String name = request.getParameter("addCate_name");
+        String sortCate = request.getParameter("sortCate");
+        String sortType = request.getParameter("sortType");
         if (indexPage == null) {
             indexPage = "1";
         }
-
+        if (sortCate == null) {
+            sortCate = "0";
+        }
+        if (sortType == null) {
+            sortType = "0";
+        }
 
         if (searchCate == null || searchCate.trim() == "") {
             int index1 = Integer.parseInt(indexPage);
@@ -76,14 +83,17 @@ public class listCate extends HttpServlet {
                 endPage++;
             }
             if (name != null) {
-            cd.addCategory(name);
-            request.setAttribute("add_suc", "Add category sucessfully!");
-        }
-            List<Category> listC = cd.pagging(index1);
+                cd.addCategory(name);
+                request.setAttribute("add_suc", "Add category sucessfully!");
+            }
+            List<Category> listC = cd.pagging(index1, sortCate, sortType);
             request.setAttribute("endPage", endPage);
             request.setAttribute("listC", listC);
             request.setAttribute("searchCate", searchCate);
             request.setAttribute("count", count);
+            request.setAttribute("sortType", sortType);
+            request.setAttribute("sortCate", sortCate);
+            
 
             request.getRequestDispatcher("category_brand/listCate2.jsp").forward(request, response);
 
@@ -94,15 +104,18 @@ public class listCate extends HttpServlet {
             if (count % 5 != 0) {
                 endPage++;
             }
-                    if (name != null) {
-            cd.addCategory(name);
-            request.setAttribute("add_suc", "Add category sucessfully!");
-        }
-            List<Category> listC = cd.search(searchCate, index1);
+            if (name != null) {
+                cd.addCategory(name);
+                request.setAttribute("add_suc", "Add category sucessfully!");
+            }
+            List<Category> listC = cd.search(searchCate, index1, sortCate, sortType);
             request.setAttribute("endPage", endPage);
             request.setAttribute("listC", listC);
             request.setAttribute("searchCate", searchCate);
             request.setAttribute("count", count);
+                   request.setAttribute("sortType", sortType);
+            request.setAttribute("sortCate", sortCate);
+            
             request.getRequestDispatcher("category_brand/listCate2.jsp").forward(request, response);
         }
 

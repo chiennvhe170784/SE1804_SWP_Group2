@@ -1,28 +1,34 @@
 <%-- 
     Document   : listBrand
-    Created on : Jun 3, 2024, 11:18:25 PM
+    Created on : Jun 22, 2024, 10:19:05 PM
     Author     : chien
 --%>
 
-<%-- 
-    Document   : listCate
-    Created on : Jun 3, 2024, 9:17:58 PM
-    Author     : chien
---%>
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
-<html  class="no-js" lang="en">
+<html lang="en">
+
     <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>BulkShop - Electronics Shop HTML Template | Shop Left Sidebar</title>
-        <link rel="icon" href="assets/img/icon.png" type="image/gif" sizes="16x16">
-        <link rel="icon" href="assets/img/icon.png" type="image/gif" sizes="18x18">
-        <link rel="icon" href="assets/img/icon.png" type="image/gif" sizes="20x20">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>Clothes Shop Manager</title>
+
+        <!-- Custom fonts for this template -->
+        <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+        <!-- Custom styles for this template -->
+        <link href="adminassets/css/sb-admin-2.min.css" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+        <!-- Custom styles for this page -->
+        <link href="adminassets/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="assets/css/bootstrap.min.css">
 
         <link rel="stylesheet" href="assets/css/bootstrap.min.css">
         <link rel="stylesheet" href="assets/css/fontawesome.all.min.css">
@@ -34,676 +40,282 @@
         <link rel="stylesheet" href="assets/css/style.css">
         <link rel="stylesheet" href="assets/css/responsive.css">
 
+
+
     </head>
-    <body>
-        <div id="preloader" class="preeloader">
-            <div class="sk-circle">
-                <div class="sk-circle1 sk-child"></div>
-                <div class="sk-circle2 sk-child"></div>
-                <div class="sk-circle3 sk-child"></div>
-                <div class="sk-circle4 sk-child"></div>
-                <div class="sk-circle5 sk-child"></div>
-                <div class="sk-circle6 sk-child"></div>
-                <div class="sk-circle7 sk-child"></div>
-                <div class="sk-circle8 sk-child"></div>
-                <div class="sk-circle9 sk-child"></div>
-                <div class="sk-circle10 sk-child"></div>
-                <div class="sk-circle11 sk-child"></div>
-                <div class="sk-circle12 sk-child"></div>
-            </div>
-        </div>
-        <div class="off_canvars_overlay"></div>
-        <!-- Header -->
-        <header class="header">
-            <!-- Header Top -->
-            <div class="header-top">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-5">
-                            <div class="top-text">
-                                <p>Welcome to Electronics Shop</p>
-                            </div>
-                        </div>
-                        <div class="col-lg-7">
-                            <div class="top-list">
-                                <a href="#"><i class="fas fa-mobile-alt"></i> +02456 054546</a>
-                                <a href="wishlist.html"><i class="far fa-heart"></i> Wishlist</a>
-                                <a href="login.html"><i class="fas fa-user"></i> Login / Register</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Header Middle -->
-            <div class="header-middle pt-30 pb-30">
-                <div class="container">
-                    <div class="row">
-                        <!-- Logo -->
-                        <div class="col-lg-2">
-                            <div class="logo">
-                                <h2><a href="index.html"><img src="assets/img/logo.png"></a></h2>
-                            </div>
-                        </div>
-                        <!-- Search Bar -->
-                        <div class="col-lg-8">
-                            <div class="header-search-form">
-                                <form action="#">
-                                    <select class="form-select">
-                                        <option selected>All Categories</option>
-                                        <option value="1">Mobile</option>
-                                        <option value="2">LifeStyle</option>
-                                        <option value="3">Leptop</option>
-                                        <option value="4">Cell Phones</option>
-                                        <option value="5">Game & Consoles</option>
-                                        <option value="6">Smart Watchs</option>
-                                        <option value="7">Smartphone</option>
-                                    </select>
-                                    <input type="search" name="search" placeholder="Search keyword here...">
-                                    <button type="submit"><i class="fas fa-search"></i></button>
-                                </form>
-                            </div>	
-                        </div>
-                        <!-- MiniCart -->
-                        <div class="col-lg-2">
-                            <div class="desktop-mini-cart">
-                                <div class="mini-cart">
-                                    <div class="mini-cart-icon">
-                                        <i class="fas fa-shopping-cart"></i>
-                                        <span class="counter">02</span>
-                                        <span class="counter-cart"><small>Your Cart</small>$10.00</span>
-                                        <!-- Mini Cart Content -->
-                                        <div class="minicart-content-wrapper">
-                                            <ul class="cart-list-full">
-                                                <!-- Single -->
-                                                <li class="cart-list-single">
-                                                    <img src="assets/img/product/1.jpg" alt="img">
-                                                    <h5><a href="#">simple product</a></h5>
-                                                    <span class="price">$120</span>
-                                                    <div class="close"><i class="fas fa-times"></i></div>
-                                                </li>
-                                                <!-- Single -->
-                                                <li class="cart-list-single">
-                                                    <img src="assets/img/product/2.jpg" alt="img">
-                                                    <h5><a href="#">simple product</a></h5>
-                                                    <span class="price">$120</span>
-                                                    <div class="close"><i class="fas fa-times"></i></div>
-                                                </li>
-                                            </ul>
-                                            <h2 class="subtotal">Subtotal : <span>$220</span></h2>
-                                            <div class="minicart-btn">
-                                                <a class="button-1" href="cart.html">View Cart</a>
-                                                <a class="button-2" href="#">Checkout</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Header Bottom -->
-            <div class="header-bottm">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="logo-2">
-                                <h2><a href="index.html"><img src="assets/img/logo.png"></a></h2>
-                            </div>
-                            <div class="canvas_open">
-                                <a href="javascript:void(0)"><i class="fas fa-bars"></i></a>
-                            </div>
-                            <div class="mobile-mini-cart">
-                                <div class="mini-cart">
-                                    <div class="mini-cart-icon">
-                                        <i class="fas fa-shopping-cart"></i>
-                                        <span class="counter">02</span>
-                                        <span class="counter-cart"><small>Your Cart</small>$10.00</span>
-                                        <!-- Mini Cart Content -->
-                                        <div class="minicart-content-wrapper">
-                                            <ul class="cart-list-full">
-                                                <!-- Single -->
-                                                <li class="cart-list-single">
-                                                    <img src="assets/img/product/1.jpg" alt="img">
-                                                    <h5><a href="#">simple product</a></h5>
-                                                    <span class="price">$120</span>
-                                                    <div class="close"><i class="fas fa-times"></i></div>
-                                                </li>
-                                                <!-- Single -->
-                                                <li class="cart-list-single">
-                                                    <img src="assets/img/product/2.jpg" alt="img">
-                                                    <h5><a href="#">simple product</a></h5>
-                                                    <span class="price">$120</span>
-                                                    <div class="close"><i class="fas fa-times"></i></div>
-                                                </li>
-                                            </ul>
-                                            <h2 class="subtotal">Subtotal : <span>$220</span></h2>
-                                            <div class="minicart-btn">
-                                                <a class="button-1" href="cart.html">View Cart</a>
-                                                <a class="button-2" href="#">Checkout</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="menu">
-                                <nav>
-                                    <ul>
-                                        <li><a href="#">Home</a></li>
-                                        <li><a href="about.html">About</a></li>
-                                        <li><a href="#">Page <i class="fa fa-angle-down"></i></a>
-                                            <ul class="submenu-item">
-                                                <li><a href="cart.html">Cart</a></li>
-                                                <li><a href="wishlist.html"> Wishlist</a></li>
-                                                <li><a href="checkout.html">Checkout</a></li>
-                                                <li><a href="login.html">Login</a></li>
-                                                <li><a href="register.html">Register</a></li>
-                                                <li><a href="reset-password.html">Reset Password</a></li>
-                                                <li><a href="privacy-policy.html">Privacy Policy</a></li>
-                                                <li><a href="terms-condition.html">Terms & Condition</a></li>
-                                                <li><a href="404.html">404 Error</a></li>
-                                                <li><a href="faq.html">Faq</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="shop.html">Shop <i class="fa fa-angle-down"></i></a>
-                                            <ul class="submenu-item">
-                                                <li><a href="shop.html">Shop</a></li>
-                                                <li><a href="shop2-columns.html">Shop 2 Columns</a></li>
-                                                <li><a href="shop-grid.html">Shop Grid</a></li>
-                                                <li><a href="shop-left-sidebar.html">Shop Left Sidebar</a></li>
-                                                <li><a href="shop-list.html">Shop List</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="#">Elements <i class="fa fa-angle-down"></i></a>
-                                            <ul class="mega-sub-menu">
-                                                <li>
-                                                    <a class="menu-title" href="#">Element List</a>
-                                                    <ul>
-                                                        <li><a href="element-infobox.html">Element Info Box</a></li>
-                                                        <li><a href="element-breadcrumb.html">Element Breadcrum</a></li>
-                                                        <li><a href="element-heading.html">Element Headding</a></li>
-                                                        <li><a href="element-post.html">Element Post Element</a></li>
-                                                        <li><a href="element-pricing.html">Element Pricing</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li>
-                                                    <a class="menu-title" href="#">Element</a>
-                                                    <ul>
-                                                        <li><a href="element-product-category.html">Element Product Category</a></li>
-                                                        <li><a href="element-product-style.html">Element Product Style</a></li>
-                                                        <li><a href="element-product-tab.html">Element Product Tab</a></li>
-                                                        <li><a href="element-team-style.html">Element Team</a></li>
-                                                        <li><a href="element-testimonial.html">Element Testimonial</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li>
-                                                    <a class="menu-title" href="#">Element List</a>
-                                                    <ul>
-                                                        <li><a href="shop.html">Element Shop</a></li>
-                                                        <li><a href="shop2-columns.html">Element Shop 2 Columns</a></li>
-                                                        <li><a href="shop-grid.html">Element Shop Grid</a></li>
-                                                        <li><a href="shop-left-sidebar.html">Element Shop Left Sidebar</a></li>
-                                                        <li><a href="shop-list.html">Element Shop List</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li>
-                                                    <a class="menu-title" href="#">Element List</a>
-                                                    <ul>
-                                                        <li><a href="product-details.html">Element Shop Single</a></li>
-                                                        <li><a href="cart.html">Element Cart Page</a></li>
-                                                        <li><a href="checkout.html">Element CheckOut Page</a></li>
-                                                        <li><a href="wishlist.html">Element Wishlist</a></li>
-                                                    </ul>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="blog.html">blog <i class="fa fa-angle-down"></i></a>
-                                            <ul class="submenu-item">
-                                                <li><a href="blog.html">Blog</a></li>
-                                                <li><a href="blog-grid.html">Blog Grid</a></li>
-                                                <li><a href="single.html">Blog Single</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="contact.html">Contact</a></li>
-                                    </ul>
-                                </nav>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </header>
-        <!-- Header -->
 
-        <!-- Start Mobile Menu Area -->
-        <div class="mobile-menu-area">
+    <body id="page-top">
 
-            <!--offcanvas menu area start-->
-            <div class="off_canvars_overlay">
+        <!-- Page Wrapper -->
+        <div id="wrapper">
 
-            </div>
-            <div class="offcanvas_menu">
-                <div class="offcanvas_menu_wrapper">
-                    <div class="canvas_close">
-                        <a href="javascript:void(0)"><i class="fas fa-times"></i></a>  
-                    </div>
-                    <div class="mobile-logo">
-                        <h2><a href="index.html"><img src="assets/img/logo.png"></a></h2>
-                    </div>
-                    <div id="menu" class="text-left ">
-                        <ul class="offcanvas_main_menu">
-                            <li class="menu-item-has-children">
-                                <a href="index.html">Home</a>
-                            </li>
-                            <li class="menu-item-has-children">
-                                <a href="about.html">about Us</a>
-                            </li>
-                            <li class="menu-item-has-children">
-                                <a href="#">Page</a>
-                                <ul class="sub-menu">
-                                    <li><a href="cart.html">Cart</a></li>
-                                    <li><a href="wishlist.html"> Wishlist</a></li>
-                                    <li><a href="checkout.html">Checkout</a></li>
-                                    <li><a href="login.html">Login</a></li>
-                                    <li><a href="register.html">Register</a></li>
-                                    <li><a href="reset-password.html">Reset Password</a></li>
-                                    <li><a href="privacy-policy.html">Privacy Policy</a></li>
-                                    <li><a href="terms-condition.html">Terms & Condition</a></li>
-                                    <li><a href="404.html">404 Error</a></li>
-                                    <li><a href="faq.html">Faq</a></li>
-                                </ul>
-                            </li>
-                            <li class="menu-item-has-children">
-                                <a href="#">Shop</a>
-                                <ul class="sub-menu">
-                                    <li><a href="shop.html">Shop</a></li>
-                                    <li><a href="shop2-columns.html">Shop 2 Columns</a></li>
-                                    <li><a href="shop-grid.html">Shop Grid</a></li>
-                                    <li><a href="shop-left-sidebar.html">Shop Left Sidebar</a></li>
-                                    <li><a href="shop-list.html">Shop List</a></li>
-                                </ul>
-                            </li>
-                            <li class="menu-item-has-children">
-                                <a href="#">Elements</a>
-                                <ul class="sub-menu">
-                                    <li class="menu-item-has-children">
-                                        <a href="#">Elements</a>
-                                        <ul class="sub-menu">
-                                            <li><a href="element-infobox.html">Element Info Box</a></li>
-                                            <li><a href="element-breadcrumb.html">Element Breadcrum</a></li>
-                                            <li><a href="element-heading.html">Element Headding</a></li>
-                                            <li><a href="element-post.html">Element Post Element</a></li>
-                                            <li><a href="element-pricing.html">Element Pricing</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="menu-item-has-children">
-                                        <a href="#">Elements</a>
-                                        <ul class="sub-menu">
-                                            <li><a href="element-product-category.html">Element Product Category</a></li>
-                                            <li><a href="element-product-style.html">Element Product Style</a></li>
-                                            <li><a href="element-product-tab.html">Element Product Tab</a></li>
-                                            <li><a href="element-team-style.html">Element Team</a></li>
-                                            <li><a href="element-testimonial.html">Element Testimonial</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="menu-item-has-children">
-                                        <a href="#">Elements</a>
-                                        <ul class="sub-menu">
-                                            <li><a href="shop.html">Element Shop</a></li>
-                                            <li><a href="shop2-columns.html">Element Shop 2 Columns</a></li>
-                                            <li><a href="shop-grid.html">Element Shop Grid</a></li>
-                                            <li><a href="shop-left-sidebar.html">Element Shop Left Sidebar</a></li>
-                                            <li><a href="shop-list.html">Element Shop List</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="menu-item-has-children">
-                                        <a href="#">Elements</a>
-                                        <ul class="sub-menu">
-                                            <li><a href="product-details.html">Element Shop Single</a></li>
-                                            <li><a href="cart.html">Element Cart Page</a></li>
-                                            <li><a href="checkout.html">Element CheckOut Page</a></li>
-                                            <li><a href="wishlist.html">Element Wishlist</a></li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="menu-item-has-children">
-                                <a href="#">Blog</a>
-                                <ul class="sub-menu">
-                                    <li><a href="blog.html">Blog</a></li>
-                                    <li><a href="blog-grid.html">Blog Grid</a></li>
-                                    <li><a href="single.html">Blog Single</a></li>
-                                </ul>
-                            </li>
-                            <li class="menu-item-has-children">
-                                <a href="contact.html"> Contact Us</a> 
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--offcanvas menu area end-->
-        <!-- End Mobile Menu Area -->
-        <!-- Start BreadCrumb Area -->
+            <!-- Sidebar -->
+            <%@include file="../sidebar_admin.jsp" %>
+            <!-- End of Sidebar -->
 
+            <!-- Content Wrapper -->
+            <div id="content-wrapper" class="d-flex flex-column">
+                <!-- Main Content -->
+                <div id="content">
 
-        <!-- Start Shop Area -->
-        <section class="shop-area pt-70 pb-70">
-            <div class="container">
-                <div class="row">
-                    <!-- Siderbar -->
-                    <div class="col-lg-4">
-                        <!-- Single -->
+                    <!-- Topbar -->
+                    <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+                        <!-- Sidebar Toggle (Topbar) -->
+                        <form class="form-inline">
+                            <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                                <i class="fa fa-bars"></i>
+                            </button>
+                        </form>
+                        <!-- Topbar Navbar -->
+                        <ul class="navbar-nav ml-auto">
+                            <div class="topbar-divider d-none d-sm-block"></div>
 
-                        <!-- Single -->
-                        <div class="sidebar-widgets">
-                            <h4 class="title">Manager</h4>
-                            <div class="widgets-latest-product-full">
-                                <!-- Single -->
-                                <div class="widgets-latest-product-single mb-30">
-
-                                    <div class="content">
-                                        <h4><a href="#">Products</a></h4>
-
-                                    </div>
-                                </div>
-                                <div class="widgets-latest-product-single mb-30">
-
-                                    <div class="content">
-                                        <h4><a class="active" href="listCate">Category</a></h4>
-
-                                    </div>
-                                </div>
-                                <div class="widgets-latest-product-single mb-30">
-
-                                    <div class="content">
-                                        <h4><a href="#">News</a></h4>
-
-                                    </div>
-                                </div>
-                                <div class="widgets-latest-product-single mb-30">
-
-                                    <div class="content">
-                                        <h4><a href="#">User</a></h4>
-
-                                    </div>
-                                </div>
-                                <div class="widgets-latest-product-single mb-30">
-
-                                    <div class="content">
-                                        <h4><a href="#">Cart</a></h4>
-
-                                    </div>
-                                </div>
-                                <div class="widgets-latest-product-single mb-30">
-
-                                    <div class="content">
-                                        <h4><a href="listBrand">Brand</a></h4>
-
-                                    </div>
-                                </div>
-
-
-                                <!-- Single -->
-
-                            </div>
-                        </div>
-                        <!-- Single -->
-                        <div class="sidebar-widgets">
-                            <h4 class="title">Blog categories</h4>
-                            <ul>
-                                <li><a href="#">All about Digital</a></li>
-                                <li><a href="#">Smartphone & Tablett</a></li>
-                                <li><a href="#">Camera</a></li>
-                                <li><a href="#">Printer & ink</a></li>
-                                <li><a href="#">Cameras</a></li>
-                            </ul>
-                        </div>
-                        <!-- Single -->
-                        <div class="sidebar-widgets">
-                            <h4 class="title">Tags</h4>
-                            <div class="tags">
-                                <a href="#">camera</a>
-                                <a href="#">Computer</a>
-                                <a href="#">Mobile</a>
-                                <a href="#">Bag</a>
-                                <a href="#">shoes</a>
-                                <a href="#">Store</a>
-                                <a href="#">smartphone</a>
-                                <a href="#">Watch</a>
-                            </div>
-                        </div>
-                        <!-- Single -->
-                        <div class="sidebar-widgets">
-                            <h4 class="title">Recent Post</h4>
-                            <ul>
-                                <li><a href="#">Gallery Post with Supported Animation</a></li>
-                                <li><a href="#">Announcement – Standard Post without Image</a></li>
-                                <li><a href="#">We’re the best Designers from UK</a></li>
-                                <li><a href="#">A Beautiful Day – Standard Post with Image</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-lg-8">
-                        <!-- Shop Top Pagination -->
-                        <div class="row section-bg pt-20 pb-20 mb-30">
-                            <div class="col-lg- col-md-6 order-2 order-md-1">
-                                <div class="sidebar-widgets">
-                                    <%
-        String searchBrand = request.getParameter("searchBrand");
-        if (searchBrand == null || searchBrand.isEmpty()) {
-            searchBrand = "Enter search key here";
-        }
-                                    %>
-                                    <!-- Search single -->
-                                    <form action="listBrand">
-                                        <input type="search" name="searchBrand" placeholder="<%= searchBrand %>">
-                                        <button type="submit"><i class="fas fa-search"></i></button>
-                                    </form>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-5 col-md-6 order-1 order-md-2 sidebar-widgets">
-                                <div class="top-bar-right">
-                                    <select class="form-select" aria-label="Default select example">
-
-                                        <option value="1">Sort by Name</option>
-                                        <option value="2">Sort by Cid</option>
-
-                                    </select>
-                                </div>
-                                <div class="top-bar-right">
-
-                                    <div class="product-amount">
-                                        <p>Showing 1–16 of 21 results</p>
-                                    </div>
-
-                                </div>
-                            </div>
-
-
-                        </div>
-                        <!-- Shop -->
-                        <div class="row">
-
-                            <!-- List Category -->
-
-                            <div style="margin-left: 10px; margin-right: 100px">
-                                <div style="text-align: start">
-                                    <a href="addBrand">
-                                        <button class="btn btn-success btn-sm" type="button" data-toggle="tooltip" data-placement="top" title="Edit">Add Brand</button>
+                            <!-- Nav Item - User Information -->
+                            <li class="nav-item dropdown no-arrow">
+                                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
+                                    <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
+                                </a>
+                                <!-- Dropdown - User Information -->
+                                <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                     aria-labelledby="userDropdown">
+                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                        Logout
                                     </a>
                                 </div>
-                                <table class="table table-striped table-bordered table-title" cellspacing="0" rules="all" border="1" id="gvLO"
-                                       style="border-collapse:collapse;">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">ID</th>
-                                            <th scope="col">Brand Name</th>
+                            </li>
+                        </ul>
+                    </nav>
+                    <!-- End of Topbar -->
 
-                                            <th scope="col">Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <c:forEach items="${requestScope.listB}" var="b">
-                                            <tr>
-                                                <td>${b.bid}</td>
-                                                <td>${b.name}</td>
+                    <!-- Begin Page Content -->
+                    <div class="container-fluid">
+                        <!-- Page Heading -->
+                        <h1 >Brand List</h1>
+                        <div id="newCateForm" style="display: none;">
+                            <form action="listBrand" method="get" style="margin-bottom: 20px">
 
+                                <fieldset class="form-group">
 
-                                                <td><li class="list-inline-item">
-                                            <a href="deleteBrand?bid=${b.bid}" onclick="return checkdelete()"><button class="btn btn-danger btn-sm rounded-0" type="button" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-trash"></i></button></a>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <a href="updateCate?cidUpdate=${c.cid}"><button class="btn btn-success btn-sm rounded-0" type="button" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-edit"></i></button></a>
-                                        </li>
-                                        </td>
-                                        </tr>
-                                    </c:forEach>
-                                    </tbody>
-                                </table>
+                                    <input type="text" value="" class="form-control col-md-4" name="addBrand_name" placeholder="Enter Brand Name" id="name" required>
+                                </fieldset>
 
-                            </div>
+                                <div class="text-left" style="margin-left: 12px">
+                                    <button type="submit" onclick="myFunction()" class="btn btn-success">Add</button>
+                                    <button type="button" onclick="cancelAdd()" class="btn btn-secondary ml-2">Cancel</button>
+                                </div>
 
-                            <!-- End List Cate -->
+                            </form>
+                        </div>
 
-                            <!-- Pagging Start -->
-                            <div class="row">
-                                <div class="col-12 mb-30">
-                                    <div class="page-pagination text-center">
-
-                                        <ul>
-                                            <c:set var="currentIndex" value="${param.index != null ? param.index : 1}" />
-                                            <c:forEach begin="1" end="${requestScope.endPage}" var="i">
-                                                <li>
-
-                                                    <a class="${i == currentIndex ? 'active' : ''}" href="listBrand?index=${i}&searchBrand=${param.searchBrand}">${i}</a>
+                        <button type="button" id="newCateButton" style="margin-bottom: 20px" class="btn btn-primary" onclick="showForm()">Add Brand</button>
 
 
-                                                </li>
-                                            </c:forEach>
 
 
-                                        </ul>
+                        <!-- Search and Filter Form -->
+                        <form id="filterForm" name="filterForm" action="listBrand" method="get" onsubmit="return validateForm()">
+                            <div class="form-row">
+                                <!-- Search properties -->
+                                <%
+                               String searchBrand = request.getParameter("searchBrand");
+                                %>
 
-                                    </div>
+                                <div class="col-md-2 mb-3">
+                                    <input type="text" name="searchBrand" placeholder="Search Brand" value="<%= searchBrand != null ? searchBrand : "" %>" class="form-control">
+                                </div>
+
+
+                                <!-- Genders Dropdown -->
+                                <div class="col-md-2 mb-3">
+                                    <select class="form-select" name="sortBrand" aria-label="Default select example">
+
+                                        <option value="1" ${requestScope.sortBrand == 1 ? 'selected' : ''}>Sort by Cid</option>
+                                        <option value="2"  ${requestScope.sortBrand == 2 ? 'selected' : ''}>Sort by Name</option>
+
+                                    </select>
+                                </div>
+                                <div class="col-md-2 mb-3">
+                                    <select class="form-select" name="sortTypeB" aria-label="Default select example">
+
+                                        <option value="1" ${requestScope.sortTypeB == 1 ? 'selected' : ''}>Increase</option>
+                                        <option value="2" ${requestScope.sortTypeB == 2 ? 'selected' : ''}>Decrease</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-1 mb-1">
+                                    <input class="form-control" readonly="" value="Total: ${requestScope.countB}">
+                                </div>
+
+                                <!-- Submit Button (hidden) -->
+                                <div class="col-md-2 mb-3" style="display: none;">
+                                    <button type="submit" class="btn btn-primary btn-block">Search</button>
                                 </div>
                             </div>
-                            <!-- Pagging End -->
+                        </form>
+                        <div style="color: green">${add_suc}</div>
+                        <div style="color: green">${update_suc}</div>
+                        <div style="color: #0061f2">${out}</div>
+                        <!-- Product Table -->
+                        <div class="card shadow  row container-fluid  " style="display: flex; justify-content: center; align-items: center;">
+                            <div class="card-body  col-md-6" >
+                                <div class="table-responsive">
+                                    <table class="table table-bordered border-1" id="dataTable" width="100%">
+                                        <thead>
+                                            <tr>
+
+                                                <th scope="col">ID</th>
+                                                <th scope="col">Brand Name</th>
+
+                                                <th scope="col">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <c:forEach items="${requestScope.listB}" var="c">
+                                                <tr>
+                                                    <td>${c.bid}</td>
+                                                    <td>${c.name}</td>
 
 
-                        </div>
-                        <!-- Pagination -->
+                                                    <td><li class="list-inline-item">
+                                                <a href="#" onclick="return checkDelete('${c.bid}')"><button class="btn btn-danger btn-sm rounded-0" type="button" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-trash"></i></button></a>
+                                            </li>
+                                            <li class="list-inline-item">
+                                                <a href="updateBrand?bidUpdate=${c.bid}"><button class="btn btn-success btn-sm rounded-0" type="button" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-edit"></i></button></a>
+                                            </li>
+                                            </td>
+                                            </tr>
+                                        </c:forEach>
+                                        </tbody>
 
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- End Shop Area -->
+                                    </table>
 
-        <!-- Start Footer Area -->
-        <footer class="footer">
-            <!-- Footer Top -->
-            <div class="footer-top pt-50">
-                <div class="container">
-                    <div class="row">
-                        <!-- SIngle -->
-                        <div class="col-lg-3 col-md-6 mb-30">
-                            <div class="footer-widgets-single">
-                                <h2><img src="assets/img/white-logo.png"></h2>
-                                <p> Lorem ipsum dolor sit amet, consectetuipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqut enim ad minim veniamquis </p>
+                                </div>
+
                             </div>
                         </div>
-                        <!-- SIngle -->
-                        <div class="col-lg-3 col-md-6 mb-30">
-                            <div class="footer-widgets-single">
-                                <h3>My account</h3>
-                                <ul>
-                                    <li><a href="#">Sign In</a></li>
-                                    <li><a href="#">View Cart</a></li>
-                                    <li><a href="#">My Wishlist</a></li>
-                                    <li><a href="#">Terms & Conditions</a></li>
-                                    <li><a href="#">Contact us</a></li>
-                                    <li><a href="#">Track My Order</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <!-- SIngle -->
-                        <div class="col-lg-3 col-md-6 mb-30">
-                            <div class="footer-widgets-single">
-                                <h3>Categories</h3>
-                                <ul>
-                                    <li><a href="#">Home Audio & Theater</a></li>
-                                    <li><a href="#">TV & Video</a></li>
-                                    <li><a href="#">Camera, Photo & Video</a></li>
-                                    <li><a href="#">Cell Phones & Accessories</a></li>
-                                    <li><a href="#">Headphones</a></li>
-                                    <li><a href="#">Video Games</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <!-- SIngle -->
-                        <div class="col-lg-3 col-md-6 mb-30">
-                            <div class="footer-widgets-single">
-                                <h3>Newsletter</h3>
-                                <p> Get notified of new products, limited releases, and more. </p>
-                                <form action="#">
-                                    <input type="email" name="email" placeholder="Your Email">
-                                    <button type="submit" class="button-1">Subscribe</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Footer Bottom -->
-            <div class="footer-bottom pt-30 pb-30">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="copyright-text">
-                                <p> &copy; Copyright 2021 <a href="https://codepopular.com" target="_blank">CodePopular</a> All Rights Reserved. </p>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <ul class="footer_payment">
-                                <li><a href="#"><img src="assets/img/visa.png" alt="visa"></a></li>
-                                <li><a href="#"><img src="assets/img/discover.png" alt="discover"></a></li>
-                                <li><a href="#"><img src="assets/img/master_card.png" alt="master_card"></a></li>
-                                <li><a href="#"><img src="assets/img/paypal.png" alt="paypal"></a></li>
-                                <li><a href="#"><img src="assets/img/amarican_express.png" alt="amarican_express"></a></li>
+
+                        <!-- Paging -->
+                        <nav aria-label="Page navigation example" class="mt-4" style="margin-top: 1.5rem;">
+                            <ul class="pagination justify-content-center" style="list-style: none; padding: 0; display: flex;">
+                                <c:set var="currentIndex" value="${param.index != null ? param.index : 1}" />
+
+                                <!-- Previous button -->
+                                <c:if test="${currentIndex > 1}">
+                                    <li style="margin: 0 5px;">
+                                        <a href="listBrand?index=${currentIndex - 1}&searchBrand=${param.searchBrand}&sortBrand=${param.sortBrand}&sortTypeB=${param.sortTypeB}"
+                                           style="text-decoration: none; padding: 8px 16px; border: 1px solid #ddd; border-radius: 4px;">
+                                            Previous
+                                        </a>
+                                    </li>
+                                </c:if>
+
+                                <!-- Page links -->
+                                <c:forEach begin="${currentIndex > 2 ? currentIndex - 1 : 1}" end="${(currentIndex < endPage - 1) ? currentIndex + 1 : endPage}" var="i">
+                                    <li style="margin: 0 5px;">
+                                        <a class="${i == currentIndex ? 'active' : ''}" href="listBrand?index=${i}&searchBrand=${param.searchBrand}&sortBrand=${param.sortBrand}&sortTypeB=${param.sortTypeB}"
+                                           style="text-decoration: none; padding: 8px 16px; border: 1px solid #ddd; border-radius: 4px; color: ${i == currentIndex ? '#fff' : '#007bff'}; background-color: ${i == currentIndex ? '#007bff' : '#fff'};">
+                                            ${i}
+                                        </a>
+                                    </li>
+                                </c:forEach>
+
+                                <!-- Next button -->
+                                <c:if test="${currentIndex < endPage}">
+                                    <li style="margin: 0 5px;">
+                                        <a href="listBrand?index=${currentIndex + 1}&searchBrand=${param.searchBrand}&sortBrand=${param.sortBrand}&sortTypeB=${param.sortTypeB}"
+                                           style="text-decoration: none; padding: 8px 16px; border: 1px solid #ddd; border-radius: 4px;">
+                                            Next
+                                        </a>
+                                    </li>
+                                </c:if>
                             </ul>
-                        </div>
+                        </nav>
+                        <!-- End paging -->
+
+
+
+
                     </div>
+                    <!-- /.container-fluid -->
                 </div>
+                <!-- End of Main Content -->
             </div>
-        </footer>
-        <!-- End Footer Area -->
-
-
-
-        <div class="scroll-area">
-            <i class="fa fa-angle-up"></i>
+            <!-- End of Content Wrapper -->
         </div>
+        <!-- End of Page Wrapper -->
 
-
-        <!-- Js File -->
-        <script src="assets/js/modernizr.min.js"></script>
-        <script src="assets/js/jquery-3.5.1.min.js"></script>
-        <script src="assets/js/popper.min.js"></script>
-        <script src="assets/js/bootstrap.min.js"></script>
-        <script src="assets/js/owl.carousel.min.js"></script>
-        <script src="assets/js/jquery.nav.min.js"></script>
-        <script src="assets/js/jquery.magnific-popup.min.js"></script>
-        <script src="assets/js/mixitup.min.js"></script>
-        <script src="assets/js/wow.min.js"></script>
-        <script src="assets/js/script.js"></script>
-        <script src="assets/js/mobile-menu.js"></script>
         <script>
-                                                function checkdelete() {
-                                                    return confirm("Deleting a category means deleting all products in this category. Are you sure want to delete?");
-                                                }
+            document.addEventListener("DOMContentLoaded", function () {
+                const form = document.getElementById("filterForm");
+                const elements = form.querySelectorAll('input, select');
+
+                elements.forEach(element => {
+                    element.addEventListener('change', function () {
+                        form.submit();
+                    });
+                });
+            });
         </script>
+        <script>
+            function myFunction() {
+                const inpObj = document.getElementById("name");
+
+                // Reset custom validity
+                inpObj.setCustomValidity("");
+
+                const value = inpObj.value.trim();
+                const valueLength = value.length;
+
+                // Regex to check if value contains only alphanumeric characters
+                const alphanumericRegex = /^[a-zA-Z0-9]+$/;
+
+                if (valueLength < 1) {
+                    inpObj.setCustomValidity("Text is too short. Please enter between 1 and 50 characters.");
+                } else if (valueLength > 50) {
+                    inpObj.setCustomValidity("Text is too long. Please enter between 1 and 50 characters.");
+                } else if (!alphanumericRegex.test(value)) {
+                    inpObj.setCustomValidity("Please enter only alphanumeric characters.");
+                } else {
+                    inpObj.setCustomValidity(""); // Clear any previous validation message
+                }
+            }
+        </script>
+        <script>
+            function showForm() {
+                document.getElementById('newCateForm').style.display = 'block';
+                document.getElementById('newCateButton').style.display = 'none';
+            }
+
+            function cancelAdd() {
+                document.getElementById('newCateForm').style.display = 'none';
+                document.getElementById('newCateButton').style.display = 'block';
+            }
+
+        </script>
+        <script>
+            function checkDelete(uid) {
+                // Thêm mã kiểm tra hợp lệ của form nếu cần
+                if (confirm("Delete brand with bid = " + uid + "?")) {
+                    window.location = 'deleteBrand?bid=' + uid;
+                }
+            }
+        </script>
+        <!-- Bootstrap core JavaScript-->
+        <script src="vendor/jquery/jquery.min.js"></script>
+        <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <!-- Core plugin JavaScript-->
+        <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+        <!-- Custom scripts for all pages-->
+        <script src="adminassets/js/sb-admin-2.min.js"></script>
+        <!-- Page level plugins -->
+        <script src="adminassets/vendor/datatables/jquery.dataTables.min.js"></script>
+        <script src="adminassets/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+        <!-- Page level custom scripts -->
+        <script src="adminassets/js/demo/datatables-demo.js"></script>
+
     </body>
+
 </html>

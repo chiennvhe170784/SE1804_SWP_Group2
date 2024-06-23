@@ -130,11 +130,21 @@
 
                                 <!-- Genders Dropdown -->
                                 <div class="col-md-2 mb-3">
-                                    <select class="form-select" aria-label="Default select example">
-                                        <option value="1">Sort by Name</option>
-                                        <option value="2">Sort by Cid</option>
+                                    <select class="form-select" name="sortCate" aria-label="Default select example">
+
+                                        <option value="1" ${requestScope.sortCate == 1 ? 'selected' : ''}>Sort by Cid</option>
+                                        <option value="2"  ${requestScope.sortCate == 2 ? 'selected' : ''}>Sort by Name</option>
+
                                     </select>
                                 </div>
+                                <div class="col-md-2 mb-3">
+                                    <select class="form-select" name="sortType" aria-label="Default select example">
+
+                                        <option value="1" ${requestScope.sortType == 1 ? 'selected' : ''}>Increase</option>
+                                        <option value="2" ${requestScope.sortType == 2 ? 'selected' : ''}>Decrease</option>
+                                    </select>
+                                </div>
+
                                 <div class="col-md-1 mb-1">
                                     <input class="form-control" readonly="" value="Total: ${requestScope.count}">
                                 </div>
@@ -146,6 +156,7 @@
                             </div>
                         </form>
                         <div style="color: green">${add_suc}</div>
+                        <div style="color: green">${update_suc}</div>
                         <div style="color: #0061f2">${out}</div>
                         <!-- Product Table -->
                         <div class="card shadow  row container-fluid  " style="display: flex; justify-content: center; align-items: center;">
@@ -194,7 +205,7 @@
                                 <!-- Previous button -->
                                 <c:if test="${currentIndex > 1}">
                                     <li style="margin: 0 5px;">
-                                        <a href="listCate?index=${currentIndex - 1}&searchCate=${param.searchCate}"
+                                        <a href="listCate?index=${currentIndex - 1}&searchCate=${param.searchCate}&sortCate=${param.sortCate}&sortType=${param.sortType}"
                                            style="text-decoration: none; padding: 8px 16px; border: 1px solid #ddd; border-radius: 4px;">
                                             Previous
                                         </a>
@@ -204,7 +215,7 @@
                                 <!-- Page links -->
                                 <c:forEach begin="${currentIndex > 2 ? currentIndex - 1 : 1}" end="${(currentIndex < endPage - 1) ? currentIndex + 1 : endPage}" var="i">
                                     <li style="margin: 0 5px;">
-                                        <a class="${i == currentIndex ? 'active' : ''}" href="listCate?index=${i}&searchCate=${param.searchCate}"
+                                        <a class="${i == currentIndex ? 'active' : ''}" href="listCate?index=${i}&searchCate=${param.searchCate}&sortCate=${param.sortCate}&sortType=${param.sortType}"
                                            style="text-decoration: none; padding: 8px 16px; border: 1px solid #ddd; border-radius: 4px; color: ${i == currentIndex ? '#fff' : '#007bff'}; background-color: ${i == currentIndex ? '#007bff' : '#fff'};">
                                             ${i}
                                         </a>
@@ -214,7 +225,7 @@
                                 <!-- Next button -->
                                 <c:if test="${currentIndex < endPage}">
                                     <li style="margin: 0 5px;">
-                                        <a href="listCate?index=${currentIndex + 1}&searchCate=${param.searchCate}"
+                                        <a href="listCate?index=${currentIndex + 1}&searchCate=${param.searchCate}&sortCate=${param.sortCate}&sortType=${param.sortType}"
                                            style="text-decoration: none; padding: 8px 16px; border: 1px solid #ddd; border-radius: 4px;">
                                             Next
                                         </a>
@@ -252,16 +263,24 @@
             function myFunction() {
                 const inpObj = document.getElementById("name");
 
+                // Reset custom validity
                 inpObj.setCustomValidity("");
 
-                const valueLength = inpObj.value.length;
+                const value = inpObj.value.trim();
+                const valueLength = value.length;
+
+                // Regex to check if value contains only alphanumeric characters
+                const alphanumericRegex = /^[a-zA-Z0-9]+$/;
 
                 if (valueLength < 1) {
                     inpObj.setCustomValidity("Text is too short. Please enter between 1 and 50 characters.");
                 } else if (valueLength > 50) {
                     inpObj.setCustomValidity("Text is too long. Please enter between 1 and 50 characters.");
+                } else if (!alphanumericRegex.test(value)) {
+                    inpObj.setCustomValidity("Please enter only alphanumeric characters.");
+                } else {
+                    inpObj.setCustomValidity(""); // Clear any previous validation message
                 }
-
             }
         </script>
         <script>
