@@ -205,6 +205,7 @@
                                                 <th>Gender</th>
                                                 <th>Size</th>
                                                 <th>Release Date</th>
+                                                <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -223,11 +224,19 @@
                                                         </c:forEach>
                                                     </td>
                                                     <td>${product.releaseDate}</td>
+                                                    <td>
+                                                        <form action="deleteProduct" method="post" style="display: inline-block;">
+                                                            <input type="hidden" name="pid" value="${product.pid}">
+                                                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this product?')">Delete</button>
+                                                        </form>
+                                                        <a href="editproduct?productId=${product.pid}" class="btn btn-primary btn-sm">Edit</a>
+                                                    </td>
                                                 </tr>
                                             </c:forEach>
                                         </tbody>
-
                                     </table>
+
+
                                 </div>
                             </div>
                         </div>
