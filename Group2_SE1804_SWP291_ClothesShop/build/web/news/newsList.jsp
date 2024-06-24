@@ -380,10 +380,10 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="breadcrumb-content">
-						<h2>Blog</h2>
+						<h2>News</h2>
 						<ul>
 							<li><a href="index.html">Home</a></li>
-							<li class="active">Blog</li>
+							<li class="active">News</li>
 						</ul>
 					</div>
 				</div>
@@ -404,7 +404,7 @@
                                                     <div class="col-md-6 mb-30">
 							<div class="blog-item">
 								<div class="thumnail">
-									<a href="newsDetail?id=${news.nId}"><img src="assets/img/blog/1.jpg" alt="blog"></a>
+                                                                    <a  href="newsDetail?id=${news.nId}"><img style="width: 416px;height: 260px;display: block;margin: 0 auto;" src="${news.thumbnail}" alt="blog"></a>
 								</div>
 								<div class="content">
 									<ul class="auth">
