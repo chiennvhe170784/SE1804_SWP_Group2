@@ -221,41 +221,42 @@
 
                     </ul>
                 </nav>-->
-                        <nav aria-label="Page navigation example" class="mt-4" style="margin-top: 1.5rem;">
-                            <ul class="pagination justify-content-center" style="list-style: none; padding: 0; display: flex;">
-                                <c:set var="currentIndex" value="${param.indexU != null ? param.indexU : 1}" />
+                      <nav aria-label="Page navigation example" class="mt-4" style="margin-top: 1.5rem;">
+    <ul class="pagination justify-content-center" style="list-style: none; padding: 0; display: flex;">
+        <c:set var="currentIndex" value="${param.indexU != null ? param.indexU : 1}" />
 
-                                <!-- Previous button -->
-                                <c:if test="${currentIndex > 1}">
-                                    <li style="margin: 0 5px;">
-                                        <a href="managerUser?indexU=${currentIndex - 1}&searchU=${param.searchU}&role=${param.role}&active=${param.active}&sortField=${param.sortField}&sortOrder=${param.sortOrder}"
-                                           style="text-decoration: none; padding: 8px 16px; border: 1px solid #ddd; border-radius: 4px;">
-                                            Previous
-                                        </a>
-                                    </li>
-                                </c:if>
+        <!-- Previous button -->
+        <c:if test="${currentIndex > 1}">
+            <li style="margin: 0 5px;">
+                <a href="managerUser?indexU=${currentIndex - 1}&searchU=${param.searchU}&role=${param.role}&active=${param.active}&sortField=${param.sortField != null ? param.sortField : 'uid'}&sortOrder=${param.sortOrder != null ? param.sortOrder : 'asc'}"
+                   style="text-decoration: none; padding: 8px 16px; border: 1px solid #ddd; border-radius: 4px;">
+                    Previous
+                </a>
+            </li>
+        </c:if>
 
-                                <!-- Page links -->
-                                <c:forEach begin="${currentIndex > 2 ? currentIndex - 1 : 1}" end="${(currentIndex < endPage - 1) ? currentIndex + 1 : endPage}" var="i">
-                                    <li style="margin: 0 5px;">
-                                        <a class="${i == currentIndex ? 'active' : ''}" href="managerUser?indexU=${i}&searchU=${param.searchU}&role=${param.role}&active=${param.active}&sortField=${param.sortField}&sortOrder=${param.sortOrder}"
-                                           style="text-decoration: none; padding: 8px 16px; border: 1px solid #ddd; border-radius: 4px; color: ${i == currentIndex ? '#fff' : '#007bff'}; background-color: ${i == currentIndex ? '#007bff' : '#fff'};">
-                                            ${i}
-                                        </a>
-                                    </li>
-                                </c:forEach>
+        <!-- Page links -->
+        <c:forEach begin="${currentIndex > 2 ? currentIndex - 1 : 1}" end="${(currentIndex < endPage - 1) ? currentIndex + 1 : endPage}" var="i">
+            <li style="margin: 0 5px;">
+                <a class="${i == currentIndex ? 'active' : ''}" href="managerUser?indexU=${i}&searchU=${param.searchU}&role=${param.role}&active=${param.active}&sortField=${param.sortField != null ? param.sortField : 'uid'}&sortOrder=${param.sortOrder != null ? param.sortOrder : 'asc'}"
+                   style="text-decoration: none; padding: 8px 16px; border: 1px solid #ddd; border-radius: 4px; color: ${i == currentIndex ? '#fff' : '#007bff'}; background-color: ${i == currentIndex ? '#007bff' : '#fff'};">
+                    ${i}
+                </a>
+            </li>
+        </c:forEach>
 
-                                <!-- Next button -->
-                                <c:if test="${currentIndex < endPage}">
-                                    <li style="margin: 0 5px;">
-                                        <a href="managerUser?indexU=${currentIndex + 1}&searchU=${param.searchU}&role=${param.role}&active=${param.active}&sortField=${param.sortField}&sortOrder=${param.sortOrder}"
-                                           style="text-decoration: none; padding: 8px 16px; border: 1px solid #ddd; border-radius: 4px;">
-                                            Next
-                                        </a>
-                                    </li>
-                                </c:if>
-                            </ul>
-                        </nav>
+        <!-- Next button -->
+        <c:if test="${currentIndex < endPage}">
+            <li style="margin: 0 5px;">
+                <a href="managerUser?indexU=${currentIndex + 1}&searchU=${param.searchU}&role=${param.role}&active=${param.active}&sortField=${param.sortField != null ? param.sortField : 'uid'}&sortOrder=${param.sortOrder != null ? param.sortOrder : 'asc'}"
+                   style="text-decoration: none; padding: 8px 16px; border: 1px solid #ddd; border-radius: 4px;">
+                    Next
+                </a>
+            </li>
+        </c:if>
+    </ul>
+</nav>
+
 
 
                     </div>
