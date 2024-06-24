@@ -60,51 +60,53 @@ public class managerUser extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-     UserDAO ud = new UserDAO();
-String indexPage = request.getParameter("indexU");
-String searchU = request.getParameter("searchU");
-String role = request.getParameter("role");
-String active = request.getParameter("active");
+        UserDAO ud = new UserDAO();
+        String indexPage = request.getParameter("indexU");
+        String searchU = request.getParameter("searchU");
+        String role = request.getParameter("role");
+        String active = request.getParameter("active");
+        String sortField = request.getParameter("sortField");
+        String sortOrder = request.getParameter("sortOrder");
 
-if (indexPage == null) {
-    indexPage = "1";
-}
+        if (indexPage == null) {
+            indexPage = "1";
+        }
 
-if ((searchU == null || searchU.trim().isEmpty()) && (role == null && active == null)) {
+        if ((searchU == null || searchU.trim().isEmpty()) && (role == null && active == null)) {
 
-    int index1 = Integer.parseInt(indexPage);
-    int count = ud.getListU(1, 9999).size();
-    int endPage = count / 5;
-    if (count % 5 != 0) {
-        endPage++;
-    }
-    List<Role> listR = ud.listRole();
-    List<User> listU = ud.getListU(index1, 5);
-    request.setAttribute("endPage", endPage);
-    request.setAttribute("listU", listU);
-    request.setAttribute("listR", listR);
-     request.setAttribute("countU", count);
-    request.getRequestDispatcher("user/managerUser.jsp").forward(request, response);
-} else {
-    int index1 = Integer.parseInt(indexPage);
-    int roleId = (role != null && !role.isEmpty()) ? Integer.parseInt(role) : -1;
-    int activeId = (active != null && !active.isEmpty()) ? Integer.parseInt(active) : -1;
-    
-    int count = ud.searchU((searchU != null) ? searchU.trim() : "", roleId, activeId, 0, 999).size();
-    int endPage = count / 5;
-    if (count % 5 != 0) {
-        endPage++;
-    }
-    List<Role> listR = ud.listRole();
-    List<User> listU = ud.searchU((searchU != null) ? searchU.trim() : "", roleId, activeId, index1, 5);
-    request.setAttribute("endPage", endPage);
-    request.setAttribute("listU", listU);
-    request.setAttribute("listR", listR);
-    request.setAttribute("role", roleId);
-    request.setAttribute("active", activeId);
-    request.setAttribute("countU", count);
-    request.getRequestDispatcher("user/managerUser.jsp").forward(request, response);
-}
+            int index1 = Integer.parseInt(indexPage);
+            int count = ud.getListU(1, 9999, null, null).size();
+            int endPage = count / 5;
+            if (count % 5 != 0) {
+                endPage++;
+            }
+            List<Role> listR = ud.listRole();
+            List<User> listU = ud.getListU(index1, 5, sortField, sortOrder);
+            request.setAttribute("endPage", endPage);
+            request.setAttribute("listU", listU);
+            request.setAttribute("listR", listR);
+            request.setAttribute("countU", count);
+            request.getRequestDispatcher("user/managerUser.jsp").forward(request, response);
+        } else {
+            int index1 = Integer.parseInt(indexPage);
+            int roleId = (role != null && !role.isEmpty()) ? Integer.parseInt(role) : -1;
+            int activeId = (active != null && !active.isEmpty()) ? Integer.parseInt(active) : -1;
+
+            int count = ud.searchU((searchU != null) ? searchU.trim() : "", roleId, activeId, 0, 999, null, null ).size();
+            int endPage = count / 5;
+            if (count % 5 != 0) {
+                endPage++;
+            }
+            List<Role> listR = ud.listRole();
+            List<User> listU = ud.searchU((searchU != null) ? searchU.trim() : "", roleId, activeId, index1, 5, sortField, sortOrder);
+            request.setAttribute("endPage", endPage);
+            request.setAttribute("listU", listU);
+            request.setAttribute("listR", listR);
+            request.setAttribute("role", roleId);
+            request.setAttribute("active", activeId);
+            request.setAttribute("countU", count);
+            request.getRequestDispatcher("user/managerUser.jsp").forward(request, response);
+        }
 
     }
 

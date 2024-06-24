@@ -31,7 +31,7 @@
         <link rel="stylesheet" href="assets/css/bootstrap.min.css">
         <link rel="stylesheet" href="assets/css/fontawesome.all.min.css">
 
-          <style>
+        <style>
             th {
                 position: relative;
                 padding-right: 20px; /* Adjust this value to give space for the icon */
@@ -135,7 +135,7 @@
                                 <div class="col-md-2 mb-3" style="display: none;">
                                     <button type="submit" class="btn btn-primary btn-block">Search</button>
                                 </div>
-                                 <div class="col-md-1 mb-1">
+                                <div class="col-md-1 mb-1">
                                     <input class="form-control" readonly="" value="Total: ${requestScope.countU}">
                                 </div>
                             </div>
@@ -149,15 +149,15 @@
                                     <thead>
                                         <tr>
 
-                                            <th>ID<span class="fa fa-sort"></span></th>
-                                            <th>Name<span class="fa fa-sort"></span></th>
-                                            <th>Phone<span class="fa fa-sort"></span></th>
-                                            <th>Email<span class="fa fa-sort"></span></th>
-                                            <th>Username<span class="fa fa-sort"></span></th>
-                                            <th>Role<span class="fa fa-sort"></span></th>
+                                            <th>ID</th>
+                                            <th>Name<a href="managerUser?indexU=${currentIndex + 1}&searchU=${param.searchU}&role=${param.role}&active=${param.active}&sortField=fullName&sortOrder=${param.sortOrder == 'asc' ? 'desc' : 'asc'}"><span class="fa fa-sort"></span></a></th>
+                                            <th>Phone<a href="managerUser?indexU=${currentIndex + 1}&searchU=${param.searchU}&role=${param.role}&active=${param.active}&sortField=phone&sortOrder=${param.sortOrder == 'asc' ? 'desc' : 'asc'}"><span class="fa fa-sort"></span></a></th>
+                                            <th>Email<a href="managerUser?indexU=${currentIndex + 1}&searchU=${param.searchU}&role=${param.role}&active=${param.active}&sortField=email&sortOrder=${param.sortOrder == 'asc' ? 'desc' : 'asc'}"><span class="fa fa-sort"></span></a></th>
+                                            <th>Username<a href="managerUser?indexU=${currentIndex + 1}&searchU=${param.searchU}&role=${param.role}&active=${param.active}&sortField=username&sortOrder=${param.sortOrder == 'asc' ? 'desc' : 'asc'}"><span class="fa fa-sort"></span></a></th>
+                                            <th>Role<a href="managerUser?indexU=${currentIndex + 1}&searchU=${param.searchU}&role=${param.role}&active=${param.active}&sortField=role&sortOrder=${param.sortOrder == 'asc' ? 'desc' : 'asc'}"><span class="fa fa-sort"></span></a></th>
                                             <th>Active</th>
                                             <th>Ban</th>
-                                            <th>UnBan</th>
+                                            <th> UnBan</th>
 
                                         </tr>
                                     </thead>
@@ -228,7 +228,7 @@
                                 <!-- Previous button -->
                                 <c:if test="${currentIndex > 1}">
                                     <li style="margin: 0 5px;">
-                                        <a href="managerUser?indexU=${currentIndex - 1}&searchU=${param.searchU}&role=${param.role}&active=${param.active}"
+                                        <a href="managerUser?indexU=${currentIndex - 1}&searchU=${param.searchU}&role=${param.role}&active=${param.active}&sortField=${param.sortField}&sortOrder=${param.sortOrder}"
                                            style="text-decoration: none; padding: 8px 16px; border: 1px solid #ddd; border-radius: 4px;">
                                             Previous
                                         </a>
@@ -238,7 +238,7 @@
                                 <!-- Page links -->
                                 <c:forEach begin="${currentIndex > 2 ? currentIndex - 1 : 1}" end="${(currentIndex < endPage - 1) ? currentIndex + 1 : endPage}" var="i">
                                     <li style="margin: 0 5px;">
-                                        <a class="${i == currentIndex ? 'active' : ''}" href="managerUser?indexU=${i}&searchU=${param.searchU}&role=${param.role}&active=${param.active}"
+                                        <a class="${i == currentIndex ? 'active' : ''}" href="managerUser?indexU=${i}&searchU=${param.searchU}&role=${param.role}&active=${param.active}&sortField=${param.sortField}&sortOrder=${param.sortOrder}"
                                            style="text-decoration: none; padding: 8px 16px; border: 1px solid #ddd; border-radius: 4px; color: ${i == currentIndex ? '#fff' : '#007bff'}; background-color: ${i == currentIndex ? '#007bff' : '#fff'};">
                                             ${i}
                                         </a>
@@ -248,7 +248,7 @@
                                 <!-- Next button -->
                                 <c:if test="${currentIndex < endPage}">
                                     <li style="margin: 0 5px;">
-                                        <a href="managerUser?indexU=${currentIndex + 1}&searchU=${param.searchU}&role=${param.role}&active=${param.active}"
+                                        <a href="managerUser?indexU=${currentIndex + 1}&searchU=${param.searchU}&role=${param.role}&active=${param.active}&sortField=${param.sortField}&sortOrder=${param.sortOrder}"
                                            style="text-decoration: none; padding: 8px 16px; border: 1px solid #ddd; border-radius: 4px;">
                                             Next
                                         </a>

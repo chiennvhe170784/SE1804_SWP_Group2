@@ -88,97 +88,106 @@ public class UserDAO extends DBContext {
     }
 
     //get all user
-    public List<User> getListU(int index, int quantity) {
-        List<User> listU = new ArrayList<>();
-        String sql = "select [uid]\n"
-                + "      ,[fullName]\n"
-                + "      ,[phone]\n"
-                + "      ,[address]\n"
-                + "      ,[email]\n"
-                + "      ,[username]\n"
-                + "      ,[password]\n"
-                + "      ,[dob]\n"
-                + "      ,[gender]\n"
-                + "      ,[rid]\n"
-                + "      ,[active]\n"
-                + "     from [User] u \n"
-                + "order by uid\n "
-                + "OFFSET ? ROWS FETCH NEXT ? ROWS ONLY;";
-        try {
-            PreparedStatement stm = connection.prepareStatement(sql);
-            stm.setInt(1, (index - 1) * quantity);
-            stm.setInt(2, quantity);
-            ResultSet rs = stm.executeQuery();
-            while (rs.next()) {
-                listU.add(new User(rs.getInt(1),
-                        rs.getString(2),
-                        rs.getString(3),
-                        rs.getString(4),
-                        rs.getString(5),
-                        rs.getString(6),
-                        rs.getString(7),
-                        rs.getString(8),
-                        rs.getInt(9),
-                        rs.getInt(10),
-                        rs.getInt(11)));
-            }
-        } catch (SQLException e) {
-        }
-        return listU;
+  public List<User> getListU(int index, int quantity, String sortField, String sortOrder) {
+    List<User> listU = new ArrayList<>();
+    String sql = "SELECT [uid], [fullName], [phone], [address], [email], [username], [password], [dob], [gender], [rid], [active] " +
+                 "FROM [User] ";
+    
+    // Add sorting
+    if (sortField != null && sortOrder != null) {
+        sql += "ORDER BY " + sortField + " " + sortOrder + " ";
+    } else {
+        sql += "ORDER BY uid ";
     }
+
+    sql += "OFFSET ? ROWS FETCH NEXT ? ROWS ONLY;";
+
+    try {
+        PreparedStatement stm = connection.prepareStatement(sql);
+        stm.setInt(1, (index - 1) * quantity);
+        stm.setInt(2, quantity);
+        ResultSet rs = stm.executeQuery();
+        while (rs.next()) {
+            listU.add(new User(rs.getInt(1),
+                    rs.getString(2),
+                    rs.getString(3),
+                    rs.getString(4),
+                    rs.getString(5),
+                    rs.getString(6),
+                    rs.getString(7),
+                    rs.getString(8),
+                    rs.getInt(9),
+                    rs.getInt(10),
+                    rs.getInt(11)));
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return listU;
+}
+
 
     //search user
 //Name Phone Email Username
-    public List<User> searchU(String key, int rid, int active, int index, int quantity) {
-        List<User> listU = new ArrayList<>();
-        String sql = "SELECT [uid], [fullName], [phone], [address], [email], [username], [password], [dob], [gender], [rid], [active] "
-                   + "FROM [dbo].[User] u "
-                   + "WHERE (u.fullName LIKE ? OR u.phone LIKE ? OR u.email LIKE ? OR u.username LIKE ?) ";
+   public List<User> searchU(String key, int rid, int active, int index, int quantity, String sortField, String sortOrder) {
+    List<User> listU = new ArrayList<>();
+    String sql = "SELECT [uid], [fullName], [phone], [address], [email], [username], [password], [dob], [gender], [rid], [active] "
+               + "FROM [dbo].[User] u "
+               + "WHERE (u.fullName LIKE ? OR u.phone LIKE ? OR u.email LIKE ? OR u.username LIKE ?) ";
+    if (rid != -1) {
+        sql += "AND u.rid = ? ";
+    }
+    if (active != -1) {
+        sql += "AND u.active = ? ";
+    }
+    
+    // Add sorting
+    if (sortField != null && sortOrder != null) {
+        sql += "ORDER BY u." + sortField + " " + sortOrder + " ";
+    } else {
+        sql += "ORDER BY u.uid "; // Default sorting
+    }
+    
+    sql += "OFFSET ? ROWS FETCH NEXT ? ROWS ONLY;";
+    
+    try {
+        PreparedStatement stm = connection.prepareStatement(sql);
+        stm.setString(1, "%" + key + "%");
+        stm.setString(2, "%" + key + "%");
+        stm.setString(3, "%" + key + "%");
+        stm.setString(4, "%" + key + "%");
+        int paramIndex = 5;
         if (rid != -1) {
-            sql += "AND u.rid = ? ";
+            stm.setInt(paramIndex++, rid);
         }
         if (active != -1) {
-            sql += "AND u.active = ? ";
+            stm.setInt(paramIndex++, active);
         }
-        sql += "ORDER BY u.uid OFFSET ? ROWS FETCH NEXT ? ROWS ONLY;";
+        int offset = Math.max(0, (index - 1) * quantity); // Ensure offset is non-negative
+        stm.setInt(paramIndex++, offset);
+        stm.setInt(paramIndex, quantity);
         
-        try {
-            PreparedStatement stm = connection.prepareStatement(sql);
-            stm.setString(1, "%" + key + "%");
-            stm.setString(2, "%" + key + "%");
-            stm.setString(3, "%" + key + "%");
-            stm.setString(4, "%" + key + "%");
-            int paramIndex = 5;
-            if (rid != -1) {
-                stm.setInt(paramIndex++, rid);
-            }
-            if (active != -1) {
-                stm.setInt(paramIndex++, active);
-            }
-            int offset = Math.max(0, (index - 1) * quantity); // Ensure offset is non-negative
-            stm.setInt(paramIndex++, offset);
-            stm.setInt(paramIndex, quantity);
-            
-            ResultSet rs = stm.executeQuery();
-            while (rs.next()) {
-                listU.add(new User(rs.getInt("uid"),
-                                   rs.getString("fullName"),
-                                   rs.getString("phone"),
-                                   rs.getString("address"),
-                                   rs.getString("email"),
-                                   rs.getString("username"),
-                                   rs.getString("password"),
-                                   rs.getString("dob"),
-                                   rs.getInt("gender"),
-                                   rs.getInt("rid"),
-                                   rs.getInt("active")));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace(); // Handle or log the exception properly
+        ResultSet rs = stm.executeQuery();
+        while (rs.next()) {
+            listU.add(new User(rs.getInt("uid"),
+                               rs.getString("fullName"),
+                               rs.getString("phone"),
+                               rs.getString("address"),
+                               rs.getString("email"),
+                               rs.getString("username"),
+                               rs.getString("password"),
+                               rs.getString("dob"),
+                               rs.getInt("gender"),
+                               rs.getInt("rid"),
+                               rs.getInt("active")));
         }
-        
-        return listU;
+    } catch (SQLException e) {
+        e.printStackTrace(); // Handle or log the exception properly
     }
+    
+    return listU;
+}
+
     //get all role
     public List<Role> listRole() {
         List<Role> listR = new ArrayList<>();
@@ -373,7 +382,6 @@ public class UserDAO extends DBContext {
 //        for (Role role : r) {
 //            System.out.println(role.getRid());
 //        }
-        List<User> lu = ud.searchU("", 1, 1, 0, 5);
-        System.out.println(lu.size());
+      
     }
 }
