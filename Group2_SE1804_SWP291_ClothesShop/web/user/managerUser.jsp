@@ -29,9 +29,21 @@
         <!-- Custom styles for this page -->
         <link href="adminassets/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
         <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+        <link rel="stylesheet" href="assets/css/fontawesome.all.min.css">
 
-
-
+          <style>
+            th {
+                position: relative;
+                padding-right: 20px; /* Adjust this value to give space for the icon */
+            }
+            th .fa {
+                position: absolute;
+                right: 5px; /* Adjust this value to control the distance from the edge */
+                top: 50%;
+                transform: translateY(-50%);
+                font-size: 12px; /* Adjust the size of the icon if needed */
+            }
+        </style>
 
 
     </head>
@@ -128,64 +140,65 @@
 
                         <!-- Product Table -->
                         <div class="card shadow mb-4">
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                        <thead>
+
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+
+                                            <th>ID<span class="fa fa-sort"></span></th>
+                                            <th>Name<span class="fa fa-sort"></span></th>
+                                            <th>Phone<span class="fa fa-sort"></span></th>
+                                            <th>Email<span class="fa fa-sort"></span></th>
+                                            <th>Username<span class="fa fa-sort"></span></th>
+                                            <th>Role<span class="fa fa-sort"></span></th>
+                                            <th>Active</th>
+                                            <th>Ban</th>
+                                            <th>UnBan</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <c:forEach items="${requestScope.listU}" var="u">
                                             <tr>
 
-                                                <th>ID</th>
-                                                <th>Name</th>
-                                                <th>Phone</th>
-                                                <th>Email</th>
-                                                <th>Username</th>
-                                                <th>Role</th>
-                                                <th>Active</th>
-                                                <th>Ban</th>
-                                                <th>UnBan</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <c:forEach items="${requestScope.listU}" var="u">
-                                                <tr>
 
-
-                                                    <td>${u.uid}</td>
-                                                    <td>${u.fullName}</td>
-                                                    <td>${u.phone}</td>
-                                                    <td>${u.email}</td>
-                                                    <td>${u.username}</td>
-                                                    <td>
-                                                        <c:choose>
-                                                            <c:when test="${u.rid == 1}">
-                                                                admin
-                                                            </c:when>
-                                                            <c:when test="${u.rid == 2}">
-                                                                staff
-                                                            </c:when>
-                                                            <c:otherwise>
-                                                                customer
-                                                            </c:otherwise>
-                                                        </c:choose>
-                                                    </td>
-                                                    <td>
-                                                        <c:choose>
-                                                            <c:when test="${u.active == 0}">
-                                                                close
-                                                            </c:when>
-                                                            <c:when test="${u.active ==1}">
-                                                                open</c:when>
-                                                        </c:choose>
-                                                    </td>
-                                                       <td><a href="#" onclick="return checkBan('${u.uid}')"><i class="bi bi-ban"></i></a></td>
+                                                <td>${u.uid}</td>
+                                                <td>${u.fullName}</td>
+                                                <td>${u.phone}</td>
+                                                <td>${u.email}</td>
+                                                <td>${u.username}</td>
+                                                <td>
+                                                    <c:choose>
+                                                        <c:when test="${u.rid == 1}">
+                                                            admin
+                                                        </c:when>
+                                                        <c:when test="${u.rid == 2}">
+                                                            staff
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            customer
+                                                        </c:otherwise>
+                                                    </c:choose>
+                                                </td>
+                                                <td>
+                                                    <c:choose>
+                                                        <c:when test="${u.active == 0}">
+                                                            close
+                                                        </c:when>
+                                                        <c:when test="${u.active ==1}">
+                                                            open</c:when>
+                                                    </c:choose>
+                                                </td>
+                                                <td><a href="#" onclick="return checkBan('${u.uid}')"><i class="bi bi-ban"></i></a></td>
                                                 <td><a href="#" onclick="return checkUnBan('${u.uid}')"><i class="bi bi-unlock"></i></a></td>
 
-                                                </tr>
-                                            </c:forEach>
-                                        </tbody>
+                                            </tr>
+                                        </c:forEach>
+                                    </tbody>
 
-                                    </table>
-                                </div>
+                                </table>
+
                             </div>
                         </div>
 
@@ -263,21 +276,21 @@
                 });
             });
         </script>
-          <script>
-        function checkBan(uid) {
-            // Thêm mã kiểm tra hợp lệ của form nếu cần
-            if (confirm("Ban user with uid = " + uid + "?")) {
-                window.location = 'lockUser?type=lock&uid=' + uid;
+        <script>
+            function checkBan(uid) {
+                // Thêm mã kiểm tra hợp lệ của form nếu cần
+                if (confirm("Ban user with uid = " + uid + "?")) {
+                    window.location = 'lockUser?type=lock&uid=' + uid;
+                }
             }
-        }
 
-        function checkUnBan(uid) {
-            // Thêm mã kiểm tra hợp lệ của form nếu cần
-            if (confirm("Unban with user " + uid + "?")) {
-                window.location = 'lockUser?type=unlock&uid=' + uid;
+            function checkUnBan(uid) {
+                // Thêm mã kiểm tra hợp lệ của form nếu cần
+                if (confirm("Unban with user " + uid + "?")) {
+                    window.location = 'lockUser?type=unlock&uid=' + uid;
+                }
             }
-        }
-    </script>
+        </script>
         <!-- Bootstrap core JavaScript-->
         <script src="vendor/jquery/jquery.min.js"></script>
         <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
