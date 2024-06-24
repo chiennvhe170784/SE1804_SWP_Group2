@@ -13,7 +13,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<title>BulkShop - Electronics Shop HTML Template | Blog Details</title>
+	<title>BulkShop - Electronics Shop HTML Template | News Details</title>
 	<link rel="icon" href="assets/img/icon.png" type="image/gif" sizes="16x16">
 	<link rel="icon" href="assets/img/icon.png" type="image/gif" sizes="18x18">
 	<link rel="icon" href="assets/img/icon.png" type="image/gif" sizes="20x20">
@@ -381,10 +381,10 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="breadcrumb-content">
-						<h2>Blog Details</h2>
+						<h2>News Details</h2>
 						<ul>
 							<li><a href="index.html">Home</a></li>
-							<li class="active">Blog Details</li>
+							<li class="active">News Details</li>
 						</ul>
 					</div>
 				</div>
@@ -401,15 +401,13 @@
 				<div class="col-lg-8">
 					<div class="blog-details">
 						<div class="blog-item">
-							<div class="thumnail">
-								<img src="assets/img/blog/2.jpg" alt="blog">
-							</div>
+							
 							<div class="content">
 								<ul class="auth">
 									<li><a href="#">by ${news.authorName}</a></li>
 									<li><a href="#">${news.updateDate}</a></li>
 								</ul>
-								<h2>${news.title}</h2>
+                                                                        <h1>${news.title}</h1>
                                                                 ${news.body}
 							</div>
 						</div>
