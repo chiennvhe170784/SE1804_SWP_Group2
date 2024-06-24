@@ -83,6 +83,7 @@ if ((searchU == null || searchU.trim().isEmpty()) && (role == null && active == 
     request.setAttribute("endPage", endPage);
     request.setAttribute("listU", listU);
     request.setAttribute("listR", listR);
+     request.setAttribute("countU", count);
     request.getRequestDispatcher("user/managerUser.jsp").forward(request, response);
 } else {
     int index1 = Integer.parseInt(indexPage);
@@ -101,6 +102,7 @@ if ((searchU == null || searchU.trim().isEmpty()) && (role == null && active == 
     request.setAttribute("listR", listR);
     request.setAttribute("role", roleId);
     request.setAttribute("active", activeId);
+    request.setAttribute("countU", count);
     request.getRequestDispatcher("user/managerUser.jsp").forward(request, response);
 }
 

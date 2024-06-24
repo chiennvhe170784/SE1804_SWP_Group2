@@ -114,7 +114,7 @@ public class login extends HttpServlet {
             response.addCookie(username);//lưu lên trình duyệt mở
             response.addCookie(password);
             response.addCookie(remem);
-            response.sendRedirect("fag.html");
+            response.sendRedirect("Home");
         } else {
             session.setAttribute("user", user);
             Cookie username = new Cookie("username", u);
@@ -132,7 +132,7 @@ public class login extends HttpServlet {
             response.addCookie(username);//lưu lên trình duyệt mở
             response.addCookie(password);
             response.addCookie(remem);
-            response.sendRedirect("about.html");
+            response.sendRedirect("managerUser");
         }
     }
 

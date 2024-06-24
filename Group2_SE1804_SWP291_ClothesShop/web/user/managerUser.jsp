@@ -115,7 +115,7 @@
 
                                 <!-- Brands Dropdown -->
                                 <div class="col-md-2 mb-3">
-                                    <select name="role" class="form-control">
+                                    <select name="role" class="form-select">
                                         <option value="-1">All Role</option>
                                         <c:forEach var="r" items="${listR}">
                                             <option value="${r.rid}" ${requestScope.role == r.rid ? 'selected' : ''}>${r.role}</option>
@@ -125,7 +125,7 @@
 
                                 <!-- Genders Dropdown -->
                                 <div class="col-md-2 mb-3">
-                                    <select name="active" class="form-control">
+                                    <select name="active" class="form-select">
                                         <option value="-1"  ${requestScope.active == -1 ? 'selected' : ''}>All Active</option>
                                         <option value="0" ${requestScope.active == 0 ? 'selected' : ''}>Close</option>
                                         <option value="1" ${requestScope.active == 1 ? 'selected' : ''}>Open</option>
@@ -134,6 +134,9 @@
                                 <!-- Submit Button (hidden) -->
                                 <div class="col-md-2 mb-3" style="display: none;">
                                     <button type="submit" class="btn btn-primary btn-block">Search</button>
+                                </div>
+                                 <div class="col-md-1 mb-1">
+                                    <input class="form-control" readonly="" value="Total: ${requestScope.countU}">
                                 </div>
                             </div>
                         </form>
