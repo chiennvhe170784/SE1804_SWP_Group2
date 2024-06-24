@@ -9,6 +9,9 @@
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
         <link href="adminassets/css/sb-admin-2.min.css" rel="stylesheet">
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+        <script src="https://widget.cloudinary.com/v2.0/global/all.js" type="text/javascript"></script>
+                <script src="https://cdn.ckeditor.com/4.16.2/full/ckeditor.js"></script>
+        <link href="https://cdn.ckeditor.com/4.16.2/full/ckeditor.css" rel="stylesheet">
         <script>
             function validateForm() {
                 let name = document.getElementById('name').value;
@@ -195,7 +198,7 @@
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label for="size">Size</label>
-                                    <select class="form-control" id="size" name="size" multiple required aria-describedby="sizeHelp">
+                                    <select class="form-control" id="size" name="size" required aria-describedby="sizeHelp">
                                         <c:forEach var="size" items="${sizes}">
                                             <option value="${size.sid}">${size.name}</option>
                                         </c:forEach>
@@ -208,6 +211,7 @@
                                 <textarea class="form-control" id="describe" name="describe" rows="3" required aria-describedby="describeHelp"></textarea>
                                 <small id="describeHelp" class="form-text text-muted">Provide a description for the product.</small>
                             </div>
+
                             <button type="submit" class="btn btn-primary">Add Product</button>
                         </form>
                     </div>
@@ -226,5 +230,9 @@
         <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
         <!-- Custom scripts for all pages-->
         <script src="adminassets/js/sb-admin-2.min.js"></script>
+         <script>
+                            // Initialize CKEditor for the 'describe' textarea
+                            CKEDITOR.replace('describe');
+        </script>
     </body>
 </html>

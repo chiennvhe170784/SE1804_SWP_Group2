@@ -617,5 +617,51 @@ public class ProductDAO extends DBContext {
         }
         return size;
     }
+     public void updateProduct(Product product) {
+        try {
+            String sql = """
+                    UPDATE product 
+                    SET name = ?, quantity = ?, price = ?, describe = ?, img = ?, releaseDate = ?, cid = ?, bid = ?, gid = ? 
+                    WHERE pid = ?
+                    """;
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, product.getName());
+            stm.setInt(2, product.getQuantity());
+            stm.setDouble(3, product.getPrice());
+            stm.setString(4, product.getDescribe());
+            stm.setString(5, product.getImg());
+            stm.setDate(6, new java.sql.Date(product.getReleaseDate().getTime()));
+            stm.setInt(7, product.getCategory().getCid());
+            stm.setInt(8, product.getBrand().getBid());
+            stm.setInt(9, product.getGender().getGid());
+            stm.setInt(10, product.getPid());
+            stm.executeUpdate();
 
+            // Cập nhật các kích thước của sản phẩm
+            deleteProductSizes(product.getPid()); // Xóa các kích thước hiện tại
+            addProductSizes(product.getPid(), product.getSizes()); // Thêm lại các kích thước mới
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void deleteProductSizes(int productId) throws Exception {
+        String sql = "DELETE FROM Product_Size WHERE pid = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setInt(1, productId);
+            stmt.executeUpdate();
+        }
+    }
+
+    public void deleteProduct(int pid) {
+        try {
+            deleteProductSizes(pid); // Xóa các kích thước của sản phẩm trước
+            String sql = "DELETE FROM product WHERE pid = ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, pid);
+            stm.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
