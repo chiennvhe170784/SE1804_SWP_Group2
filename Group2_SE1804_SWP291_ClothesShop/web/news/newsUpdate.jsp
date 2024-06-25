@@ -63,9 +63,9 @@
             }
             ;
             function saveUpdate(functionName) {
-                if (window.editor.getData() === "") {
-                    showError('All field must be filled', 3000);
-                } else {
+              if (!/[A-Za-z0-9]/.test($('#title').val()) || !/[A-Za-z0-9]/.test(window.editor.getData())) {
+    showError('All field must be filled', 3000);
+} else {
                     var body = window.editor.getData();
 
 

@@ -194,9 +194,9 @@
                         
                         
      $('#savebtn').click(() => {
-     if ($('#title').val() === "" || window.editor.getData() === "") {
-         showError('All field must be filled', 3000);
-     }
+   if (!/[A-Za-z0-9]/.test($('#title').val()) || !/[A-Za-z0-9]/.test(window.editor.getData())) {
+    showError('All field must be filled', 3000);
+}
      else {
          if ($('#title').val().length > 60) {
              showError('Title can not be more than 60 char', 3000);
