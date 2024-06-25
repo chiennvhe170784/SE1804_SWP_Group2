@@ -55,6 +55,12 @@
             <i class="fas fa-fw fa-table"></i>
             <span>Brand Table</span></a>
     </li>
+    <li class="nav-item active">
+        <a class="nav-link" href="newsListStaff">
+            <i class="fas fa-fw fa-table"></i>
+            <span>News Manager</span></a>
+    </li>
+    
 
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
