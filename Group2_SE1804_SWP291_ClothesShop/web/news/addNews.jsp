@@ -193,42 +193,40 @@
                         });
                         
                         
-     $('#savebtn').click(() => {
-   if (!/[A-Za-z0-9]/.test($('#title').val()) || !/[A-Za-z0-9]/.test(window.editor.getData())) {
-    showError('All field must be filled', 3000);
-}
-     else {
-         if ($('#title').val().length > 60) {
-             showError('Title can not be more than 60 char', 3000);
-         } else {
-             var title = $('#title').val(),
-                 body = window.editor.getData(),
-                 AuthorId = 1;
-             var inputString = body;
+    $('#savebtn').click(() => {
+    // Kiểm tra tiêu đề và nội dung có chứa ít nhất một ký tự chữ hoặc số không
+    if (!/[A-Za-z0-9]/.test($('#title').val()) || !/[A-Za-z0-9]/.test(window.editor.getData())) {
+        showError('All fields must be filled with at least one alphanumeric character', 3000);
+    } else {
+        // Kiểm tra độ dài của tiêu đề
+        if ($('#title').val().length > 60) {
+            showError('Title cannot be more than 60 characters', 3000);
+        } else {
+            var title = $('#title').val(),
+                body = window.editor.getData(),
+                AuthorId = 1;
 
-             
-             $.ajax({
-                  type: 'POST',
-                 url: 'addNews',
-                 data: {
-                     "title": title,
-                     "body": body,
-                     "authorId": AuthorId
-                 },
-                 success: function (data) {
-                     showAlert("Create News successfully",3000);
-                      setTimeout(() => {
-                              window.location.href = 'newsListStaff'; // Thay 'newsList' bằng URL đúng của servlet
-                            }, 1000);
-                 },
-                 error: function (xhr, status, error) {
-                     showError("Create fail, something went wrong",3000);
-
-                 }
-             });
-         }
-     }
- });
+            $.ajax({
+                type: 'POST',
+                url: 'addNews',
+                data: {
+                    "title": title,
+                    "body": body,
+                    "authorId": AuthorId
+                },
+                success: function (data) {
+                    showAlert("Create News successfully", 3000);
+                    setTimeout(() => {
+                        window.location.href = 'newsListStaff'; // Thay 'newsList' bằng URL đúng của servlet
+                    }, 1000); // Để nhất quán với thời gian thông báo
+                },
+                error: function (xhr, status, error) {
+                    showError("Create fail, something went wrong", 3000);
+                }
+            });
+        }
+    }
+});
             });
         </script>
     </head>

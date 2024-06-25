@@ -27,11 +27,11 @@
                 let description = document.getElementById('describe').value;
 
                 // Basic validations
-                if (!name || !quantity || !price || !img || !releaseDate || !category || !brand || !gender || size.length === 0 || !description) {
+                if (!name || !quantity || !price || !img || !releaseDate || !category || !brand || !gender || size.length === 0 || !window.editor.getData()) {
                     alert("All fields are required.");
                     return false;
                 }
-                let namePattern = /^[a-zA-Z0-9\s]{3,50}$/;
+                let namePattern = /^(?!.*\s{2})[a-zA-Z0-9\s]{3,50}$/;
                 if (!namePattern.test(name)) {
                     alert("Name must be 3-50 characters long and contain only letters, numbers, and spaces.");
                     return false;
