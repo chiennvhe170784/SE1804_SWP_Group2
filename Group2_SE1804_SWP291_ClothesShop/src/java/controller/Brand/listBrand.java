@@ -89,7 +89,7 @@ public class listBrand extends HttpServlet {
                 }
                 if (name != null) {
                     cd.addBrand(name);
-                    request.setAttribute("add_suc", "Add category sucessfully!");
+                    request.setAttribute("add_suc", "Add brand sucessfully!");
                 }
                 List<Brand> listC = cd.pagging(index1, sortCate, sortType);
                 request.setAttribute("endPage", endPage);

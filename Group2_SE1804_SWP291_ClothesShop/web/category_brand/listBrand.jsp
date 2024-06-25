@@ -132,7 +132,7 @@
                                 <div class="col-md-2 mb-3">
                                     <select class="form-select" name="sortBrand" aria-label="Default select example">
 
-                                        <option value="1" ${requestScope.sortBrand == 1 ? 'selected' : ''}>Sort by Cid</option>
+                                        <option value="1" ${requestScope.sortBrand == 1 ? 'selected' : ''}>Sort by Bid</option>
                                         <option value="2"  ${requestScope.sortBrand == 2 ? 'selected' : ''}>Sort by Name</option>
 
                                     </select>
