@@ -279,6 +279,7 @@ public class UserDAO extends DBContext {
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1, username);
+            ps.setString(2, email);
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
@@ -382,6 +383,6 @@ public class UserDAO extends DBContext {
 //        for (Role role : r) {
 //            System.out.println(role.getRid());
 //        }
-      
+        System.out.println(ud.checkUsername("user", ""));
     }
 }

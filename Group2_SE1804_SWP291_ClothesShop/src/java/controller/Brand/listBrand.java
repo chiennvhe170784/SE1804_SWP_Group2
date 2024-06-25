@@ -62,7 +62,11 @@ public class listBrand extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession();
         User o =(User) session.getAttribute("user");
-        if (o.getRid() != 0 || o.getRid()!=1) {
+          if (o == null) {
+            response.sendRedirect("login");
+            return;
+        }
+        if (o.getRid() != 2 || o.getRid()!=1) {
             BrandDAO cd = new BrandDAO();
 
             String indexPage = request.getParameter("index");

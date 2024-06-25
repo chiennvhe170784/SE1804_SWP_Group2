@@ -272,7 +272,7 @@
                 // Regex to check if value contains only alphanumeric characters
                 const alphanumericRegex = /^[a-zA-Z0-9]+$/;
 
-                if (valueLength < 1) {
+                if (valueLength <= 1) {
                     inpObj.setCustomValidity("Text is too short. Please enter between 1 and 50 characters.");
                 } else if (valueLength > 50) {
                     inpObj.setCustomValidity("Text is too long. Please enter between 1 and 50 characters.");

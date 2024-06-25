@@ -62,6 +62,11 @@ public class managerUser extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession();
         User o = (User) session.getAttribute("user");
+        if (o == null) {
+            response.sendRedirect("login");
+            return; // Ensure the method returns to avoid further execution
+        }
+
         if (o.getRid() != 0 || o.getRid() != 1) {
             UserDAO ud = new UserDAO();
             String indexPage = request.getParameter("indexU");

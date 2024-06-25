@@ -60,7 +60,7 @@
                         </div>
                         <div class="col-lg-7">
                             <div class="top-list">
-                                <a href="login"><i class="fas fa-user"></i> Login / Register</a>
+                                <a href="logOut"><i class="fas fa-user"></i> Login / Register</a>
                             </div>
                         </div>
                     </div>

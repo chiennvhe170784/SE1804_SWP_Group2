@@ -90,7 +90,6 @@ public class register extends HttpServlet {
             request.setAttribute("suc", "username or email already exist!");
             request.getRequestDispatcher("login/register.jsp").forward(request, response);
         }
-
     }
 
     /**
