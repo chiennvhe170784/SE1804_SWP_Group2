@@ -370,7 +370,7 @@ public class UserDAO extends DBContext {
 //        ud.verifyCode("chien19042003@gmail.com", ud.getCode());
 //         System.out.println(ud.getCode());
 //      System.out.println(ud.toSHA1("12345"));
-//ud.changePassByEmail("chien19042003@gmail.com", "12345");
+ud.changePassByEmail("chien19042003@gmail.com", "1BvTL8F1vT5msPyDEcEhPR4m8po=");
 //        System.out.println(ud.toSHA1("123"));
 //        System.out.println(ud.checkUser("admin", ud.toSHA1("123")));
 
@@ -383,6 +383,6 @@ public class UserDAO extends DBContext {
 //        for (Role role : r) {
 //            System.out.println(role.getRid());
 //        }
-        System.out.println(ud.checkUsername("user", ""));
+//        System.out.println(ud.checkUsername("user", ""));
     }
 }
