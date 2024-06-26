@@ -75,7 +75,7 @@
         <!-- Page Wrapper -->
         <div id="wrapper">
            <!-- Sidebar -->
-            <%@include file="../sidebar_admin.jsp" %>
+              <%@include file="../homepage/sidebar_admin.jsp" %>
             <!-- End of Sidebar -->
             <!-- Content Wrapper -->
             <div id="content-wrapper" class="d-flex flex-column">
