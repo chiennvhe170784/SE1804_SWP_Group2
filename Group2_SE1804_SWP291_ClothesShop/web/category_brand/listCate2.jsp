@@ -11,6 +11,7 @@
 
     <head>
 
+    
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -29,16 +30,8 @@
         <!-- Custom styles for this page -->
         <link href="adminassets/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
         <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-
-        <link rel="stylesheet" href="assets/css/bootstrap.min.css">
         <link rel="stylesheet" href="assets/css/fontawesome.all.min.css">
-        <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
-        <link rel="stylesheet" href="assets/css/owl.theme.default.min.css">
-        <link rel="stylesheet" href="assets/css/animate.css">
-        <link rel="stylesheet" href="assets/css/magnific-popup.css">
-        <link rel="stylesheet" href="assets/css/normalize.css">
-        <link rel="stylesheet" href="assets/css/style.css">
-        <link rel="stylesheet" href="assets/css/responsive.css">
+
 
 
 
@@ -58,36 +51,8 @@
                 <!-- Main Content -->
                 <div id="content">
 
-                    <!-- Topbar -->
-                    <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-                        <!-- Sidebar Toggle (Topbar) -->
-                        <form class="form-inline">
-                            <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                                <i class="fa fa-bars"></i>
-                            </button>
-                        </form>
-                        <!-- Topbar Navbar -->
-                        <ul class="navbar-nav ml-auto">
-                            <div class="topbar-divider d-none d-sm-block"></div>
-
-                            <!-- Nav Item - User Information -->
-                            <li class="nav-item dropdown no-arrow">
-                                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
-                                    <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
-                                </a>
-                                <!-- Dropdown - User Information -->
-                                <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                     aria-labelledby="userDropdown">
-                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                        Logout
-                                    </a>
-                                </div>
-                            </li>
-                        </ul>
-                    </nav>
+                        <!-- Topbar -->
+                    <%@include file="../homepage/header_admin.jsp" %>
                     <!-- End of Topbar -->
 
                     <!-- Begin Page Content -->
@@ -273,9 +238,9 @@
                 const alphanumericRegex = /^[a-zA-Z0-9]+$/;
 
                 if (valueLength <= 1) {
-                    inpObj.setCustomValidity("Text is too short. Please enter between 1 and 50 characters.");
-                } else if (valueLength > 50) {
-                    inpObj.setCustomValidity("Text is too long. Please enter between 1 and 50 characters.");
+                    inpObj.setCustomValidity("Text is too short. Please enter between 2 and 30 characters.");
+                } else if (valueLength > 30) {
+                    inpObj.setCustomValidity("Text is too long. Please enter between 2 and 30 characters.");
                 } else if (!alphanumericRegex.test(value)) {
                     inpObj.setCustomValidity("Please enter only alphanumeric characters.");
                 } else {
