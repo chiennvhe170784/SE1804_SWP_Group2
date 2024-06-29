@@ -112,14 +112,13 @@
 
                 const valueLength = inpObj.value.trim().length; // Trim spaces from both ends
 
-                if (valueLength < 1) {
-                    inpObj.setCustomValidity("Text is too short. Please enter between 1 and 50 characters.");
-                } else if (valueLength > 50) {
-                    inpObj.setCustomValidity("Text is too long. Please enter between 1 and 50 characters.");
+                if (valueLength < 2) {
+                    inpObj.setCustomValidity("Text is too short. Please enter between 2 and 30 characters.");
+                } else if (valueLength > 30) {
+                    inpObj.setCustomValidity("Text is too long. Please enter between 2 and 30 characters.");
                 } else {
                     inpObj.setCustomValidity(""); // Clear any previous validation message
                 }
-                F
 
             }
         </script>

@@ -30,110 +30,17 @@
 
     </head>
     <body>
-        <div id="preloader" class="preeloader">
-            <div class="sk-circle">
-                <div class="sk-circle1 sk-child"></div>
-                <div class="sk-circle2 sk-child"></div>
-                <div class="sk-circle3 sk-child"></div>
-                <div class="sk-circle4 sk-child"></div>
-                <div class="sk-circle5 sk-child"></div>
-                <div class="sk-circle6 sk-child"></div>
-                <div class="sk-circle7 sk-child"></div>
-                <div class="sk-circle8 sk-child"></div>
-                <div class="sk-circle9 sk-child"></div>
-                <div class="sk-circle10 sk-child"></div>
-                <div class="sk-circle11 sk-child"></div>
-                <div class="sk-circle12 sk-child"></div>
-            </div>
-        </div>
+ 
         <div class="off_canvars_overlay"></div>
         <!-- Header -->
         <header class="header">
             <!-- Header Top -->
-            <div class="header-top">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-5">
-                            <div class="top-text">
-                                <p>Welcome to Clothes Shop</p>
-                            </div>
-                        </div>
-                        <div class="col-lg-7">
-                            <div class="top-list">
-                                <a href="logOut"><i class="fas fa-user"></i> Login / Register</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+         
             <!-- Header Middle -->
-            <div class="header-middle" style="padding-top: 30px; padding-bottom: 30px;">
-                <div class="container">
-                    <div class="row" style="display: flex; align-items: center;">
-                        <!-- Logo -->
-                        <div class="col-lg-2">
-                            <div class="logo">
-                                <h2 style="margin: 0;"><a href="index.html"><img src="assets/img/logo3.jpg"></a></h2>
-                            </div>
-                        </div>
-                        <!-- Search Bar -->
-                        <div class="col-lg-7" style="margin-top: 10px;">
-                            <div class="header-search-form">
-                                <form action="#" style="display: flex; align-items: center;">
-                                    <select class="form-select" style="height: 40px;">
-                                        <option selected>All Categories</option>
-                                        <c:forEach var="category" items="${categories}">
-                                            <option value="${category.cid}">${category.name}</option>
-                                        </c:forEach>
-                                    </select>
-                                    <input type="search" name="search" placeholder="Search keyword here..." style="height: 40px;">
-                                    <button type="submit" style="height: 40px;"><i class="fas fa-search"></i></button>
-                                </form>
-                            </div>
-                        </div>
-                        <!-- MiniCart -->
-                        <div class="col-lg-2">
-                            <div class="desktop-mini-cart">
-                                <div class="mini-cart">
-                                    <div class="mini-cart-icon" style="display: flex; align-items: center;">
-                                        <i class="fas fa-shopping-cart"></i>
-                                        <span class="counter" style="margin-left: 10px;">02</span>
-                                        <span class="counter-cart" style="margin-left: 10px;"><small>Your Cart</small>$10.00</span>
-                                        <!-- Mini Cart Content -->
-                                        <div class="minicart-content-wrapper">
-                                            <ul class="cart-list-full">
-                                                <!-- Single -->
-                                                <li class="cart-list-single">
-                                                    <img src="assets/img/product/1.jpg" alt="img">
-                                                    <h5><a href="#">simple product</a></h5>
-                                                    <span class="price">$120</span>
-                                                    <div class="close"><i class="fas fa-times"></i></div>
-                                                </li>
-                                                <!-- Single -->
-                                                <li class="cart-list-single">
-                                                    <img src="assets/img/product/2.jpg" alt="img">
-                                                    <h5><a href="#">simple product</a></h5>
-                                                    <span class="price">$120</span>
-                                                    <div class="close"><i class="fas fa-times"></i></div>
-                                                </li>
-                                            </ul>
-                                            <h2 class="subtotal">Subtotal : <span>$220</span></h2>
-                                            <div class="minicart-btn">
-                                                <a class="button-1" href="cart.html">View Cart</a>
-                                                <a class="button-2" href="#">Checkout</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-1"></div> <!-- Added an empty column to adjust alignment -->
-                    </div>
-                </div>
-            </div>
+            <%@include file="header.jsp" %>
 
             <!-- Header Bottom -->
-            <div class="header-bottm">
+            <div class="header-bottm" style="background-color: #ea880d">
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-12">
@@ -176,7 +83,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="menu">
+                            <div class="menu" >
                                 <nav>
                                     <ul>
                                         <li><a href="/Home">Home</a></li>

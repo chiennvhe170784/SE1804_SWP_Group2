@@ -60,7 +60,7 @@ public class logOut extends HttpServlet {
 
         session.invalidate(); // Vô hiệu hóa phiên
 
-        response.sendRedirect("login");
+        response.sendRedirect("Home");
     }
 
     /**
