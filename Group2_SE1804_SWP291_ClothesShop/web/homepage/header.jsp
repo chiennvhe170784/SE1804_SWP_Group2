@@ -104,7 +104,10 @@
                     <div class="col-lg-1 text-center" style="margin-left: 100px">
                         <c:if test="${sessionScope.user != null}" >
                             <div style="position: relative; display: inline-block;">
-                                <i class="fas fa-user" id="userIcon" style="font-size: 30px; color: black; cursor: pointer;"></i>
+
+                                <!--                                <i class="fas fa-user" id="userIcon" style="font-size: 30px; color: black; cursor: pointer;"></i>-->
+                                <span class="logo" style="margin-left: 20px"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQuzZt1REzKbmypTgYKn0rAvtrwEIPnK6Kfnw&s" id="userIcon" style="border-radius: 50%; height: 50px; width: 50px;"></span>
+
                                 <span class="dropdown-menu" id="dropdownMenu">
                                     <a href="#"><i class="fas fa-user"></i>&nbsp;&nbsp;Show profile</a>
                                     <a href="#"><i class="fas fa-cog"></i>&nbsp;&nbsp;Setting</a>

@@ -127,7 +127,7 @@
                 <ul class="navbar-nav">
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" onclick="toggleDropdown(event)">
-                            <img class="img-profile" src="img/undraw_profile.svg" alt="Profile Image">
+                            <i style="padding-right: 20px" class="fas fa-bell"></i>
 
                             <span>${sessionScope.user.fullName}</span>
                     </a>

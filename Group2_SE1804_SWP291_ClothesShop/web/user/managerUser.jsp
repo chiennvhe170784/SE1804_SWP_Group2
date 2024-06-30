@@ -198,11 +198,11 @@
                                 <c:set var="currentIndex" value="${param.indexU != null ? param.indexU : 1}" />
 
                                 <!-- Previous button -->
-                                <c:if test="${currentIndex > 1}">
+                                <c:if test="${currentIndex > 2}">
                                     <li style="margin: 0 5px;">
-                                        <a href="managerUser?indexU=${currentIndex - 1}&searchU=${param.searchU}&role=${param.role}&active=${param.active}&sortField=${param.sortField != null ? param.sortField : 'uid'}&sortOrder=${param.sortOrder != null ? param.sortOrder : 'asc'}"
+                                        <a href="managerUser?indexU=${currentIndex - 2}&searchU=${param.searchU}&role=${param.role}&active=${param.active}&sortField=${param.sortField != null ? param.sortField : 'uid'}&sortOrder=${param.sortOrder != null ? param.sortOrder : 'asc'}"
                                            style="text-decoration: none; padding: 8px 16px; border: 1px solid #ddd; border-radius: 4px;">
-                                            Previous
+                                              ${currentIndex -2}
                                         </a>
                                     </li>
                                 </c:if>
@@ -218,11 +218,11 @@
                                 </c:forEach>
 
                                 <!-- Next button -->
-                                <c:if test="${currentIndex < endPage}">
+                                <c:if test="${currentIndex +2 <= endPage}">
                                     <li style="margin: 0 5px;">
-                                        <a href="managerUser?indexU=${currentIndex + 1}&searchU=${param.searchU}&role=${param.role}&active=${param.active}&sortField=${param.sortField != null ? param.sortField : 'uid'}&sortOrder=${param.sortOrder != null ? param.sortOrder : 'asc'}"
+                                        <a href="managerUser?indexU=${currentIndex + 2}&searchU=${param.searchU}&role=${param.role}&active=${param.active}&sortField=${param.sortField != null ? param.sortField : 'uid'}&sortOrder=${param.sortOrder != null ? param.sortOrder : 'asc'}"
                                            style="text-decoration: none; padding: 8px 16px; border: 1px solid #ddd; border-radius: 4px;">
-                                            Next
+                                              ${currentIndex + 2 }
                                         </a>
                                     </li>
                                 </c:if>

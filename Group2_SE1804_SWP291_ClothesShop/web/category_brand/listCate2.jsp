@@ -11,7 +11,7 @@
 
     <head>
 
-    
+
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -43,7 +43,7 @@
         <div id="wrapper">
 
             <!-- Sidebar -->
-              <%@include file="../homepage/sidebar_admin.jsp" %>
+            <%@include file="../homepage/sidebar_admin.jsp" %>
             <!-- End of Sidebar -->
 
             <!-- Content Wrapper -->
@@ -51,7 +51,7 @@
                 <!-- Main Content -->
                 <div id="content">
 
-                        <!-- Topbar -->
+                    <!-- Topbar -->
                     <%@include file="../homepage/header_admin.jsp" %>
                     <!-- End of Topbar -->
 
@@ -168,17 +168,17 @@
                                 <c:set var="currentIndex" value="${param.index != null ? param.index : 1}" />
 
                                 <!-- Previous button -->
-                                <c:if test="${currentIndex > 1}">
+                                <c:if test="${currentIndex > 2}">
                                     <li style="margin: 0 5px;">
-                                        <a href="listCate?index=${currentIndex - 1}&searchCate=${param.searchCate}&sortCate=${param.sortCate}&sortType=${param.sortType}"
+                                        <a href="listCate?index=${currentIndex - 2}&searchCate=${param.searchCate}&sortCate=${param.sortCate}&sortType=${param.sortType}"
                                            style="text-decoration: none; padding: 8px 16px; border: 1px solid #ddd; border-radius: 4px;">
-                                            Previous
+                                            ${currentIndex -2}
                                         </a>
                                     </li>
                                 </c:if>
 
                                 <!-- Page links -->
-                                <c:forEach begin="${currentIndex > 2 ? currentIndex - 1 : 1}" end="${(currentIndex < endPage - 1) ? currentIndex + 1 : endPage}" var="i">
+                                <c:forEach begin="${(currentIndex - 1) > 0 ? (currentIndex - 1) : 1}" end="${(currentIndex + 1) <= endPage ? (currentIndex + 1) : endPage}" var="i">
                                     <li style="margin: 0 5px;">
                                         <a class="${i == currentIndex ? 'active' : ''}" href="listCate?index=${i}&searchCate=${param.searchCate}&sortCate=${param.sortCate}&sortType=${param.sortType}"
                                            style="text-decoration: none; padding: 8px 16px; border: 1px solid #ddd; border-radius: 4px; color: ${i == currentIndex ? '#fff' : '#007bff'}; background-color: ${i == currentIndex ? '#007bff' : '#fff'};">
@@ -188,14 +188,15 @@
                                 </c:forEach>
 
                                 <!-- Next button -->
-                                <c:if test="${currentIndex < endPage}">
+                                <c:if test="${currentIndex + 2 <= endPage}">
                                     <li style="margin: 0 5px;">
-                                        <a href="listCate?index=${currentIndex + 1}&searchCate=${param.searchCate}&sortCate=${param.sortCate}&sortType=${param.sortType}"
+                                        <a href="listCate?index=${currentIndex + 2}&searchCate=${param.searchCate}&sortCate=${param.sortCate}&sortType=${param.sortType}"
                                            style="text-decoration: none; padding: 8px 16px; border: 1px solid #ddd; border-radius: 4px;">
-                                            Next
+                                            ${currentIndex + 2 }
                                         </a>
                                     </li>
                                 </c:if>
+
                             </ul>
                         </nav>
                         <!-- End paging -->

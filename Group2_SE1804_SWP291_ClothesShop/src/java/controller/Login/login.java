@@ -59,17 +59,21 @@ public class login extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-             Cookie arr[] = request.getCookies();
-        for (Cookie o : arr) {
-            if (o.getName().equals("username")) {
-                request.setAttribute("username", o.getValue());
+        Cookie arr[] = request.getCookies();
+        if (arr != null) {
+            for (Cookie o : arr) {
+                if (o.getName().equals("username")) {
+                    request.setAttribute("username", o.getValue());
+                }
+                if (o.getName().equals("password")) {
+                    request.setAttribute("password", o.getValue());
+                }
             }
-            if (o.getName().equals("password")) {
-                request.setAttribute("password", o.getValue());
-            }
+             request.getRequestDispatcher("login/login.jsp").forward(request, response);
+        }else{
+            response.sendRedirect("Home");
         }
-
-        request.getRequestDispatcher("login/login.jsp").forward(request, response);
+       
     }
 
     /**
@@ -87,7 +91,7 @@ public class login extends HttpServlet {
         String pass = request.getParameter("password");
         String r = request.getParameter("rem");
         UserDAO ud = new UserDAO();
-        String p=ud.toSHA1(pass);
+        String p = ud.toSHA1(pass);
         HttpSession session = request.getSession();
         User user = ud.checkUser(u, p);
         if (user == null) {

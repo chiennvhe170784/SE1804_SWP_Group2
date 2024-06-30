@@ -165,11 +165,11 @@
                                 <c:set var="currentIndex" value="${param.index != null ? param.index : 1}" />
 
                                 <!-- Previous button -->
-                                <c:if test="${currentIndex > 1}">
+                                <c:if test="${currentIndex > 2}">
                                     <li style="margin: 0 5px;">
-                                        <a href="listBrand?index=${currentIndex - 1}&searchBrand=${param.searchBrand}&sortBrand=${param.sortBrand}&sortTypeB=${param.sortTypeB}"
+                                        <a href="listBrand?index=${currentIndex - 2}&searchBrand=${param.searchBrand}&sortBrand=${param.sortBrand}&sortTypeB=${param.sortTypeB}"
                                            style="text-decoration: none; padding: 8px 16px; border: 1px solid #ddd; border-radius: 4px;">
-                                            Previous
+                                              ${currentIndex -2}
                                         </a>
                                     </li>
                                 </c:if>
@@ -185,11 +185,11 @@
                                 </c:forEach>
 
                                 <!-- Next button -->
-                                <c:if test="${currentIndex < endPage}">
+                                <c:if test="${currentIndex +2 <= endPage}">
                                     <li style="margin: 0 5px;">
-                                        <a href="listBrand?index=${currentIndex + 1}&searchBrand=${param.searchBrand}&sortBrand=${param.sortBrand}&sortTypeB=${param.sortTypeB}"
+                                        <a href="listBrand?index=${currentIndex + 2}&searchBrand=${param.searchBrand}&sortBrand=${param.sortBrand}&sortTypeB=${param.sortTypeB}"
                                            style="text-decoration: none; padding: 8px 16px; border: 1px solid #ddd; border-radius: 4px;">
-                                            Next
+                                             ${currentIndex + 2 }
                                         </a>
                                     </li>
                                 </c:if>
