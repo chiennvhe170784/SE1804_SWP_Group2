@@ -66,7 +66,7 @@ public class listBrand extends HttpServlet {
             response.sendRedirect("login");
             return;
         }
-        if (o.getRid() != 2 || o.getRid()!=1) {
+        if (o.getRid()!=0) {
             BrandDAO cd = new BrandDAO();
 
             String indexPage = request.getParameter("index");

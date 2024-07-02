@@ -67,7 +67,7 @@ public class managerUser extends HttpServlet {
             return; // Ensure the method returns to avoid further execution
         }
 
-        if (o.getRid() != 0 || o.getRid() != 1) {
+        if (o.getRid() == 1) {
             UserDAO ud = new UserDAO();
             String indexPage = request.getParameter("indexU");
             String searchU = request.getParameter("searchU");
