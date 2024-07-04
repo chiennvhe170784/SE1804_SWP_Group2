@@ -364,6 +364,31 @@ public class UserDAO extends DBContext {
         return result;
 
     }
+     public void updateProfile (User user){
+        try {
+            String sql = "UPDATE [dbo].[User]"+
+   "SET [fullName] = ?"+
+      ",[phone] = ?"+
+      ",[address] = ?"+
+      ",[email] = ?"+
+      ",[dob] = <dob, date,>"+
+      ",[gender] = ?"+
+ "WHERE [uid] = ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, user.getFullName());
+            stm.setString(2, user.getPhone());
+            stm.setString(3, user.getAddress());
+            stm.setString(4, user.getEmail() );
+            stm.setString(5, user.getDob());
+            stm.setInt(6, user.getGender());
+            stm.setInt(6, user.getUid());
+            stm.executeUpdate();
+
+          
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     public static void main(String[] args) {
         UserDAO ud = new UserDAO();

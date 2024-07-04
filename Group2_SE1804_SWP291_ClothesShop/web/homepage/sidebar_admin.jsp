@@ -73,7 +73,7 @@
         <li class="nav-item active">
             <a class="nav-link" href="addNews">
                 <i class="fas fa-fw fa-table"></i>
-                <span> Create News</span></a>
+                <span> News Manager</span></a>
         </li>
     </c:if>
 

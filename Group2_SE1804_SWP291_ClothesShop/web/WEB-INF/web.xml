@@ -124,6 +124,10 @@
         <servlet-name>logOut</servlet-name>
         <servlet-class>controller.Login.logOut</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>userProfile</servlet-name>
+        <servlet-class>controller.User.userProfile</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>newsList</servlet-name>
         <url-pattern>/newsList</url-pattern>
@@ -247,6 +251,10 @@
     <servlet-mapping>
         <servlet-name>logOut</servlet-name>
         <url-pattern>/logOut</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>userProfile</servlet-name>
+        <url-pattern>/userProfile</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
