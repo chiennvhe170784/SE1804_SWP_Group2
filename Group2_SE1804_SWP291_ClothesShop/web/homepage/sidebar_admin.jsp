@@ -34,7 +34,13 @@
 
     <!-- Heading -->
     <div class="sidebar-heading">Interface</div>
-
+    
+        <li class="nav-item active">
+            <a class="nav-link" href="userProfile">
+                <i class="fas fa-fw fa-table"></i>
+                <span>Profile</span></a>
+        </li>
+    
     <!-- Nav Item - Tables -->
     <li class="nav-item active">
         <a class="nav-link" href="listproduct">
