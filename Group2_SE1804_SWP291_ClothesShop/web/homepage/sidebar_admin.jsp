@@ -34,7 +34,13 @@
 
     <!-- Heading -->
     <div class="sidebar-heading">Interface</div>
-
+    
+        <li class="nav-item active">
+            <a class="nav-link" href="userProfile">
+                <i class="fas fa-fw fa-table"></i>
+                <span>Profile</span></a>
+        </li>
+    
     <!-- Nav Item - Tables -->
     <li class="nav-item active">
         <a class="nav-link" href="listproduct">
@@ -73,7 +79,7 @@
         <li class="nav-item active">
             <a class="nav-link" href="addNews">
                 <i class="fas fa-fw fa-table"></i>
-                <span> Create News</span></a>
+                <span> News Manager</span></a>
         </li>
     </c:if>
 

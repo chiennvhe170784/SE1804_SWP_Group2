@@ -18,7 +18,7 @@ public class NewsDAO extends DBContext{
       public ArrayList<News> pagging(int index){
         ArrayList<News> b = new ArrayList<>();
         try {
-            String sql = "select * from News WHERE status = '1'  order by 'nid' OFFSET ? ROWS FETCH NEXT 4 ROWS ONLY";
+            String sql = "select * from News WHERE status = '1'  order by 'nid' DESC  OFFSET ? ROWS FETCH NEXT 4 ROWS ONLY";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setInt(1, (index-1)*4);
             ResultSet rs = stm.executeQuery();     
@@ -32,7 +32,7 @@ public class NewsDAO extends DBContext{
        public ArrayList<News> paggingWaitingList(int index){
         ArrayList<News> b = new ArrayList<>();
         try {
-            String sql = "select * from News WHERE status = '0'  order by 'nid' OFFSET ? ROWS FETCH NEXT 4 ROWS ONLY";
+            String sql = "select * from News WHERE status = '0'  order by 'nid' DESC  OFFSET ? ROWS FETCH NEXT 4 ROWS ONLY";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setInt(1, (index-1)*4);
             ResultSet rs = stm.executeQuery();     
@@ -105,7 +105,7 @@ public class NewsDAO extends DBContext{
          ArrayList<News> b = new ArrayList<>();
         try {
             String searchTitle = "%" + title + "%";
-            String sql = "select * from News WHERE title LIKE ? AND status = 1  order by 'nid' OFFSET ? ROWS FETCH NEXT 4 ROWS ONLY";
+            String sql = "select * from News WHERE title LIKE ? AND status = 1  order by 'nid' DESC  OFFSET ? ROWS FETCH NEXT 4 ROWS ONLY";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setString(1, searchTitle);
             stm.setInt(2, (index-1)*4);

@@ -308,9 +308,11 @@
                                     <a  class="btn btn-link" style="height:20px;color:royalblue;width:160px;font-size:18px;height: 36px" href="newsListStaff?type=News">News</a>
 
                                 </div>
+                                 <c:if test="${sessionScope.user.rid == 1}">
                                 <div class="col-3">
                                     <a  class="btn btn-link" style="height:20px;color:royalblue;width:160px;font-size:18px;height: 36px" href="newsListStaff?type=WaitingNews">Waiting News</a>
                                 </div>
+                                </c:if>
                             </div>
                             <div id="box" class="row" style="   min-width: 500px;max-width: 1060px;position: relative;margin-left:40px;border:solid;height:auto;background-color:white;min-height: 350px;border-radius: 7px;overflow: auto;">
                                 <div id="createBlog" class="col">

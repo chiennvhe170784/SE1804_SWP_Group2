@@ -3,9 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-package controller.news;
+package controller.User;
 
-import context.NewsDAO;
+import context.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -13,15 +13,13 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import java.util.Date;
-import model.News;
 import model.User;
 
 /**
  *
  * @author ADMIN
  */
-public class addNews extends HttpServlet {
+public class userProfile extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -32,7 +30,19 @@ public class addNews extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-         
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet userProfile</title>");  
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet userProfile at " + request.getContextPath () + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        }
     } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -46,19 +56,15 @@ public class addNews extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-       HttpSession session = request.getSession();
-        User o = (User) session.getAttribute("user");
-        if (o == null) {
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
             response.sendRedirect("login");
             return; // Ensure the method returns to avoid further execution
         }
-        if (o.getRid() == 1 || o.getRid() == 2) {
-            request.getRequestDispatcher("news/addNews.jsp").forward(request, response);
-        }
-        else {
-            response.sendRedirect("login");
-        }
-        
+        else
+        request.getRequestDispatcher("Profile/userProfile.jsp").forward(request, response);
+
     } 
 
     /** 
@@ -71,14 +77,36 @@ public class addNews extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        News news = new News();
-        news.setAuthor(Integer.parseInt(request.getParameter("authorId")));
-        news.setBody(request.getParameter("body"));
-        news.setTitle((request.getParameter("title")));
-        news.setStatus(false);
-        news.setUpdateDate(new Date());
-        NewsDAO dao = new NewsDAO();
-        dao.addNews(news);
+         HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
+            response.sendRedirect("login");
+            return; // Ensure the method returns to avoid further execution
+        }
+        else{
+             String fullName = request.getParameter("fullName");
+        String phoneNumber = request.getParameter("phoneNumber");
+        String email = request.getParameter("email");
+        String address = request.getParameter("address");
+        String gender = request.getParameter("gender");
+        String dateOfBirth = request.getParameter("dateOfBirth");
+        UserDAO dao = new UserDAO();
+        user.setFullName(fullName);
+        user.setPhone(phoneNumber);
+        user.setAddress(address);
+        user.setEmail(email);
+        user.setDob(dateOfBirth);
+        if(gender.equals("male")){
+            user.setGender(1);
+        }
+        else{
+             user.setGender(0);
+        }
+        dao.updateProfile(user);
+  
+        request.getRequestDispatcher("Profile/userProfile.jsp").forward(request, response);
+        }
+       
     }
 
     /** 
