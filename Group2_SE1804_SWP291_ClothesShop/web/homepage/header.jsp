@@ -62,32 +62,10 @@
                             <div class="mini-cart">
                                 <div class="mini-cart-icon" style="display: flex; align-items: center;">
                                     <i class="fas fa-shopping-cart"></i>
-                                    <span class="counter-cart" style="margin-left: 10px;"><small>Your Cart</small>$10.00</span>
-                                    <span class="counter" style="margin-left: 10px;">02</span>
+                                    <span class="counter-cart" style="margin-left: 10px;"><small>Your Cart</small></span>
+                                    <span class="counter" style="margin-left: 10px;">0</span>
                                     <!-- Mini Cart Content -->
-                                    <div class="minicart-content-wrapper">
-                                        <ul class="cart-list-full">
-                                            <!-- Single -->
-                                            <li class="cart-list-single">
-                                                <img src="assets/img/product/1.jpg" alt="Product Image">
-                                                <h5><a href="#">simple product</a></h5>
-                                                <span class="price">$120</span>
-                                                <div class="close"><i class="fas fa-times"></i></div>
-                                            </li>
-                                            <!-- Single -->
-                                            <li class="cart-list-single">
-                                                <img src="assets/img/product/2.jpg" alt="Product Image">
-                                                <h5><a href="#">simple product</a></h5>
-                                                <span class="price">$120</span>
-                                                <div class="close"><i class="fas fa-times"></i></div>
-                                            </li>
-                                        </ul>
-                                        <h2 class="subtotal">Subtotal : <span>$220</span></h2>
-                                        <div class="minicart-btn">
-                                            <a class="button-1" href="cart.html">View Cart</a>
-                                            <a class="button-2" href="#">Checkout</a>
-                                        </div>
-                                    </div>
+                                  
                                 </div>
                             </div>
                         </div>

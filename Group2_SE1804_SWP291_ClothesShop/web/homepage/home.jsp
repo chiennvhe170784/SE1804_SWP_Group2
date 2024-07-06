@@ -27,15 +27,69 @@
         <link rel="stylesheet" href="assets/css/normalize.css">
         <link rel="stylesheet" href="assets/css/style.css">
         <link rel="stylesheet" href="assets/css/responsive.css">
+        <script src="${pageContext.request.contextPath}/assets/js/jquery-3.5.1.min.js" type="text/javascript"></script>
+        <script type="text/javascript">
 
+            function addToCart(productId) {
+                var pId = productId; 
+                var totalProduct;
+                $.ajax({
+                    type: 'GET',
+                    data: {pId: pId},
+                    url: 'AddToCart',
+                    success: (result) => {
+                        var cart = result;
+                        totalProduct = cart.length;
+                        $('.counter').text(totalProduct);
+                    },
+                    error: function () {
+                        showError('Delete fail something went wrong', 3000);
+                    }
+                });
+
+            }
+            function showAlert(message, duration) {
+                // Tạo phần tử alert mới
+                let alertDiv = document.createElement('div');
+                alertDiv.className = 'alert alert-success';
+                alertDiv.role = 'alert';
+                alertDiv.innerHTML = message;
+                alertDiv.style = 'margin-top: 50px;z-index: 9999; position: fixed; top: 0; right: 0;width: 300px;height:50px';
+                let wrapper = document.getElementById('notifications');
+                // Thêm phần tử alert vào body hoặc một container cụ thể
+                wrapper.appendChild(alertDiv);
+
+                // Tự động ẩn phần tử alert sau thời gian đã định
+                setTimeout(() => {
+                    alertDiv.remove();
+                }, duration);
+            }
+            function showError(message, duration) {
+                // Tạo phần tử alert mới
+                let alertDiv = document.createElement('div');
+                alertDiv.className = 'alert alert-danger';
+                alertDiv.role = 'alert';
+                alertDiv.innerHTML = message;
+                alertDiv.style = 'margin-top: 50px;z-index: 9999; position: fixed; top: 0; right: 0;width: 300px;height:50px'
+                let wrapper = document.getElementById('notifications');
+                // Thêm phần tử alert vào body hoặc một container cụ thể
+                wrapper.appendChild(alertDiv);
+
+                // Tự động ẩn phần tử alert sau thời gian đã định
+                setTimeout(() => {
+                    alertDiv.remove();
+                }, duration);
+            }
+
+        </script>
     </head>
     <body>
- 
+
         <div class="off_canvars_overlay"></div>
         <!-- Header -->
         <header class="header">
             <!-- Header Top -->
-         
+
             <!-- Header Middle -->
             <%@include file="header.jsp" %>
 
@@ -55,31 +109,9 @@
                                     <div class="mini-cart-icon">
                                         <i class="fas fa-shopping-cart"></i>
                                         <span class="counter">02</span>
-                                        <span class="counter-cart"><small>Your Cart</small>$10.00</span>
+                                        <span class="counter-cart"><small>Your Cart</small></span>
                                         <!-- Mini Cart Content -->
-                                        <div class="minicart-content-wrapper">
-                                            <ul class="cart-list-full">
-                                                <!-- Single -->
-                                                <li class="cart-list-single">
-                                                    <img src="assets/img/product/1.jpg" alt="img">
-                                                    <h5><a href="#">simple product</a></h5>
-                                                    <span class="price">$120</span>
-                                                    <div class="close"><i class="fas fa-times"></i></div>
-                                                </li>
-                                                <!-- Single -->
-                                                <li class="cart-list-single">
-                                                    <img src="assets/img/product/2.jpg" alt="img">
-                                                    <h5><a href="#">simple product</a></h5>
-                                                    <span class="price">$120</span>
-                                                    <div class="close"><i class="fas fa-times"></i></div>
-                                                </li>
-                                            </ul>
-                                            <h2 class="subtotal">Subtotal : <span>$220</span></h2>
-                                            <div class="minicart-btn">
-                                                <a class="button-1" href="cart.html">View Cart</a>
-                                                <a class="button-2" href="#">Checkout</a>
-                                            </div>
-                                        </div>
+                                      
                                     </div>
                                 </div>
                             </div>
@@ -307,7 +339,7 @@
                                                 <div class="product-content-btn">
                                                     <ul>
                                                         <li><a href="wishlist.html"><i class="far fa-heart"></i></a></li>
-                                                        <li><a class="active" href="cart.html">Add to Cart</a></li>
+                                                        <li><a onclick="addToCart(${product.pid})" class="active">Add to Cart</a></li>
                                                         <li><a href="#"><i class="far fa-eye"></i></a></li>
                                                     </ul>
                                                 </div>
@@ -345,7 +377,7 @@
                                         </a>
                                         <div class="product-thumbnail-overly">
                                             <ul>
-                                                <li><a href="cart.html"><i class="fas fa-shopping-cart"></i></a></li>
+                                                <li><a onclick="addToCart(${product2.pid})"><i class="fas fa-shopping-cart"></i></a></li>
                                                 <li><a href="wishlist.html"><i class="far fa-heart"></i></a></li>
                                                 <li><a href="#"><i class="far fa-eye"></i></a></li>
                                             </ul>
