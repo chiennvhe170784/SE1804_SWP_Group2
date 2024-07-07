@@ -139,11 +139,8 @@
     <servlet>
         <servlet-name>cartView</servlet-name>
         <servlet-class>controller.Cart.cartView</servlet-class>
-        </servlet>
-        <servlet>
-        <servlet-name>AllProduct</servlet-name>
-        <servlet-class>controller.home.AllProduct</servlet-class>
     </servlet>
+
     <servlet-mapping>
         <servlet-name>newsList</servlet-name>
         <url-pattern>/newsList</url-pattern>
@@ -265,14 +262,10 @@
         <url-pattern>/updateBrand</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-<<<<<<< HEAD
         <servlet-name>AllProduct</servlet-name>
         <url-pattern>/AllProduct</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-=======
-<<<<<<< HEAD
->>>>>>> 0be94eb (resolve conflict)
         <servlet-name>logOut</servlet-name>
         <url-pattern>/logOut</url-pattern>
     </servlet-mapping>
@@ -287,11 +280,8 @@
     <servlet-mapping>
         <servlet-name>cartView</servlet-name>
         <url-pattern>/cartView</url-pattern>
-        </servlet-mapping>
-<servlet-mapping>
-        <servlet-name>AllProduct</servlet-name>
-        <url-pattern>/AllProduct</url-pattern>
     </servlet-mapping>
+
     <session-config>
         <session-timeout>
             60
