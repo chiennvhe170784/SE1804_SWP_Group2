@@ -373,7 +373,7 @@
                                 <div class="product-single">
                                     <div class="product-thumbnail">
                                         <a href="product-details.html?pid=${product2.pid}">
-                                            <img src="${product2.img}" alt="${product2.name}" style="width: 100%; height: auto; object-fit: cover; aspect-ratio: 1 / 1;">
+                                            <img src="${product2.img}" alt="${product2.name}" style="width: 100%; height: auto; object-fit: cover;">
                                         </a>
                                         <div class="product-thumbnail-overly">
                                             <ul>
@@ -386,7 +386,7 @@
                                     <div class="product-content">
                                         <h4><a href="product-details.html?pid=${product2.pid}">${product2.name}</a></h4>
                                         <div class="pricing">
-                                            <span>$${product2.price} <del>$210</del></span>
+                                            <span>$${product2.price}</span>
                                         </div>
                                     </div>
                                 </div>
