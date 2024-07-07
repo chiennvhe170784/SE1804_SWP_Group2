@@ -29,9 +29,21 @@
         <!-- Custom styles for this page -->
         <link href="adminassets/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
         <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+        <link rel="stylesheet" href="assets/css/fontawesome.all.min.css">
 
-
-
+        <style>
+            th {
+                position: relative;
+                padding-right: 20px; /* Adjust this value to give space for the icon */
+            }
+            th .fa {
+                position: absolute;
+                right: 5px; /* Adjust this value to control the distance from the edge */
+                top: 50%;
+                transform: translateY(-50%);
+                font-size: 12px; /* Adjust the size of the icon if needed */
+            }
+        </style>
 
 
     </head>
@@ -42,7 +54,7 @@
         <div id="wrapper">
 
             <!-- Sidebar -->
-            <%@include file="../sidebar_admin.jsp" %>
+            <%@include file="../homepage/sidebar_admin.jsp" %>
             <!-- End of Sidebar -->
 
             <!-- Content Wrapper -->
@@ -51,35 +63,7 @@
                 <div id="content">
 
                     <!-- Topbar -->
-                    <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-                        <!-- Sidebar Toggle (Topbar) -->
-                        <form class="form-inline">
-                            <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                                <i class="fa fa-bars"></i>
-                            </button>
-                        </form>
-                        <!-- Topbar Navbar -->
-                        <ul class="navbar-nav ml-auto">
-                            <div class="topbar-divider d-none d-sm-block"></div>
-
-                            <!-- Nav Item - User Information -->
-                            <li class="nav-item dropdown no-arrow">
-                                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
-                                    <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
-                                </a>
-                                <!-- Dropdown - User Information -->
-                                <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                     aria-labelledby="userDropdown">
-                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                        Logout
-                                    </a>
-                                </div>
-                            </li>
-                        </ul>
-                    </nav>
+                    <%@include file="../homepage/header_admin.jsp" %>
                     <!-- End of Topbar -->
 
                     <!-- Begin Page Content -->
@@ -103,7 +87,7 @@
 
                                 <!-- Brands Dropdown -->
                                 <div class="col-md-2 mb-3">
-                                    <select name="role" class="form-control">
+                                    <select name="role" class="form-select">
                                         <option value="-1">All Role</option>
                                         <c:forEach var="r" items="${listR}">
                                             <option value="${r.rid}" ${requestScope.role == r.rid ? 'selected' : ''}>${r.role}</option>
@@ -113,7 +97,7 @@
 
                                 <!-- Genders Dropdown -->
                                 <div class="col-md-2 mb-3">
-                                    <select name="active" class="form-control">
+                                    <select name="active" class="form-select">
                                         <option value="-1"  ${requestScope.active == -1 ? 'selected' : ''}>All Active</option>
                                         <option value="0" ${requestScope.active == 0 ? 'selected' : ''}>Close</option>
                                         <option value="1" ${requestScope.active == 1 ? 'selected' : ''}>Open</option>
@@ -123,69 +107,73 @@
                                 <div class="col-md-2 mb-3" style="display: none;">
                                     <button type="submit" class="btn btn-primary btn-block">Search</button>
                                 </div>
+                                <div class="col-md-1 mb-1">
+                                    <input class="form-control" readonly="" value="Total: ${requestScope.countU}">
+                                </div>
                             </div>
                         </form>
 
                         <!-- Product Table -->
                         <div class="card shadow mb-4">
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                        <thead>
+
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+
+                                            <th>ID</th>
+                                            <th>Name<a href="managerUser?indexU=${currentIndex + 1}&searchU=${param.searchU}&role=${param.role}&active=${param.active}&sortField=fullName&sortOrder=${param.sortOrder == 'asc' ? 'desc' : 'asc'}"><span class="fa fa-sort"></span></a></th>
+                                            <th>Phone<a href="managerUser?indexU=${currentIndex + 1}&searchU=${param.searchU}&role=${param.role}&active=${param.active}&sortField=phone&sortOrder=${param.sortOrder == 'asc' ? 'desc' : 'asc'}"><span class="fa fa-sort"></span></a></th>
+                                            <th>Email<a href="managerUser?indexU=${currentIndex + 1}&searchU=${param.searchU}&role=${param.role}&active=${param.active}&sortField=email&sortOrder=${param.sortOrder == 'asc' ? 'desc' : 'asc'}"><span class="fa fa-sort"></span></a></th>
+                                            <th>Username<a href="managerUser?indexU=${currentIndex + 1}&searchU=${param.searchU}&role=${param.role}&active=${param.active}&sortField=username&sortOrder=${param.sortOrder == 'asc' ? 'desc' : 'asc'}"><span class="fa fa-sort"></span></a></th>
+                                            <th>Role<a href="managerUser?indexU=${currentIndex + 1}&searchU=${param.searchU}&role=${param.role}&active=${param.active}&sortField=role&sortOrder=${param.sortOrder == 'asc' ? 'desc' : 'asc'}"><span class="fa fa-sort"></span></a></th>
+                                            <th>Active</th>
+                                            <th>Ban</th>
+                                            <th> UnBan</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <c:forEach items="${requestScope.listU}" var="u">
                                             <tr>
 
-                                                <th>ID</th>
-                                                <th>Name</th>
-                                                <th>Phone</th>
-                                                <th>Email</th>
-                                                <th>Username</th>
-                                                <th>Role</th>
-                                                <th>Active</th>
-                                                <th>Ban</th>
-                                                <th>UnBan</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <c:forEach items="${requestScope.listU}" var="u">
-                                                <tr>
 
-
-                                                    <td>${u.uid}</td>
-                                                    <td>${u.fullName}</td>
-                                                    <td>${u.phone}</td>
-                                                    <td>${u.email}</td>
-                                                    <td>${u.username}</td>
-                                                    <td>
-                                                        <c:choose>
-                                                            <c:when test="${u.rid == 1}">
-                                                                admin
-                                                            </c:when>
-                                                            <c:when test="${u.rid == 2}">
-                                                                staff
-                                                            </c:when>
-                                                            <c:otherwise>
-                                                                customer
-                                                            </c:otherwise>
-                                                        </c:choose>
-                                                    </td>
-                                                    <td>
-                                                        <c:choose>
-                                                            <c:when test="${u.active == 0}">
-                                                                close
-                                                            </c:when>
-                                                            <c:when test="${u.active ==1}">
-                                                                open</c:when>
-                                                        </c:choose>
-                                                    </td>
-                                                       <td><a href="#" onclick="return checkBan('${u.uid}')"><i class="bi bi-ban"></i></a></td>
+                                                <td>${u.uid}</td>
+                                                <td>${u.fullName}</td>
+                                                <td>${u.phone}</td>
+                                                <td>${u.email}</td>
+                                                <td>${u.username}</td>
+                                                <td>
+                                                    <c:choose>
+                                                        <c:when test="${u.rid == 1}">
+                                                            admin
+                                                        </c:when>
+                                                        <c:when test="${u.rid == 2}">
+                                                            staff
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            customer
+                                                        </c:otherwise>
+                                                    </c:choose>
+                                                </td>
+                                                <td>
+                                                    <c:choose>
+                                                        <c:when test="${u.active == 0}">
+                                                            close
+                                                        </c:when>
+                                                        <c:when test="${u.active ==1}">
+                                                            open</c:when>
+                                                    </c:choose>
+                                                </td>
+                                                <td><a href="#" onclick="return checkBan('${u.uid}')"><i class="bi bi-ban"></i></a></td>
                                                 <td><a href="#" onclick="return checkUnBan('${u.uid}')"><i class="bi bi-unlock"></i></a></td>
 
-                                                </tr>
-                                            </c:forEach>
-                                        </tbody>
+                                            </tr>
+                                        </c:forEach>
+                                    </tbody>
 
-                                    </table>
-                                </div>
+                                </table>
+
                             </div>
                         </div>
 
@@ -210,11 +198,11 @@
                                 <c:set var="currentIndex" value="${param.indexU != null ? param.indexU : 1}" />
 
                                 <!-- Previous button -->
-                                <c:if test="${currentIndex > 1}">
+                                <c:if test="${currentIndex > 2}">
                                     <li style="margin: 0 5px;">
-                                        <a href="managerUser?indexU=${currentIndex - 1}&searchU=${param.searchU}&role=${param.role}&active=${param.active}"
+                                        <a href="managerUser?indexU=${currentIndex - 2}&searchU=${param.searchU}&role=${param.role}&active=${param.active}&sortField=${param.sortField != null ? param.sortField : 'uid'}&sortOrder=${param.sortOrder != null ? param.sortOrder : 'asc'}"
                                            style="text-decoration: none; padding: 8px 16px; border: 1px solid #ddd; border-radius: 4px;">
-                                            Previous
+                                              ${currentIndex -2}
                                         </a>
                                     </li>
                                 </c:if>
@@ -222,7 +210,7 @@
                                 <!-- Page links -->
                                 <c:forEach begin="${currentIndex > 2 ? currentIndex - 1 : 1}" end="${(currentIndex < endPage - 1) ? currentIndex + 1 : endPage}" var="i">
                                     <li style="margin: 0 5px;">
-                                        <a class="${i == currentIndex ? 'active' : ''}" href="managerUser?indexU=${i}&searchU=${param.searchU}&role=${param.role}&active=${param.active}"
+                                        <a class="${i == currentIndex ? 'active' : ''}" href="managerUser?indexU=${i}&searchU=${param.searchU}&role=${param.role}&active=${param.active}&sortField=${param.sortField != null ? param.sortField : 'uid'}&sortOrder=${param.sortOrder != null ? param.sortOrder : 'asc'}"
                                            style="text-decoration: none; padding: 8px 16px; border: 1px solid #ddd; border-radius: 4px; color: ${i == currentIndex ? '#fff' : '#007bff'}; background-color: ${i == currentIndex ? '#007bff' : '#fff'};">
                                             ${i}
                                         </a>
@@ -230,16 +218,17 @@
                                 </c:forEach>
 
                                 <!-- Next button -->
-                                <c:if test="${currentIndex < endPage}">
+                                <c:if test="${currentIndex +2 <= endPage}">
                                     <li style="margin: 0 5px;">
-                                        <a href="managerUser?indexU=${currentIndex + 1}&searchU=${param.searchU}&role=${param.role}&active=${param.active}"
+                                        <a href="managerUser?indexU=${currentIndex + 2}&searchU=${param.searchU}&role=${param.role}&active=${param.active}&sortField=${param.sortField != null ? param.sortField : 'uid'}&sortOrder=${param.sortOrder != null ? param.sortOrder : 'asc'}"
                                            style="text-decoration: none; padding: 8px 16px; border: 1px solid #ddd; border-radius: 4px;">
-                                            Next
+                                              ${currentIndex + 2 }
                                         </a>
                                     </li>
                                 </c:if>
                             </ul>
                         </nav>
+
 
 
                     </div>
@@ -263,21 +252,21 @@
                 });
             });
         </script>
-          <script>
-        function checkBan(uid) {
-            // Thêm mã kiểm tra hợp lệ của form nếu cần
-            if (confirm("Ban user with uid = " + uid + "?")) {
-                window.location = 'lockUser?type=lock&uid=' + uid;
+        <script>
+            function checkBan(uid) {
+                // Thêm mã kiểm tra hợp lệ của form nếu cần
+                if (confirm("Ban user with uid = " + uid + "?")) {
+                    window.location = 'lockUser?type=lock&uid=' + uid;
+                }
             }
-        }
 
-        function checkUnBan(uid) {
-            // Thêm mã kiểm tra hợp lệ của form nếu cần
-            if (confirm("Unban with user " + uid + "?")) {
-                window.location = 'lockUser?type=unlock&uid=' + uid;
+            function checkUnBan(uid) {
+                // Thêm mã kiểm tra hợp lệ của form nếu cần
+                if (confirm("Unban with user " + uid + "?")) {
+                    window.location = 'lockUser?type=unlock&uid=' + uid;
+                }
             }
-        }
-    </script>
+        </script>
         <!-- Bootstrap core JavaScript-->
         <script src="vendor/jquery/jquery.min.js"></script>
         <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

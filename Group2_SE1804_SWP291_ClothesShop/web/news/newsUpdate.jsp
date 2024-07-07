@@ -63,9 +63,9 @@
             }
             ;
             function saveUpdate(functionName) {
-                if (window.editor.getData() === "") {
-                    showError('All field must be filled', 3000);
-                } else {
+              if (!/[A-Za-z0-9]/.test($('#title').val()) || !/[A-Za-z0-9]/.test(window.editor.getData())) {
+    showError('All field must be filled', 3000);
+} else {
                     var body = window.editor.getData();
 
 
@@ -274,53 +274,8 @@
         <!-- Page Wrapper -->
         <div id="wrapper">
 
-            <!-- Sidebar -->
-            <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-                <!-- Sidebar - Brand -->
-                <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-                    <div class="sidebar-brand-icon rotate-n-15">
-                        <i class="fas fa-laugh-wink"></i>
-                    </div>
-                    <div class="sidebar-brand-text mx-3">Clothes Shop Manager
-                    </div>
-                </a>
-
-                <!-- Divider -->
-                <hr class="sidebar-divider my-0">
-
-                <!-- Nav Item - Dashboard -->
-                <li class="nav-item">
-                    <a class="nav-link" href="index.html">
-                        <i class="fas fa-fw fa-tachometer-alt"></i>
-                        <span>Dashboard</span></a>
-                </li>
-
-                <!-- Divider -->
-                <hr class="sidebar-divider">
-
-                <!-- Heading -->
-                <div class="sidebar-heading">Interface</div>
-
-                <!-- Nav Item - Tables -->
-                <li class="nav-item disabled">
-                    <a class="nav-link" href="listproduct">
-                        <i class="fas fa-fw fa-table"></i>
-                        <span>Product Table</span></a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="newsListStaff">
-                        <i class="fas fa-fw fa-table"></i>
-                        <span>News</span></a>
-                </li>
-
-                <!-- Divider -->
-                <hr class="sidebar-divider d-none d-md-block">
-
-                <!-- Sidebar Toggler (Sidebar) -->
-                <div class="text-center d-none d-md-inline">
-                    <button class="rounded-circle border-0" id="sidebarToggle"></button>
-                </div>
-            </ul>
+                <!-- Sidebar -->
+            <%@include file="../sidebar_admin.jsp" %>
             <!-- End of Sidebar -->
 
             <!-- Content Wrapper -->
@@ -329,35 +284,7 @@
                 <div id="content">
 
                     <!-- Topbar -->
-                    <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-                        <!-- Sidebar Toggle (Topbar) -->
-                        <form class="form-inline">
-                            <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                                <i class="fa fa-bars"></i>
-                            </button>
-                        </form>
-                        <!-- Topbar Navbar -->
-                        <ul class="navbar-nav ml-auto">
-                            <div class="topbar-divider d-none d-sm-block"></div>
-
-                            <!-- Nav Item - User Information -->
-                            <li class="nav-item dropdown no-arrow">
-                                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
-                                    <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
-                                </a>
-                                <!-- Dropdown - User Information -->
-                                <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                     aria-labelledby="userDropdown">
-                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                        Logout
-                                    </a>
-                                </div>
-                            </li>
-                        </ul>
-                    </nav>
+                    <%@include file="../homepage/header_admin.jsp" %>
                     <!-- End of Topbar -->
 
                     <!-- Begin Page Content -->
@@ -381,9 +308,11 @@
                                     <a  class="btn btn-link" style="height:20px;color:royalblue;width:160px;font-size:18px;height: 36px" href="newsListStaff?type=News">News</a>
 
                                 </div>
+                                 <c:if test="${sessionScope.user.rid == 1}">
                                 <div class="col-3">
                                     <a  class="btn btn-link" style="height:20px;color:royalblue;width:160px;font-size:18px;height: 36px" href="newsListStaff?type=WaitingNews">Waiting News</a>
                                 </div>
+                                </c:if>
                             </div>
                             <div id="box" class="row" style="   min-width: 500px;max-width: 1060px;position: relative;margin-left:40px;border:solid;height:auto;background-color:white;min-height: 350px;border-radius: 7px;overflow: auto;">
                                 <div id="createBlog" class="col">

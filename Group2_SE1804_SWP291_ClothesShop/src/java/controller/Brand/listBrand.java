@@ -11,8 +11,10 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.util.List;
 import model.Brand;
+import model.User;
 
 /**
  *
@@ -58,64 +60,74 @@ public class listBrand extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        BrandDAO cd = new BrandDAO();
+        HttpSession session = request.getSession();
+        User o =(User) session.getAttribute("user");
+          if (o == null) {
+            response.sendRedirect("login");
+            return;
+        }
+        if (o.getRid()!=0) {
+            BrandDAO cd = new BrandDAO();
 
-        String indexPage = request.getParameter("index");
-        String searchCate = request.getParameter("searchBrand");
-        String name = request.getParameter("addBrand_name");
-        String sortCate = request.getParameter("sortBrand");
-        String sortType = request.getParameter("sortTypeB");
-        if (indexPage == null) {
-            indexPage = "1";
-        }
-        if (sortCate == null) {
-            sortCate = "0";
-        }
-        if (sortType == null) {
-            sortType = "0";
-        }
-
-        if (searchCate == null || searchCate.trim() == "") {
-            int index1 = Integer.parseInt(indexPage);
-            int count = cd.count();
-            int endPage = count / 5;
-            if (count % 5 != 0) {
-                endPage++;
+            String indexPage = request.getParameter("index");
+            String searchCate = request.getParameter("searchBrand");
+            String name = request.getParameter("addBrand_name");
+            String sortCate = request.getParameter("sortBrand");
+            String sortType = request.getParameter("sortTypeB");
+            if (indexPage == null) {
+                indexPage = "1";
             }
-            if (name != null) {
-                cd.addBrand(name);
-                request.setAttribute("add_suc", "Add category sucessfully!");
+            if (sortCate == null) {
+                sortCate = "0";
             }
-            List<Brand> listC = cd.pagging(index1, sortCate, sortType);
-            request.setAttribute("endPage", endPage);
-            request.setAttribute("listB", listC);
-            request.setAttribute("searchBrand", searchCate);
-            request.setAttribute("countB", count);
-            request.setAttribute("sortTypeB", sortType);
-            request.setAttribute("sortBrand", sortCate);
+            if (sortType == null) {
+                sortType = "0";
+            }
 
-            request.getRequestDispatcher("category_brand/listBrand.jsp").forward(request, response);
+            if (searchCate == null || searchCate.trim() == "") {
+                int index1 = Integer.parseInt(indexPage);
+                int count = cd.count();
+                int endPage = count / 5;
+                if (count % 5 != 0) {
+                    endPage++;
+                }
+                if (name != null) {
+                    cd.addBrand(name);
+                    request.setAttribute("add_suc", "Add brand sucessfully!");
+                }
+                List<Brand> listC = cd.pagging(index1, sortCate, sortType);
+                request.setAttribute("endPage", endPage);
+                request.setAttribute("listB", listC);
+                request.setAttribute("searchBrand", searchCate);
+                request.setAttribute("countB", count);
+                request.setAttribute("sortTypeB", sortType);
+                request.setAttribute("sortBrand", sortCate);
 
+                request.getRequestDispatcher("category_brand/listBrand.jsp").forward(request, response);
+
+            } else {
+                int index1 = Integer.parseInt(indexPage);
+                int count = cd.count2(searchCate);
+                int endPage = count / 5;
+                if (count % 5 != 0) {
+                    endPage++;
+                }
+                if (name != null) {
+                    cd.addBrand(name);
+                    request.setAttribute("add_suc", "Add category sucessfully!");
+                }
+                List<Brand> listC = cd.search(searchCate, index1, sortCate, sortType);
+                request.setAttribute("endPage", endPage);
+                request.setAttribute("listB", listC);
+                request.setAttribute("searchBrand", searchCate);
+                request.setAttribute("countB", count);
+                request.setAttribute("sortTypeB", sortType);
+                request.setAttribute("sortBrand", sortCate);
+
+                request.getRequestDispatcher("category_brand/listBrand.jsp").forward(request, response);
+            }
         } else {
-            int index1 = Integer.parseInt(indexPage);
-            int count = cd.count2(searchCate);
-            int endPage = count / 5;
-            if (count % 5 != 0) {
-                endPage++;
-            }
-            if (name != null) {
-                cd.addBrand(name);
-                request.setAttribute("add_suc", "Add category sucessfully!");
-            }
-            List<Brand> listC = cd.search(searchCate, index1, sortCate, sortType);
-            request.setAttribute("endPage", endPage);
-            request.setAttribute("listB", listC);
-            request.setAttribute("searchBrand", searchCate);
-            request.setAttribute("countB", count);
-            request.setAttribute("sortTypeB", sortType);
-            request.setAttribute("sortBrand", sortCate);
-
-            request.getRequestDispatcher("category_brand/listBrand.jsp").forward(request, response);
+            response.sendRedirect("login");
         }
     }
 

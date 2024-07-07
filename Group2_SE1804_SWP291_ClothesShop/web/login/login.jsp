@@ -27,7 +27,7 @@
                         <div class="breadcrumb-content">
                             <h2>Login</h2>
                             <ul>
-                                <li><a href="index.html">Home</a></li>
+                                <li><a href="Home">Home</a></li>
                                 <li class="active">Login</li>
                             </ul>
                         </div>
@@ -43,7 +43,7 @@
                 <div class="row">
                     <div class="col-lg-5 offset-lg-4 text-center">
                         <div class="login-register-form-full"  style="background-color: #ffffff; padding: 30px; border-radius: 8px; box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);">
-                            <h3 style="margin-bottom: 35px"><img src="assets/img/logo.png"></h3>
+                            <h3 style="margin-bottom: 35px"><img src="assets/img/logo3.jpg"></h3>
                             <form action="login" method="post">
                                 <input type="text" class="form-control" id="email"  value="${username}" name="username" placeholder="Your Username" required>
                                 <div id="email-error" class="error"></div>

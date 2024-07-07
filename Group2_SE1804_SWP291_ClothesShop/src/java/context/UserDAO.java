@@ -20,6 +20,8 @@ import java.util.Random;
 import model.User;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import model.Role;
@@ -44,6 +46,7 @@ public class UserDAO extends DBContext {
         } catch (SQLException e) {
         }
     }
+
     public void changePass(String username, String pass) {
         String sql = "UPDATE [dbo].[User]\n"
                 + "   SET \n"
@@ -88,22 +91,20 @@ public class UserDAO extends DBContext {
     }
 
     //get all user
-    public List<User> getListU(int index, int quantity) {
+    public List<User> getListU(int index, int quantity, String sortField, String sortOrder) {
         List<User> listU = new ArrayList<>();
-        String sql = "select [uid]\n"
-                + "      ,[fullName]\n"
-                + "      ,[phone]\n"
-                + "      ,[address]\n"
-                + "      ,[email]\n"
-                + "      ,[username]\n"
-                + "      ,[password]\n"
-                + "      ,[dob]\n"
-                + "      ,[gender]\n"
-                + "      ,[rid]\n"
-                + "      ,[active]\n"
-                + "     from [User] u \n"
-                + "order by uid\n "
-                + "OFFSET ? ROWS FETCH NEXT ? ROWS ONLY;";
+        String sql = "SELECT [uid], [fullName], [phone], [address], [email], [username], [password], [dob], [gender], [rid], [active] "
+                + "FROM [User] ";
+
+        // Add sorting
+        if (sortField != null && sortOrder != null) {
+            sql += "ORDER BY " + sortField + " " + sortOrder + " ";
+        } else {
+            sql += "ORDER BY uid ";
+        }
+
+        sql += "OFFSET ? ROWS FETCH NEXT ? ROWS ONLY;";
+
         try {
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setInt(1, (index - 1) * quantity);
@@ -123,25 +124,34 @@ public class UserDAO extends DBContext {
                         rs.getInt(11)));
             }
         } catch (SQLException e) {
+            e.printStackTrace();
         }
         return listU;
     }
 
     //search user
 //Name Phone Email Username
-    public List<User> searchU(String key, int rid, int active, int index, int quantity) {
+    public List<User> searchU(String key, int rid, int active, int index, int quantity, String sortField, String sortOrder) {
         List<User> listU = new ArrayList<>();
         String sql = "SELECT [uid], [fullName], [phone], [address], [email], [username], [password], [dob], [gender], [rid], [active] "
-                   + "FROM [dbo].[User] u "
-                   + "WHERE (u.fullName LIKE ? OR u.phone LIKE ? OR u.email LIKE ? OR u.username LIKE ?) ";
+                + "FROM [dbo].[User] u "
+                + "WHERE (u.fullName LIKE ? OR u.phone LIKE ? OR u.email LIKE ? OR u.username LIKE ?) ";
         if (rid != -1) {
             sql += "AND u.rid = ? ";
         }
         if (active != -1) {
             sql += "AND u.active = ? ";
         }
-        sql += "ORDER BY u.uid OFFSET ? ROWS FETCH NEXT ? ROWS ONLY;";
-        
+
+        // Add sorting
+        if (sortField != null && sortOrder != null) {
+            sql += "ORDER BY u." + sortField + " " + sortOrder + " ";
+        } else {
+            sql += "ORDER BY u.uid "; // Default sorting
+        }
+
+        sql += "OFFSET ? ROWS FETCH NEXT ? ROWS ONLY;";
+
         try {
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setString(1, "%" + key + "%");
@@ -158,27 +168,28 @@ public class UserDAO extends DBContext {
             int offset = Math.max(0, (index - 1) * quantity); // Ensure offset is non-negative
             stm.setInt(paramIndex++, offset);
             stm.setInt(paramIndex, quantity);
-            
+
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 listU.add(new User(rs.getInt("uid"),
-                                   rs.getString("fullName"),
-                                   rs.getString("phone"),
-                                   rs.getString("address"),
-                                   rs.getString("email"),
-                                   rs.getString("username"),
-                                   rs.getString("password"),
-                                   rs.getString("dob"),
-                                   rs.getInt("gender"),
-                                   rs.getInt("rid"),
-                                   rs.getInt("active")));
+                        rs.getString("fullName"),
+                        rs.getString("phone"),
+                        rs.getString("address"),
+                        rs.getString("email"),
+                        rs.getString("username"),
+                        rs.getString("password"),
+                        rs.getString("dob"),
+                        rs.getInt("gender"),
+                        rs.getInt("rid"),
+                        rs.getInt("active")));
             }
         } catch (SQLException e) {
             e.printStackTrace(); // Handle or log the exception properly
         }
-        
+
         return listU;
     }
+
     //get all role
     public List<Role> listRole() {
         List<Role> listR = new ArrayList<>();
@@ -194,7 +205,6 @@ public class UserDAO extends DBContext {
         }
         return listR;
     }
-    
 
     //_____________________________________Register Account______________________________
     //resgister with customer
@@ -270,6 +280,7 @@ public class UserDAO extends DBContext {
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1, username);
+            ps.setString(2, email);
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
@@ -355,12 +366,72 @@ public class UserDAO extends DBContext {
 
     }
 
+    public void updateProfile(User user) {
+         if (connection == null) {
+        throw new IllegalStateException("Database connection is not initialized.");
+    }
+    
+    if (user == null) {
+        throw new IllegalArgumentException("User object cannot be null.");
+    }
+
+    String sql = "UPDATE [User] "
+                + "SET [fullName] = ?, "
+                + "[phone] = ?, "
+                + "[address] = ?, "
+                + "[email] = ?, "
+                + "[dob] = ?, "
+                + "[gender] = ? "
+                + "WHERE [uid] = ?";
+    
+    try {
+        // Chuyển đổi ngày tháng từ String sang java.sql.Date
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        java.util.Date utilDate = sdf.parse(user.getDob());
+        java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+
+        try (PreparedStatement stm = connection.prepareStatement(sql)) {
+            stm.setString(1, user.getFullName());
+            stm.setString(2, user.getPhone());
+            stm.setString(3, user.getAddress());
+            stm.setString(4, user.getEmail());
+            stm.setDate(5, sqlDate);
+            stm.setInt(6, user.getGender());
+            stm.setInt(7, user.getUid());
+
+            int rowsUpdated = stm.executeUpdate();
+            if (rowsUpdated == 0) {
+                System.out.println("No user found with UID: " + user.getUid());
+            } else {
+                System.out.println("User profile updated successfully.");
+            }
+        }
+    } catch (ParseException e) {
+        System.err.println("Date parsing error: " + e.getMessage());
+        e.printStackTrace();
+    } catch (SQLException e) {
+        System.err.println("SQL error: " + e.getMessage());
+        e.printStackTrace();
+    }
+    }
+    
+
     public static void main(String[] args) {
         UserDAO ud = new UserDAO();
+        User user = new User();
+        user.setFullName("Chiennnnn");
+        user.setDob("02/12/2002");
+        user.setAddress("123HoanKiem");
+        user.setGender(0);
+        user.setEmail("chien19042003@gmail.com");
+        user.setPhone("1234567890");
+        user.setUid(11);
+        user.setRid(1);
+        ud.updateProfile(user);
 //        ud.verifyCode("chien19042003@gmail.com", ud.getCode());
 //         System.out.println(ud.getCode());
 //      System.out.println(ud.toSHA1("12345"));
-//ud.changePassByEmail("chien19042003@gmail.com", "12345");
+        ud.changePassByEmail("chien19042003@gmail.com", "1BvTL8F1vT5msPyDEcEhPR4m8po=");
 //        System.out.println(ud.toSHA1("123"));
 //        System.out.println(ud.checkUser("admin", ud.toSHA1("123")));
 
@@ -373,7 +444,6 @@ public class UserDAO extends DBContext {
 //        for (Role role : r) {
 //            System.out.println(role.getRid());
 //        }
-        List<User> lu = ud.searchU("", 1, 1, 0, 5);
-        System.out.println(lu.size());
+//        System.out.println(ud.checkUsername("user", ""));
     }
 }

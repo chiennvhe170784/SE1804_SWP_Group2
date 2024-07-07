@@ -12,8 +12,10 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.util.Date;
 import model.News;
+import model.User;
 
 /**
  *
@@ -44,7 +46,19 @@ public class addNews extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-       request.getRequestDispatcher("news/addNews.jsp").forward(request, response);
+       HttpSession session = request.getSession();
+        User o = (User) session.getAttribute("user");
+        if (o == null) {
+            response.sendRedirect("login");
+            return; // Ensure the method returns to avoid further execution
+        }
+        if (o.getRid() == 1 || o.getRid() == 2) {
+            request.getRequestDispatcher("news/addNews.jsp").forward(request, response);
+        }
+        else {
+            response.sendRedirect("login");
+        }
+        
     } 
 
     /** 

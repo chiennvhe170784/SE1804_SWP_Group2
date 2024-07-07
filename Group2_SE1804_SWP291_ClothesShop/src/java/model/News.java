@@ -31,7 +31,13 @@ public class News {
     }
     public News() {
     }
-
+     public News(String title, String body, int author, Date update_date, boolean status) {
+        this.title = title;
+        this.body = body;
+        this.author = author;
+        this.updateDate = update_date;
+        this.status = status;
+    }
     public News(int nId, String title, String body, int author, Date update_date, boolean status, String authorName, String thumbnail) {
         this.nId = nId;
         this.title = title;
