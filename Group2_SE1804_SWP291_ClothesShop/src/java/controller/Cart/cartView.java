@@ -14,15 +14,16 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import model.Product;
 
 /**
  *
  * @author ADMIN
  */
-public class AddToCart extends HttpServlet {
+public class cartView extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -39,10 +40,10 @@ public class AddToCart extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet AddToCart</title>");  
+            out.println("<title>Servlet cartView</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet AddToCart at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet cartView at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -59,55 +60,7 @@ public class AddToCart extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-         HttpSession session = request.getSession();
-    List<Product> cart = (List<Product>) session.getAttribute("cart");
-    Integer productInCart = (Integer)session.getAttribute("productInCart");
-    ProductDAO dao = new ProductDAO();
-    Double totalPrice =(Double) session.getAttribute("totalPrice");
-    if (totalPrice == null) {
-    totalPrice = 0.0;
-}
-    if (productInCart == null) {
-    productInCart = 0;
-}
-    if (cart == null) {
-        cart = new ArrayList<>();
-        totalPrice = 0.0;
-    }
-  
-
-    // Giả sử bạn có một phương thức để lấy sản phẩm theo ID
-    String productId = request.getParameter("pId");
-    Product product = dao.getProductById(Integer.parseInt(productId));
-    
-    if (product != null) {
-        product.setQuantity(1);
-        totalPrice += product.getPrice();
-        productInCart ++;
-        boolean found = false;
-        for (Product p : cart) {
-            if (p.getPid()== product.getPid()) { 
-                p.setQuantity(p.getQuantity() + 1);
-                found = true;
-                break;
-            }
-        }
-
-        if (!found) {
-            cart.add(product);
-        }
- 
-       session.setAttribute("productInCart", productInCart);
-       session.setAttribute("totalPrice", totalPrice);
-        session.setAttribute("cart", cart);
-    }
-
-    // Chuyển đổi danh sách sản phẩm thành JSON
-    Gson gson = new Gson();
-    String jsonCart = gson.toJson(productInCart);
-    response.setContentType("application/json");
-    response.setCharacterEncoding("UTF-8");
-    response.getWriter().write(jsonCart);
+        request.getRequestDispatcher("homepage/cart.jsp").forward(request, response);
     } 
 
     /** 
@@ -120,7 +73,32 @@ public class AddToCart extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        HttpSession session = request.getSession();
+        int productId = Integer.parseInt(request.getParameter("pId")) ;
+        int productInCart = (Integer)session.getAttribute("productInCart");
+        ProductDAO dao = new ProductDAO();
+        List<Product> cart = (List<Product>) session.getAttribute("cart");
+        Double totalPrice =(Double) session.getAttribute("totalPrice");
+        for (Product product : cart) {
+            if(product.getPid() == productId){
+                totalPrice -= (product.getPrice() * product.getQuantity());
+                productInCart -= product.getQuantity();
+                cart.remove(product);
+                break;
+            }
+        }
+          Map<String, Object> result = new HashMap<>();
+        result.put("totalPrice", totalPrice);
+        result.put("productInCart", productInCart);
+
+        Gson gson = new Gson();
+        String jsonResult = gson.toJson(result);
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        response.getWriter().write(jsonResult);
+        session.setAttribute("totalPrice", totalPrice);
+        session.setAttribute("productInCart", productInCart);
+        session.setAttribute("cart", cart);
     }
 
     /** 

@@ -61,11 +61,23 @@
                         <div class="desktop-mini-cart">
                             <div class="mini-cart">
                                 <div class="mini-cart-icon" style="display: flex; align-items: center;">
-                                    <i class="fas fa-shopping-cart"></i>
+                                    <a href="cartView" class="cart-link" style="display: flex; align-items: center; text-decoration: none; color: inherit;">
+                                        <i class="fas fa-shopping-cart"></i>
+                                    </a>
                                     <span class="counter-cart" style="margin-left: 10px;"><small>Your Cart</small></span>
-                                    <span class="counter" style="margin-left: 10px;">0</span>
+                                    <c:if test="${empty sessionScope.cart}">
+                                     
+                                            <span class="counter" style="margin-left: 10px;">0</span>
+                                       
+                                    </c:if>
+                                        <c:if test="${not empty sessionScope.cart}">
+                                    
+                                            <span class="counter" style="margin-left: 10px;">${sessionScope.productInCart}</span>
+                                       
+                                    </c:if>
+                                    
                                     <!-- Mini Cart Content -->
-                                  
+
                                 </div>
                             </div>
                         </div>
