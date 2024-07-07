@@ -265,10 +265,14 @@
         <url-pattern>/updateBrand</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+<<<<<<< HEAD
         <servlet-name>AllProduct</servlet-name>
         <url-pattern>/AllProduct</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+=======
+<<<<<<< HEAD
+>>>>>>> 0be94eb (resolve conflict)
         <servlet-name>logOut</servlet-name>
         <url-pattern>/logOut</url-pattern>
     </servlet-mapping>
