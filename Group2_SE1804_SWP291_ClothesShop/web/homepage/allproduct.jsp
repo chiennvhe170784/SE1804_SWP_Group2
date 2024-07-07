@@ -1,8 +1,3 @@
-<%-- 
-    Document   : home
-    Created on : Jun 20, 2024, 10:22:00 PM
-    Author     : KieuTuanPC
---%>
 <%@ page import="model.Category" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -13,7 +8,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>Colthes Shop</title>
+        <title>BulkShop - Electronics Shop HTML Template | Shop</title>
         <link rel="icon" href="assets/img/icon.png" type="image/gif" sizes="16x16">
         <link rel="icon" href="assets/img/icon.png" type="image/gif" sizes="18x18">
         <link rel="icon" href="assets/img/icon.png" type="image/gif" sizes="20x20">
@@ -60,7 +55,9 @@
                         </div>
                         <div class="col-lg-7">
                             <div class="top-list">
-                                <a href="login"><i class="fas fa-user"></i> Login / Register</a>
+                                <a href="#"><i class="fas fa-mobile-alt"></i> +02456 054546</a>
+                                <a href="wishlist.html"><i class="far fa-heart"></i> Wishlist</a>
+                                <a href="login.html"><i class="fas fa-user"></i> Login / Register</a>
                             </div>
                         </div>
                     </div>
@@ -264,178 +261,34 @@
                 </div>
             </div>
         </div>
-        <!--offcanvas menu area end-->
-        <!-- End Mobile Menu Area -->
-        <!-- Start Hero Area -->
-        <section class="hero-area">
-            <div class="hero-area-full owl-carousel">
-                <c:forEach var="image" items="${randomImages}">
-                    <div class="hero-slider-single" style="background-image: url('${image}');">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <div class="hero-slider-single-content">
-                                        <h2>Leading Fashion <span>Manufacturer</span></h2>
-                                        <p>Ostromi Is A Specialist In High-Quality Clothing And Accessories</p>
 
-                                        <a class="button-1" href="shop.html">Shop Now</a>
-                                    </div>
+        <!-- Start Shop Area -->
+        <section class="shop-area pt-70 pb-70">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8">
+                        <!-- Shop Top Pagination -->
+                        <div class="row section-bg pt-20 pb-20 mb-30">
+                            <div class="col-lg-5 col-md-6 order-1 order-md-2">
+                                <div class="top-bar-right">
+                                    <select class="form-select" aria-label="Default select example">
+                                        <option selected>Sort by popularity</option>
+                                        <option value="1">Sort by Name</option>
+                                        <option value="2">Sort by Price</option>
+                                        <option value="3">Sort by Ratting</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </c:forEach>
-            </div>
-        </section>
-        <!-- End Hero Area -->
-        <!-- Start Shipping Area -->
-        <div class="shipping-area container">
-            <div class="row">
-                <!-- Single -->
-                <div class="col-lg-3 col-md-6 mb-25">
-                    <div class="shipping-item">
-                        <div class="icon">
-                            <img src="assets/img/pay-1.png" alt="img">
-                        </div>
-                        <div class="content">
-                            <h4>Free Shipping</h4>
-                            <p>On all orders over $75.00</p>
-                        </div>
-                    </div>
-                </div>
-                <!-- Single -->
-                <div class="col-lg-3 col-md-6 mb-25">
-                    <div class="shipping-item">
-                        <div class="icon">
-                            <img src="assets/img/pay-2.png" alt="img">
-                        </div>
-                        <div class="content">
-                            <h4>Free Returns</h4>
-                            <p>Returns are free within 9 days</p>
-                        </div>
-                    </div>
-                </div>
-                <!-- Single -->
-                <div class="col-lg-3 col-md-6 mb-25">
-                    <div class="shipping-item">
-                        <div class="icon">
-                            <img src="assets/img/pay-3.png" alt="img">
-                        </div>
-                        <div class="content">
-                            <h4>Support 24/7</h4>
-                            <p>Contact us 24 hours a day</p>
-                        </div>
-                    </div>
-                </div>
-                <!-- Single -->
-                <div class="col-lg-3 col-md-6 mb-25">
-                    <div class="shipping-item">
-                        <div class="icon">
-                            <img src="assets/img/pay-4.png" alt="img">
-                        </div>
-                        <div class="content">
-                            <h4>100% Payment Secure</h4>
-                            <p>Your payment are safe with us.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- End Shipping Area -->
-        <!-- Start banner Area -->
-        <section class="banner-area container">
-            <div class="row">
-                <c:forEach var="image" items="${bannerImages}">
-                    <div class="col-lg-3 col-md-6 mb-30">
-                        <div class="banner-item">
-                            <a href="#">
-                                <img src="${image}" alt="img">
-                            </a>
-                        </div>
-                    </div>
-                </c:forEach>
-            </div>
-        </section>
-        <!-- End banner Area -->
-        <!-- Start Product Style -->
-        <section class="pb-50 pt-50">
-            <div class="container">
-                <div class="row">
-                    <div class="product-tab-style product-tab-style-1">
+                        <!-- Shop -->
                         <div class="row">
-                            <div class="col-lg-6">
-                                <h3 class="deal-title">Featured Products</h3>
-                            </div>
-                            <div class="col-lg-6">
-                                <ul class="nav nav-tabs" id="myTab" role="tablist">
-                                    <li class="nav-item" role="presentation">
-                                        <span class="nav-link active" id="popular1-tab" data-bs-toggle="tab" data-bs-target="#popular1" role="tab" aria-controls="popular1" aria-selected="true">Popular</span>
-                                    </li>
-                                    <li class="nav-item" role="presentation">
-                                        <span class="nav-link" id="bastsaller1-tab" data-bs-toggle="tab" data-bs-target="#bastsaller1" role="tab" aria-controls="bastsaller1" aria-selected="false">Best Seller</span>
-                                    </li>
-                                    <li class="nav-item" role="presentation">
-                                        <span class="nav-link" id="featured1-tab" data-bs-toggle="tab" data-bs-target="#featured1" role="tab" aria-controls="featured1" aria-selected="false">Featured</span>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="tab-content product-tab-full" id="myTabContent">
-                            <div class="tab-pane product-tab-item fade show active" id="popular1" role="tabpanel" aria-labelledby="popular1-tab">
-                                <div class="product-tab-slider-full owl-carousel">
-                                    <!-- Iterating through products -->
-                                    <c:forEach var="product" items="${products}">
-                                        <div class="product-single product-style-1">
-                                            <div class="product-thumbnail" style="width: 100%; height: 400px; overflow: hidden;">
-                                                <a href="product-details.html">
-                                                    <img src="${product.img}" alt="${product.name}" style="width: 100%; height: 400px; object-fit: cover; display: block;">
-                                                    <img src="${product.img}" alt="${product.name}" style="width: 100%; height: 400px; object-fit: cover; display: block;">
-                                                </a>
-                                            </div>
-                                            <div class="product-content">
-                                                <h4><a href="product-details.html">${product.name}</a></h4>
-                                                <div class="pricing">
-                                                    <span>$${product.price}</span>
-                                                </div>
-                                                <div class="product-content-btn">
-                                                    <ul>
-                                                        <li><a href="wishlist.html"><i class="far fa-heart"></i></a></li>
-                                                        <li><a class="active" href="cart.html">Add to Cart</a></li>
-                                                        <li><a href="#"><i class="far fa-eye"></i></a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </c:forEach>
-                                </div>
-                            </div>
-                            <!-- Repeat for other tabs if necessary -->
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section class="latest-product pt-70 pb-70">
-            <div class="container">
-                <!-- Section Title -->
-                <div class="row">
-                    <div class="col-12">
-                        <div class="section-headding-1 mb-50">
-                            <h2><span>Latest Products</span></h2>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-12">
-                        <div class="latest-product-full owl-carousel">
-                            <!-- Single -->
-                            <c:forEach var="product2" items="${products2}">
+                            <!-- Product Single -->
+                            <c:forEach var="product" items="${products}">
+                            <div class="col-lg-4 col-md-4 col-sm-6 mb-30">
                                 <div class="product-single">
                                     <div class="product-thumbnail">
-                                        <a href="product-details.html?pid=${product2.pid}">
-                                            <img src="${product2.img}" alt="${product2.name}" style="width: 100%; height: auto; object-fit: cover;">
-                                        </a>
+                                        <a href="product-details.html">
+                                            <img src="${product.img}" alt="${product.name}" style="width: 100%; height: 350px; object-fit: cover;">
                                         <div class="product-thumbnail-overly">
                                             <ul>
                                                 <li><a href="cart.html"><i class="fas fa-shopping-cart"></i></a></li>
@@ -445,68 +298,78 @@
                                         </div>
                                     </div>
                                     <div class="product-content">
-                                        <h4><a href="product-details.html?pid=${product2.pid}">${product2.name}</a></h4>
+                                        <h4><a href="product-details.html">${product.name}</a></h4>
                                         <div class="pricing">
-                                            <span>$${product2.price}</span>
+                                            <span>$${product.price}</span>
                                         </div>
                                     </div>
                                 </div>
+                            </div>
                             </c:forEach>
                         </div>
-                    </div>
-                </div>
-
-            </div>
-        </section>
-
-
-        <!-- End Our Latest Product -->
-
-        <!-- Start Deal Product -->
-        <!-- Start Deal Product -->
-
-        <!-- Start Product Widget List Area -->
-
-        <!-- End Product Widget List Area -->
-
-        <!-- Start Latest Blog -->
-        <section class="latest-blog pt-70 pb-40 section-border">
-            <div class="container">
-                <!-- Section Title -->
-                <div class="row">
-                    <div class="col-12">
-                        <div class="section-headding-1 mb-50">
-                            <h2><span>Latest Blogs</span></h2>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <c:forEach var="news" items="${latestNews}">
-                        <div class="col-lg-4 col-md-6 mb-30">
-                            <div class="blog-item">
-                                <div class="thumnail">
-                                    <a href="single.html"><img src="assets/img/blog/${news.nId}.jpg" alt="blog"></a>
-                                </div>
-                                <div class="content">
-                                    <ul class="auth">
-                                        <li><a href="#">by ${news.authorName}</a></li>
-                                        <li><a href="#">${news.updateDate}</a></li>
-                                        <li><a href="#">${news.categoryName}</a></li>
+                        <!-- Pagination -->
+                        <div class="row">
+                            <div class="col-12 mb-30">
+                                <div class="page-pagination text-center">
+                                    <ul>
+                                        <li><a href="#"><i class="fa fa-angle-left"></i></a></li>
+                                        <li><a href="#">1</a></li>
+                                        <li><a href="#">2</a></li>
+                                        <li><span>3</span></li>
+                                        <li><a href="#">4</a></li>
+                                        <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
                                     </ul>
-                                    <h2><a href="single.html">${news.title}</a></h2>
-                                    <p>${news.body.substring(0, 100)}...</p>
                                 </div>
                             </div>
                         </div>
-                    </c:forEach>
+                    </div>
+                    <!-- Siderbar -->
+                    <div class="col-lg-4">
+                        <!-- Single -->
+                        <div class="sidebar-widgets">
+                            <h4 class="title">Search</h4>
+                            <form action="#">
+                                <input type="search" name="search" placeholder="Search Here..">
+                                <button type="submit"><i class="fas fa-search"></i></button>
+                            </form>
+                        </div>
+                        <!-- Single -->
+                        <div class="sidebar-widgets">
+                            <h4 class="title">Latest Products</h4>
+                            <div class="widgets-latest-product-full">
+                                <!-- Single -->
+                                <div class="widgets-latest-product-single mb-30">
+                                    <div class="thumbanil">
+                                        <a href="#">
+                                            <img src="assets/img/product/1.jpg" alt="Products">
+                                        </a>
+                                    </div>
+                                    <div class="content">
+                                        <h4><a href="#">Homasy Portable</a></h4>
+                                        <div class="pricing">
+                                            <span>$200</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Single -->
+                        <div class="sidebar-widgets">
+                            <h4 class="title">Recent Post</h4>
+                            <ul>
+                                <li><a href="#">Gallery Post with Supported Animation</a></li>
+                                <li><a href="#">Announcement – Standard Post without Image</a></li>
+                                <li><a href="#">We’re the best Designers from UK</a></li>
+                                <li><a href="#">A Beautiful Day – Standard Post with Image</a></li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
+        <!-- End Shop Area -->
 
-        <!-- End Latest Blog -->
 
-        <!-- Start Instagram Feed -->
-        <!-- End Instagram Feed -->
 
         <!-- Start Footer Area -->
         <footer class="footer">
@@ -514,46 +377,46 @@
             <div class="footer-top pt-50">
                 <div class="container">
                     <div class="row">
-                        <!-- Single -->
+                        <!-- SIngle -->
                         <div class="col-lg-3 col-md-6 mb-30">
                             <div class="footer-widgets-single">
-                                <h2><img src="assets/img/logo3.jpg" alt="Shop Logo"></h2>
-                                <p>Discover the latest trends in fashion and get inspired by our new styles. Shop our current collections now at the Online Store.</p>
+                                <h2><img src="assets/img/white-logo.png"></h2>
+                                <p> Lorem ipsum dolor sit amet, consectetuipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqut enim ad minim veniamquis </p>
                             </div>
                         </div>
-                        <!-- Single -->
+                        <!-- SIngle -->
                         <div class="col-lg-3 col-md-6 mb-30">
                             <div class="footer-widgets-single">
-                                <h3>My Account</h3>
+                                <h3>My account</h3>
                                 <ul>
                                     <li><a href="#">Sign In</a></li>
                                     <li><a href="#">View Cart</a></li>
                                     <li><a href="#">My Wishlist</a></li>
-                                    <li><a href="#">Order History</a></li>
+                                    <li><a href="#">Terms & Conditions</a></li>
+                                    <li><a href="#">Contact us</a></li>
                                     <li><a href="#">Track My Order</a></li>
-                                    <li><a href="#">Help</a></li>
                                 </ul>
                             </div>
                         </div>
-                        <!-- Single -->
+                        <!-- SIngle -->
                         <div class="col-lg-3 col-md-6 mb-30">
                             <div class="footer-widgets-single">
-                                <h3>Shop</h3>
+                                <h3>Categories</h3>
                                 <ul>
-                                    <li><a href="#">New Arrivals</a></li>
-                                    <li><a href="#">Women</a></li>
-                                    <li><a href="#">Men</a></li>
-                                    <li><a href="#">Kids</a></li>
-                                    <li><a href="#">Sale</a></li>
-                                    <li><a href="#">Accessories</a></li>
+                                    <li><a href="#">Home Audio & Theater</a></li>
+                                    <li><a href="#">TV & Video</a></li>
+                                    <li><a href="#">Camera, Photo & Video</a></li>
+                                    <li><a href="#">Cell Phones & Accessories</a></li>
+                                    <li><a href="#">Headphones</a></li>
+                                    <li><a href="#">Video Games</a></li>
                                 </ul>
                             </div>
                         </div>
-                        <!-- Single -->
+                        <!-- SIngle -->
                         <div class="col-lg-3 col-md-6 mb-30">
                             <div class="footer-widgets-single">
                                 <h3>Newsletter</h3>
-                                <p>Subscribe to our newsletter to get the latest updates on new arrivals and exclusive offers.</p>
+                                <p> Get notified of new products, limited releases, and more. </p>
                                 <form action="#">
                                     <input type="email" name="email" placeholder="Your Email">
                                     <button type="submit" class="button-1">Subscribe</button>
@@ -569,23 +432,22 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="copyright-text">
-                                <p>&copy; Copyright 2024 <a href="https://yourshop.com" target="_blank">YourShop</a> All Rights Reserved.</p>
+                                <p> &copy; Copyright 2021 <a href="https://codepopular.com" target="_blank">CodePopular</a> All Rights Reserved. </p>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <ul class="footer_payment">
-                                <li><a href="#"><img src="assets/img/visa.png" alt="Visa"></a></li>
-                                <li><a href="#"><img src="assets/img/discover.png" alt="Discover"></a></li>
-                                <li><a href="#"><img src="assets/img/master_card.png" alt="MasterCard"></a></li>
-                                <li><a href="#"><img src="assets/img/paypal.png" alt="PayPal"></a></li>
-                                <li><a href="#"><img src="assets/img/american_express.png" alt="American Express"></a></li>
+                                <li><a href="#"><img src="assets/img/visa.png" alt="visa"></a></li>
+                                <li><a href="#"><img src="assets/img/discover.png" alt="discover"></a></li>
+                                <li><a href="#"><img src="assets/img/master_card.png" alt="master_card"></a></li>
+                                <li><a href="#"><img src="assets/img/paypal.png" alt="paypal"></a></li>
+                                <li><a href="#"><img src="assets/img/amarican_express.png" alt="amarican_express"></a></li>
                             </ul>
                         </div>
                     </div>
                 </div>
             </div>
         </footer>
-
         <!-- End Footer Area -->
 
 

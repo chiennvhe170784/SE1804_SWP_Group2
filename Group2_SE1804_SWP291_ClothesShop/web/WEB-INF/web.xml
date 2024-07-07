@@ -120,6 +120,10 @@
         <servlet-name>updateBrand</servlet-name>
         <servlet-class>controller.Brand.updateBrand</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AllProduct</servlet-name>
+        <servlet-class>controller.home.AllProduct</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>newsList</servlet-name>
         <url-pattern>/newsList</url-pattern>
@@ -239,6 +243,10 @@
     <servlet-mapping>
         <servlet-name>updateBrand</servlet-name>
         <url-pattern>/updateBrand</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AllProduct</servlet-name>
+        <url-pattern>/AllProduct</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

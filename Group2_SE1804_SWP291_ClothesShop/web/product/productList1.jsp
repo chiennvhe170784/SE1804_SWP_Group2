@@ -203,7 +203,6 @@
                                                 <th>Category</th>
                                                 <th>Brand</th>
                                                 <th>Gender</th>
-                                                <th>Size</th>
                                                 <th>Release Date</th>
                                                 <th>Action</th>
                                             </tr>
@@ -218,11 +217,6 @@
                                                     <td>${product.category.name}</td>
                                                     <td>${product.brand.name}</td>
                                                     <td>${product.gender.description}</td>
-                                                    <td>
-                                                        <c:forEach var="size" items="${product.sizes}" varStatus="status">
-                                                            ${size.name}<c:if test="${!status.last}">,</c:if>
-                                                        </c:forEach>
-                                                    </td>
                                                     <td>${product.releaseDate}</td>
                                                     <td>
                                                         <form action="deleteProduct" method="post" style="display: inline-block;">
