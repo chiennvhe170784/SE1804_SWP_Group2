@@ -288,9 +288,9 @@
                                 <div class="product-single">
                                     <div class="product-thumbnail">
                                         <a href="product-details.html">
-                                            <img src="${product.img}" alt="${product.name}" style="width: 100%; height: 200px; object-fit: cover;">
+                                            <img src="${product.img}" alt="${product.name}" style="width: 100%; height: 350px; object-fit: cover;">
                                         <div class="product-thumbnail-overly">
-                                            <ul>    
+                                            <ul>
                                                 <li><a href="cart.html"><i class="fas fa-shopping-cart"></i></a></li>
                                                 <li><a href="wishlist.html"><i class="far fa-heart"></i></a></li>
                                                 <li><a href="#"><i class="far fa-eye"></i></a></li>
@@ -306,7 +306,6 @@
                                 </div>
                             </div>
                             </c:forEach>
-
                         </div>
                         <!-- Pagination -->
                         <div class="row">
