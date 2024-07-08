@@ -230,7 +230,6 @@
                                     </div>
                                 </div>
                             </c:forEach>
-
                         </div>
                         <!-- Pagination -->
                         <div class="row">
