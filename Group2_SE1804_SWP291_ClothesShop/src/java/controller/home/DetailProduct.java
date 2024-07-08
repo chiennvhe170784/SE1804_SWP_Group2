@@ -21,10 +21,13 @@ public class DetailProduct extends HttpServlet {
         int pid = Integer.parseInt(request.getParameter("pid"));
 
         ProductDAO dao = new ProductDAO();
-        Product product = dao.getProductById(pid);   
+        HomeDAO dao2 = new HomeDAO();
+        Product product = dao.getProductById(pid);
         List<Size> sizes = dao.getProductSizesById(pid);
         product.setSizes(sizes);
+        List<Product> relatedProducts = dao2.getProductsByCategory(product.getCategory().getCid());
 
+        request.setAttribute("relatedProducts", relatedProducts);
         request.setAttribute("product", product);
         request.getRequestDispatcher("homepage/productdetail.jsp").forward(request, response);
     }
