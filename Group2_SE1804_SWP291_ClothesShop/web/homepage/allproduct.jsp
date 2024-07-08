@@ -103,12 +103,7 @@
                                                 <li><a href="gender-products?gender=other">Other</a></li>
                                             </ul>
                                         </li>
-                                        <li><a href="#">Collections <i class="fa fa-angle-down"></i></a>
-                                            <ul class="submenu-item">
-                                                <li><a href="collection-summer.html">Summer Collection</a></li>
-                                                <li><a href="collection-winter.html">Winter Collection</a></li>
-                                                <li><a href="collection-best-sellers.html">My Collection</a></li>
-                                            </ul>
+                                        <li><a href="#">Collections</a>
                                         </li>
                                         <li><a href="blog.html">Blog <i class="fa fa-angle-down"></i></a>
                                             <ul class="submenu-item">
@@ -157,11 +152,6 @@
                             </li>
                             <li class="menu-item-has-children">
                                 <a href="#">Collections</a>
-                                <ul class="sub-menu">
-                                    <li><a href="collection-summer.html">Summer Collection</a></li>
-                                    <li><a href="collection-winter.html">Winter Collection</a></li>
-                                    <li><a href="collection-best-sellers.html">My Collection</a></li>
-                                </ul>
                             </li>
                             <li class="menu-item-has-children">
                                 <a href="#">Blog</a>
@@ -217,12 +207,12 @@
                                                 <ul>    
                                                     <li><a href="cart.html"><i class="fas fa-shopping-cart"></i></a></li>
                                                     <li><a href="wishlist.html"><i class="far fa-heart"></i></a></li>   
-                                                    <li><a href="#"><i class="far fa-eye"></i></a></li>
+                                                    <li><a href="DetailProduct?pid=${product.pid}"><i class="far fa-eye"></i></a></li>
                                                 </ul>
                                             </div>
                                         </div>
                                         <div class="product-content">
-                                            <h4><a href="product-details.html">${product.name}</a></h4>
+                                            <h4><a href="DetailProduct?pid=${product.pid}">${product.name}</a></h4>
                                             <div class="pricing">
                                                 <span>$${product.price}</span>
                                             </div>

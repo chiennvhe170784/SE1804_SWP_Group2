@@ -47,7 +47,7 @@
                 });
 
             }
-           
+
         </script>
     </head>
     <body>
@@ -94,12 +94,7 @@
                                                 <li><a href="gender-products?gender=other">Other</a></li>
                                             </ul>
                                         </li>
-                                        <li><a href="#">Collections <i class="fa fa-angle-down"></i></a>
-                                            <ul class="submenu-item">
-                                                <li><a href="collection-summer.html">Summer Collection</a></li>
-                                                <li><a href="collection-winter.html">Winter Collection</a></li>
-                                                <li><a href="collection-best-sellers.html">My Collection</a></li>
-                                            </ul>
+                                        <li><a href="#">Collections</a>
                                         </li>
                                         <li><a href="blog.html">Blog <i class="fa fa-angle-down"></i></a>
                                             <ul class="submenu-item">
@@ -147,11 +142,6 @@
                             </li>
                             <li class="menu-item-has-children">
                                 <a href="#">Collections</a>
-                                <ul class="sub-menu">
-                                    <li><a href="collection-summer.html">Summer Collection</a></li>
-                                    <li><a href="collection-winter.html">Winter Collection</a></li>
-                                    <li><a href="collection-best-sellers.html">My Collection</a></li>
-                                </ul>
                             </li>
                             <li class="menu-item-has-children">
                                 <a href="#">Blog</a>
@@ -180,7 +170,6 @@
                                     <div class="hero-slider-single-content">
                                         <h2>Leading Fashion <span>Manufacturer</span></h2>
                                         <p>Ostromi Is A Specialist In High-Quality Clothing And Accessories</p>
-
                                         <a class="button-1" href="/clothesShop/AllProduct">Shop Now</a>
                                     </div>
                                 </div>
@@ -191,73 +180,20 @@
             </div>
         </section>
         <!-- End Hero Area -->
-        <!-- Start Shipping Area -->
-        <div class="shipping-area container">
-            <div class="row">
-                <!-- Single -->
-                <div class="col-lg-3 col-md-6 mb-25">
-                    <div class="shipping-item">
-                        <div class="icon">
-                            <img src="assets/img/pay-1.png" alt="img">
-                        </div>
-                        <div class="content">
-                            <h4>Free Shipping</h4>
-                            <p>On all orders over $75.00</p>
-                        </div>
-                    </div>
-                </div>
-                <!-- Single -->
-                <div class="col-lg-3 col-md-6 mb-25">
-                    <div class="shipping-item">
-                        <div class="icon">
-                            <img src="assets/img/pay-2.png" alt="img">
-                        </div>
-                        <div class="content">
-                            <h4>Free Returns</h4>
-                            <p>Returns are free within 9 days</p>
-                        </div>
-                    </div>
-                </div>
-                <!-- Single -->
-                <div class="col-lg-3 col-md-6 mb-25">
-                    <div class="shipping-item">
-                        <div class="icon">
-                            <img src="assets/img/pay-3.png" alt="img">
-                        </div>
-                        <div class="content">
-                            <h4>Support 24/7</h4>
-                            <p>Contact us 24 hours a day</p>
-                        </div>
-                    </div>
-                </div>
-                <!-- Single -->
-                <div class="col-lg-3 col-md-6 mb-25">
-                    <div class="shipping-item">
-                        <div class="icon">
-                            <img src="assets/img/pay-4.png" alt="img">
-                        </div>
-                        <div class="content">
-                            <h4>100% Payment Secure</h4>
-                            <p>Your payment are safe with us.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- End Shipping Area -->
         <!-- Start banner Area -->
         <section class="banner-area container">
             <div class="row">
                 <c:forEach var="image" items="${bannerImages}">
-                    <div class="col-lg-3 col-md-6 mb-30">
-                        <div class="banner-item">
+                    <div class="col-lg-3 col-md-6 mb-30" style="padding: 15px;">
+                        <div class="banner-item" style="overflow: hidden; display: flex; align-items: center; justify-content: center;">
                             <a href="#">
-                                <img src="${image}" alt="img">
+                                <img src="${image}" alt="img" style="width: 300px; height: 300px; object-fit: cover;">
                             </a>
                         </div>
                     </div>
                 </c:forEach>
             </div>
+
         </section>
         <!-- End banner Area -->
         <!-- Start Product Style -->
@@ -271,12 +207,6 @@
                             </div>
                             <div class="col-lg-6">
                                 <ul class="nav nav-tabs" id="myTab" role="tablist">
-                                    <li class="nav-item" role="presentation">
-                                        <span class="nav-link active" id="popular1-tab" data-bs-toggle="tab" data-bs-target="#popular1" role="tab" aria-controls="popular1" aria-selected="true">Popular</span>
-                                    </li>
-                                    <li class="nav-item" role="presentation">
-                                        <span class="nav-link" id="bastsaller1-tab" data-bs-toggle="tab" data-bs-target="#bastsaller1" role="tab" aria-controls="bastsaller1" aria-selected="false">Best Seller</span>
-                                    </li>
                                     <li class="nav-item" role="presentation">
                                         <span class="nav-link" id="featured1-tab" data-bs-toggle="tab" data-bs-target="#featured1" role="tab" aria-controls="featured1" aria-selected="false">Featured</span>
                                     </li>
@@ -312,9 +242,7 @@
                                     </c:forEach>
                                 </div>
                             </div>
-                            <!-- Repeat for other tabs if necessary -->
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -337,7 +265,7 @@
                                 <div class="product-single">
                                     <div class="product-thumbnail">
                                         <a href="product-details.html?pid=${product2.pid}">
-                                            <img src="${product2.img}" alt="${product2.name}" style="width: 100%; height: auto; object-fit: cover;">
+                                            <img src="${product2.img}" alt="${product2.name}" style="width: 100%; height: 300px; object-fit: cover; border:2px solid">
                                         </a>
                                         <div class="product-thumbnail-overly">
                                             <ul>
