@@ -161,10 +161,7 @@
                 </div>
             </div>
         </div>
-
-
         <!-- Start Shop Area -->
-         <!-- Start Shop Area -->
         <section class="shop-area pt-70 pb-70">
             <div class="container">
                 <!-- Product Details -->
@@ -172,7 +169,7 @@
                     <div class="col-md-5 col-lg-6">
                         <div class="modal_tab">  
                             <div class="tab-content product-details-large">
-                                <div class="tab-pane fade show active" id="detailstab1" role="tabpanel" >
+                                <div class="tab-pane fade show active" id="detailstab1" role="tabpanel">
                                     <div class="modal_tab_img">
                                         <a href="#"><img src="${product.img}" alt="${product.name}"></a>    
                                     </div>
@@ -185,7 +182,7 @@
                             <h2>${product.name}</h2>
                             <br>
                             <div class="pricing">
-                                <span>$${product.price}</span>
+                                <span><fmt:formatNumber value="${product.price}" type="currency" currencySymbol="$"/></span>
                             </div>
                             <br>
                             <div class="variants_size">
@@ -196,23 +193,20 @@
                                     </c:forEach>
                                 </select>
                             </div>
-                            <div class="variants_color">
-                                <h5>Color</h5>
-                                <select class="form-select">
-                                    <option selected="">RED</option>
-                                    <option value="1">GREEN</option>
-                                    <option value="2">BLUE</option>
-                                    <option value="3">YELLOW</option>
-                                    <option value="3">BLACK</option>
-                                </select>
-                            </div>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
                             <div class="modal_add_to_cart">
-                                <form action="CartServlet" method="post">
+                                <form action="addToCart" method="post">
                                     <span class="quantity">
-                                        <input type="number" min="1" max="${product.quantity}" step="1" value="1">
+                                        <input type="number" name="quantity" min="1" max="1000" step="1" value="1">
                                     </span>
-                                    <input type="hidden" name="pid" value="${product.pid}">
-                                    <button class="button-1" type="submit">Add to Cart</button>
+                                    <input type="hidden" name="productId" value="${product.pid}">
+                                    <button class="button-1" type="submit">Add to cart</button>
                                 </form>
                             </div>
                         </div>
@@ -233,22 +227,26 @@
                         </ul>
                         <div class="tab-content" id="myTabContent">
                             <div class="tab-pane fade show active" id="Description" role="tabpanel" aria-labelledby="Description-tab">
-                                <p>${product.describe}</p>
+                                <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque id mauris tempus, feugiat justo sed, auctor felis. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Mauris gravida libero a massa posuere, nec sollicitudin erat aliquam. Fusce sed tincidunt nisi. Nunc condimentum laoreet lorem commodo vehicula. Maecenas ultrices viverra diam at mollis. Nunc euismod ex quis luctus scelerisque. Sed sodales lobortis iaculis. Aliquam ultricies cursus felis non sollicitudin. </p>
                             </div>
                             <div class="tab-pane fade" id="information" role="tabpanel" aria-labelledby="information-tab">
                                 <table class="table table-bordered">
                                     <tbody>
                                         <tr>
-                                            <td>Category</td>
-                                            <td>${product.category.name}</td>
+                                            <td>Capacity</td>
+                                            <td>5 Kg</td>
                                         </tr>
                                         <tr>
-                                            <td>Brand</td>
-                                            <td>${product.brand.name}</td>
+                                            <td>Color</td>
+                                            <td>Black, Brown, Red,</td>
                                         </tr>
                                         <tr>
-                                            <td>Gender</td>
-                                            <td>${product.gender.name}</td>
+                                            <td>Water Resistant</td>
+                                            <td>Yes</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Material</td>
+                                            <td>Artificial Leather</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -256,7 +254,7 @@
                             <div class="tab-pane fade" id="Review" role="tabpanel" aria-labelledby="Review-tab">
                                 <div class="product-review">
                                     <div class="product-review-list">
-                                        <h3>2 Review For ${product.name}</h3>
+                                        <h3>2 Review For Blue Dress For Woman</h3>
                                         <ul>
                                             <!-- Single -->
                                             <li class="review-single">
@@ -321,11 +319,8 @@
                 </div>
             </div>
         </section>
-        <!-- End Shop Area -->
-        <!-- Start Our Latest Product -->
         <section class="latest-product pt-70 pb-70 section-bg">
             <div class="container">
-                <!-- Section Title -->
                 <div class="row">
                     <div class="col-12">
                         <div class="section-headding-1 mb-50">
@@ -336,7 +331,6 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="latest-product-full owl-carousel">
-                            <!-- Single -->
                             <div class="product-single">
                                 <div class="product-thumbnail">
                                     <a href="product-details.html"><img src="assets/img/product/8.jpg" alt="product"></a>
@@ -351,154 +345,60 @@
                                 <div class="product-content">
                                     <h4><a href="product-details.html">Funda Para Ebook 7" 128GB full HD</a></h4>
                                     <div class="pricing">
-                                        <span>$200 <del>$210</del></span>
+                                        <span>$200</span>
                                     </div>
                                 </div>
                             </div>
-                            <div class="product-single">
-                                <div class="product-thumbnail">
-                                    <a href="product-details.html"><img src="assets/img/product/1.jpg" alt="product"></a>
-                                    <div class="product-thumbnail-overly">
-                                        <ul>
-                                            <li><a href="cart.html"><i class="fas fa-shopping-cart"></i></a></li>
-                                            <li><a href="wishlist.html"><i class="far fa-heart"></i></a></li>
-                                            <li><a href="#"><i class="far fa-eye"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="product-content">
-                                    <h4><a href="product-details.html">Funda Para Ebook 7" 128GB full HD</a></h4>
-                                    <div class="pricing">
-                                        <span>$200 <del>$210</del></span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="product-single">
-                                <div class="product-thumbnail">
-                                    <a href="product-details.html"><img src="assets/img/product/3.jpg" alt="product"></a>
-                                    <div class="product-thumbnail-overly">
-                                        <ul>
-                                            <li><a href="cart.html"><i class="fas fa-shopping-cart"></i></a></li>
-                                            <li><a href="wishlist.html"><i class="far fa-heart"></i></a></li>
-                                            <li><a href="#"><i class="far fa-eye"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="product-content">
-                                    <h4><a href="#">Funda Para Ebook 7" 128GB full HD</a></h4>
-                                    <div class="pricing">
-                                        <span>$200 <del>$210</del></span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="product-single">
-                                <div class="product-thumbnail">
-                                    <a href="product-details.html"><img src="assets/img/product/4.jpg" alt="product"></a>
-                                    <div class="product-thumbnail-overly">
-                                        <ul>
-                                            <li><a href="cart.html"><i class="fas fa-shopping-cart"></i></a></li>
-                                            <li><a href="wishlist.html"><i class="far fa-heart"></i></a></li>
-                                            <li><a href="#"><i class="far fa-eye"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="product-content">
-                                    <h4><a href="#">Funda Para Ebook 7" 128GB full HD</a></h4>
-                                    <div class="pricing">
-                                        <span>$200 <del>$210</del></span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="product-single">
-                                <div class="product-thumbnail">
-                                    <a href="product-details.html"><img src="assets/img/product/5.jpg" alt="product"></a>
-                                    <div class="product-thumbnail-overly">
-                                        <ul>
-                                            <li><a href="cart.html"><i class="fas fa-shopping-cart"></i></a></li>
-                                            <li><a href="wishlist.html"><i class="far fa-heart"></i></a></li>
-                                            <li><a href="#"><i class="far fa-eye"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="product-content">
-                                    <h4><a href="#">Funda Para Ebook 7" 128GB full HD</a></h4>
-                                    <div class="pricing">
-                                        <span>$200 <del>$210</del></span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="product-single">
-                                <div class="product-thumbnail">
-                                    <a href="product-details.html"><img src="assets/img/product/6.jpg" alt="product"></a>
-                                    <div class="product-thumbnail-overly">
-                                        <ul>
-                                            <li><a href="cart.html"><i class="fas fa-shopping-cart"></i></a></li>
-                                            <li><a href="wishlist.html"><i class="far fa-heart"></i></a></li>
-                                            <li><a href="#"><i class="far fa-eye"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="product-content">
-                                    <h4><a href="#">Funda Para Ebook 7" 128GB full HD</a></h4>
-                                    <div class="pricing">
-                                        <span>$200 <del>$210</del></span>
-                                    </div>
-                                </div>
-                            </div>
-
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-        <!-- End Our Latest Product -->
-
-        <!-- Start Footer Area -->
         <footer class="footer">
             <!-- Footer Top -->
             <div class="footer-top pt-50">
                 <div class="container">
                     <div class="row">
-                        <!-- SIngle -->
+                        <!-- Single -->
                         <div class="col-lg-3 col-md-6 mb-30">
                             <div class="footer-widgets-single">
-                                <h2><img src="assets/img/white-logo.png"></h2>
-                                <p> Lorem ipsum dolor sit amet, consectetuipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqut enim ad minim veniamquis </p>
+                                <h2><img src="assets/img/logo3.jpg" alt="Shop Logo"></h2>
+                                <p>Discover the latest trends in fashion and get inspired by our new styles. Shop our current collections now at the Online Store.</p>
                             </div>
                         </div>
-                        <!-- SIngle -->
+                        <!-- Single -->
                         <div class="col-lg-3 col-md-6 mb-30">
                             <div class="footer-widgets-single">
-                                <h3>My account</h3>
+                                <h3>My Account</h3>
                                 <ul>
                                     <li><a href="#">Sign In</a></li>
                                     <li><a href="#">View Cart</a></li>
                                     <li><a href="#">My Wishlist</a></li>
-                                    <li><a href="#">Terms & Conditions</a></li>
-                                    <li><a href="#">Contact us</a></li>
+                                    <li><a href="#">Order History</a></li>
                                     <li><a href="#">Track My Order</a></li>
+                                    <li><a href="#">Help</a></li>
                                 </ul>
                             </div>
                         </div>
-                        <!-- SIngle -->
+                        <!-- Single -->
                         <div class="col-lg-3 col-md-6 mb-30">
                             <div class="footer-widgets-single">
-                                <h3>Categories</h3>
+                                <h3>Shop</h3>
                                 <ul>
-                                    <li><a href="#">Home Audio & Theater</a></li>
-                                    <li><a href="#">TV & Video</a></li>
-                                    <li><a href="#">Camera, Photo & Video</a></li>
-                                    <li><a href="#">Cell Phones & Accessories</a></li>
-                                    <li><a href="#">Headphones</a></li>
-                                    <li><a href="#">Video Games</a></li>
+                                    <li><a href="#">New Arrivals</a></li>
+                                    <li><a href="#">Women</a></li>
+                                    <li><a href="#">Men</a></li>
+                                    <li><a href="#">Kids</a></li>
+                                    <li><a href="#">Sale</a></li>
+                                    <li><a href="#">Accessories</a></li>
                                 </ul>
                             </div>
                         </div>
-                        <!-- SIngle -->
+                        <!-- Single -->
                         <div class="col-lg-3 col-md-6 mb-30">
                             <div class="footer-widgets-single">
                                 <h3>Newsletter</h3>
-                                <p> Get notified of new products, limited releases, and more. </p>
+                                <p>Subscribe to our newsletter to get the latest updates on new arrivals and exclusive offers.</p>
                                 <form action="#">
                                     <input type="email" name="email" placeholder="Your Email">
                                     <button type="submit" class="button-1">Subscribe</button>
@@ -510,15 +410,10 @@
             </div>
             <!-- Footer Bottom -->
         </footer>
-        <!-- End Footer Area -->
-
-
 
         <div class="scroll-area">
             <i class="fa fa-angle-up"></i>
         </div>
-
-
         <!-- Js File -->
         <script src="assets/js/modernizr.min.js"></script>
         <script src="assets/js/jquery-3.5.1.min.js"></script>

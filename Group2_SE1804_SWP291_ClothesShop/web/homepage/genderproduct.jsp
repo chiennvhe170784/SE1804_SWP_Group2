@@ -103,12 +103,7 @@
                                                 <li><a href="gender-products?gender=other">Other</a></li>
                                             </ul>
                                         </li>
-                                        <li><a href="#">Collections <i class="fa fa-angle-down"></i></a>
-                                            <ul class="submenu-item">
-                                                <li><a href="collection-summer.html">Summer Collection</a></li>
-                                                <li><a href="collection-winter.html">Winter Collection</a></li>
-                                                <li><a href="collection-best-sellers.html">My Collection</a></li>
-                                            </ul>
+                                        <li><a href="#">Collections</a>
                                         </li>
                                         <li><a href="blog.html">Blog <i class="fa fa-angle-down"></i></a>
                                             <ul class="submenu-item">
@@ -156,11 +151,6 @@
                             </li>
                             <li class="menu-item-has-children">
                                 <a href="#">Collections</a>
-                                <ul class="sub-menu">
-                                    <li><a href="collection-summer.html">Summer Collection</a></li>
-                                    <li><a href="collection-winter.html">Winter Collection</a></li>
-                                    <li><a href="collection-best-sellers.html">My Collection</a></li>
-                                </ul>
                             </li>
                             <li class="menu-item-has-children">
                                 <a href="#">Blog</a>
