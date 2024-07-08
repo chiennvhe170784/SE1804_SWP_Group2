@@ -51,6 +51,7 @@ public class OrderDAO extends DBContext {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setInt(1, numberP);
             st.setInt(2, pid);
+            st.executeUpdate();
         } catch (SQLException e) {
         }
     }
