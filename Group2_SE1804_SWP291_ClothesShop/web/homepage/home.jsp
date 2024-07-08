@@ -99,7 +99,7 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="logo-2">
-                                <h2><a href="index.html"><img src="assets/img/logo.png"></a></h2>
+                                <h2><a href="/clothesShop/Home"><img src="assets/img/logo.png"></a></h2>
                             </div>
                             <div class="canvas_open">
                                 <a href="javascript:void(0)"><i class="fas fa-bars"></i></a>
@@ -118,10 +118,10 @@
                             <div class="menu" >
                                 <nav>
                                     <ul>
-                                        <li><a href="/Home">Home</a></li>
-                                        <li><a href="shop.html">Shop <i class="fa fa-angle-down"></i></a>
+                                        <li><a href="/clothesShop/Home">Home</a></li>
+                                        <li><a href="/clothesShop/AllProduct">Shop <i class="fa fa-angle-down"></i></a>
                                             <ul class="submenu-item">
-                                                <li><a href="shop.html">All Products</a></li>
+                                                <li><a href="/clothesShop/AllProduct">All Products</a></li>
                                                 <li><a href="shop-men.html">Men</a></li>
                                                 <li><a href="shop-women.html">Women</a></li>
                                                 <li><a href="shop-new-arrivals.html">Unisex</a></li>
@@ -217,7 +217,7 @@
                                         <h2>Leading Fashion <span>Manufacturer</span></h2>
                                         <p>Ostromi Is A Specialist In High-Quality Clothing And Accessories</p>
 
-                                        <a class="button-1" href="shop.html">Shop Now</a>
+                                        <a class="button-1" href="/clothesShop/AllProduct">Shop Now</a>
                                     </div>
                                 </div>
                             </div>
@@ -503,26 +503,6 @@
                 </div>
             </div>
             <!-- Footer Bottom -->
-            <div class="footer-bottom pt-30 pb-30">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="copyright-text">
-                                <p>&copy; Copyright 2024 <a href="https://yourshop.com" target="_blank">YourShop</a> All Rights Reserved.</p>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <ul class="footer_payment">
-                                <li><a href="#"><img src="assets/img/visa.png" alt="Visa"></a></li>
-                                <li><a href="#"><img src="assets/img/discover.png" alt="Discover"></a></li>
-                                <li><a href="#"><img src="assets/img/master_card.png" alt="MasterCard"></a></li>
-                                <li><a href="#"><img src="assets/img/paypal.png" alt="PayPal"></a></li>
-                                <li><a href="#"><img src="assets/img/american_express.png" alt="American Express"></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </footer>
 
         <!-- End Footer Area -->
