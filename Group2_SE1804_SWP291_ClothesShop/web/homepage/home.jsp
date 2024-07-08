@@ -31,7 +31,7 @@
         <script type="text/javascript">
 
             function addToCart(productId) {
-                var pId = productId; 
+                var pId = productId;
                 var totalProduct;
                 $.ajax({
                     type: 'GET',
@@ -111,7 +111,7 @@
                                         <span class="counter">02</span>
                                         <span class="counter-cart"><small>Your Cart</small></span>
                                         <!-- Mini Cart Content -->
-                                      
+
                                     </div>
                                 </div>
                             </div>
@@ -122,17 +122,16 @@
                                         <li><a href="/clothesShop/AllProduct">Shop <i class="fa fa-angle-down"></i></a>
                                             <ul class="submenu-item">
                                                 <li><a href="/clothesShop/AllProduct">All Products</a></li>
-                                                <li><a href="shop-men.html">Men</a></li>
-                                                <li><a href="shop-women.html">Women</a></li>
-                                                <li><a href="shop-new-arrivals.html">Unisex</a></li>
-                                                <li><a href="shop-sale.html">Sale</a></li>
+                                                <li><a href="gender-products?gender=men">Men</a></li>
+                                                <li><a href="gender-products?gender=women">Women</a></li>
+                                                <li><a href="gender-products?gender=other">Other</a></li>
                                             </ul>
                                         </li>
                                         <li><a href="#">Collections <i class="fa fa-angle-down"></i></a>
                                             <ul class="submenu-item">
                                                 <li><a href="collection-summer.html">Summer Collection</a></li>
                                                 <li><a href="collection-winter.html">Winter Collection</a></li>
-                                                <li><a href="collection-best-sellers.html">Best Sellers</a></li>
+                                                <li><a href="collection-best-sellers.html">My Collection</a></li>
                                             </ul>
                                         </li>
                                         <li><a href="blog.html">Blog <i class="fa fa-angle-down"></i></a>
@@ -169,16 +168,14 @@
                     </div>
                     <div id="menu" class="text-left">
                         <ul class="offcanvas_main_menu">
-                            <li><a href="index.html">Home</a></li>
-                            <li><a href="about.html">About Us</a></li>
+                            <li><a href="/clothesShop/Home">Home</a></li>
                             <li class="menu-item-has-children">
-                                <a href="#">Shop</a>
+                                <a href="/clothesShop/AllProduct">Shop</a>
                                 <ul class="sub-menu">
-                                    <li><a href="shop.html">All Products</a></li>
-                                    <li><a href="shop-men.html">Men</a></li>
-                                    <li><a href="shop-women.html">Women</a></li>
-                                    <li><a href="shop-kids.html">Unisex</a></li>
-                                    <li><a href="shop-sale.html">Sale</a></li>
+                                    <li><a href="/clothesShop/AllProduct">All Products</a></li>
+                                    <li><a href="gender-products?gender=men">Men</a></li>
+                                    <li><a href="gender-products?gender=women">Women</a></li>
+                                    <li><a href="gender-products?gender=other">Other</a></li>
                                 </ul>
                             </li>
                             <li class="menu-item-has-children">
@@ -186,7 +183,7 @@
                                 <ul class="sub-menu">
                                     <li><a href="collection-summer.html">Summer Collection</a></li>
                                     <li><a href="collection-winter.html">Winter Collection</a></li>
-                                    <li><a href="collection-best-sellers.html">Best Sellers</a></li>
+                                    <li><a href="collection-best-sellers.html">My Collection</a></li>
                                 </ul>
                             </li>
                             <li class="menu-item-has-children">
