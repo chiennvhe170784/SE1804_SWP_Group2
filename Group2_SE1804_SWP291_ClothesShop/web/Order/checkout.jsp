@@ -1,10 +1,9 @@
 <%-- 
-    Document   : cart
-    Created on : 07/07/2024, 8:28:36 AM
-    Author     : ADMIN
+    Document   : checkOut
+    Created on : Jul 8, 2024, 11:56:17 PM
+    Author     : chien
 --%>
-<%@ page import="java.util.ArrayList" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html  class="no-js" lang="en">
@@ -12,7 +11,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>Colthes Shop</title>
+        <title>BulkShop - Electronics Shop HTML Template | Checkout</title>
         <link rel="icon" href="assets/img/icon.png" type="image/gif" sizes="16x16">
         <link rel="icon" href="assets/img/icon.png" type="image/gif" sizes="18x18">
         <link rel="icon" href="assets/img/icon.png" type="image/gif" sizes="20x20">
@@ -26,33 +25,7 @@
         <link rel="stylesheet" href="assets/css/normalize.css">
         <link rel="stylesheet" href="assets/css/style.css">
         <link rel="stylesheet" href="assets/css/responsive.css">
- <script type="text/javascript">
-    function removeProduct(pid){
-                    var result =  confirm("Confirm remove this product?");
-                    var totalAmountElement = document.querySelector('.total-amount');
-                   
-                    var pId = pid; 
-                     var element = document.getElementById(pid);
-        if (result) {
-                    $.ajax({
-    type: 'POST',
-    data: {pId:pId},
-    url: 'cartView',
-    success: (result) => {
-        element.remove();
-        var totalPrice = result.totalPrice;
-        var productInCart = result.productInCart;
-                    $('.counter').text(productInCart);
-                    totalAmountElement.textContent = totalPrice + "$";
-    },
-    error: function () {
-     console.log('Remove fail something went wrong');
-    }
-});
-                }               
-    }   
-    
-        </script>
+
     </head>
     <body>
         <div id="preloader" class="preeloader">
@@ -77,7 +50,7 @@
             <!-- Header Top -->
 
             <!-- Header Middle -->
-            <%@include file="header.jsp" %>
+            <%@include file="../homepage/header.jsp" %>
             <!-- Header Bottom -->
             <div class="header-bottm">
                 <div class="container">
@@ -327,10 +300,10 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="breadcrumb-content">
-                            <h2>Cart</h2>
+                            <h2>Checkout</h2>
                             <ul>
                                 <li><a href="index.html">Home</a></li>
-                                <li class="active">Cart Page</li>
+                                <li class="active">Checkout</li>
                             </ul>
                         </div>
                     </div>
@@ -339,77 +312,121 @@
         </div>
         <!-- End BreadCrumb Area -->
 
-        <!-- Start Cart page -->
-        <section class="cart-page pt-70 pb-70">
+        <!-- Start Chekout Page -->
+        <section class="checkout-page-wrapper pt-70 pb-70">
             <div class="container">
                 <div class="row">
-                    <div class="col-12">
-                        <div class="cart-table table-responsive">
-                            <table class="table table-bordered align-middle text-center">
-                                <thead>
-                                    <tr>
-                                        <th class="pro-thumbnail">Thumbnail</th>
-                                        <th class="pro-title">Product</th>
-                                        <th class="pro-price">Price</th>
-                                        <th class="pro-quantity">Quantity</th>
-                                        <th class="pro-subtotal">Total</th>
-                                        <th class="pro-remove">Remove</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <c:if test="${not empty sessionScope.cart}">
-                                        <c:forEach var="p" items="${sessionScope.cart}">
-                                            <tr id="${p.pid}">
-                                                <td class="pro-thumbnail"><a href="#"><img class="img-fluid" src="${p.img}" alt="Product"></a></td>
-                                                <td class="pro-title"><a href="#">${p.name}</a></td>
-                                                <td class="pro-price"><span>${p.price} $</span></td>
-                                                <td class="pro-quantity">
-                                                    <span class="quantity">
-                                                        ${p.quantity}
-                                                    </span>
-                                                </td>
-                                                <td class="pro-subtotal">
-                                                    <span> <c:out value="${p.price * p.quantity}" /> $</span>
-                                                </td>
-                                                <td class="pro-remove"><a onclick="removeProduct(${p.pid})" ><i class="fas fa-times"></i></a></td>
-                                            </tr>
-                                        </c:forEach>
-                                    </c:if>
-                                    <c:if test="${empty sessionScope.cart}">
-                                        <tr>
-                                            <td colspan="6" style="text-align: center;">Your cart is empty.</td>
-                                        </tr>
-                                    </c:if>
-                                </tbody>
-                            </table>
+                    <div class="col-lg-6">
+                        <div class="checkout-billing-details-wrap">
+                            <h2>Billing Details</h2>
+                            <div class="billing-form-wrap">
+                                <form action="#">
+
+                                    <div class="single-input-item">
+                                        <label for="f_name" class="required">Name</label>
+                                        <input readonly="" type="text" id="f_name" placeholder="${sessionScope.user.fullName}" required="required">
+                                    </div>
+
+
+                                    <div class="single-input-item">
+                                        <label for="company_name" class="required"> Address </label>
+                                        <input type="text" id="company_name" placeholder="Address Name ">
+                                    </div>
+
+
+                                    <div class="single-input-item">
+                                        <label for="phone" class="required">Phone</label>
+                                        <input type="text" id="phone" readonly="" placeholder="${sessionScope.user.phone}">
+                                    </div>
+
+
+                                    <div class="single-input-item">
+                                        <label for="order_note" class="required">Order Note</label>
+                                        <textarea name="order_note" id="order_note" placeholder="Order Note"></textarea>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
-
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-5 ml-auto">
-                        <!-- Cart Calculation Area -->
-                        <div class="cart-calculator-wrapper section-bg mt-30">
-                            <div class="cart-calculate-items">
-                                <h3>Cart Totals</h3>
-                                <div class="table-responsive">
-                                    <table class="table">
-                                        <tbody><tr>
-
-                                            <tr class="total">
-                                                <td>Total</td>
-                                                <td class="total-amount">${sessionScope.totalPrice} $</td>
+                    <div class="col-lg-6">
+                        <div class="order-summary-details">
+                            <h2>Your Order Summary</h2>
+                            <div class="order-summary-content">
+                                <div class="order-summary-table table-responsive text-center">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>Products</th>
+                                                <th>Total</th>
                                             </tr>
-                                        </tbody></table>
+                                        </thead>
+                                        <tbody>
+                                            <c:if test="${not empty sessionScope.cart}">
+                                                <c:forEach var="p" items="${sessionScope.cart}">
+                                                    <tr>
+                                                        <td><a href="#">${p.name}<strong> × ${p.quantity}</strong></a>
+                                                        </td>
+                                                        <td>$${p.price * p.quantity}</td>
+                                                    </tr>
+                                                </c:forEach>
+                                            </c:if>
+                                        </tbody>
+                                        <tfoot>
+<!--                                            <tr>
+                                                <td>Sub Total</td>
+                                                <td><strong>$${sessionScope.totalPrice}</strong></td>
+                                            </tr>-->
+<!--                                            <tr>
+                                                <td>Shipping</td>
+                                                <td class="d-flex justify-content-left">
+                                                    <ul class="shipping-type">
+                                                        <li>
+                                                            <div class="custom-control custom-radio">
+                                                                <input type="radio" id="flatrate" name="shipping" class="custom-control-input" checked="">
+                                                                <label class="custom-control-label" for="flatrate">Flat
+                                                                    Rate: $70.00</label>
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="custom-control custom-radio">
+                                                                <input type="radio" id="freeshipping" name="shipping" class="custom-control-input">
+                                                                <label class="custom-control-label" for="freeshipping">Free
+                                                                    Shipping</label>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </td>
+                                            </tr>-->
+                                            <tr>
+                                                <td>Total Amount</td>
+                                                <td><strong>$470</strong></td>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                    <div class="form-group payment">
+                                        <!--                                        <h4 class="deal-title">Payment Method</h4>
+                                                                                <p>Check / Money order</p>
+                                                                                <p>Credit Cart (saved)</p>
+                                                                                <ul>
+                                                                                    <li><label class="inline"><input class="form-check-input" type="checkbox"><span class="input"></span>Direct Bank
+                                                                                            Transder</label></li>
+                                                                                    <li><label class="inline"><input class="form-check-input" type="checkbox"><span class="input"></span>Cash on Delivery</label>
+                                                                                    </li>
+                                                                                    <li><label class="inline"><input class="form-check-input" type="checkbox"><span class="input"></span>Paypal</label>
+                                                                                    </li>
+                                                                                </ul>-->
+                                        <!--                                        <p class="credit">You can pay with your credit<br> card if you don't have a paypal account</p>-->
+                                        <span class="grand-total">Grand Total :  <span>$${sessionScope.totalPrice}</span></span>
+                                        <button type="submit" class="button-1">Place Order Now</button>
+                                    </div>
                                 </div>
                             </div>
-                            <a href="checkout" class="button-1">Proceed To Checkout</a>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-        <!-- End Cart page -->
+        <!-- End Chekout Page -->
 
         <!-- Start Footer Area -->
         <footer class="footer">
