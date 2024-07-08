@@ -124,6 +124,23 @@
         <servlet-name>AllProduct</servlet-name>
         <servlet-class>controller.home.AllProduct</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>logOut</servlet-name>
+        <servlet-class>controller.Login.logOut</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>userProfile</servlet-name>
+        <servlet-class>controller.User.userProfile</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddToCart</servlet-name>
+        <servlet-class>controller.Cart.AddToCart</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>cartView</servlet-name>
+        <servlet-class>controller.Cart.cartView</servlet-class>
+    </servlet>
+
     <servlet-mapping>
         <servlet-name>newsList</servlet-name>
         <url-pattern>/newsList</url-pattern>
@@ -248,9 +265,26 @@
         <servlet-name>AllProduct</servlet-name>
         <url-pattern>/AllProduct</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>logOut</servlet-name>
+        <url-pattern>/logOut</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>userProfile</servlet-name>
+        <url-pattern>/userProfile</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddToCart</servlet-name>
+        <url-pattern>/AddToCart</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>cartView</servlet-name>
+        <url-pattern>/cartView</url-pattern>
+    </servlet-mapping>
+
     <session-config>
         <session-timeout>
-            30
+            60
         </session-timeout>
     </session-config>
 </web-app>

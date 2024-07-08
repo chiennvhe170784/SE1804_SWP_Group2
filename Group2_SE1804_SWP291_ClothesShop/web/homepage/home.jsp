@@ -38,49 +38,16 @@
                     data: {pId: pId},
                     url: 'AddToCart',
                     success: (result) => {
-                        var cart = result;
-                        totalProduct = cart.length;
+                        totalProduct = result;
                         $('.counter').text(totalProduct);
                     },
                     error: function () {
-                        showError('Delete fail something went wrong', 3000);
+                        console.log('something went wrong');
                     }
                 });
 
             }
-            function showAlert(message, duration) {
-                // Tạo phần tử alert mới
-                let alertDiv = document.createElement('div');
-                alertDiv.className = 'alert alert-success';
-                alertDiv.role = 'alert';
-                alertDiv.innerHTML = message;
-                alertDiv.style = 'margin-top: 50px;z-index: 9999; position: fixed; top: 0; right: 0;width: 300px;height:50px';
-                let wrapper = document.getElementById('notifications');
-                // Thêm phần tử alert vào body hoặc một container cụ thể
-                wrapper.appendChild(alertDiv);
-
-                // Tự động ẩn phần tử alert sau thời gian đã định
-                setTimeout(() => {
-                    alertDiv.remove();
-                }, duration);
-            }
-            function showError(message, duration) {
-                // Tạo phần tử alert mới
-                let alertDiv = document.createElement('div');
-                alertDiv.className = 'alert alert-danger';
-                alertDiv.role = 'alert';
-                alertDiv.innerHTML = message;
-                alertDiv.style = 'margin-top: 50px;z-index: 9999; position: fixed; top: 0; right: 0;width: 300px;height:50px'
-                let wrapper = document.getElementById('notifications');
-                // Thêm phần tử alert vào body hoặc một container cụ thể
-                wrapper.appendChild(alertDiv);
-
-                // Tự động ẩn phần tử alert sau thời gian đã định
-                setTimeout(() => {
-                    alertDiv.remove();
-                }, duration);
-            }
-
+           
         </script>
     </head>
     <body>
