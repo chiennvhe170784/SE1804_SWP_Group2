@@ -6,17 +6,24 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
-import model.Category;
 import model.Product;
 
-public class AllProduct extends HttpServlet {
+public class GenderProductServlet extends HttpServlet {
+
+    private int getGenderId(String gender) {
+        return switch (gender.toLowerCase()) {
+            case "men" -> 1;
+            case "women" -> 2;
+            default -> 3;
+        };
+    }
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
+        String gender = request.getParameter("gender");
         String sortBy = request.getParameter("sortBy");
         if (sortBy == null) {
             sortBy = "name";
@@ -28,20 +35,24 @@ public class AllProduct extends HttpServlet {
             page = Integer.parseInt(request.getParameter("page"));
         }
 
+        int genderId = getGenderId(gender);
+
         HomeDAO homeDAO = new HomeDAO();
-        List<Product> products = homeDAO.getSortedAndPaginatedProducts(sortBy, page, pageSize);
-        ArrayList<Category> categories = homeDAO.getAllCate();
-        int totalProducts = homeDAO.getTotalProducts();
+        List<Product> products = homeDAO.getProductsByGender(genderId, sortBy, page, pageSize);
+        int totalProducts = homeDAO.getTotalProductsByGender(genderId);
         int totalPages = (int) Math.ceil((double) totalProducts / pageSize);
-        List<Product> products2 = homeDAO.getLatestProducts(3);
-        request.setAttribute("products2", products2);
-        request.setAttribute("categories", categories);
+
+        if (products.isEmpty()) {
+            request.setAttribute("message", "No products available for the selected gender.");
+        }
+
         request.setAttribute("products", products);
         request.setAttribute("currentPage", page);
         request.setAttribute("totalPages", totalPages);
         request.setAttribute("sortBy", sortBy);
+        request.setAttribute("gender", gender);
 
-        request.getRequestDispatcher("homepage/allproduct.jsp").forward(request, response);
+        request.getRequestDispatcher("homepage/genderproduct.jsp").forward(request, response);
     }
 
     @Override

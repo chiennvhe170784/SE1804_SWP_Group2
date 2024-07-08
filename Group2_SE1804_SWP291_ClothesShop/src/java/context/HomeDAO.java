@@ -170,6 +170,166 @@ public class HomeDAO extends DBContext {
         return newsList;
     }
 
+    public int getTotalProducts() {
+        int totalProducts = 0;
+        String query = "SELECT COUNT(*) FROM product";
+        try ( PreparedStatement ps = connection.prepareStatement(query)) {
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                totalProducts = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return totalProducts;
+    }
+
+    public List<Product> getSortedAndPaginatedProducts(String sortBy, int page, int pageSize) {
+        List<Product> products = new ArrayList<>();
+        String orderByClause = "ORDER BY ";
+
+        switch (sortBy) {
+            case "name":
+                orderByClause += "name";
+                break;
+            case "price":
+                orderByClause += "price";
+                break;
+            case "rating":
+                orderByClause += "rating";
+                break;
+            default:
+                orderByClause += "popularity";
+                break;
+        }
+
+        int offset = (page - 1) * pageSize;
+
+        String query = "SELECT * FROM product " + orderByClause + " OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
+        try ( PreparedStatement ps = connection.prepareStatement(query)) {
+            ps.setInt(1, offset);
+            ps.setInt(2, pageSize);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Product product = new Product(
+                        rs.getInt("pid"),
+                        rs.getString("name"),
+                        rs.getInt("quantity"),
+                        rs.getDouble("price"),
+                        rs.getString("describe"),
+                        rs.getString("img"),
+                        rs.getDate("releaseDate"),
+                        new Category(rs.getInt("cid"), rs.getString("name")),
+                        new Brand(rs.getInt("bid"), rs.getString("name")),
+                        new Gender(rs.getInt("gid"), rs.getString("name")),
+                        getSizesByProductId(rs.getInt("pid"))
+                );
+                products.add(product);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return products;
+    }
+
+    public List<Product> getProductsByGender(int genderId, String sortBy, int page, int pageSize) {
+        List<Product> products = new ArrayList<>();
+        String orderByClause = "ORDER BY ";
+
+        switch (sortBy) {
+            case "name":
+                orderByClause += "name";
+                break;
+            case "price":
+                orderByClause += "price";
+                break;
+            case "rating":
+                orderByClause += "rating";
+                break;
+            default:
+                orderByClause += "popularity";
+                break;
+        }
+
+        int offset = (page - 1) * pageSize;
+
+        String query = "SELECT * FROM product WHERE gid = ? " + orderByClause + " OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
+        try ( PreparedStatement ps = connection.prepareStatement(query)) {
+            ps.setInt(1, genderId);
+            ps.setInt(2, offset);
+            ps.setInt(3, pageSize);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Product product = new Product(
+                        rs.getInt("pid"),
+                        rs.getString("name"),
+                        rs.getInt("quantity"),
+                        rs.getDouble("price"),
+                        rs.getString("describe"),
+                        rs.getString("img"),
+                        rs.getDate("releaseDate"),
+                        new Category(rs.getInt("cid"), rs.getString("name")),
+                        new Brand(rs.getInt("bid"), rs.getString("name")),
+                        new Gender(rs.getInt("gid"), rs.getString("name")),
+                        getSizesByProductId(rs.getInt("pid"))
+                );
+                products.add(product);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return products;
+    }
+
+    public int getTotalProductsByGender(int genderId) {
+        int totalProducts = 0;
+        String query = "SELECT COUNT(*) FROM product WHERE gid = ?";
+        try ( PreparedStatement ps = connection.prepareStatement(query)) {
+            ps.setInt(1, genderId);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                totalProducts = rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return totalProducts;
+    }
+
+    public Product getProductById(int productId) {
+        Product product = null;
+        String sql = "SELECT p.pid, p.name, p.quantity, p.price, p.describe, p.img, p.releaseDate, "
+                + "c.cid, c.name as cname, b.bid, b.name as bname, g.gid, g.name as gname "
+                + "FROM product p "
+                + "JOIN category c ON p.cid = c.cid "
+                + "JOIN brand b ON p.bid = b.bid "
+                + "JOIN gender g ON p.gid = g.gid "
+                + "WHERE p.pid = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, productId);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                product = new Product(
+                        rs.getInt("pid"),
+                        rs.getString("name"),
+                        rs.getInt("quantity"),
+                        rs.getDouble("price"),
+                        rs.getString("describe"),
+                        rs.getString("img"),
+                        rs.getDate("releaseDate"),
+                        new Category(rs.getInt("cid"), rs.getString("cname")),
+                        new Brand(rs.getInt("bid"), rs.getString("bname")),
+                        new Gender(rs.getInt("gid"), rs.getString("gname")),
+                        getSizesByProductId(rs.getInt("pid"))
+                );
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return product;
+    }
+
     public static void main(String[] args) {
         // Create an instance of HomeDAO
         HomeDAO homeDAO = new HomeDAO();

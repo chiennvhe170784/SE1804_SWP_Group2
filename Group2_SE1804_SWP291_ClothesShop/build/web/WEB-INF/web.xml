@@ -137,10 +137,17 @@
         <servlet-class>controller.Cart.AddToCart</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>GenderProductServlet</servlet-name>
+        <servlet-class>controller.home.GenderProductServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DetailProduct</servlet-name>
+        <servlet-class>controller.home.DetailProduct</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>cartView</servlet-name>
         <servlet-class>controller.Cart.cartView</servlet-class>
     </servlet>
-
     <servlet-mapping>
         <servlet-name>newsList</servlet-name>
         <url-pattern>/newsList</url-pattern>
@@ -278,10 +285,17 @@
         <url-pattern>/AddToCart</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>GenderProductServlet</servlet-name>
+        <url-pattern>/gender-products</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DetailProduct</servlet-name>
+        <url-pattern>/DetailProduct</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>cartView</servlet-name>
         <url-pattern>/cartView</url-pattern>
     </servlet-mapping>
-
     <session-config>
         <session-timeout>
             60

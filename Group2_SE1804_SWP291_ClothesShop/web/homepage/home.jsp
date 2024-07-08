@@ -31,7 +31,7 @@
         <script type="text/javascript">
 
             function addToCart(productId) {
-                var pId = productId; 
+                var pId = productId;
                 var totalProduct;
                 $.ajax({
                     type: 'GET',
@@ -66,7 +66,7 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="logo-2">
-                                <h2><a href="index.html"><img src="assets/img/logo.png"></a></h2>
+                                <h2><a href="/clothesShop/Home"><img src="assets/img/logo.png"></a></h2>
                             </div>
                             <div class="canvas_open">
                                 <a href="javascript:void(0)"><i class="fas fa-bars"></i></a>
@@ -78,28 +78,27 @@
                                         <span class="counter">02</span>
                                         <span class="counter-cart"><small>Your Cart</small></span>
                                         <!-- Mini Cart Content -->
-                                      
+
                                     </div>
                                 </div>
                             </div>
                             <div class="menu" >
                                 <nav>
                                     <ul>
-                                        <li><a href="/Home">Home</a></li>
-                                        <li><a href="shop.html">Shop <i class="fa fa-angle-down"></i></a>
+                                        <li><a href="/clothesShop/Home">Home</a></li>
+                                        <li><a href="/clothesShop/AllProduct">Shop <i class="fa fa-angle-down"></i></a>
                                             <ul class="submenu-item">
-                                                <li><a href="shop.html">All Products</a></li>
-                                                <li><a href="shop-men.html">Men</a></li>
-                                                <li><a href="shop-women.html">Women</a></li>
-                                                <li><a href="shop-new-arrivals.html">Unisex</a></li>
-                                                <li><a href="shop-sale.html">Sale</a></li>
+                                                <li><a href="/clothesShop/AllProduct">All Products</a></li>
+                                                <li><a href="gender-products?gender=men">Men</a></li>
+                                                <li><a href="gender-products?gender=women">Women</a></li>
+                                                <li><a href="gender-products?gender=other">Other</a></li>
                                             </ul>
                                         </li>
                                         <li><a href="#">Collections <i class="fa fa-angle-down"></i></a>
                                             <ul class="submenu-item">
                                                 <li><a href="collection-summer.html">Summer Collection</a></li>
                                                 <li><a href="collection-winter.html">Winter Collection</a></li>
-                                                <li><a href="collection-best-sellers.html">Best Sellers</a></li>
+                                                <li><a href="collection-best-sellers.html">My Collection</a></li>
                                             </ul>
                                         </li>
                                         <li><a href="blog.html">Blog <i class="fa fa-angle-down"></i></a>
@@ -136,16 +135,14 @@
                     </div>
                     <div id="menu" class="text-left">
                         <ul class="offcanvas_main_menu">
-                            <li><a href="index.html">Home</a></li>
-                            <li><a href="about.html">About Us</a></li>
+                            <li><a href="/clothesShop/Home">Home</a></li>
                             <li class="menu-item-has-children">
-                                <a href="#">Shop</a>
+                                <a href="/clothesShop/AllProduct">Shop</a>
                                 <ul class="sub-menu">
-                                    <li><a href="shop.html">All Products</a></li>
-                                    <li><a href="shop-men.html">Men</a></li>
-                                    <li><a href="shop-women.html">Women</a></li>
-                                    <li><a href="shop-kids.html">Unisex</a></li>
-                                    <li><a href="shop-sale.html">Sale</a></li>
+                                    <li><a href="/clothesShop/AllProduct">All Products</a></li>
+                                    <li><a href="gender-products?gender=men">Men</a></li>
+                                    <li><a href="gender-products?gender=women">Women</a></li>
+                                    <li><a href="gender-products?gender=other">Other</a></li>
                                 </ul>
                             </li>
                             <li class="menu-item-has-children">
@@ -153,7 +150,7 @@
                                 <ul class="sub-menu">
                                     <li><a href="collection-summer.html">Summer Collection</a></li>
                                     <li><a href="collection-winter.html">Winter Collection</a></li>
-                                    <li><a href="collection-best-sellers.html">Best Sellers</a></li>
+                                    <li><a href="collection-best-sellers.html">My Collection</a></li>
                                 </ul>
                             </li>
                             <li class="menu-item-has-children">
@@ -184,7 +181,7 @@
                                         <h2>Leading Fashion <span>Manufacturer</span></h2>
                                         <p>Ostromi Is A Specialist In High-Quality Clothing And Accessories</p>
 
-                                        <a class="button-1" href="shop.html">Shop Now</a>
+                                        <a class="button-1" href="/clothesShop/AllProduct">Shop Now</a>
                                     </div>
                                 </div>
                             </div>
@@ -470,26 +467,6 @@
                 </div>
             </div>
             <!-- Footer Bottom -->
-            <div class="footer-bottom pt-30 pb-30">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="copyright-text">
-                                <p>&copy; Copyright 2024 <a href="https://yourshop.com" target="_blank">YourShop</a> All Rights Reserved.</p>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <ul class="footer_payment">
-                                <li><a href="#"><img src="assets/img/visa.png" alt="Visa"></a></li>
-                                <li><a href="#"><img src="assets/img/discover.png" alt="Discover"></a></li>
-                                <li><a href="#"><img src="assets/img/master_card.png" alt="MasterCard"></a></li>
-                                <li><a href="#"><img src="assets/img/paypal.png" alt="PayPal"></a></li>
-                                <li><a href="#"><img src="assets/img/american_express.png" alt="American Express"></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </footer>
 
         <!-- End Footer Area -->
