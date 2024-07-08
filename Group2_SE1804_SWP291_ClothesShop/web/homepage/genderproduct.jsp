@@ -154,7 +154,6 @@
                                     <li><a href="gender-products?gender=other">Other</a></li>
                                 </ul>
                             </li>
-                            </li>
                             <li class="menu-item-has-children">
                                 <a href="#">Collections</a>
                                 <ul class="sub-menu">
@@ -188,10 +187,8 @@
                             <div class="col-lg-5 col-md-6 order-1 order-md-2">
                                 <div class="top-bar-right">
                                     <select class="form-select" id="sortSelect" aria-label="Default select example" onchange="changeSort()">
-<!--                                        <option value="popularity" ${sortBy == 'popularity' ? 'selected' : ''}>Sort by popularity</option>-->
                                         <option value="name" ${sortBy == 'name' ? 'selected' : ''}>Sort by Name</option>
                                         <option value="price" ${sortBy == 'price' ? 'selected' : ''}>Sort by Price</option>
-<!--                                        <option value="rating" ${sortBy == 'rating' ? 'selected' : ''}>Sort by Rating</option>-->
                                     </select>
                                 </div>
                             </div>
@@ -200,11 +197,18 @@
                             function changeSort() {
                                 var sortBy = document.getElementById('sortSelect').value;
                                 var currentPage = ${currentPage};
-                                window.location.href = 'AllProduct?sortBy=' + sortBy + '&page=' + currentPage;
+                                window.location.href = 'gender-products?gender=${gender}&sortBy=' + sortBy + '&page=' + currentPage;
                             }
                         </script>
                         <!-- Shop -->
                         <div class="row">
+                            <!-- No Products Message -->
+                            <c:if test="${not empty message}">
+                                <div class="col-12">
+                                    <p>${message}</p>
+                                </div>
+                            </c:if>
+
                             <!-- Product Single -->
                             <c:forEach var="product" items="${products}">
                                 <div class="col-lg-4 col-md-4 col-sm-6 mb-30">
@@ -214,9 +218,9 @@
                                                 <img src="${product.img}" alt="${product.name}" style="width: 100%; height: 300px; object-fit: cover;">
                                             </a>
                                             <div class="product-thumbnail-overly">
-                                                <ul>    
+                                                <ul>
                                                     <li><a href="cart.html"><i class="fas fa-shopping-cart"></i></a></li>
-                                                    <li><a href="wishlist.html"><i class="far fa-heart"></i></a></li>   
+                                                    <li><a href="wishlist.html"><i class="far fa-heart"></i></a></li>
                                                     <li><a href="#"><i class="far fa-eye"></i></a></li>
                                                 </ul>
                                             </div>
@@ -231,20 +235,23 @@
                                 </div>
                             </c:forEach>
                         </div>
+
                         <!-- Pagination -->
-                        <div class="row">
-                            <div class="col-12 mb-30">
-                                <div class="page-pagination text-center">
-                                    <ul>
-                                        <li><a href="AllProduct?sortBy=${sortBy}&page=${currentPage - 1}" ${currentPage == 1 ? 'style="display:none;"' : ''}><i class="fa fa-angle-left"></i></a></li>
-                                                <c:forEach begin="1" end="${totalPages}" var="i">
-                                            <li><a href="AllProduct?sortBy=${sortBy}&page=${i}" class="${i == currentPage ? 'active' : ''}">${i}</a></li>
-                                            </c:forEach>
-                                        <li><a href="AllProduct?sortBy=${sortBy}&page=${currentPage + 1}" ${currentPage == totalPages ? 'style="display:none;"' : ''}><i class="fa fa-angle-right"></i></a></li>
-                                    </ul>
+                        <c:if test="${totalPages > 1}">
+                            <div class="row">
+                                <div class="col-12 mb-30">
+                                    <div class="page-pagination text-center">
+                                        <ul>
+                                            <li><a href="gender-products?gender=${gender}&sortBy=${sortBy}&page=${currentPage - 1}" ${currentPage == 1 ? 'style="display:none;"' : ''}><i class="fa fa-angle-left"></i></a></li>
+                                                    <c:forEach begin="1" end="${totalPages}" var="i">
+                                                <li><a href="gender-products?gender=${gender}&sortBy=${sortBy}&page=${i}" class="${i == currentPage ? 'active' : ''}">${i}</a></li>
+                                                </c:forEach>
+                                            <li><a href="gender-products?gender=${gender}&sortBy=${sortBy}&page=${currentPage + 1}" ${currentPage == totalPages ? 'style="display:none;"' : ''}><i class="fa fa-angle-right"></i></a></li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        </c:if>
                     </div>
                     <!-- Siderbar -->
                     <div class="col-lg-4">

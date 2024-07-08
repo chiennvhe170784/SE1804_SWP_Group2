@@ -37,7 +37,7 @@
                     <!-- Logo -->
                     <div class="col-lg-2">
                         <div class="logo">
-                            <h2 style="margin: 0;"><a href="index.html"><img src="assets/img/logo3.jpg" alt="Logo"></a></h2>
+                            <h2 style="margin: 0;"><a href="/clothesShop/Home"><img src="assets/img/logo3.jpg" alt="Logo"></a></h2>
                         </div>
                     </div>
                     <!-- Search Bar -->
