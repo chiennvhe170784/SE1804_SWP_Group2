@@ -43,18 +43,20 @@
                     <!-- Search Bar -->
                     <div class="col-lg-6" style="margin-top: 10px;">
                         <div class="header-search-form">
-                            <form action="#" style="display: flex; align-items: center;">
-                                <select class="form-select" style="height: 40px;">
-                                    <option selected>All Categories</option>
+                            <form action="search" method="get" style="display: flex; align-items: center;">
+                                <select class="form-select" name="categoryId" style="height: 40px;">
+                                    <option value="0" selected>All Categories</option>
                                     <c:forEach var="category" items="${categories}">
                                         <option value="${category.cid}">${category.name}</option>
                                     </c:forEach>
                                 </select>
-                                <input type="search" name="search" placeholder="Search keyword here..." style="height: 40px;">
+                                <input type="search" name="searchKeyword" placeholder="Search keyword here..." style="height: 40px;">
                                 <button type="submit" style="height: 40px;"><i class="fas fa-search"></i></button>
                             </form>
                         </div>
                     </div>
+
+
 
                     <!-- MiniCart -->
                     <div class="col-lg-2">
@@ -66,16 +68,16 @@
                                     </a>
                                     <span class="counter-cart" style="margin-left: 10px;"><small>Your Cart</small></span>
                                     <c:if test="${empty sessionScope.cart}">
-                                     
-                                            <span class="counter" style="margin-left: 10px;">0</span>
-                                       
+
+                                        <span class="counter" style="margin-left: 10px;">0</span>
+
                                     </c:if>
-                                        <c:if test="${not empty sessionScope.cart}">
-                                    
-                                            <span class="counter" style="margin-left: 10px;">${sessionScope.productInCart}</span>
-                                       
+                                    <c:if test="${not empty sessionScope.cart}">
+
+                                        <span class="counter" style="margin-left: 10px;">${sessionScope.productInCart}</span>
+
                                     </c:if>
-                                    
+
                                     <!-- Mini Cart Content -->
 
                                 </div>

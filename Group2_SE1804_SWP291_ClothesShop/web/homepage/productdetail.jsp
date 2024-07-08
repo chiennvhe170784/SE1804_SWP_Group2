@@ -227,26 +227,30 @@
                         </ul>
                         <div class="tab-content" id="myTabContent">
                             <div class="tab-pane fade show active" id="Description" role="tabpanel" aria-labelledby="Description-tab">
-                                <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque id mauris tempus, feugiat justo sed, auctor felis. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Mauris gravida libero a massa posuere, nec sollicitudin erat aliquam. Fusce sed tincidunt nisi. Nunc condimentum laoreet lorem commodo vehicula. Maecenas ultrices viverra diam at mollis. Nunc euismod ex quis luctus scelerisque. Sed sodales lobortis iaculis. Aliquam ultricies cursus felis non sollicitudin. </p>
+                                <p> ${product.quantity}</p>
                             </div>
                             <div class="tab-pane fade" id="information" role="tabpanel" aria-labelledby="information-tab">
                                 <table class="table table-bordered">
                                     <tbody>
                                         <tr>
-                                            <td>Capacity</td>
-                                            <td>5 Kg</td>
+                                            <td>Quantity</td>
+                                            <td>${product.quantity}</td>
                                         </tr>
                                         <tr>
-                                            <td>Color</td>
-                                            <td>Black, Brown, Red,</td>
+                                            <td>Gender</td>
+                                            <td>${product.gender.description}</td>
                                         </tr>
                                         <tr>
-                                            <td>Water Resistant</td>
-                                            <td>Yes</td>
+                                            <td>Release Date</td>
+                                            <td>${product.releaseDate}</td>
                                         </tr>
                                         <tr>
-                                            <td>Material</td>
-                                            <td>Artificial Leather</td>
+                                            <td>Brand</td>
+                                            <td>${product.brand.name}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Category</td>
+                                            <td>${product.category.name}</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -319,41 +323,49 @@
                 </div>
             </div>
         </section>
+        <!-- Related Products Section -->
         <section class="latest-product pt-70 pb-70 section-bg">
             <div class="container">
                 <div class="row">
                     <div class="col-12">
-                        <div class="section-headding-1 mb-50">
-                            <h2><span>Releted Products</span></h2>
+                        <div class="section-heading-1 mb-50">
+                            <h2><span>Related Products</span></h2>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-12">
                         <div class="latest-product-full owl-carousel">
-                            <div class="product-single">
-                                <div class="product-thumbnail">
-                                    <a href="product-details.html"><img src="assets/img/product/8.jpg" alt="product"></a>
-                                    <div class="product-thumbnail-overly">
-                                        <ul>
-                                            <li><a href="cart.html"><i class="fas fa-shopping-cart"></i></a></li>
-                                            <li><a href="wishlist.html"><i class="far fa-heart"></i></a></li>
-                                            <li><a href="#"><i class="far fa-eye"></i></a></li>
-                                        </ul>
+                            <c:forEach var="relatedProduct" items="${relatedProducts}">
+                                <div class="product-single">
+                                    <div class="product-thumbnail">
+                                        <a href="DetailProduct?pid=${relatedProduct.pid}">
+                                            <img src="${relatedProduct.img}" alt="${relatedProduct.name}" style="width: 300px; height: 300px; object-fit: cover;">
+                                        </a>
+                                        <div class="product-thumbnail-overly">
+                                            <ul>
+                                                <li><a href="cart.html"><i class="fas fa-shopping-cart"></i></a></li>
+                                                <li><a href="wishlist.html"><i class="far fa-heart"></i></a></li>
+                                                <li><a href="#"><i class="far fa-eye"></i></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="product-content">
+                                        <h4>
+                                            <a href="DetailProduct?pid=${relatedProduct.pid}">${relatedProduct.name}</a>
+                                        </h4>
+                                        <div class="pricing">
+                                            <span><fmt:formatNumber value="${relatedProduct.price}" type="currency" currencySymbol="$"/></span>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="product-content">
-                                    <h4><a href="product-details.html">Funda Para Ebook 7" 128GB full HD</a></h4>
-                                    <div class="pricing">
-                                        <span>$200</span>
-                                    </div>
-                                </div>
-                            </div>
+                            </c:forEach>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
+
         <footer class="footer">
             <!-- Footer Top -->
             <div class="footer-top pt-50">

@@ -16,6 +16,83 @@ import model.Size;
 
 public class HomeDAO extends DBContext {
 
+    public List<Product> getProductsByCategory(int categoryId) {
+        List<Product> products = new ArrayList<>();
+        String sql = "SELECT p.pid, p.name, p.quantity, p.price, p.describe, p.img, p.releaseDate, "
+                + "c.cid, c.name as cname, b.bid, b.name as bname, g.gid, g.description as gname "
+                + "FROM product p "
+                + "JOIN category c ON p.cid = c.cid "
+                + "JOIN brand b ON p.bid = b.bid "
+                + "JOIN gender g ON p.gid = g.gid "
+                + "WHERE c.cid = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, categoryId);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Product product = new Product(
+                        rs.getInt("pid"),
+                        rs.getString("name"),
+                        rs.getInt("quantity"),
+                        rs.getDouble("price"),
+                        rs.getString("describe"),
+                        rs.getString("img"),
+                        rs.getDate("releaseDate"),
+                        new Category(rs.getInt("cid"), rs.getString("cname")),
+                        new Brand(rs.getInt("bid"), rs.getString("bname")),
+                        new Gender(rs.getInt("gid"), rs.getString("gname")),
+                        getSizesByProductId(rs.getInt("pid"))
+                );
+                products.add(product);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return products;
+    }
+
+    public List<Product> searchProductsByNameAndCategory(String name, int categoryId) {
+        List<Product> products = new ArrayList<>();
+        String sql = "SELECT p.pid, p.name, p.quantity, p.price, p.describe, p.img, p.releaseDate, "
+                + "c.cid, c.name as cname, b.bid, b.name as bname, g.gid, g.description as gname "
+                + "FROM product p "
+                + "JOIN category c ON p.cid = c.cid "
+                + "JOIN brand b ON p.bid = b.bid "
+                + "JOIN gender g ON p.gid = g.gid "
+                + "WHERE p.name LIKE ? ";
+        if (categoryId != 0) {
+            sql += "AND c.cid = ? ";
+        }
+
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, "%" + name + "%");
+            if (categoryId != 0) {
+                st.setInt(2, categoryId);
+            }
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                Product product = new Product(
+                        rs.getInt("pid"),
+                        rs.getString("name"),
+                        rs.getInt("quantity"),
+                        rs.getDouble("price"),
+                        rs.getString("describe"),
+                        rs.getString("img"),
+                        rs.getDate("releaseDate"),
+                        new Category(rs.getInt("cid"), rs.getString("cname")),
+                        new Brand(rs.getInt("bid"), rs.getString("bname")),
+                        new Gender(rs.getInt("gid"), rs.getString("gname")),
+                        getSizesByProductId(rs.getInt("pid"))
+                );
+                products.add(product);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return products;
+    }
+
     public ArrayList<Category> getAllCate() {
         ArrayList<Category> listCate = new ArrayList<>();
         String sql = "SELECT * FROM category";
@@ -330,16 +407,95 @@ public class HomeDAO extends DBContext {
         return product;
     }
 
+    public int getTotalSearchedProducts(String searchKeyword, int categoryId) {
+        String sql = "SELECT COUNT(*) FROM product WHERE name LIKE ? AND (cid = ? OR ? = 0)";
+        try (
+                 PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setString(1, "%" + searchKeyword + "%");
+            ps.setInt(2, categoryId);
+            ps.setInt(3, categoryId);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    public List<Product> searchProductsByNameAndCategoryWithSortingAndPaging(
+            String searchKeyword, int categoryId, String sortBy, int page, int pageSize) {
+        List<Product> products = new ArrayList<>();
+        String orderByClause = "ORDER BY ";
+
+        switch (sortBy) {
+            case "name":
+                orderByClause += "name";
+                break;
+            case "price":
+                orderByClause += "price";
+                break;
+            case "releaseDate":
+                orderByClause += "releaseDate";
+                break;
+            default:
+                orderByClause += "name";
+                break;
+        }
+
+        String sql = "SELECT p.pid, p.name, p.quantity, p.price, p.describe, p.img, p.releaseDate, "
+                + "c.cid, c.name as cname, b.bid, b.name as bname, g.gid, g.description as gname "
+                + "FROM product p "
+                + "JOIN category c ON p.cid = c.cid "
+                + "JOIN brand b ON p.bid = b.bid "
+                + "JOIN gender g ON p.gid = g.gid "
+                + "WHERE p.name LIKE ? AND (c.cid = ? OR ? = 0) "
+                + orderByClause + " OFFSET ? ROWS FETCH NEXT ? ROWS ONLY";
+
+        try (
+                 PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setString(1, "%" + searchKeyword + "%");
+            ps.setInt(2, categoryId);
+            ps.setInt(3, categoryId);
+            ps.setInt(4, (page - 1) * pageSize);
+            ps.setInt(5, pageSize);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Product product = new Product(
+                        rs.getInt("pid"),
+                        rs.getString("name"),
+                        rs.getInt("quantity"),
+                        rs.getDouble("price"),
+                        rs.getString("describe"),
+                        rs.getString("img"),
+                        rs.getDate("releaseDate"),
+                        new Category(rs.getInt("cid"), rs.getString("cname")),
+                        new Brand(rs.getInt("bid"), rs.getString("bname")),
+                        new Gender(rs.getInt("gid"), rs.getString("gname")),
+                        getSizesByProductId(rs.getInt("pid"))
+                );
+                products.add(product);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return products;
+    }
+
     public static void main(String[] args) {
         // Create an instance of HomeDAO
         HomeDAO homeDAO = new HomeDAO();
 
-        // Call the getLatestProducts method to fetch the latest products
-        List<Product> latestProducts = homeDAO.getLatestProducts(6);
+        // Define the category ID to fetch products
+        int categoryId = 1;  // Thay đổi ID này theo nhu cầu của bạn
+
+        // Call the getProductsByCategory method
+        List<Product> productsByCategory = homeDAO.getProductsByCategory(categoryId);
 
         // Print the details of each product
-        System.out.println("Number of latest products: " + latestProducts.size());
-        for (Product product : latestProducts) {
+        System.out.println("Number of products in category " + categoryId + ": " + productsByCategory.size());
+        for (Product product : productsByCategory) {
             System.out.println("Product ID: " + product.getPid());
             System.out.println("Product Name: " + product.getName());
             System.out.println("Product Price: " + product.getPrice());
