@@ -296,6 +296,40 @@ public class HomeDAO extends DBContext {
         return totalProducts;
     }
 
+    public Product getProductById(int productId) {
+        Product product = null;
+        String sql = "SELECT p.pid, p.name, p.quantity, p.price, p.describe, p.img, p.releaseDate, "
+                + "c.cid, c.name as cname, b.bid, b.name as bname, g.gid, g.name as gname "
+                + "FROM product p "
+                + "JOIN category c ON p.cid = c.cid "
+                + "JOIN brand b ON p.bid = b.bid "
+                + "JOIN gender g ON p.gid = g.gid "
+                + "WHERE p.pid = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, productId);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                product = new Product(
+                        rs.getInt("pid"),
+                        rs.getString("name"),
+                        rs.getInt("quantity"),
+                        rs.getDouble("price"),
+                        rs.getString("describe"),
+                        rs.getString("img"),
+                        rs.getDate("releaseDate"),
+                        new Category(rs.getInt("cid"), rs.getString("cname")),
+                        new Brand(rs.getInt("bid"), rs.getString("bname")),
+                        new Gender(rs.getInt("gid"), rs.getString("gname")),
+                        getSizesByProductId(rs.getInt("pid"))
+                );
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return product;
+    }
+
     public static void main(String[] args) {
         // Create an instance of HomeDAO
         HomeDAO homeDAO = new HomeDAO();

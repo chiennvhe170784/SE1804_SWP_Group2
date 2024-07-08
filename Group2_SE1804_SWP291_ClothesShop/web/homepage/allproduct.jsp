@@ -8,7 +8,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>BulkShop - Electronics Shop HTML Template | Shop</title>
+        <title>Colthes Shop</title>
         <link rel="icon" href="assets/img/icon.png" type="image/gif" sizes="16x16">
         <link rel="icon" href="assets/img/icon.png" type="image/gif" sizes="18x18">
         <link rel="icon" href="assets/img/icon.png" type="image/gif" sizes="20x20">
@@ -107,7 +107,7 @@
                                             <ul class="submenu-item">
                                                 <li><a href="collection-summer.html">Summer Collection</a></li>
                                                 <li><a href="collection-winter.html">Winter Collection</a></li>
-                                                <li><a href="collection-best-sellers.html">Best Sellers</a></li>
+                                                <li><a href="collection-best-sellers.html">My Collection</a></li>
                                             </ul>
                                         </li>
                                         <li><a href="blog.html">Blog <i class="fa fa-angle-down"></i></a>
@@ -160,7 +160,7 @@
                                 <ul class="sub-menu">
                                     <li><a href="collection-summer.html">Summer Collection</a></li>
                                     <li><a href="collection-winter.html">Winter Collection</a></li>
-                                    <li><a href="collection-best-sellers.html">Best Sellers</a></li>
+                                    <li><a href="collection-best-sellers.html">My Collection</a></li>
                                 </ul>
                             </li>
                             <li class="menu-item-has-children">
@@ -210,7 +210,7 @@
                                 <div class="col-lg-4 col-md-4 col-sm-6 mb-30">
                                     <div class="product-single">
                                         <div class="product-thumbnail">
-                                            <a href="product-details.html">
+                                            <a href="DetailProduct?pid=${product.pid}">
                                                 <img src="${product.img}" alt="${product.name}" style="width: 100%; height: 300px; object-fit: cover;">
                                             </a>
                                             <div class="product-thumbnail-overly">
