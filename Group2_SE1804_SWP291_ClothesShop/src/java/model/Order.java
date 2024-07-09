@@ -13,30 +13,21 @@ public class Order {
     private int totalPrice;
     private String address;
     private String status;
-    private int cartid;
+    private String note;
+    private int uid;
 
     public Order() {
-   }
+    }
 
-    public Order(int oid, String orderDate, int totalPrice, String address, String status, int cartid) {
+    public Order(int oid, String orderDate, int totalPrice, String address, String status, String note, int uid) {
         this.oid = oid;
         this.orderDate = orderDate;
         this.totalPrice = totalPrice;
         this.address = address;
         this.status = status;
-        this.cartid = cartid;
+        this.note = note;
+        this.uid = uid;
     }
-
-  
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-    
-  
 
     public int getOid() {
         return oid;
@@ -54,8 +45,6 @@ public class Order {
         this.orderDate = orderDate;
     }
 
-    
-    
     public int getTotalPrice() {
         return totalPrice;
     }
@@ -72,21 +61,30 @@ public class Order {
         this.address = address;
     }
 
-
-
-  
-
-    public int getCartid() {
-        return cartid;
+    public String getStatus() {
+        return status;
     }
 
-    public void setCartid(int cartid) {
-        this.cartid = cartid;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
+    }
+
+    public int getUid() {
+        return uid;
+    }
+
+    public void setUid(int uid) {
+        this.uid = uid;
+    }
     
-
-  
-
+    
     
 }

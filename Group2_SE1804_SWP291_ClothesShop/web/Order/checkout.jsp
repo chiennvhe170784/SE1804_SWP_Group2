@@ -320,7 +320,7 @@
                         <div class="checkout-billing-details-wrap">
                             <h2>Billing Details</h2>
                             <div class="billing-form-wrap">
-                                <form action="#">
+                                <form id="checkoutForm" class="required" method="post" action="checkout">
 
                                     <div class="single-input-item">
                                         <label for="f_name" class="required">Name</label>
@@ -329,8 +329,8 @@
 
 
                                     <div class="single-input-item">
-                                        <label for="company_name" class="required"> Address </label>
-                                        <input type="text" id="company_name" placeholder="Address Name ">
+                                        <label for="company_name"  class="required"> Address </label>
+                                        <input type="text" required name="addressInput" id="company_name" placeholder="Address Name ">
                                     </div>
 
 
@@ -339,10 +339,9 @@
                                         <input type="text" id="phone" readonly="" placeholder="${sessionScope.user.phone}">
                                     </div>
 
-
                                     <div class="single-input-item">
                                         <label for="order_note" class="required">Order Note</label>
-                                        <textarea name="order_note" id="order_note" placeholder="Order Note"></textarea>
+                                        <textarea name="Note" id="order_note" placeholder="Order Note"></textarea>
                                     </div>
                                 </form>
                             </div>
@@ -397,10 +396,7 @@
                                                     </ul>
                                                 </td>
                                             </tr>-->
-                                            <tr>
-                                                <td>Total Amount</td>
-                                                <td><strong>$470</strong></td>
-                                            </tr>
+                                        
                                         </tfoot>
                                     </table>
                                     <div class="form-group payment">
@@ -417,8 +413,9 @@
                                                                                 </ul>-->
                                         <!--                                        <p class="credit">You can pay with your credit<br> card if you don't have a paypal account</p>-->
                                         <span class="grand-total">Grand Total :  <span>$${sessionScope.totalPrice}</span></span>
-                                        <button type="submit" class="button-1">Place Order Now</button>
+                                        <p style="color: #0b5ed7">${requestScope.output}</p>
                                     </div>
+                                         <button type="submit" onclick="submitCheckoutForm()" class="button-1">Place Order Now</button>
                                 </div>
                             </div>
                         </div>
@@ -513,7 +510,11 @@
             <i class="fa fa-angle-up"></i>
         </div>
 
-
+<script>
+    function submitCheckoutForm() {
+        document.getElementById('checkoutForm').submit();
+    }
+</script>
         <!-- Js File -->
         <script src="assets/js/modernizr.min.js"></script>
         <script src="assets/js/jquery-3.5.1.min.js"></script>

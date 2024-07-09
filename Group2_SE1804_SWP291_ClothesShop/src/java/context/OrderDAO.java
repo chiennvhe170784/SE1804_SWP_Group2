@@ -9,6 +9,7 @@ import model.User;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import model.Product;
 
 /**
  *
@@ -16,11 +17,11 @@ import java.sql.SQLException;
  */
 public class OrderDAO extends DBContext {
 
-    public void addOrder(User u, String address, String note, int totalPrice) {
+    public void addOrder(User u, String address, String note, double totalPrice) {
         LocalDate curDate = java.time.LocalDate.now();
         String date = curDate.toString();
         try {
-            //lay id user
+      
 
             // add vào bảng Order
             String sql = "INSERT INTO [dbo].[Order]\n"
@@ -35,7 +36,7 @@ public class OrderDAO extends DBContext {
 
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, date);
-            st.setInt(2, totalPrice);
+            st.setDouble(2, totalPrice);
             st.setString(3, address);
             st.setString(4, "0");
             st.setString(5, note);
@@ -56,6 +57,27 @@ public class OrderDAO extends DBContext {
         }
     }
 
+    public void reduceWallet(User u, double totalMoney) {
+        String sql = "UPDATE [dbo].[wallet]\n"
+                + "   SET wallet = wallet - ?"
+                + " WHERE uid = ? ";
+        String sql1 = "UPDATE [dbo].[wallet]\n"
+                + "   SET wallet = wallet + ?"
+                + " WHERE uid = 1 ";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+
+            st.setDouble(1, totalMoney);
+            st.setInt(2, u.getUid());
+            st.executeUpdate();
+            
+            PreparedStatement st1 = connection.prepareStatement(sql1);
+            st1.setDouble(1, totalMoney);
+            st1.executeUpdate();
+        } catch (SQLException e) {
+        }
+    }
+
     public double getWalletByUId(User u) {
         int uid = u.getUid();
         String sql = "SELECT wallet\n"
@@ -63,10 +85,10 @@ public class OrderDAO extends DBContext {
                 + "  where uid = ?";
 
         try {
-             PreparedStatement st = connection.prepareStatement(sql);
+            PreparedStatement st = connection.prepareStatement(sql);
             st.setInt(1, uid);
             ResultSet rs = st.executeQuery();
-            if(rs.next()){
+            if (rs.next()) {
                 return rs.getInt("wallet");
             }
         } catch (SQLException e) {
@@ -74,8 +96,47 @@ public class OrderDAO extends DBContext {
         return 0;
     }
 
-    public boolean checkValidBuy(int totalMoney, User u) {
+    public boolean checkValidBuy(double totalMoney, User u) {
         return totalMoney <= getWalletByUId(u);
     }
-    
+    //Bơm tiền
+    private void AddWallet(){
+        String sql = "UPDATE [dbo].[wallet]\n"
+                + "   SET wallet = 99999"
+                + " WHERE uid = ? ";
+           try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, 4);
+            st.executeUpdate();
+  
+        } catch (SQLException e) {
+        }
+    }
+
+    public boolean checkValidProduct(Product p) {
+        String sql = "select quantity from product where pid =?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, p.getPid());
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                int numberP = rs.getInt("quantity");
+                if (numberP > p.getQuantity()) {
+                    return true;
+                }
+            }
+        } catch (SQLException e) {
+        }
+        return false;
+    }
+    //validbuy = true thì trừ sản phẩm rồi thêm vào order
+
+    public static void main(String[] args) {
+        OrderDAO ord = new OrderDAO();
+        ord.AddWallet();
+        UserDAO ud = new UserDAO();
+           LocalDate curDate = java.time.LocalDate.now();
+        String date = curDate.toString();
+        System.out.println(date);
+    }
 }
