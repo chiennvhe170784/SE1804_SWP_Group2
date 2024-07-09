@@ -15,7 +15,9 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import model.Product;
 
 /**
@@ -63,6 +65,7 @@ public class AddToCart extends HttpServlet {
     List<Product> cart = (List<Product>) session.getAttribute("cart");
     Integer productInCart = (Integer)session.getAttribute("productInCart");
     ProductDAO dao = new ProductDAO();
+    boolean outOfStock = false;
     Double totalPrice =(Double) session.getAttribute("totalPrice");
     if (totalPrice == null) {
     totalPrice = 0.0;
@@ -80,21 +83,29 @@ public class AddToCart extends HttpServlet {
     String productId = request.getParameter("pId");
     Product product = dao.getProductById(Integer.parseInt(productId));
     
-    if (product != null) {
-        product.setQuantity(1);
+    if (product != null && product.getQuantity()>0) {
+        
         totalPrice += product.getPrice();
-        productInCart ++;
+        
         boolean found = false;
         for (Product p : cart) {
             if (p.getPid()== product.getPid()) { 
+                if(product.getQuantity() <= p.getQuantity()){
+                    outOfStock = true;
+                    found = true;
+                    break;
+                }
                 p.setQuantity(p.getQuantity() + 1);
                 found = true;
+                productInCart ++;
                 break;
             }
         }
 
         if (!found) {
+            product.setQuantity(1);
             cart.add(product);
+            productInCart ++;
         }
  
        session.setAttribute("productInCart", productInCart);
@@ -104,7 +115,10 @@ public class AddToCart extends HttpServlet {
 
     // Chuyển đổi danh sách sản phẩm thành JSON
     Gson gson = new Gson();
-    String jsonCart = gson.toJson(productInCart);
+    Map<String, Object> result = new HashMap<>();
+        result.put("outOfStock", outOfStock);
+        result.put("productInCart", productInCart);
+    String jsonCart = gson.toJson(result);
     response.setContentType("application/json");
     response.setCharacterEncoding("UTF-8");
     response.getWriter().write(jsonCart);

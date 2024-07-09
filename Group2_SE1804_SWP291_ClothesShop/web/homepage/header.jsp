@@ -28,6 +28,64 @@
                 background-color: #f0f0f0;
             }
         </style>
+        <script src="${pageContext.request.contextPath}/assets/js/jquery-3.5.1.min.js" type="text/javascript"></script>
+            <script type="text/javascript">
+
+            function addToCart(productId) {
+                var pId = productId;
+                var totalProduct;
+                $.ajax({
+                    type: 'GET',
+                    data: {pId: pId},
+                    url: 'AddToCart',
+                    success: (result) => {
+                        if(result.outOfStock){
+                            showError("Product out of stock", 3000);
+                        }
+                        totalProduct = result.productInCart;;
+                        $('.counter').text(totalProduct);
+                    },
+                    error: function () {
+                        console.log('something went wrong');
+                    }
+                });
+
+            }
+              function showAlert(message, duration) {
+                // Tạo phần tử alert mới
+                let alertDiv = document.createElement('div');
+                alertDiv.className = 'alert alert-success';
+                alertDiv.role = 'alert';
+                alertDiv.innerHTML = message;
+                alertDiv.style = 'margin-top: 50px;z-index: 9999; position: fixed; top: 0; right: 0;width: 300px;height:50px'
+                let wrapper = document.getElementById('notifications');
+                // Thêm phần tử alert vào body hoặc một container cụ thể
+                wrapper.appendChild(alertDiv);
+
+                // Tự động ẩn phần tử alert sau thời gian đã định
+                setTimeout(() => {
+                    alertDiv.remove();
+                }, duration);
+            }
+            function showError(message, duration) {
+                // Tạo phần tử alert mới
+                let alertDiv = document.createElement('div');
+                alertDiv.className = 'alert alert-danger';
+                alertDiv.role = 'alert';
+                alertDiv.innerHTML = message;
+                alertDiv.style = 'margin-top: 50px;z-index: 9999; position: fixed; top: 0; right: 0;width: 300px;height:50px'
+                let wrapper = document.getElementById('notifications');
+                // Thêm phần tử alert vào body hoặc một container cụ thể
+                wrapper.appendChild(alertDiv);
+
+                // Tự động ẩn phần tử alert sau thời gian đã định
+                setTimeout(() => {
+                    alertDiv.remove();
+                }, duration);
+            }
+            
+
+        </script>
     </head>
     <body>
         <!-- Header Middle -->
