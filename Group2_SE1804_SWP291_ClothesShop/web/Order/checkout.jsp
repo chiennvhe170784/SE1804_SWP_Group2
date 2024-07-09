@@ -330,7 +330,7 @@
 
                                     <div class="single-input-item">
                                         <label for="company_name"  class="required"> Address </label>
-                                        <input type="text" required name="addressInput" id="company_name" placeholder="Address Name ">
+                                        <input type="text" required name="addressInput" id="company_name" placeholder="Address Name " value="${param.addressInput}">
                                     </div>
 
 
@@ -341,7 +341,7 @@
 
                                     <div class="single-input-item">
                                         <label for="order_note" class="required">Order Note</label>
-                                        <textarea name="Note" id="order_note" placeholder="Order Note"></textarea>
+                                        <textarea name="Note" id="order_note" placeholder="Order Note">${param.Note} </textarea>
                                     </div>
                                 </form>
                             </div>
