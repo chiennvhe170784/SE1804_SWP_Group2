@@ -275,7 +275,7 @@
         <div id="wrapper">
 
                 <!-- Sidebar -->
-            <%@include file="../sidebar_admin.jsp" %>
+          <%@include file="../homepage/sidebar_admin.jsp" %>
             <!-- End of Sidebar -->
 
             <!-- Content Wrapper -->
@@ -283,7 +283,7 @@
                 <!-- Main Content -->
                 <div id="content">
 
-                    <!-- Topbar -->
+                       <!-- Topbar -->
                     <%@include file="../homepage/header_admin.jsp" %>
                     <!-- End of Topbar -->
 
