@@ -88,7 +88,15 @@
         <servlet-name>sendCode</servlet-name>
         <servlet-class>controller.Login.sendCode</servlet-class>
     </servlet>
+     <servlet>
+        <servlet-name>viewWishList</servlet-name>
+        <servlet-class>controller.wishList.viewWishList</servlet-class>
+    </servlet>
     <servlet>
+        <servlet-name>addWishList</servlet-name>
+        <servlet-class>controller.wishList.addWishList</servlet-class>
+   
+  </servlet>        <servlet>
         <servlet-name>addNews</servlet-name>
         <servlet-class>controller.news.addNews</servlet-class>
     </servlet>
@@ -159,6 +167,14 @@
     <servlet>
         <servlet-name>OrderHistory</servlet-name>
         <servlet-class>controller.Cart.OrderHistory</servlet-class>
+         </servlet>
+<servlet>
+        <servlet-name>viewWishList</servlet-name>
+        <servlet-class>controller.wishList.viewWishList</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>addWishList</servlet-name>
+        <servlet-class>controller.wishList.addWishList</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>viewWishList</servlet-name>
@@ -261,6 +277,14 @@
         <url-pattern>/sendCode</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+            <servlet-name>viewWishList</servlet-name>
+        <url-pattern>/viewWishList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>addWishList</servlet-name>
+        <url-pattern>/addWishList</url-pattern>
+     </servlet-mapping>   
+        <servlet-mapping>
         <servlet-name>addNews</servlet-name>
         <url-pattern>/addNews</url-pattern>
     </servlet-mapping>
@@ -335,6 +359,14 @@
     <servlet-mapping>
         <servlet-name>OrderHistory</servlet-name>
         <url-pattern>/orderHistory</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>viewWishList</servlet-name>
+        <url-pattern>/viewWishList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>addWishList</servlet-name>
+        <url-pattern>/addWishList</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
