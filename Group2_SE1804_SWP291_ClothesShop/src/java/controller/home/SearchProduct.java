@@ -35,11 +35,15 @@ public class SearchProduct extends HttpServlet {
         int totalProducts = dao.getTotalSearchedProducts(searchKeyword, categoryId);
         List<Product> products = dao.searchProductsByNameAndCategoryWithSortingAndPaging(
                 searchKeyword, categoryId, sortBy, page, pageSize);
-
+        List<Product> products2 = dao.getLatestProducts(3);
         ArrayList<Category> categories = dao.getAllCate();
         int totalPages = (int) Math.ceil((double) totalProducts / pageSize);
-        List<Product> latestProducts = dao.getLatestProducts(3);
 
+// Ensure these attributes are set for the JSP
+        request.setAttribute("searchKeyword", searchKeyword);
+        request.setAttribute("categoryId", categoryId);
+        List<Product> latestProducts = dao.getLatestProducts(3);
+        request.setAttribute("products2", products2);
         request.setAttribute("products", products);
         request.setAttribute("categories", categories);
         request.setAttribute("latestProducts", latestProducts);

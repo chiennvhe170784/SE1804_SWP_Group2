@@ -157,108 +157,170 @@
                         <script>
                             function changeSort() {
                                 var sortBy = document.getElementById('sortSelect').value;
-                                window.location.href = 'searchresult?sortBy=' + sortBy + '&searchKeyword=${searchKeyword}&categoryId=${categoryId}';
+                                var searchKeyword = '<%= request.getParameter("searchKeyword") %>';
+                                var categoryId = '<%= request.getParameter("categoryId") %>';
+                                window.location.href = 'search?sortBy=' + sortBy + '&searchKeyword=' + searchKeyword + '&categoryId=' + categoryId;
                             }
                         </script>
+
                         <!-- Shop -->
                         <div class="row">
                             <!-- Product Single -->
                             <c:forEach var="product" items="${products}">
                                 <div class="col-lg-4 col-md-4 col-sm-6 mb-30">
                                     <div class="product-single">
-                                        <div class="product-img">
-                                            <img src="${product.image}" alt="Product Image">
-                                            <div class="product-img-overlay">
-                                                <a href="product?productId=${product.id}">View Details</a>
+                                        <div class="product-thumbnail">
+                                            <a href="DetailProduct?pid=${product.pid}">
+                                                <img src="${product.img}" alt="${product.name}" style="width: 100%; height: 300px; object-fit: cover;">
+                                            </a>
+                                            <div class="product-thumbnail-overly">
+                                                <ul>    
+                                                    <li><a href="cart.html"><i class="fas fa-shopping-cart"></i></a></li>
+                                                    <li><a href="wishlist.html"><i class="far fa-heart"></i></a></li>   
+                                                    <li><a href="DetailProduct?pid=${product.pid}"><i class="far fa-eye"></i></a></li>
+                                                </ul>
                                             </div>
                                         </div>
-                                        <div class="product-info">
-                                            <h4>${product.name}</h4>
-                                            <p>${product.price}</p>
+                                        <div class="product-content">
+                                            <h4><a href="DetailProduct?pid=${product.pid}">${product.name}</a></h4>
+                                            <div class="pricing">
+                                                <span>$${product.price}</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </c:forEach>
-                            <!-- End Product Single -->
                         </div>
                         <!-- End Shop -->
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- End Shop Area -->
+                        <div class="row">
+                            <div class="col-12 mb-30">
+                                <div class="page-pagination text-center">
+                                    <ul>
+                                        <li><a href="search?sortBy=${sortBy}&searchKeyword=${searchKeyword}&categoryId=${categoryId}&page=${currentPage - 1}" ${currentPage == 1 ? 'style="display:none;"' : ''}><i class="fa fa-angle-left"></i></a></li>
+                                                <c:forEach begin="1" end="${totalPages}" var="i">
+                                            <li><a href="search?sortBy=${sortBy}&searchKeyword=${searchKeyword}&categoryId=${categoryId}&page=${i}" class="${i == currentPage ? 'active' : ''}">${i}</a></li>
+                                            </c:forEach>
+                                        <li><a href="search?sortBy=${sortBy}&searchKeyword=${searchKeyword}&categoryId=${categoryId}&page=${currentPage + 1}" ${currentPage == totalPages ? 'style="display:none;"' : ''}><i class="fa fa-angle-right"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
 
-        <!-- Footer -->
-        <footer class="footer">
-            <!-- Footer Top -->
-            <div class="footer-top pt-50">
-                <div class="container">
-                    <div class="row">
-                        <!-- Single -->
-                        <div class="col-lg-3 col-md-6 mb-30">
-                            <div class="footer-widgets-single">
-                                <h2><img src="assets/img/logo3.jpg" alt="Shop Logo"></h2>
-                                <p>Discover the latest trends in fashion and get inspired by our new styles. Shop our current collections now at the Online Store.</p>
-                            </div>
+                    </div>
+                    <!-- Siderbar -->
+                    <div class="col-lg-4">
+                        <div class="sidebar-widgets">
+                            <h4 class="title">Latest Products</h4>
+                            <c:forEach var="product" items="${products2}">
+                                <div class="widgets-latest-product-full">
+                                    <!-- Single -->
+
+                                    <div class="widgets-latest-product-single mb-30">
+                                        <div class="thumbanil">
+                                            <a href="#">
+                                                <img src="${product.img}" alt="${product.name}" style="width: 100%; object-fit: cover;">
+                                            </a>
+                                        </div>
+                                        <div class="content">
+                                            <h4><a href="#">${product.name}</a></h4>
+                                            <div class="pricing">
+                                                <span>$${product.price}</span>
+                                            </div>
+                                        </div>
+                                    </div
+
+                                </div>
+                            </c:forEach>
                         </div>
                         <!-- Single -->
-                        <div class="col-lg-3 col-md-6 mb-30">
-                            <div class="footer-widgets-single">
-                                <h3>My Account</h3>
-                                <ul>
-                                    <li><a href="#">Sign In</a></li>
-                                    <li><a href="#">View Cart</a></li>
-                                    <li><a href="#">My Wishlist</a></li>
-                                    <li><a href="#">Order History</a></li>
-                                    <li><a href="#">Track My Order</a></li>
-                                    <li><a href="#">Help</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <!-- Single -->
-                        <div class="col-lg-3 col-md-6 mb-30">
-                            <div class="footer-widgets-single">
-                                <h3>Shop</h3>
-                                <ul>
-                                    <li><a href="#">New Arrivals</a></li>
-                                    <li><a href="#">Women</a></li>
-                                    <li><a href="#">Men</a></li>
-                                    <li><a href="#">Kids</a></li>
-                                    <li><a href="#">Sale</a></li>
-                                    <li><a href="#">Accessories</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <!-- Single -->
-                        <div class="col-lg-3 col-md-6 mb-30">
-                            <div class="footer-widgets-single">
-                                <h3>Newsletter</h3>
-                                <p>Subscribe to our newsletter to get the latest updates on new arrivals and exclusive offers.</p>
-                                <form action="#">
-                                    <input type="email" name="email" placeholder="Your Email">
-                                    <button type="submit" class="button-1">Subscribe</button>
-                                </form>
-                            </div>
+                        <div class="sidebar-widgets">
+                            <h4 class="title">Recent Post</h4>
+                            <ul>
+                                <li><a href="#">Gallery Post with Supported Animation</a></li>
+                                <li><a href="#">Announcement – Standard Post without Image</a></li>
+                                <li><a href="#">We’re the best Designers from UK</a></li>
+                                <li><a href="#">A Beautiful Day – Standard Post with Image</a></li>
+                            </ul>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- Footer Bottom -->
-        </footer>
 
-        <!-- Footer -->
+        </div>
+    </section>
+    <!-- End Shop Area -->
 
-        <!-- Javascript -->
-        <script src="assets/js/vendor/modernizr-3.6.0.min.js"></script>
-        <script src="assets/js/vendor/jquery-3.3.1.min.js"></script>
-        <script src="assets/js/vendor/popper.min.js"></script>
-        <script src="assets/js/vendor/bootstrap.min.js"></script>
-        <script src="assets/js/vendor/owl.carousel.min.js"></script>
-        <script src="assets/js/vendor/slick.min.js"></script>
-        <script src="assets/js/vendor/jquery.counterup.min.js"></script>
-        <script src="assets/js/vendor/jquery.countdown.js"></script>
-        <script src="assets/js/vendor/waypoints.min.js"></script>
-        <script src="assets/js/vendor/jquery.magnific-popup.min.js"></script>
-        <script src="assets/js/main.js"></script>
-    </body>
+    <!-- Footer -->
+    <footer class="footer">
+        <!-- Footer Top -->
+        <div class="footer-top pt-50">
+            <div class="container">
+                <div class="row">
+                    <!-- Single -->
+                    <div class="col-lg-3 col-md-6 mb-30">
+                        <div class="footer-widgets-single">
+                            <h2><img src="assets/img/logo3.jpg" alt="Shop Logo"></h2>
+                            <p>Discover the latest trends in fashion and get inspired by our new styles. Shop our current collections now at the Online Store.</p>
+                        </div>
+                    </div>
+                    <!-- Single -->
+                    <div class="col-lg-3 col-md-6 mb-30">
+                        <div class="footer-widgets-single">
+                            <h3>My Account</h3>
+                            <ul>
+                                <li><a href="#">Sign In</a></li>
+                                <li><a href="#">View Cart</a></li>
+                                <li><a href="#">My Wishlist</a></li>
+                                <li><a href="#">Order History</a></li>
+                                <li><a href="#">Track My Order</a></li>
+                                <li><a href="#">Help</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- Single -->
+                    <div class="col-lg-3 col-md-6 mb-30">
+                        <div class="footer-widgets-single">
+                            <h3>Shop</h3>
+                            <ul>
+                                <li><a href="#">New Arrivals</a></li>
+                                <li><a href="#">Women</a></li>
+                                <li><a href="#">Men</a></li>
+                                <li><a href="#">Kids</a></li>
+                                <li><a href="#">Sale</a></li>
+                                <li><a href="#">Accessories</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- Single -->
+                    <div class="col-lg-3 col-md-6 mb-30">
+                        <div class="footer-widgets-single">
+                            <h3>Newsletter</h3>
+                            <p>Subscribe to our newsletter to get the latest updates on new arrivals and exclusive offers.</p>
+                            <form action="#">
+                                <input type="email" name="email" placeholder="Your Email">
+                                <button type="submit" class="button-1">Subscribe</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer Bottom -->
+    </footer>
+
+    <!-- Footer -->
+
+    <!-- Javascript -->
+    <script src="assets/js/vendor/modernizr-3.6.0.min.js"></script>
+    <script src="assets/js/vendor/jquery-3.3.1.min.js"></script>
+    <script src="assets/js/vendor/popper.min.js"></script>
+    <script src="assets/js/vendor/bootstrap.min.js"></script>
+    <script src="assets/js/vendor/owl.carousel.min.js"></script>
+    <script src="assets/js/vendor/slick.min.js"></script>
+    <script src="assets/js/vendor/jquery.counterup.min.js"></script>
+    <script src="assets/js/vendor/jquery.countdown.js"></script>
+    <script src="assets/js/vendor/waypoints.min.js"></script>
+    <script src="assets/js/vendor/jquery.magnific-popup.min.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
 </html>
