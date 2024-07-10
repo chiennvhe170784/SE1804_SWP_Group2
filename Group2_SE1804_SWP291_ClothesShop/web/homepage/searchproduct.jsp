@@ -166,7 +166,7 @@
                         </div>
                         <!-- Single -->
                         <div class="sidebar-widgets">
-                            <h4 class="title">Recent Post</h4>
+                            <h4 class="title">Recent News</h4>
                             <ul>
                                 <li><a href="#">Gallery Post with Supported Animation</a></li>
                                 <li><a href="#">Announcement – Standard Post without Image</a></li>

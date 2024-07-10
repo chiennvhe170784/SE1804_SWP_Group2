@@ -160,6 +160,14 @@
         <servlet-name>OrderHistory</servlet-name>
         <servlet-class>controller.Cart.OrderHistory</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>viewWishList</servlet-name>
+        <servlet-class>controller.wishList.viewWishList</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>addWishList</servlet-name>
+        <servlet-class>controller.wishList.addWishList</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>newsList</servlet-name>
         <url-pattern>/newsList</url-pattern>
@@ -215,6 +223,14 @@
     <servlet-mapping>
         <servlet-name>listBrand</servlet-name>
         <url-pattern>/listBrand</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>viewWishList</servlet-name>
+        <url-pattern>/viewWishList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>addWishList</servlet-name>
+        <url-pattern>/addWishList</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>deleteBrand</servlet-name>
