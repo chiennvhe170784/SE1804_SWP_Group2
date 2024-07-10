@@ -88,15 +88,8 @@
         <servlet-name>sendCode</servlet-name>
         <servlet-class>controller.Login.sendCode</servlet-class>
     </servlet>
-     <servlet>
-        <servlet-name>viewWishList</servlet-name>
-        <servlet-class>controller.wishList.viewWishList</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>addWishList</servlet-name>
-        <servlet-class>controller.wishList.addWishList</servlet-class>
-   
-  </servlet>        <servlet>
+
+      <servlet>
         <servlet-name>addNews</servlet-name>
         <servlet-class>controller.news.addNews</servlet-class>
     </servlet>
@@ -168,10 +161,7 @@
         <servlet-name>OrderHistory</servlet-name>
         <servlet-class>controller.Cart.OrderHistory</servlet-class>
          </servlet>
-<servlet>
-        <servlet-name>viewWishList</servlet-name>
-        <servlet-class>controller.wishList.viewWishList</servlet-class>
-    </servlet>
+
     <servlet>
         <servlet-name>addWishList</servlet-name>
         <servlet-class>controller.wishList.addWishList</servlet-class>
@@ -180,10 +170,7 @@
         <servlet-name>viewWishList</servlet-name>
         <servlet-class>controller.wishList.viewWishList</servlet-class>
     </servlet>
-    <servlet>
-        <servlet-name>addWishList</servlet-name>
-        <servlet-class>controller.wishList.addWishList</servlet-class>
-    </servlet>
+
     <servlet-mapping>
         <servlet-name>newsList</servlet-name>
         <url-pattern>/newsList</url-pattern>
@@ -240,14 +227,8 @@
         <servlet-name>listBrand</servlet-name>
         <url-pattern>/listBrand</url-pattern>
     </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>viewWishList</servlet-name>
-        <url-pattern>/viewWishList</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>addWishList</servlet-name>
-        <url-pattern>/addWishList</url-pattern>
-    </servlet-mapping>
+
+
     <servlet-mapping>
         <servlet-name>deleteBrand</servlet-name>
         <url-pattern>/deleteBrand</url-pattern>
