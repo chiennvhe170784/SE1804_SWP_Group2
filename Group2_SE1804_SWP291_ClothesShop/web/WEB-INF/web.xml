@@ -275,15 +275,7 @@
     <servlet-mapping>
         <servlet-name>sendCode</servlet-name>
         <url-pattern>/sendCode</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-            <servlet-name>viewWishList</servlet-name>
-        <url-pattern>/viewWishList</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>addWishList</servlet-name>
-        <url-pattern>/addWishList</url-pattern>
-     </servlet-mapping>   
+    </servlet-mapping> 
         <servlet-mapping>
         <servlet-name>addNews</servlet-name>
         <url-pattern>/addNews</url-pattern>
