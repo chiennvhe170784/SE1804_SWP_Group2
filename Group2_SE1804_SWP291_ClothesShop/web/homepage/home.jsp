@@ -28,7 +28,7 @@
         <link rel="stylesheet" href="assets/css/style.css">
         <link rel="stylesheet" href="assets/css/responsive.css">
         <script src="${pageContext.request.contextPath}/assets/js/jquery-3.5.1.min.js" type="text/javascript"></script>
-    
+
     </head>
     <body>
 
@@ -92,21 +92,45 @@
         <!-- Start Hero Area -->
         <section class="hero-area">
             <div class="hero-area-full owl-carousel">
-                <c:forEach var="image" items="${randomImages}">
-                    <div class="hero-slider-single" style="background-image: url('${image}');">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <div class="hero-slider-single-content">
-                                        <h2>Leading Fashion <span>Manufacturer</span></h2>
-                                        <p>Ostromi Is A Specialist In High-Quality Clothing And Accessories</p>
-                                        <a class="button-1" href="/clothesShop/AllProduct">Shop Now</a>
-                                    </div>
+                <div class="hero-slider-single" style="background-image: url('assets/img/clothing-accessories-men-women-ready-1117305.jpg');">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="hero-slider-single-content">
+                                    <h2>Leading Fashion <span>Manufacturer</span></h2>
+                                    <p>Ostromi Is A Specialist In High-Quality Clothing And Accessories</p>
+                                    <a class="button-1" href="/clothesShop/AllProduct">Shop Now</a>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </c:forEach>
+                </div>
+                <div class="hero-slider-single" style="background-image: url('assets/img/0eded263a69560e7bc89d9da84441f07.jpg');">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="hero-slider-single-content">
+                                    <h2>Leading Fashion <span>Manufacturer</span></h2>
+                                    <p>Ostromi Is A Specialist In High-Quality Clothing And Accessories</p>
+                                    <a class="button-1" href="/clothesShop/AllProduct">Shop Now</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-slider-single" style="background-image: url('assets/img/pngtree-men-s-shirts-hang-on-racks-in-a-closet-picture-image_2615102.jpg');">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="hero-slider-single-content">
+                                    <h2>Leading Fashion <span>Manufacturer</span></h2>
+                                    <p>Ostromi Is A Specialist In High-Quality Clothing And Accessories</p>
+                                    <a class="button-1" href="/clothesShop/AllProduct">Shop Now</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
         <!-- End Hero Area -->
@@ -150,13 +174,13 @@
                                     <c:forEach var="product" items="${products}">
                                         <div class="product-single product-style-1">
                                             <div class="product-thumbnail" style="width: 100%; height: 400px; overflow: hidden;">
-                                                <a href="product-details.html">
+                                                <a href="DetailProduct?pid=${product.pid}">
                                                     <img src="${product.img}" alt="${product.name}" style="width: 100%; height: 400px; object-fit: cover; display: block;">
                                                     <img src="${product.img}" alt="${product.name}" style="width: 100%; height: 400px; object-fit: cover; display: block;">
                                                 </a>
                                             </div>
                                             <div class="product-content">
-                                                <h4><a href="product-details.html">${product.name}</a></h4>
+                                                <h4><a href="DetailProduct?pid=${product.pid}">${product.name}</a></h4>
                                                 <div class="pricing">
                                                     <span>$${product.price}</span>
                                                 </div>
@@ -194,7 +218,7 @@
                             <c:forEach var="product2" items="${products2}">
                                 <div class="product-single">
                                     <div class="product-thumbnail">
-                                        <a href="product-details.html?pid=${product2.pid}">
+                                        <a href="DetailProduct?pid=${product2.pid}}">
                                             <img src="${product2.img}" alt="${product2.name}" style="width: 100%; height: 300px; object-fit: cover; border:2px solid">
                                         </a>
                                         <div class="product-thumbnail-overly">
@@ -206,7 +230,7 @@
                                         </div>
                                     </div>
                                     <div class="product-content">
-                                        <h4><a href="product-details.html?pid=${product2.pid}">${product2.name}</a></h4>
+                                        <h4><a href="DetailProduct?pid=${product2.pid}">${product2.name}</a></h4>
                                         <div class="pricing">
                                             <span>$${product2.price}</span>
                                         </div>
