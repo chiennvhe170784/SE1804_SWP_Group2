@@ -4,6 +4,7 @@
  */
 package controller.Login;
 
+import context.OrderDAO;
 import context.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -91,6 +92,7 @@ public class login extends HttpServlet {
         String pass = request.getParameter("password");
         String r = request.getParameter("rem");
         UserDAO ud = new UserDAO();
+        OrderDAO ord = new OrderDAO();
         String p = ud.toSHA1(pass);
         HttpSession session = request.getSession();
         User user = ud.checkUser(u, p);
@@ -101,7 +103,8 @@ public class login extends HttpServlet {
             request.setAttribute("err", "Your account has been locked, please contact admin fix the status! ");
             request.getRequestDispatcher("login/login.jsp").forward(request, response);
         } else if (user.getRid() == 0) {
-
+            double wallet = ord.getWalletByUId(user);
+            session.setAttribute("wallet", wallet);
             session.setAttribute("user", user);
             Cookie username = new Cookie("username", u);
             Cookie password = new Cookie("password", pass);
@@ -120,6 +123,8 @@ public class login extends HttpServlet {
             response.addCookie(remem);
             response.sendRedirect("Home");
         } else {
+            double wallet = ord.getWalletByUId(user);
+            session.setAttribute("wallet", wallet);
             session.setAttribute("user", user);
             Cookie username = new Cookie("username", u);
             Cookie password = new Cookie("password", pass);

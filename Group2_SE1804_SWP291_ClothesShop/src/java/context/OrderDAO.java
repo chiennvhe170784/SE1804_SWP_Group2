@@ -9,6 +9,10 @@ import model.User;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import model.Product;
 
 /**
@@ -17,11 +21,12 @@ import model.Product;
  */
 public class OrderDAO extends DBContext {
 
-    public void addOrder(User u, String address, String note, double totalPrice) {
+    //add order 
+    public int addOrder(User u, String address, String note, double totalPrice) {
+
         LocalDate curDate = java.time.LocalDate.now();
         String date = curDate.toString();
         try {
-      
 
             // add vào bảng Order
             String sql = "INSERT INTO [dbo].[Order]\n"
@@ -42,8 +47,79 @@ public class OrderDAO extends DBContext {
             st.setString(5, note);
             st.setInt(6, u.getUid());
             st.executeUpdate();
+
+            //get id  order
+            int oid;
+            String sql1 = "SELECT [oid]\n"
+                    + "  FROM [dbo].[Order]\n"
+                    + "  Where uid= ? and  orderDate like ?";
+            PreparedStatement st1 = connection.prepareStatement(sql1);
+            st1.setInt(1, u.getUid());
+            st1.setString(2, date);
+            ResultSet rs1 = st1.executeQuery();
+            if (rs1.next()) {
+                oid = rs1.getInt("oid");
+                return oid;
+            }
+
         } catch (SQLException e) {
         }
+        return -1;
+    }
+
+    //add order detail
+    public void addOrderDetal(int oid, int pid, int quantity) {
+        try {
+            String sql = "INSERT INTO [dbo].[OrderDetail]\n"
+                    + "           ([oid]\n"
+                    + "           ,[pid]\n"
+                    + "           ,[numP])\n"
+                    + "     VALUES\n"
+                    + "           (?,?,?)";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, oid);
+            ps.setInt(2, pid);
+            ps.setInt(3, quantity);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public List<Product> getOrderDetail(int uid) {
+        List<Product> listPOrder = new ArrayList<>();
+        try {
+            String sql = "SELECT od.[pid] as [pid]\n"
+                    + "      ,[name]\n"
+                    + "      ,od.numP as [quantity] \n"
+                    + "      ,od.numP*p.price as [price]\n"
+                    + "      ,[describe]\n"
+                    + "      ,[img]\n"
+                    + "      ,o.orderDate as [releaseDate]\n"
+                    + "      ,[cid] \n"
+                    + "      ,[bid]\n"
+                    + "      ,[gid]\n"
+                    + "  FROM [ClothesShop].[dbo].[OrderDetail] od\n"
+                    + "  join   [Order] o on  o.oid = od.oid\n"
+                    + "  join [Product] p on p.pid = od.pid\n"
+                    + "  where uid = ?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, uid);
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                listPOrder.add(new Product(rs.getInt(1),
+                         rs.getString(2),
+                         rs.getInt(3),
+                         rs.getDouble(4),
+                         rs.getString(5),
+                         rs.getString(6),
+                         rs.getDate(7), null, null, null, null));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return listPOrder;
     }
 
     public void reduceNumberProduct(int pid, int numberP) {
@@ -70,7 +146,7 @@ public class OrderDAO extends DBContext {
             st.setDouble(1, totalMoney);
             st.setInt(2, u.getUid());
             st.executeUpdate();
-            
+
             PreparedStatement st1 = connection.prepareStatement(sql1);
             st1.setDouble(1, totalMoney);
             st1.executeUpdate();
@@ -99,16 +175,17 @@ public class OrderDAO extends DBContext {
     public boolean checkValidBuy(double totalMoney, User u) {
         return totalMoney <= getWalletByUId(u);
     }
+
     //Bơm tiền
-    private void AddWallet(){
+    private void AddWallet() {
         String sql = "UPDATE [dbo].[wallet]\n"
                 + "   SET wallet = 99999"
                 + " WHERE uid = ? ";
-           try {
+        try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setInt(1, 4);
             st.executeUpdate();
-  
+
         } catch (SQLException e) {
         }
     }
@@ -134,9 +211,10 @@ public class OrderDAO extends DBContext {
     public static void main(String[] args) {
         OrderDAO ord = new OrderDAO();
         ord.AddWallet();
-        UserDAO ud = new UserDAO();
-           LocalDate curDate = java.time.LocalDate.now();
-        String date = curDate.toString();
-        System.out.println(date);
+//        UserDAO ud = new UserDAO();
+//        LocalDate curDate = java.time.LocalDate.now();
+//        String date = curDate.toString();
+//        System.out.println(date);
+        System.out.println(ord.getOrderDetail(4).size());
     }
 }

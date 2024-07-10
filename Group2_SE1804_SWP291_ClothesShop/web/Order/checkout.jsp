@@ -67,7 +67,7 @@
                         <div class="breadcrumb-content">
                             <h2>Checkout</h2>
                             <ul>
-                                <li><a href="index.html">Home</a></li>
+                                <li><a href="Home">Home</a></li>
                                 <li class="active">Checkout</li>
                             </ul>
                         </div>

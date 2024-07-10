@@ -129,8 +129,12 @@ public class checkout extends HttpServlet {
             double totalMoney = (double) session.getAttribute("totalPrice");
             if (ord.checkValidBuy(totalMoney, user)) {
                 // Add order to database
-                ord.addOrder(user, address, note, totalMoney);
-
+               
+                int oid = ord.addOrder(user, address, note, totalMoney);
+                for (Product product : listP) {
+                    ord.addOrderDetal(oid, product.getPid(), product.getQuantity());
+           
+                }
                 ord.reduceWallet(user, totalMoney);
 
                 // Clear session attributes related to cart
