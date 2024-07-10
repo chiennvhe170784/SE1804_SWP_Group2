@@ -201,7 +201,7 @@
                                     <c:forEach items="${requestScope.listDORD}" var="product">
                                         <tr>
                                             <td class="pro-thumbnail"><img class="img-fluid" src="${product.img}" alt="${product.name}"></td>
-                                            <td class="pro-title">${product.name}</td>
+                                            <td class="pro-title"><a href="DetailProduct?pid=${product.pid}">${product.name}</a></td>
                                              <td class="pro-title">x${product.quantity}</td>
                                             <td class="pro-price"><span>${product.price}</span></td>
                                              <td class="pro-title"><span>${product.describe}</span></td>

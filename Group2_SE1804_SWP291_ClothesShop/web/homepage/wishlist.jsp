@@ -233,7 +233,7 @@
                                     <td class="pro-title"><a href="DetailProduct?pid=${p.pid}">${p.name}</a></td>
                                     <td class="pro-price"><span>${p.price} $</span></td>
                                     <td class="pro-quantity"><span class="text-success">${p.quantity}</span></td>
-                                    <td class="pro-subtotal"><a onclick="addToCart(${product.pid})" class="button-1">Add to Cart</a></td>
+                                    <td class="pro-subtotal"><a onclick="addToCart(${p.pid})" class="button-1">Add to Cart</a></td>
                                     <td class="pro-remove"><a onclick="removeProduct(${p.pid})"><i class="fas fa-trash-alt"></i></a></td>
                                 </tr>
                                                 </c:forEach>
