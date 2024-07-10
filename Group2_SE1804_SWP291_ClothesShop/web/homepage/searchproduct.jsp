@@ -24,76 +24,8 @@
         <!-- Header -->
         <header class="header">
             <%@include file="header.jsp" %>
-            <!-- Header Bottom -->
-            <div class="header-bottm">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="logo-2">
-                                <h2><a href="/clothesShop/Home"><img src="assets/img/logo.png"></a></h2>
-                            </div>
-                            <div class="canvas_open">
-                                <a href="javascript:void(0)"><i class="fas fa-bars"></i></a>
-                            </div>
-                            <div class="mobile-mini-cart">
-                                <div class="mini-cart">
-                                    <div class="mini-cart-icon">
-                                        <i class="fas fa-shopping-cart"></i>
-                                        <span class="counter">02</span>
-                                        <span class="counter-cart"><small>Your Cart</small>$10.00</span>
-                                        <div class="minicart-content-wrapper">
-                                            <ul class="cart-list-full">
-                                                <li class="cart-list-single">
-                                                    <img src="assets/img/product/1.jpg" alt="img">
-                                                    <h5><a href="#">simple product</a></h5>
-                                                    <span class="price">$120</span>
-                                                    <div class="close"><i class="fas fa-times"></i></div>
-                                                </li>
-                                                <li class="cart-list-single">
-                                                    <img src="assets/img/product/2.jpg" alt="img">
-                                                    <h5><a href="#">simple product</a></h5>
-                                                    <span class="price">$120</span>
-                                                    <div class="close"><i class="fas fa-times"></i></div>
-                                                </li>
-                                            </ul>
-                                            <h2 class="subtotal">Subtotal : <span>$220</span></h2>
-                                            <div class="minicart-btn">
-                                                <a class="button-1" href="cart.html">View Cart</a>
-                                                <a class="button-2" href="#">Checkout</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="menu">
-                                <nav>
-                                    <ul>
-                                        <li><a href="/clothesShop/Home">Home</a></li>
-                                        <li><a href="/clothesShop/AllProduct">Shop <i class="fa fa-angle-down"></i></a>
-                                            <ul class="submenu-item">
-                                                <li><a href="/clothesShop/AllProduct">All Products</a></li>
-                                                <li><a href="gender-products?gender=men">Men</a></li>
-                                                <li><a href="gender-products?gender=women">Women</a></li>
-                                                <li><a href="gender-products?gender=other">Other</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="#">Collections</a>
-                                        </li>
-                                        <li><a href="blog.html">Blog <i class="fa fa-angle-down"></i></a>
-                                            <ul class="submenu-item">
-                                                <li><a href="bloglist.html">Blog List</a></li>
-                                                <li><a href="blog-grid.html">Blog Grid</a></li>
-                                                <li><a href="blog-single.html">Blog Single</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="contact.html">Contact</a></li>
-                                    </ul>
-                                </nav>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                 <!-- Header Bottom -->
+            <%@include file="../homepage/header_bottom.jsp" %>
         </header>
         <!-- Header -->
 
