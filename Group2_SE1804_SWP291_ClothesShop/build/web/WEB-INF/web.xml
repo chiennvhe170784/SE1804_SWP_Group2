@@ -149,14 +149,20 @@
         <servlet-class>controller.Cart.cartView</servlet-class>
     </servlet>
     <servlet>
-
         <servlet-name>SearchProduct</servlet-name>
         <servlet-class>controller.home.SearchProduct</servlet-class>
-        </servlet>
+    </servlet>
     <servlet>
         <servlet-name>checkout</servlet-name>
         <servlet-class>controller.Cart.checkout</servlet-class>
-
+    </servlet>
+    <servlet>
+        <servlet-name>viewWishList</servlet-name>
+        <servlet-class>controller.wishList.viewWishList</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>addWishList</servlet-name>
+        <servlet-class>controller.wishList.addWishList</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>newsList</servlet-name>
@@ -313,7 +319,14 @@
     <servlet-mapping>
         <servlet-name>checkout</servlet-name>
         <url-pattern>/checkout</url-pattern>
-
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>viewWishList</servlet-name>
+        <url-pattern>/viewWishList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>addWishList</servlet-name>
+        <url-pattern>/addWishList</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
