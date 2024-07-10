@@ -56,7 +56,7 @@
                         <a href="javascript:void(0)"><i class="fas fa-times"></i></a>
                     </div>
                     <div class="mobile-logo">
-                        <h2><a href="index.html"><img src="assets/img/logo.png" alt="Logo"></a></h2>
+                        <h2><a href="Home"><img src="assets/img/logo.png" alt="Logo"></a></h2>
                     </div>
                     <div id="menu" class="text-left">
                         <ul class="offcanvas_main_menu">
@@ -231,38 +231,7 @@
         <!-- End Product Widget List Area -->
 
         <!-- Start Latest Blog -->
-        <section class="latest-blog pt-70 pb-40 section-border">
-            <div class="container">
-                <!-- Section Title -->
-                <div class="row">
-                    <div class="col-12">
-                        <div class="section-headding-1 mb-50">
-                            <h2><span>Latest Blogs</span></h2>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <c:forEach var="news" items="${latestNews}">
-                        <div class="col-lg-4 col-md-6 mb-30">
-                            <div class="blog-item">
-                                <div class="thumnail">
-                                    <a href="single.html"><img src="assets/img/blog/${news.nId}.jpg" alt="blog"></a>
-                                </div>
-                                <div class="content">
-                                    <ul class="auth">
-                                        <li><a href="#">by ${news.authorName}</a></li>
-                                        <li><a href="#">${news.updateDate}</a></li>
-                                        <li><a href="#">${news.categoryName}</a></li>
-                                    </ul>
-                                    <h2><a href="single.html">${news.title}</a></h2>
-                                    <p>${news.body.substring(0, 100)}...</p>
-                                </div>
-                            </div>
-                        </div>
-                    </c:forEach>
-                </div>
-            </div>
-        </section>
+      
 
         <!-- End Latest Blog -->
 
