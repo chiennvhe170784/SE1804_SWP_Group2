@@ -179,8 +179,11 @@
                                 <span class="logo" style="margin-left: 20px"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQuzZt1REzKbmypTgYKn0rAvtrwEIPnK6Kfnw&s" id="userIcon" style="border-radius: 50%; height: 50px; width: 50px;"></span>
 
                                 <span class="dropdown-menu" id="dropdownMenu">
+                                     <a href="#">&nbsp;&nbsp;$${sessionScope.wallet}</a>
                                     <a href="userProfile"><i class="fas fa-user"></i>&nbsp;&nbsp;Show profile</a>
-                                    <a href="#"><i class="fas fa-cog"></i>&nbsp;&nbsp;Setting</a>
+                                     <a href="orderHistory">
+                                        <i class="fas fa-shopping-bag"></i>&nbsp;&nbsp;History Order
+                                    </a>
                                     <a href="logOut"><i class="fas fa-sign-out-alt"></i>&nbsp;&nbsp;Logout</a>
 
                                 </span>
