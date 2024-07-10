@@ -30,7 +30,22 @@
         </style>
         <script src="${pageContext.request.contextPath}/assets/js/jquery-3.5.1.min.js" type="text/javascript"></script>
             <script type="text/javascript">
+            function addToWishList(productId) {
+                var pId = productId;
+                $.ajax({
+                    type: 'GET',
+                    data: {pId: pId},
+                    url: 'addWishList',
+                    success: (result) => {
+                            
+                    },
+                    error: function () {
+                        console.log('something went wrong');
+                    }
+                });
 
+            }
+            
             function addToCart(productId) {
                 var pId = productId;
                 var totalProduct;
@@ -41,6 +56,9 @@
                     success: (result) => {
                         if(result.outOfStock){
                             showError("Product out of stock", 3000);
+                        }
+                        else{
+                            showAlert("Product added to your cart", 3000);
                         }
                         totalProduct = result.productInCart;;
                         $('.counter').text(totalProduct);
@@ -88,6 +106,8 @@
         </script>
     </head>
     <body>
+        <div  id="notifications">
+        </div>
         <!-- Header Middle -->
         <div class="header-middle" style="padding-top: 30px; padding-bottom: 30px;">
             <div class="container">

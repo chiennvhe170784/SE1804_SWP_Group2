@@ -31,8 +31,7 @@
     
     </head>
     <body>
-<div  id="notifications">
-        </div>
+
         <div class="off_canvars_overlay"></div>
         <!-- Header -->
         <header class="header">
@@ -163,7 +162,7 @@
                                                 </div>
                                                 <div class="product-content-btn">
                                                     <ul>
-                                                        <li><a href="wishlist.html"><i class="far fa-heart"></i></a></li>
+                                                        <li><a onclick="addToWishList(${product.pid})"><i class="far fa-heart"></i></a></li>
                                                         <li><a onclick="addToCart(${product.pid})" class="active">Add to Cart</a></li>
                                                         <li><a href="#"><i class="far fa-eye"></i></a></li>
                                                     </ul>
@@ -201,7 +200,7 @@
                                         <div class="product-thumbnail-overly">
                                             <ul>
                                                 <li><a onclick="addToCart(${product2.pid})"><i class="fas fa-shopping-cart"></i></a></li>
-                                                <li><a href="wishlist.html"><i class="far fa-heart"></i></a></li>
+                                                <li><a onclick="addToWishList(${product2.pid})"><i class="far fa-heart"></i></a></li>
                                                 <li><a href="#"><i class="far fa-eye"></i></a></li>
                                             </ul>
                                         </div>

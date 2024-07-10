@@ -124,13 +124,8 @@
                             <br>
                             <br>
                             <div class="modal_add_to_cart">
-                                <form action="addToCart" method="post">
-                                    <span class="quantity">
-                                        <input type="number" name="quantity" min="1" max="1000" step="1" value="1">
-                                    </span>
-                                    <input type="hidden" name="productId" value="${product.pid}">
-                                    <button class="button-1" type="submit">Add to cart</button>
-                                </form>
+                                    <button class="button-1" onclick="addToCart(${product.pid})">Add to cart</button>
+
                             </div>
                         </div>
                     </div>
@@ -267,8 +262,8 @@
                                         </a>
                                         <div class="product-thumbnail-overly">
                                             <ul>
-                                                <li><a href="cart.html"><i class="fas fa-shopping-cart"></i></a></li>
-                                                <li><a href="wishlist.html"><i class="far fa-heart"></i></a></li>
+                                                <li><a onclick="addToCart(${product.pid})" ><i class="fas fa-shopping-cart"></i></a></li>
+                                                <li><a onclick="addToWishList(${product.pid})"><i class="far fa-heart"></i></a></li>
                                                 <li><a href="#"><i class="far fa-eye"></i></a></li>
                                             </ul>
                                         </div>

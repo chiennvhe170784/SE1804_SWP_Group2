@@ -664,4 +664,49 @@ public class ProductDAO extends DBContext {
             e.printStackTrace();
         }
     }
+    public void addProductWishList(int pId, int uId) {
+        try {
+            String sql = "INSERT INTO collection (uid,pid) VALUES (?, ?)";
+            PreparedStatement stm = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
+            stm.setInt(1, uId);
+            stm.setInt(2, pId);
+            stm.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+     public ArrayList<Product> wishList(int uid) {
+        ArrayList<Product> products = new ArrayList<>();
+        try {
+            String sql = """
+                        SELECT product.*
+                        FROM product
+                        INNER JOIN collection ON product.pId = collection.pid
+                        WHERE collection.uid = ?
+                        ORDER BY product.pId;
+                        """;
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, uid);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Product product = extractProduct(rs);
+                products.add(product);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return products;
+    }
+     public void deleteProductWishList(int pid, int uid) {
+        try {
+            deleteProductSizes(pid); // Xóa các kích thước của sản phẩm trước
+            String sql = "DELETE FROM collection WHERE pid = ? AND uid = ?;";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, pid);
+            stm.setInt(2, uid);
+            stm.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
