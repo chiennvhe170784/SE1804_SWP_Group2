@@ -76,135 +76,7 @@
                 <%@include file="header.jsp" %>
 		
 		<!-- Header Bottom -->
-		<div class="header-bottm">
-			<div class="container">
-				<div class="row">
-					<div class="col-lg-12">
-						<div class="logo-2">
-							<h2><a href="index.html"><img src="assets/img/logo.png"></a></h2>
-						</div>
-						<div class="canvas_open">
-					        <a href="javascript:void(0)"><i class="fas fa-bars"></i></a>
-					    </div>
-					    <div class="mobile-mini-cart">
-							<div class="mini-cart">
-								<div class="mini-cart-icon">
-									<i class="fas fa-shopping-cart"></i>
-									<span class="counter">02</span>
-									<span class="counter-cart"><small>Your Cart</small>$10.00</span>
-									 <!-- Mini Cart Content -->
-									 <div class="minicart-content-wrapper">
-									 	<ul class="cart-list-full">
-									 		<!-- Single -->
-									 		<li class="cart-list-single">
-									 			<img src="assets/img/product/1.jpg" alt="img">
-									 			<h5><a href="#">simple product</a></h5>
-									 			<span class="price">$120</span>
-									 			<div class="close"><i class="fas fa-times"></i></div>
-									 		</li>
-									 		<!-- Single -->
-									 		<li class="cart-list-single">
-									 			<img src="assets/img/product/2.jpg" alt="img">
-									 			<h5><a href="#">simple product</a></h5>
-									 			<span class="price">$120</span>
-									 			<div class="close"><i class="fas fa-times"></i></div>
-									 		</li>
-									 	</ul>
-									 	<h2 class="subtotal">Subtotal : <span>$220</span></h2>
-									 	<div class="minicart-btn">
-									 		<a class="button-1" href="cart.html">View Cart</a>
-									 		<a class="button-2" href="#">Checkout</a>
-									 	</div>
-									 </div>
-								</div>
-							</div>
-						</div>
-						<div class="menu">
-							<nav>
-								<ul>
-									<li><a href="#">Home</a></li>
-									<li><a href="about.html">About</a></li>
-									<li><a href="#">Page <i class="fa fa-angle-down"></i></a>
-										<ul class="submenu-item">
-											<li><a href="cart.html">Cart</a></li>
-											<li><a href="wishlist.html"> Wishlist</a></li>
-											<li><a href="checkout.html">Checkout</a></li>
-											<li><a href="login.html">Login</a></li>
-											<li><a href="register.html">Register</a></li>
-											<li><a href="reset-password.html">Reset Password</a></li>
-											<li><a href="privacy-policy.html">Privacy Policy</a></li>
-											<li><a href="terms-condition.html">Terms & Condition</a></li>
-											<li><a href="404.html">404 Error</a></li>
-											<li><a href="faq.html">Faq</a></li>
-										</ul>
-									</li>
-									<li><a href="shop.html">Shop <i class="fa fa-angle-down"></i></a>
-										<ul class="submenu-item">
-											<li><a href="shop.html">Shop</a></li>
-											<li><a href="shop2-columns.html">Shop 2 Columns</a></li>
-											<li><a href="shop-grid.html">Shop Grid</a></li>
-											<li><a href="shop-left-sidebar.html">Shop Left Sidebar</a></li>
-											<li><a href="shop-list.html">Shop List</a></li>
-										</ul>
-									</li>
-									<li><a href="#">Elements <i class="fa fa-angle-down"></i></a>
-										<ul class="mega-sub-menu">
-											<li>
-												<a class="menu-title" href="#">Element List</a>
-												<ul>
-													<li><a href="element-infobox.html">Element Info Box</a></li>
-													<li><a href="element-breadcrumb.html">Element Breadcrum</a></li>
-													<li><a href="element-heading.html">Element Headding</a></li>
-													<li><a href="element-post.html">Element Post Element</a></li>
-													<li><a href="element-pricing.html">Element Pricing</a></li>
-												</ul>
-											</li>
-											<li>
-												<a class="menu-title" href="#">Element</a>
-												<ul>
-													<li><a href="element-product-category.html">Element Product Category</a></li>
-													<li><a href="element-product-style.html">Element Product Style</a></li>
-													<li><a href="element-product-tab.html">Element Product Tab</a></li>
-													<li><a href="element-team-style.html">Element Team</a></li>
-													<li><a href="element-testimonial.html">Element Testimonial</a></li>
-												</ul>
-											</li>
-											<li>
-												<a class="menu-title" href="#">Element List</a>
-												<ul>
-													<li><a href="shop.html">Element Shop</a></li>
-													<li><a href="shop2-columns.html">Element Shop 2 Columns</a></li>
-													<li><a href="shop-grid.html">Element Shop Grid</a></li>
-													<li><a href="shop-left-sidebar.html">Element Shop Left Sidebar</a></li>
-													<li><a href="shop-list.html">Element Shop List</a></li>
-												</ul>
-											</li>
-											<li>
-												<a class="menu-title" href="#">Element List</a>
-												<ul>
-													<li><a href="product-details.html">Element Shop Single</a></li>
-													<li><a href="cart.html">Element Cart Page</a></li>
-													<li><a href="checkout.html">Element CheckOut Page</a></li>
-													<li><a href="wishlist.html">Element Wishlist</a></li>
-												</ul>
-											</li>
-			                            </ul>
-									</li>
-									<li><a href="blog.html">blog <i class="fa fa-angle-down"></i></a>
-										<ul class="submenu-item">
-											<li><a href="blog.html">Blog</a></li>
-											<li><a href="blog-grid.html">Blog Grid</a></li>
-											<li><a href="single.html">Blog Single</a></li>
-										</ul>
-									</li>
-									<li><a href="contact.html">Contact</a></li>
-								</ul>
-							</nav>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+                <%@include file="header_bottom.jsp" %>
 	</header>
 	<!-- Header -->
 
@@ -221,12 +93,12 @@
 	                <a href="javascript:void(0)"><i class="fas fa-times"></i></a>  
 	            </div>
 	            <div class="mobile-logo">
-	            	<h2><a href="index.html"><img src="assets/img/logo.png"></a></h2>
+	            	<h2><a href="Home"><img src="assets/img/logo.png"></a></h2>
 	            </div>
 	            <div id="menu" class="text-left ">
 	                <ul class="offcanvas_main_menu">
 	                    <li class="menu-item-has-children">
-	                        <a href="index.html">Home</a>
+	                        <a href="Home">Home</a>
 	                    </li>
 	                    <li class="menu-item-has-children">
 	                        <a href="about.html">about Us</a>
@@ -326,7 +198,7 @@
 					<div class="breadcrumb-content">
 						<h2>Wishlist</h2>
 						<ul>
-							<li><a href="index.html">Home</a></li>
+							<li><a href="Home">Home</a></li>
 							<li class="active">Wishlist</li>
 						</ul>
 					</div>
@@ -375,82 +247,7 @@
 	<!-- End Wishlist Area -->
 	
 	<!-- Start Footer Area -->
-	<footer class="footer">
-		<!-- Footer Top -->
-		<div class="footer-top pt-50">
-			<div class="container">
-				<div class="row">
-					<!-- SIngle -->
-					<div class="col-lg-3 col-md-6 mb-30">
-						<div class="footer-widgets-single">
-							<h2><img src="assets/img/white-logo.png"></h2>
-							<p> Lorem ipsum dolor sit amet, consectetuipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqut enim ad minim veniamquis </p>
-						</div>
-					</div>
-					<!-- SIngle -->
-					<div class="col-lg-3 col-md-6 mb-30">
-						<div class="footer-widgets-single">
-							<h3>My account</h3>
-							<ul>
-								<li><a href="#">Sign In</a></li>
-								<li><a href="#">View Cart</a></li>
-								<li><a href="#">My Wishlist</a></li>
-								<li><a href="#">Terms & Conditions</a></li>
-								<li><a href="#">Contact us</a></li>
-								<li><a href="#">Track My Order</a></li>
-							</ul>
-						</div>
-					</div>
-					<!-- SIngle -->
-					<div class="col-lg-3 col-md-6 mb-30">
-						<div class="footer-widgets-single">
-							<h3>Categories</h3>
-							<ul>
-								<li><a href="#">Home Audio & Theater</a></li>
-								<li><a href="#">TV & Video</a></li>
-								<li><a href="#">Camera, Photo & Video</a></li>
-								<li><a href="#">Cell Phones & Accessories</a></li>
-								<li><a href="#">Headphones</a></li>
-								<li><a href="#">Video Games</a></li>
-							</ul>
-						</div>
-					</div>
-					<!-- SIngle -->
-					<div class="col-lg-3 col-md-6 mb-30">
-						<div class="footer-widgets-single">
-							<h3>Newsletter</h3>
-							<p> Get notified of new products, limited releases, and more. </p>
-							<form action="#">
-								<input type="email" name="email" placeholder="Your Email">
-								<button type="submit" class="button-1">Subscribe</button>
-							</form>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- Footer Bottom -->
-		<div class="footer-bottom pt-30 pb-30">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-6">
-						<div class="copyright-text">
-							<p> &copy; Copyright 2021 <a href="https://codepopular.com" target="_blank">CodePopular</a> All Rights Reserved. </p>
-						</div>
-					</div>
-					<div class="col-md-6">
-						<ul class="footer_payment">
-	                        <li><a href="#"><img src="assets/img/visa.png" alt="visa"></a></li>
-	                        <li><a href="#"><img src="assets/img/discover.png" alt="discover"></a></li>
-	                        <li><a href="#"><img src="assets/img/master_card.png" alt="master_card"></a></li>
-	                        <li><a href="#"><img src="assets/img/paypal.png" alt="paypal"></a></li>
-	                        <li><a href="#"><img src="assets/img/amarican_express.png" alt="amarican_express"></a></li>
-	                    </ul>
-					</div>
-				</div>
-			</div>
-		</div>
-	</footer>
+	<%@include file="footer.jsp" %>
 	<!-- End Footer Area -->
 	
 

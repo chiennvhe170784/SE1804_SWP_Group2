@@ -13,14 +13,23 @@ import model.Brand;
 import model.Gender;
 import model.Size;
 import context.ProductDAO;
+import jakarta.servlet.http.HttpSession;
+import model.User;
 
 public class listproduct extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+          HttpSession session = request.getSession();
+        User o = (User) session.getAttribute("user");
+        if (o == null) {
+            response.sendRedirect("login");
+            return; // Ensure the method returns to avoid further execution
+        }
 
-        int pageIndex = 1;
+        if (o.getRid() == 1 || o.getRid() == 2) {
+             int pageIndex = 1;
         int pageSize = 4;
         if (request.getParameter("page") != null) {
             pageIndex = Integer.parseInt(request.getParameter("page"));
@@ -78,6 +87,8 @@ public class listproduct extends HttpServlet {
         request.setAttribute("maxPrice", maxPrice); // Pass the maxPrice to the JSP
 
         request.getRequestDispatcher("product/productList1.jsp").forward(request, response);
+        }
+       
     }
 
     @Override

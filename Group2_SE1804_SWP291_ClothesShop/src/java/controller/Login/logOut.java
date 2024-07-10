@@ -11,6 +11,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import model.User;
 
 /**
  *
@@ -57,9 +58,12 @@ public class logOut extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession(false); // Không tạo phiên mới
+        if (session == null) {
+            response.sendRedirect("Home");
+            return; // Ensure the method returns to avoid further execution
+        }
 
         session.invalidate(); // Vô hiệu hóa phiên
-
         response.sendRedirect("Home");
     }
 

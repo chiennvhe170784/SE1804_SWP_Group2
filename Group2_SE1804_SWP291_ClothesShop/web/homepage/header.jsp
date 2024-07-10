@@ -55,10 +55,10 @@
                     url: 'AddToCart',
                     success: (result) => {
                         if(result.outOfStock){
-                            showError("Product out of stock", 3000);
+                            showError("Product out of stock", 1000);
                         }
                         else{
-                            showAlert("Product added to your cart", 3000);
+                            showAlert("Product added to your cart", 1000);
                         }
                         totalProduct = result.productInCart;;
                         $('.counter').text(totalProduct);
