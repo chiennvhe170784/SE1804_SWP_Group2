@@ -157,6 +157,10 @@
         <servlet-class>controller.Cart.checkout</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>OrderHistory</servlet-name>
+        <servlet-class>controller.Cart.OrderHistory</servlet-class>
+        </servlet>
+<servlet>
         <servlet-name>viewWishList</servlet-name>
         <servlet-class>controller.wishList.viewWishList</servlet-class>
     </servlet>
@@ -319,6 +323,10 @@
     <servlet-mapping>
         <servlet-name>checkout</servlet-name>
         <url-pattern>/checkout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>OrderHistory</servlet-name>
+        <url-pattern>/orderHistory</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>viewWishList</servlet-name>
