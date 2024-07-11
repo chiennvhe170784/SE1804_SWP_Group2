@@ -107,8 +107,8 @@
                                             </a>
                                             <div class="product-thumbnail-overly">
                                                 <ul>    
-                                                    <li><a href="cart.html"><i class="fas fa-shopping-cart"></i></a></li>
-                                                    <li><a href="wishlist.html"><i class="far fa-heart"></i></a></li>   
+                                                     <li><a onclick="addToCart(${product.pid})"><i class="fas fa-shopping-cart"></i></a></li>
+                                                    <li><a onclick="addToWishList(${product.pid})"><i class="far fa-heart"></i></a></li>   
                                                     <li><a href="DetailProduct?pid=${product.pid}"><i class="far fa-eye"></i></a></li>
                                                 </ul>
                                             </div>
