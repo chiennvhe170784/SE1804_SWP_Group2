@@ -66,7 +66,7 @@ public class listCate extends HttpServlet {
             response.sendRedirect("login");
             return; // Ensure the method returns to avoid further execution
         }
-        if (o.getRid() != 0) {
+        if (o.getRid() == 1) {
             CategoryDAO cd = new CategoryDAO();
 
             String indexPage = request.getParameter("index");

@@ -3,14 +3,23 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Map;
+import model.User;
 
 public class Dashboard extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+              HttpSession session = request.getSession();
+        User o =(User) session.getAttribute("user");
+          if (o == null) {
+            response.sendRedirect("login");
+            return;
+        }
+        if (o.getRid()!=0) {
         HomeDAO dao = new HomeDAO();
         int totalProductsInStock = dao.getTotalProductsInStock();
         double totalRevenue = dao.getTotalRevenue();
@@ -24,6 +33,9 @@ public class Dashboard extends HttpServlet {
         request.setAttribute("totalOrders", totalOrders);
         request.setAttribute("monthlyEarnings", monthlyEarnings);
         request.getRequestDispatcher("dashboard/dashboard.jsp").forward(request, response);
+          } else {
+            response.sendRedirect("login");
+        }
     }
 
     @Override
