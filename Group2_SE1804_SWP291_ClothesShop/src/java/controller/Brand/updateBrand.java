@@ -57,7 +57,7 @@ public class updateBrand extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int cid = Integer.parseInt(request.getParameter("cidUpdate"));
+        int cid = Integer.parseInt(request.getParameter("bidUpdate"));
         BrandDAO cd = new BrandDAO();
         Brand c = cd.getCateById(cid);
         request.setAttribute("brand", c);
