@@ -4,7 +4,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Brand;
@@ -134,6 +136,52 @@ public class HomeDAO extends DBContext {
             e.printStackTrace();
         }
         return products;
+    }
+    private static final Logger LOGGER = Logger.getLogger(HomeDAO.class.getName());
+
+    public int getTotalProductsInStock() {
+        int totalProducts = 0;
+        String sql = "SELECT SUM(quantity) AS total FROM Product";
+
+        try ( PreparedStatement st = connection.prepareStatement(sql);  ResultSet rs = st.executeQuery()) {
+
+            if (rs.next()) {
+                totalProducts = rs.getInt("total");
+            }
+        } catch (SQLException e) {
+            LOGGER.log(Level.SEVERE, "Error getting total products in stock", e);
+        }
+        return totalProducts;
+    }
+
+    public double getTotalRevenue() {
+        double totalRevenue = 0;
+        String sql = "SELECT SUM(totalPrice) AS total FROM [Order]";  // 'Order' is a reserved keyword in SQL
+
+        try ( PreparedStatement st = connection.prepareStatement(sql);  ResultSet rs = st.executeQuery()) {
+
+            if (rs.next()) {
+                totalRevenue = rs.getDouble("total");
+            }
+        } catch (SQLException e) {
+            LOGGER.log(Level.SEVERE, "Error getting total revenue", e);
+        }
+        return totalRevenue;
+    }
+
+    public int getTotalOrders() {
+        int totalOrders = 0;
+        String sql = "SELECT COUNT(*) AS total FROM [Order]";  // 'Order' is a reserved keyword in SQL
+
+        try ( PreparedStatement st = connection.prepareStatement(sql);  ResultSet rs = st.executeQuery()) {
+
+            if (rs.next()) {
+                totalOrders = rs.getInt("total");
+            }
+        } catch (SQLException e) {
+            LOGGER.log(Level.SEVERE, "Error getting total orders", e);
+        }
+        return totalOrders;
     }
 
     public Gender getGenderById(int id) {
@@ -482,26 +530,46 @@ public class HomeDAO extends DBContext {
         }
         return products;
     }
+    public Map<String, Double> getMonthlyEarnings() {
+        Map<String, Double> monthlyEarnings = new HashMap<>();
+        String sql = "SELECT FORMAT(orderDate, 'yyyy-MM') AS month, SUM(totalPrice) AS earnings "
+                   + "FROM [Order] "
+                   + "GROUP BY FORMAT(orderDate, 'yyyy-MM')";
+        
+        try (PreparedStatement st = connection.prepareStatement(sql);  ResultSet rs = st.executeQuery()) {
+            
+            while (rs.next()) {
+                String month = rs.getString("month");
+                double earnings = rs.getDouble("earnings");
+                monthlyEarnings.put(month, earnings);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+        return monthlyEarnings;
+    }
 
     public static void main(String[] args) {
         // Create an instance of HomeDAO
         HomeDAO homeDAO = new HomeDAO();
 
-        // Define the category ID to fetch products
-        int categoryId = 1;  // Thay đổi ID này theo nhu cầu của bạn
+        // Get total products in stock
+        int totalProductsInStock = homeDAO.getTotalProductsInStock();
+        System.out.println("Total Products in Stock: " + totalProductsInStock);
 
-        // Call the getProductsByCategory method
-        List<Product> productsByCategory = homeDAO.getProductsByCategory(categoryId);
+        // Get total revenue
+        double totalRevenue = homeDAO.getTotalRevenue();
+        System.out.println("Total Revenue: " + totalRevenue);
 
-        // Print the details of each product
-        System.out.println("Number of products in category " + categoryId + ": " + productsByCategory.size());
-        for (Product product : productsByCategory) {
-            System.out.println("Product ID: " + product.getPid());
-            System.out.println("Product Name: " + product.getName());
-            System.out.println("Product Price: " + product.getPrice());
-            System.out.println("Product Release Date: " + product.getReleaseDate());
-            System.out.println("Product Image: " + product.getImg());
-            System.out.println("-----------------------------");
-        }
+        // Get total orders
+        int totalOrders = homeDAO.getTotalOrders();
+        System.out.println("Total Orders: " + totalOrders);
+        Map<String, Double> monthlyEarnings = homeDAO.getMonthlyEarnings();
+    System.out.println("Monthly Earnings:");
+    for (Map.Entry<String, Double> entry : monthlyEarnings.entrySet()) {
+        System.out.println(entry.getKey() + ": " + entry.getValue());
     }
+    }
+
 }
