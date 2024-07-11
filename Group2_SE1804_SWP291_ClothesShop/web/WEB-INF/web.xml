@@ -332,6 +332,14 @@
         <servlet-name>OrderHistory</servlet-name>
         <url-pattern>/orderHistory</url-pattern>
     </servlet-mapping>
+        <servlet-mapping>
+        <servlet-name>viewWishList</servlet-name>
+        <url-pattern>/viewWishList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>addWishList</servlet-name>
+        <url-pattern>/addWishList</url-pattern>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>Dashboard</servlet-name>
         <url-pattern>/Dashboard</url-pattern>
