@@ -70,9 +70,8 @@
                     <div class="container-fluid">
                         <!-- Page Heading -->
                         <h1 class="h3 mb-2 text-gray-800">User List</h1>
-                        <a href="addproduct" class="btn btn-success mb-3">New User</a>
-
-
+                        <br> 
+ <br> 
                         <!-- Search and Filter Form -->
                         <form id="filterForm" name="filterForm" action="managerUser" method="get" onsubmit="return validateForm()">
                             <div class="form-row">

@@ -141,7 +141,7 @@ public class login extends HttpServlet {
             response.addCookie(username);//lưu lên trình duyệt mở
             response.addCookie(password);
             response.addCookie(remem);
-            response.sendRedirect("managerUser");
+            response.sendRedirect("listproduct");
         }
     }
 

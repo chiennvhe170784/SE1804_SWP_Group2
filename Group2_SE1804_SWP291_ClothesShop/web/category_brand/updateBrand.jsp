@@ -67,7 +67,7 @@
                         <!-- Page Heading -->
                         <h1 >Update Brand</h1>
 
-                        <form action="updateCate" method="post">
+                        <form action="updateBrand" method="post">
                             <fieldset class="form-group">
                                 <div> <label>Category ID</label></div>  
                                 <input readonly="" name="bid" value="${brand.bid}"/>

@@ -152,7 +152,7 @@
                                     <button class="btn btn-primary profile-button" type="submit" style="margin-right: 10px;">Save Profile</button>
                                 </div>
                             </form>
-                            <button class="btn btn-primary profile-button" type="button">Change Password</button>
+                                        <a href="changePass" class="btn btn-primary profile-button" type="button">Change Password</a>
                         </div>
                     </div>
                     <!-- /.container-fluid -->
