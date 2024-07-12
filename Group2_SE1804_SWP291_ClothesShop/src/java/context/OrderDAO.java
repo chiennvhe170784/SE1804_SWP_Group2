@@ -198,7 +198,7 @@ public class OrderDAO extends DBContext {
             ResultSet rs = st.executeQuery();
             if (rs.next()) {
                 int numberP = rs.getInt("quantity");
-                if (numberP > p.getQuantity()) {
+                if (numberP >= p.getQuantity()) {
                     return true;
                 }
             }

@@ -167,7 +167,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="breadcrumb-content">
-                            <h2>Cart</h2>
+                            <h2>History Order</h2>
                             <ul>
                                 <li><a href="Home">Home</a></li>
                                 <li class="active">History Order</li>
