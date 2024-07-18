@@ -111,12 +111,12 @@
                                     </div>
 
                                     <div class="custom-control custom-radio">
-                                        <input type="radio" id="flatrate" name="pay" class="custom-control-input">
-                                        <label class="custom-control-label" for="flatrate">Payment upon receipt</label>
+                                        <input type="radio" id="payNoWallet" value="payNoWallet1" name="pay" checked="" class="custom-control-input">
+                                        
                                     </div>
                                     <div class="custom-control custom-radio">
-                                        <input type="radio" id="freeshipping" name="pay" class="custom-control-input">
-                                        <label class="custom-control-label" for="freeshipping">Pay with wallet</label>
+                                        <input type="radio" id="payWallet" value="payWallet1" name="pay"  class="custom-control-input">
+                                        
                                     </div>
 
                                 </form>
@@ -157,20 +157,20 @@
                                                     <ul class="shipping-type">
                                                         <li>
                                                             <div class="custom-control custom-radio">
-                                                                <input type="radio" id="flatrate" name="pay" class="custom-control-input" checked="">
-                                                                <label class="custom-control-label" for="flatrate">Payment upon receipt</label>
+                                                                <input type="radio" id="pay1" name="pay" class="custom-control-input" checked="">
+                                                                <label class="custom-control-label" >Payment upon receipt</label>
                                                             </div>
                                                         </li>
                                                         <li>
                                                             <div class="custom-control custom-radio">
-                                                                <input type="radio" id="freeshipping" name="pay" class="custom-control-input">
-                                                                <label class="custom-control-label" for="freeshipping">Pay with wallet</label>
+                                                                <input type="radio" id="pay2" name="pay" class="custom-control-input">
+                                                                <label class="custom-control-label" >Pay with wallet</label>
                                                             </div>
                                                         </li>
                                                         <!--                                                        <li>
                                                                                                                     <div class="custom-control custom-radio">
-                                                                                                                        <input type="radio" id="freeshipping" name="pay" class="custom-control-input">
-                                                                                                                        <label class="custom-control-label" for="freeshipping">Pay with wallet</label>
+                                                                                                                        <input type="radio" id="payWallet" name="pay" class="custom-control-input">
+                                                                                                                        <label class="custom-control-label" for="payWallet">Pay with wallet</label>
                                                                                                                     </div>
                                                                                                                 </li>-->
                                                     </ul>
@@ -291,12 +291,14 @@
         </div>
 
         <script>
-            document.getElementById('checkbox-flatrate').addEventListener('change', function () {
-                document.getElementById('flatrate').checked = this.checked;
+            document.getElementById('pay1').addEventListener('change', function () {
+                document.getElementById('payNoWallet').checked = this.checked;
+                document.getElementById('pay1').checked = this.checked;
             });
 
-            document.getElementById('checkbox-freeshipping').addEventListener('change', function () {
-                document.getElementById('freeshipping').checked = this.checked;
+            document.getElementById('pay2').addEventListener('change', function () {
+                document.getElementById('payWallet').checked = this.checked;
+                document.getElementById('pay2').checked = this.checked;
             });
 
             function submitCheckoutForm() {

@@ -109,12 +109,12 @@ public class OrderDAO extends DBContext {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 listPOrder.add(new Product(rs.getInt(1),
-                         rs.getString(2),
-                         rs.getInt(3),
-                         rs.getDouble(4),
-                         rs.getString(5),
-                         rs.getString(6),
-                         rs.getDate(7), null, null, null, null));
+                        rs.getString(2),
+                        rs.getInt(3),
+                        rs.getDouble(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getDate(7), null, null, null, null));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -177,13 +177,27 @@ public class OrderDAO extends DBContext {
     }
 
     //Bơm tiền
-    private void AddWallet() {
+    private void AddWallet(int uid) {
         String sql = "UPDATE [dbo].[wallet]\n"
                 + "   SET wallet = 99999"
                 + " WHERE uid = ? ";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
-            st.setInt(1, 4);
+            st.setInt(1, uid);
+            st.executeUpdate();
+
+        } catch (SQLException e) {
+        }
+    }
+
+    //update quantity=1
+    private void testCart(String name) {
+        String sql = "UPDATE [dbo].[Product]\n"
+                + "   SET [quantity] = 1\n"
+                + " WHERE name =?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, name);
             st.executeUpdate();
 
         } catch (SQLException e) {
@@ -210,7 +224,9 @@ public class OrderDAO extends DBContext {
 
     public static void main(String[] args) {
         OrderDAO ord = new OrderDAO();
-        ord.AddWallet();
+        ord.AddWallet(4);//user 123
+        ord.AddWallet(5);//user1 123
+        ord.testCart("Basic T-shirt");
 //        UserDAO ud = new UserDAO();
 //        LocalDate curDate = java.time.LocalDate.now();
 //        String date = curDate.toString();

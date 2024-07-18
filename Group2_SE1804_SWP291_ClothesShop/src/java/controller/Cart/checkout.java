@@ -84,6 +84,7 @@ public class checkout extends HttpServlet {
         // Retrieve parameters from the URL4
         String address = request.getParameter("addressInput");
         String note = request.getParameter("Note");
+        String payment = request.getParameter("pay");
 
         // Retrieve session
         HttpSession session = request.getSession(true);
@@ -127,18 +128,34 @@ public class checkout extends HttpServlet {
         // Proceed with order if all products are in stock
         if (!outOfStock) {
             double totalMoney = (double) session.getAttribute("totalPrice");
-            if (ord.checkValidBuy(totalMoney, user)) {
+            if (ord.checkValidBuy(totalMoney, user) && payment.equals("payWallet1")) {
                 // Add order to database
-               
+
                 int oid = ord.addOrder(user, address, note, totalMoney);
                 for (Product product : listP) {
                     ord.addOrderDetal(oid, product.getPid(), product.getQuantity());
-           
-                }
-                ord.reduceWallet(user, totalMoney);
 
+                }
+
+                ord.reduceWallet(user, totalMoney);
+                
+                  session.removeAttribute("wallet");
+                double wallet = ord.getWalletByUId(user);
+                session.setAttribute("wallet", wallet);
                 // Clear session attributes related to cart
                 output += "Checkout success!";
+                session.removeAttribute("cart");
+                session.removeAttribute("totalPrice");
+                session.removeAttribute("productInCart");
+            } else if (payment.equals("payNoWallet1")) {
+                int oid = ord.addOrder(user, address, note, totalMoney);
+                for (Product product : listP) {
+                    ord.addOrderDetal(oid, product.getPid(), product.getQuantity());
+
+                }
+
+                // Clear session attributes related to cart
+                output += "Your order will be delivered soon!";
                 session.removeAttribute("cart");
                 session.removeAttribute("totalPrice");
                 session.removeAttribute("productInCart");
