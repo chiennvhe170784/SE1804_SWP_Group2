@@ -192,7 +192,7 @@
                         </c:if>
                         <c:if test="${sessionScope.user == null}">
                             <a href="login" style="display: block;">
-                                <i class="fas fa-user" style="font-size: 30px; color: #ccc; cursor: pointer"></i>
+                                <i class="fas fa-user" id ="userIcon" style="font-size: 30px; color: #ccc; cursor: pointer"></i>
                                 <span style="line-height: 30px; display: block; color: #04414d  ">Login/register</span>
                             </a>
                         </c:if>

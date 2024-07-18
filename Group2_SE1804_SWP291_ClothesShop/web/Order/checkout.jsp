@@ -52,10 +52,10 @@
             <!-- Header Middle -->
             <%@include file="../homepage/header.jsp" %>
             <!-- Header Bottom -->
-             <%@include file="../homepage/header_bottom.jsp" %>
+            <%@include file="../homepage/header_bottom.jsp" %>
         </header>
         <!-- Header -->
-   
+
 
         <!--offcanvas menu area end-->
         <!-- End Mobile Menu Area -->
@@ -77,7 +77,7 @@
         </div>
         <!-- End BreadCrumb Area -->
 
- 
+
         <!-- Start Chekout Page -->
         <section class="checkout-page-wrapper pt-70 pb-70">
             <div class="container">
@@ -109,6 +109,16 @@
                                         <label for="order_note" class="required">Order Note</label>
                                         <textarea name="Note" id="order_note" placeholder="Order Note">${param.Note} </textarea>
                                     </div>
+
+                                    <div class="custom-control custom-radio">
+                                        <input type="radio" id="flatrate" name="pay" class="custom-control-input">
+                                        <label class="custom-control-label" for="flatrate">Payment upon receipt</label>
+                                    </div>
+                                    <div class="custom-control custom-radio">
+                                        <input type="radio" id="freeshipping" name="pay" class="custom-control-input">
+                                        <label class="custom-control-label" for="freeshipping">Pay with wallet</label>
+                                    </div>
+
                                 </form>
                             </div>
                         </div>
@@ -137,32 +147,36 @@
                                             </c:if>
                                         </tbody>
                                         <tfoot>
-<!--                                            <tr>
-                                                <td>Sub Total</td>
-                                                <td><strong>$${sessionScope.totalPrice}</strong></td>
-                                            </tr>-->
-<!--                                            <tr>
-                                                <td>Shipping</td>
+                                            <!--                                            <tr>
+                                                                                            <td>Sub Total</td>
+                                                                                            <td><strong>$${sessionScope.totalPrice}</strong></td>
+                                                                                        </tr>-->
+                                            <tr>
+                                                <td>Payment method</td>
                                                 <td class="d-flex justify-content-left">
                                                     <ul class="shipping-type">
                                                         <li>
                                                             <div class="custom-control custom-radio">
-                                                                <input type="radio" id="flatrate" name="shipping" class="custom-control-input" checked="">
-                                                                <label class="custom-control-label" for="flatrate">Flat
-                                                                    Rate: $70.00</label>
+                                                                <input type="radio" id="flatrate" name="pay" class="custom-control-input" checked="">
+                                                                <label class="custom-control-label" for="flatrate">Payment upon receipt</label>
                                                             </div>
                                                         </li>
                                                         <li>
                                                             <div class="custom-control custom-radio">
-                                                                <input type="radio" id="freeshipping" name="shipping" class="custom-control-input">
-                                                                <label class="custom-control-label" for="freeshipping">Free
-                                                                    Shipping</label>
+                                                                <input type="radio" id="freeshipping" name="pay" class="custom-control-input">
+                                                                <label class="custom-control-label" for="freeshipping">Pay with wallet</label>
                                                             </div>
                                                         </li>
+                                                        <!--                                                        <li>
+                                                                                                                    <div class="custom-control custom-radio">
+                                                                                                                        <input type="radio" id="freeshipping" name="pay" class="custom-control-input">
+                                                                                                                        <label class="custom-control-label" for="freeshipping">Pay with wallet</label>
+                                                                                                                    </div>
+                                                                                                                </li>-->
                                                     </ul>
                                                 </td>
-                                            </tr>-->
-                                        
+                                            </tr>
+
                                         </tfoot>
                                     </table>
                                     <div class="form-group payment">
@@ -181,7 +195,7 @@
                                         <span class="grand-total">Grand Total :  <span>$${sessionScope.totalPrice}</span></span>
                                         <p style="color: #0b5ed7">${requestScope.output}</p>
                                     </div>
-                                         <button type="submit" onclick="submitCheckoutForm()" class="button-1">Place Order Now</button>
+                                    <button type="submit" onclick="submitCheckoutForm()" class="button-1">Place Order Now</button>
                                 </div>
                             </div>
                         </div>
@@ -276,11 +290,19 @@
             <i class="fa fa-angle-up"></i>
         </div>
 
-<script>
-    function submitCheckoutForm() {
-        document.getElementById('checkoutForm').submit();
-    }
-</script>
+        <script>
+            document.getElementById('checkbox-flatrate').addEventListener('change', function () {
+                document.getElementById('flatrate').checked = this.checked;
+            });
+
+            document.getElementById('checkbox-freeshipping').addEventListener('change', function () {
+                document.getElementById('freeshipping').checked = this.checked;
+            });
+
+            function submitCheckoutForm() {
+                document.getElementById('checkoutForm').submit();
+            }
+        </script>
         <!-- Js File -->
         <script src="assets/js/modernizr.min.js"></script>
         <script src="assets/js/jquery-3.5.1.min.js"></script>

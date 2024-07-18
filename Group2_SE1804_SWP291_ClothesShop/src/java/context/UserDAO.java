@@ -418,20 +418,23 @@ public class UserDAO extends DBContext {
 
     public static void main(String[] args) {
         UserDAO ud = new UserDAO();
-        User user = new User();
-        user.setFullName("Chiennnnn");
-        user.setDob("02/12/2002");
-        user.setAddress("123HoanKiem");
-        user.setGender(0);
-        user.setEmail("chien19042003@gmail.com");
-        user.setPhone("1234567890");
-        user.setUid(11);
-        user.setRid(1);
-        ud.updateProfile(user);
+//        User user = new User();
+//        user.setFullName("Chiennnnn");
+//        user.setDob("02/12/2002");
+//        user.setAddress("123HoanKiem");
+//        user.setGender(0);
+//        user.setEmail("chien19042003@gmail.com");
+//        user.setPhone("1234567890");
+//        user.setUid(11);
+//        user.setRid(1);
+//        ud.updateProfile(user);
 //        ud.verifyCode("chien19042003@gmail.com", ud.getCode());
 //         System.out.println(ud.getCode());
 //      System.out.println(ud.toSHA1("12345"));
-        ud.changePassByEmail("chien19042003@gmail.com", "1BvTL8F1vT5msPyDEcEhPR4m8po=");
+//        ud.changePassByEmail("chien19042003@gmail.com", "1BvTL8F1vT5msPyDEcEhPR4m8po=");
+        ud.changePass("user", "1BvTL8F1vT5msPyDEcEhPR4m8po=");
+        ud.changePass("admin", "1BvTL8F1vT5msPyDEcEhPR4m8po=");
+
 //        System.out.println(ud.toSHA1("123"));
 //        System.out.println(ud.checkUser("admin", ud.toSHA1("123")));
 

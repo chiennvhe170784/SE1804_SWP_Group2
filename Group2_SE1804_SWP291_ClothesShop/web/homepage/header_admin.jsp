@@ -61,7 +61,8 @@
                 display: none;
                 position: absolute;
                 width: 200px;
-                margin-left: 1480px;
+/*                margin-left: 1480px;*/
+                margin-left: 85%;
                 top: 70px;
                 right: 0px;
                 background-color: #fff;
