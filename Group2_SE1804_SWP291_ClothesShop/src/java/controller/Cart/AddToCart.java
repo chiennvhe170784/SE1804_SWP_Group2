@@ -108,9 +108,13 @@ public class AddToCart extends HttpServlet {
             productInCart ++;
         }
  
+        
        session.setAttribute("productInCart", productInCart);
        session.setAttribute("totalPrice", totalPrice);
         session.setAttribute("cart", cart);
+    }
+    else{
+        outOfStock = true;
     }
 
     // Chuyển đổi danh sách sản phẩm thành JSON
