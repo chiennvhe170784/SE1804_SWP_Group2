@@ -110,11 +110,11 @@
                                         <textarea name="Note" id="order_note" placeholder="Order Note">${param.Note} </textarea>
                                     </div>
 
-                                    <div class="custom-control custom-radio">
+                                    <div hidden="" class="custom-control custom-radio">
                                         <input type="radio" id="payNoWallet" value="payNoWallet1" name="pay" checked="" class="custom-control-input">
                                         
                                     </div>
-                                    <div class="custom-control custom-radio">
+                                    <div hidden="" class="custom-control custom-radio">
                                         <input type="radio" id="payWallet" value="payWallet1" name="pay"  class="custom-control-input">
                                         
                                     </div>

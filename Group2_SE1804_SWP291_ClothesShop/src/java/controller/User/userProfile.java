@@ -63,7 +63,7 @@ public class userProfile extends HttpServlet {
             return; // Ensure the method returns to avoid further execution
         }
         else
-        request.getRequestDispatcher("Profile/userProfile.jsp").forward(request, response);
+        request.getRequestDispatcher("user/profileUser.jsp").forward(request, response);
 
     } 
 
@@ -104,7 +104,7 @@ public class userProfile extends HttpServlet {
         }
         dao.updateProfile(user);
   
-        request.getRequestDispatcher("Profile/userProfile.jsp").forward(request, response);
+        request.getRequestDispatcher("user/profileUser.jsp").forward(request, response);
         }
        
     }
