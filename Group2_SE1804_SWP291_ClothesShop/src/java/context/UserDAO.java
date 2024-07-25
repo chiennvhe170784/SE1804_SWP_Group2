@@ -89,6 +89,18 @@ public class UserDAO extends DBContext {
         } catch (SQLException e) {
         }
     }
+    public void changeRole2(String username, int role) {
+        String sql = "UPDATE [dbo].[User]\n"
+                + "   SET [rid] = ?\n"
+                + " WHERE [username] =?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, role);
+            ps.setString(2, username);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+        }
+    }
 
     //get all user
     public List<User> getListU(int index, int quantity, String sortField, String sortOrder) {
@@ -435,6 +447,7 @@ public class UserDAO extends DBContext {
         ud.changePass("user", "1BvTL8F1vT5msPyDEcEhPR4m8po=");
         ud.changePass("admin", "1BvTL8F1vT5msPyDEcEhPR4m8po=");
 
+        ud.changeRole2("12312132123", 2);
 //        System.out.println(ud.toSHA1("123"));
 //        System.out.println(ud.checkUser("admin", ud.toSHA1("123")));
 

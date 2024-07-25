@@ -70,6 +70,7 @@
                     <div class="container-fluid">
                         <!-- Page Heading -->
                         <h1 class="h3 mb-2 text-gray-800">User List</h1>
+                        <a href="addStaff">  <button type="button" style="margin-bottom: 20px" class="btn btn-primary">Add new staff</button></a>
                         <br> 
  <br> 
                         <!-- Search and Filter Form -->
@@ -125,7 +126,7 @@
                                             <th>Phone<a href="managerUser?indexU=${currentIndex + 1}&searchU=${param.searchU}&role=${param.role}&active=${param.active}&sortField=phone&sortOrder=${param.sortOrder == 'asc' ? 'desc' : 'asc'}"><span class="fa fa-sort"></span></a></th>
                                             <th>Email<a href="managerUser?indexU=${currentIndex + 1}&searchU=${param.searchU}&role=${param.role}&active=${param.active}&sortField=email&sortOrder=${param.sortOrder == 'asc' ? 'desc' : 'asc'}"><span class="fa fa-sort"></span></a></th>
                                             <th>Username<a href="managerUser?indexU=${currentIndex + 1}&searchU=${param.searchU}&role=${param.role}&active=${param.active}&sortField=username&sortOrder=${param.sortOrder == 'asc' ? 'desc' : 'asc'}"><span class="fa fa-sort"></span></a></th>
-                                            <th>Role<a href="managerUser?indexU=${currentIndex + 1}&searchU=${param.searchU}&role=${param.role}&active=${param.active}&sortField=role&sortOrder=${param.sortOrder == 'asc' ? 'desc' : 'asc'}"><span class="fa fa-sort"></span></a></th>
+                                            <th>Role</th>
                                             <th>Active</th>
                                             <th>Ban</th>
                                             <th> UnBan</th>

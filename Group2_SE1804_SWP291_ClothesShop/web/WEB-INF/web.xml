@@ -172,6 +172,10 @@
         <servlet-name>Dashboard</servlet-name>
         <servlet-class>Dashboard</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>addStaff</servlet-name>
+        <servlet-class>controller.User.addStaff</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>newsList</servlet-name>
         <url-pattern>/newsList</url-pattern>
@@ -332,7 +336,7 @@
         <servlet-name>OrderHistory</servlet-name>
         <url-pattern>/orderHistory</url-pattern>
     </servlet-mapping>
-        <servlet-mapping>
+    <servlet-mapping>
         <servlet-name>viewWishList</servlet-name>
         <url-pattern>/viewWishList</url-pattern>
     </servlet-mapping>
@@ -343,6 +347,10 @@
     <servlet-mapping>
         <servlet-name>Dashboard</servlet-name>
         <url-pattern>/Dashboard</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>addStaff</servlet-name>
+        <url-pattern>/addStaff</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

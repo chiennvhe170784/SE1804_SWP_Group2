@@ -12,11 +12,13 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
+import model.User;
 
 @WebServlet(name = "AddProductServlet", urlPatterns = {"/addproduct"})
 public class AddProductServlet extends HttpServlet {
@@ -26,6 +28,11 @@ public class AddProductServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+             HttpSession session = request.getSession(true);
+        User user = (User) session.getAttribute("user");
+        if (user!= null && user.getRid()==1) {
+           
+       
         try {
             // Retrieve lists of categories, brands, genders, and sizes
             List<Category> categories = productDAO.getAllCategories();
@@ -43,6 +50,10 @@ public class AddProductServlet extends HttpServlet {
             request.getRequestDispatcher("product/addproduct.jsp").forward(request, response);
         } catch (Exception e) {
             throw new ServletException("Error retrieving product data", e);
+        }
+         } else {
+            // Redirect to login page if user session is not found
+            response.sendRedirect("login");
         }
     }
 
