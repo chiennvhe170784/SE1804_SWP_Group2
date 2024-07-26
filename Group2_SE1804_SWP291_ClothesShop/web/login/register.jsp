@@ -68,11 +68,11 @@
             <label for="male">Male</label>
         </div>
         <div style="display: inline-block; margin-left: 10px; margin-right: 10px">
-            <input type="radio" name="genderU" id="female" value="0">
+            <input type="radio" name="genderU" id="female" value="2">
             <label for="female">Female</label>
         </div>
         <div style="display: inline-block; margin-left: 10px;">
-            <input type="radio" name="genderU" id="other" value="2">
+            <input type="radio" name="genderU" id="other" value="3">
             <label for="other">Other</label>
         </div>
     </div>

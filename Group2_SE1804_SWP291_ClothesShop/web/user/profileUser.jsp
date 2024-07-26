@@ -205,7 +205,7 @@
                                         <option selected value="female">Female</option>
                                     </select>
                                 </c:if>
-                                <c:if test="${sessionScope.user.gender != 0 && sessionScope.user.gender != 1} ">
+                                <c:if test="${sessionScope.user.gender != 1 && sessionScope.user.gender != 2} ">
                                     <select name="gender" class="form-control" required>
                                         <option value="" disabled selected>Select gender</option>
                                         <option  value="male">Male</option>
